@@ -31,7 +31,7 @@ public class loaderScript : MonoBehaviour
         StartCoroutine(LoadLevel(name));
     }
 
-    IEnumerator LoadLevel(string name)
+    private IEnumerator LoadLevel(string name)
     {
         transition.SetTrigger("Start");
         ProgressBarScript.Progress = 0;
@@ -48,9 +48,5 @@ public class loaderScript : MonoBehaviour
 
             yield return null;
         }
-
-        transition.SetTrigger("End");
-
-        yield return new WaitForSeconds(1);
     }
 }
