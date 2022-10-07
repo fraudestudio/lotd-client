@@ -50,6 +50,6 @@ public class CompteTextScript : MonoBehaviour, IPointerClickHandler, IPointerEnt
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        text.color = new Color(0.1960784f, 0.1960784f, 0.1960784f);
+        text.color = new Color(1, 1, 1);
     }
 }
