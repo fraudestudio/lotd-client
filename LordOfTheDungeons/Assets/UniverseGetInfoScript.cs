@@ -32,7 +32,7 @@ public class UniverseGetInfoScript : MonoBehaviour
             button.transform.Find("T").GetComponent<TMP_Text>().text = "FEURFEUR";
             button.transform.SetParent(contentMyUniverse);
             button.GetComponent<UniverseButtonScript>().VillageName = "FEURFEUR";
-            button.GetComponent<UniverseButtonScript>().Password = false;
+            button.GetComponent<UniverseButtonScript>().Password = true;
 
             stop = true;
         }
