@@ -295,8 +295,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Entrez le nom de votre village
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 153ebabfea1d2c04eb6137575a0c4912, type: 2}
-  m_sharedMaterial: {fileID: -2874410466189963502, guid: 153ebabfea1d2c04eb6137575a0c4912, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: eef50040cca06554492da4dbafd848ea, type: 2}
+  m_sharedMaterial: {fileID: -2874410466189963502, guid: eef50040cca06554492da4dbafd848ea, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -640,8 +640,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u200B"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 153ebabfea1d2c04eb6137575a0c4912, type: 2}
-  m_sharedMaterial: {fileID: -2874410466189963502, guid: 153ebabfea1d2c04eb6137575a0c4912, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: eef50040cca06554492da4dbafd848ea, type: 2}
+  m_sharedMaterial: {fileID: -2874410466189963502, guid: eef50040cca06554492da4dbafd848ea, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1393,7 +1393,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: NAIN
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 153ebabfea1d2c04eb6137575a0c4912, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: eef50040cca06554492da4dbafd848ea, type: 2}
   m_sharedMaterial: {fileID: -2874410466189963502, guid: 153ebabfea1d2c04eb6137575a0c4912, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -1457,7 +1457,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &423576268
@@ -1755,7 +1755,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: Hobbit
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 153ebabfea1d2c04eb6137575a0c4912, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: eef50040cca06554492da4dbafd848ea, type: 2}
   m_sharedMaterial: {fileID: -2874410466189963502, guid: 153ebabfea1d2c04eb6137575a0c4912, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -1819,7 +1819,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &585679383
@@ -2032,7 +2032,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: HUMAIN
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 153ebabfea1d2c04eb6137575a0c4912, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: eef50040cca06554492da4dbafd848ea, type: 2}
   m_sharedMaterial: {fileID: -2874410466189963502, guid: 153ebabfea1d2c04eb6137575a0c4912, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -2096,7 +2096,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &623568302
@@ -8693,7 +8693,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: Elfe
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 153ebabfea1d2c04eb6137575a0c4912, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: eef50040cca06554492da4dbafd848ea, type: 2}
   m_sharedMaterial: {fileID: -2874410466189963502, guid: 153ebabfea1d2c04eb6137575a0c4912, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -8757,7 +8757,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1509549508
@@ -9032,8 +9032,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Nom de votre village
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 153ebabfea1d2c04eb6137575a0c4912, type: 2}
-  m_sharedMaterial: {fileID: -2874410466189963502, guid: 153ebabfea1d2c04eb6137575a0c4912, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: eef50040cca06554492da4dbafd848ea, type: 2}
+  m_sharedMaterial: {fileID: -2874410466189963502, guid: eef50040cca06554492da4dbafd848ea, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -9167,8 +9167,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: VALIDER
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 153ebabfea1d2c04eb6137575a0c4912, type: 2}
-  m_sharedMaterial: {fileID: -2874410466189963502, guid: 153ebabfea1d2c04eb6137575a0c4912, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: eef50040cca06554492da4dbafd848ea, type: 2}
+  m_sharedMaterial: {fileID: -2874410466189963502, guid: eef50040cca06554492da4dbafd848ea, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -9545,8 +9545,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Choisissez votre faction
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 153ebabfea1d2c04eb6137575a0c4912, type: 2}
-  m_sharedMaterial: {fileID: -2874410466189963502, guid: 153ebabfea1d2c04eb6137575a0c4912, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: eef50040cca06554492da4dbafd848ea, type: 2}
+  m_sharedMaterial: {fileID: -2874410466189963502, guid: eef50040cca06554492da4dbafd848ea, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

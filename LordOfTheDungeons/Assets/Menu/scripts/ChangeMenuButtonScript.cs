@@ -47,9 +47,11 @@ public class ChangeMenuButtonScript : MonoBehaviour, IPointerClickHandler
         {
             scdMenuOptional.SetTrigger("HideMenu");
             newMenuCanvasOptional.GetComponent<CanvasGroup>().interactable = false;
+            newMenuCanvasOptional.GetComponent<CanvasGroup>().blocksRaycasts = false;
         }
 
         menuCanvas.GetComponent<CanvasGroup>().interactable = false;
+        menuCanvas.GetComponent<CanvasGroup>().blocksRaycasts = false;
         yield return new WaitForSeconds(0.5f);
         menuCanvas.GetComponent<CanvasGroup>().alpha = 0;
 
@@ -89,16 +91,29 @@ public class ChangeMenuButtonScript : MonoBehaviour, IPointerClickHandler
             transitionMenuOptional.SetTrigger("GoBackIdle");
         }
 
+
+
+
         transitionNewMenu.SetTrigger("GoBackIdle");
+
+        if (newMenuCanvas.name == "UniversesMenu")
+        {
+            newMenuCanvas.GetComponent<UniverseGetInfoScript>().GetUniverses();
+        }
+
 
         if (newMenuCanvasOptional != null)
         {
             if (scdMenuOptional == null)
             {
                 newMenuCanvasOptional.GetComponent<CanvasGroup>().interactable = true;
+                newMenuCanvasOptional.GetComponent<CanvasGroup>().blocksRaycasts = true;
             }
         }
         newMenuCanvas.GetComponent<CanvasGroup>().interactable = true;
+        newMenuCanvas.GetComponent<CanvasGroup>().blocksRaycasts = true;
+
+
 
     }
 }
