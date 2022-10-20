@@ -59,18 +59,29 @@ public class VillageMenuLoaderScript : MonoBehaviour
     public void CreateVillageButtons()
     {
         int i = 0;
+        int y = 0;
         while (!stop)
         {
             GameObject b = Instantiate(buttonPrefab);
+            b.transform.localScale = new Vector2(2, 2);
             b.name = "Village de" + b.GetComponent<VillageButtonScript>().UserName;
-            b.GetComponentInChildren<TMP_Text>().text = "Village de" + b.GetComponent<VillageButtonScript>().UserName;
-            b.transform.position = new Vector3(100 * ((i % 5) + 1), 100);
+            b.transform.SetParent(GameObject.Find("VillageMenu").transform);
+            b.GetComponentInChildren<TMP_Text>().text = "Village de " + b.GetComponent<VillageButtonScript>().UserName;
+            b.transform.position = new Vector3(170 + ((i % 3) * 300), 750 - (y * 270), 0);
             i++;
 
-            if (i == 5)
+            if (i % 3 == 0)
+            {
+                y++;
+            }
+
+
+            if (i == 9)
             {
                 stop = true;
             }
         }
+
+        transform.Find("bubblespeach").SetSiblingIndex(30);
     }
 }
