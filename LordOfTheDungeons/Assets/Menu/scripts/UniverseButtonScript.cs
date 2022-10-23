@@ -8,11 +8,28 @@ public class UniverseButtonScript : MonoBehaviour, IPointerClickHandler
 {
 
     private string villageName;
+    public string VillageName { get => villageName; set => villageName = value; }
+
+    private string owner;
+    public string Owner { get => owner; set => owner = value; }
+
 
     private bool password;
-    public string VillageName { get => villageName; set => villageName = value; }
     public bool Password { get => password; set => password = value; }
 
+
+    private string passwordString;
+    public string PasswordString
+    {
+        get { return passwordString; }
+        set
+        {
+            if (value != "")
+            {
+                passwordString = value;
+            }
+        }
+    }
 
     private GameObject passwordCanvas;
     private GameObject universeCanvas;
@@ -104,7 +121,7 @@ public class UniverseButtonScript : MonoBehaviour, IPointerClickHandler
         universeCanvas.GetComponent<CanvasGroup>().alpha = 0;
         universeSearchAnimator.SetTrigger("GoBackIdle");
         universeSearchCanvas.GetComponent<CanvasGroup>().alpha = 0;
-        GameObject.Find("VillageMenu").GetComponent<VillageMenuLoaderScript>().CreateVillageButtons();
+        GameObject.Find("VillageMenu").GetComponent<VillageMenuLoaderScript>().UpdateVillageButtons();
         GameObject.Find("WaitingServer").GetComponent<WaitingForServerScript>().StopAnim();
         villageCanvas.GetComponent<CanvasGroup>().interactable = true;
         villageCanvas.GetComponent<CanvasGroup>().blocksRaycasts = true;
