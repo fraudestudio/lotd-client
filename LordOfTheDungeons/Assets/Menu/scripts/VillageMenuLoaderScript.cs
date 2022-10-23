@@ -63,11 +63,13 @@ public class VillageMenuLoaderScript : MonoBehaviour
         while (!stop)
         {
             GameObject b = Instantiate(buttonPrefab);
-            b.transform.localScale = new Vector2(2, 2);
+            b.transform.localScale = new Vector2(1.7f, 1.7f);
             b.name = "Village de" + b.GetComponent<VillageButtonScript>().UserName;
             b.transform.SetParent(GameObject.Find("VillageMenu").transform);
             b.GetComponentInChildren<TMP_Text>().text = "Village de " + b.GetComponent<VillageButtonScript>().UserName;
             b.transform.position = new Vector3(170 + ((i % 3) * 300), 750 - (y * 270), 0);
+            b.GetComponent<VillageButtonScript>().PosX = i;
+            b.GetComponent<VillageButtonScript>().PosY = y;
             i++;
 
             if (i % 3 == 0)
