@@ -28,6 +28,7 @@ public class loaderScript : MonoBehaviour
 
     public void Level(string name)
     {
+        ProgressBarScript.Progress = 0;
         StartCoroutine(LoadLevel(name));
     }
 

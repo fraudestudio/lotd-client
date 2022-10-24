@@ -13,6 +13,8 @@ public class SelectRaceScript : MonoBehaviour
     public Animator transition;
     public TMP_Text text;
 
+    public TMP_InputField inputField;
+
     private bool isEnter;
     private bool isExit;
 
@@ -45,6 +47,31 @@ public class SelectRaceScript : MonoBehaviour
 
     private void OnMouseUp()
     {
-        Debug.Log("feur");
+        switch (name)
+        {
+            case "humanshitbox":
+                {
+                    TemporaryScript.AddVillage(SaveUniverseScript.Universe, inputField.text, "human", TemporaryScript.currentUser);
+                }
+                break;
+            case "elveshitbox":
+                {
+                    TemporaryScript.AddVillage(SaveUniverseScript.Universe, inputField.text, "elve", TemporaryScript.currentUser);
+                }
+                break;
+            case "dwarfshitbox":
+                {
+                    TemporaryScript.AddVillage(SaveUniverseScript.Universe, inputField.text, "dwarf", TemporaryScript.currentUser);
+                }
+                break;
+            case "hobbitshitbox":
+                {
+                    TemporaryScript.AddVillage(SaveUniverseScript.Universe, inputField.text, "hobbit", TemporaryScript.currentUser);
+                }
+                break;
+
+        }
+
+        GameObject.Find("loadscreen").GetComponent<loaderScript>().Level("Village");
     }
 }

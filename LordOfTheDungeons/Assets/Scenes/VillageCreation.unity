@@ -1890,6 +1890,7 @@ MonoBehaviour:
   usedLight: {fileID: 242784241}
   transition: {fileID: 243741209}
   text: {fileID: 1509549507}
+  inputField: {fileID: 1974369702}
 --- !u!212 &589366016
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7329,6 +7330,7 @@ MonoBehaviour:
   usedLight: {fileID: 507853441}
   transition: {fileID: 865996244}
   text: {fileID: 623568301}
+  inputField: {fileID: 1974369702}
 --- !u!212 &841453114
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8331,6 +8333,7 @@ MonoBehaviour:
   usedLight: {fileID: 98612206}
   transition: {fileID: 140148449}
   text: {fileID: 423576267}
+  inputField: {fileID: 1974369702}
 --- !u!212 &1241710027
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -9403,6 +9406,7 @@ MonoBehaviour:
   usedLight: {fileID: 797554342}
   transition: {fileID: 2139004951}
   text: {fileID: 585679382}
+  inputField: {fileID: 1974369702}
 --- !u!212 &1788417134
 SpriteRenderer:
   m_ObjectHideFlags: 0

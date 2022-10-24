@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SocialPlatforms;
 
 public class UniverseButtonScript : MonoBehaviour, IPointerClickHandler
 {
 
-    private string villageName;
-    public string VillageName { get => villageName; set => villageName = value; }
+    private string universeName;
+    public string UniverseName { get => universeName; set => universeName = value; }
 
     private string owner;
     public string Owner { get => owner; set => owner = value; }
@@ -19,6 +20,10 @@ public class UniverseButtonScript : MonoBehaviour, IPointerClickHandler
 
 
     private string passwordString;
+
+    private List<string> users = new List<string>();
+    public List<string> Users { get => users; set => users = value; }
+
     public string PasswordString
     {
         get { return passwordString; }
@@ -31,6 +36,7 @@ public class UniverseButtonScript : MonoBehaviour, IPointerClickHandler
         }
     }
 
+    
     private GameObject passwordCanvas;
     private GameObject universeCanvas;
     private GameObject universeSearchCanvas;
@@ -73,7 +79,6 @@ public class UniverseButtonScript : MonoBehaviour, IPointerClickHandler
             else
             {
                 ShowVillage();
-                Debug.Log("feur");
             }
         }
     }
@@ -84,13 +89,21 @@ public class UniverseButtonScript : MonoBehaviour, IPointerClickHandler
         yield return new WaitForSeconds(.5f);
         passwordCanvas.GetComponent<CanvasGroup>().interactable = true;
         passwordCanvas.GetComponent<CanvasGroup>().blocksRaycasts = true;
+        universeCanvas.GetComponent<CanvasGroup>().interactable = false;
+        universeCanvas.GetComponent<CanvasGroup>().blocksRaycasts = false;        
+        universeSearchCanvas.GetComponent<CanvasGroup>().interactable = false;
+        universeSearchCanvas.GetComponent<CanvasGroup>().blocksRaycasts = false;
         passwordAnimator.SetTrigger("GoBackIdle");
     }
 
-    private IEnumerator HidePassword()
+    public IEnumerator HidePassword()
     {
         passwordCanvas.GetComponent<CanvasGroup>().interactable = false;
         passwordCanvas.GetComponent<CanvasGroup>().blocksRaycasts = false;
+        universeCanvas.GetComponent<CanvasGroup>().interactable = true;
+        universeCanvas.GetComponent<CanvasGroup>().blocksRaycasts = true;
+        universeSearchCanvas.GetComponent<CanvasGroup>().interactable = true;
+        universeSearchCanvas.GetComponent<CanvasGroup>().blocksRaycasts = true;
         passwordAnimator.SetTrigger("UnZoom");
         yield return new WaitForSeconds(0.3f);
         passwordCanvas.GetComponent<CanvasGroup>().alpha = 0;
@@ -102,6 +115,7 @@ public class UniverseButtonScript : MonoBehaviour, IPointerClickHandler
     {
         StartCoroutine(HidePassword());
         StartCoroutine(ChangeMenu());
+        GameObject.Find("VillageMenu").GetComponent<VillageMenuLoaderScript>().CurrentUniverse = TemporaryScript.GetUniverse(universeName);
     }
 
     private IEnumerator ChangeMenu()
@@ -128,9 +142,15 @@ public class UniverseButtonScript : MonoBehaviour, IPointerClickHandler
 
     }
 
-    public void VerifyPassword(string p)
+    public bool VerifyPassword(string p)
     {
-        Debug.Log(p);
-        ShowVillage();
+        bool b = false;
+        if (p == PasswordString)
+        {
+            ShowVillage();
+            b = true;
+        }
+
+        return b;
     }
 }

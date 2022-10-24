@@ -17,6 +17,8 @@ public class UniverseGetInfoScript : MonoBehaviour
     private Transform contentMyUniverse;
     private Transform contentGlobalUniverse;
 
+    public GameObject createUniverseButton;
+
 
     List<GameObject> buttons = new List<GameObject>();
     List<GameObject> myUniverseButton = new List<GameObject>();
@@ -54,47 +56,48 @@ public class UniverseGetInfoScript : MonoBehaviour
 
         while (!stop)
         {
-            foreach (KeyValuePair<string, string> entry in TemporaryScript.Universes)
+            foreach (Universe u in TemporaryScript.Universes)
             {
                 GameObject button = Instantiate(buttonPreFab);
-                button.transform.Find("T").GetComponent<TMP_Text>().text = entry.Key;
+                button.transform.Find("T").GetComponent<TMP_Text>().text = u.UniverseName;
                 button.transform.SetParent(contentGlobalUniverse);
-                button.GetComponent<UniverseButtonScript>().VillageName = entry.Key;
-
-                foreach (KeyValuePair<string, List<string>> entry2 in TemporaryScript.UniverseOwner)
-                {
-                    if (entry2.Value.Contains(entry.Key))
-                    {
-                        button.GetComponent<UniverseButtonScript>().Owner = entry2.Key;
-                    }
-                }
-
-                if (entry.Value != "")
-                {
-                    button.GetComponent<UniverseButtonScript>().Password = true;
-                    button.GetComponent<UniverseButtonScript>().PasswordString = entry.Value;
-                }
-                else
-                {
-                    button.GetComponent<UniverseButtonScript>().Password = false;
-                }
+                button.GetComponent<UniverseButtonScript>().UniverseName = u.UniverseName ;
+                button.GetComponent<UniverseButtonScript>().Owner = u.Owner;
+                button.GetComponent<UniverseButtonScript>().Password = u.Password;
+                button.GetComponent<UniverseButtonScript>().PasswordString = u.UniversePassword;
+                button.GetComponent<UniverseButtonScript>().Users = u.Users;
                 buttons.Add(button);
             }
 
 
 
+
             foreach(GameObject button in buttons)
             {
-                if (button.GetComponent<UniverseButtonScript>().Owner == TemporaryScript.currentUser)
+                if (button.GetComponent<UniverseButtonScript>().Owner == TemporaryScript.currentUser || button.GetComponent<UniverseButtonScript>().Users.Contains(TemporaryScript.currentUser))
                 {
                     GameObject b = Instantiate(button);
+                    b.GetComponent<UniverseButtonScript>().UniverseName = button.GetComponent<UniverseButtonScript>().UniverseName;
+                    b.GetComponent<UniverseButtonScript>().Owner = button.GetComponent<UniverseButtonScript>().Owner;
+                    b.GetComponent<UniverseButtonScript>().PasswordString = button.GetComponent<UniverseButtonScript>().PasswordString;
+                    b.GetComponent<UniverseButtonScript>().Users = button.GetComponent<UniverseButtonScript>().Users;
                     b.transform.SetParent(contentMyUniverse);
                     b.transform.localScale = new Vector2(0.8333334f, 0.8333334f);
+                    b.GetComponent<UniverseButtonScript>().Password = false;
                     myUniverseButton.Add(b);
                 }
             }
 
             stop = true;
+        }
+
+        foreach (GameObject button in myUniverseButton)
+        {
+            Debug.Log(button.GetComponent<UniverseButtonScript>().Owner);
+            if (button.GetComponent<UniverseButtonScript>().Owner == TemporaryScript.currentUser)
+            {
+                createUniverseButton.SetActive(false);
+            }
         }
 
         GameObject.Find("WaitingServer").GetComponent<WaitingForServerScript>().StopAnim();
@@ -107,7 +110,7 @@ public class UniverseGetInfoScript : MonoBehaviour
         {
             foreach (GameObject button in buttons)
             {
-                if (!button.GetComponent<UniverseButtonScript>().VillageName.Contains(search))
+                if (!button.GetComponent<UniverseButtonScript>().UniverseName.Contains(search))
                 {
                     button.SetActive(false);
                 }
