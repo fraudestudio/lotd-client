@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -10,6 +11,8 @@ public class VillageNameValidation : MonoBehaviour, IPointerClickHandler
     public Canvas factionCanvas;
     public GameObject factionObjects;
     public Animator animator;
+    public TMP_InputField field;
+    public TMP_Text error;
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +30,15 @@ public class VillageNameValidation : MonoBehaviour, IPointerClickHandler
     {
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            StartCoroutine(changeChoice());
+            if (field.text.ToUpper() != field.text.ToLower())
+            {
+                error.color = new Color(1, 1, 1, 0);
+                StartCoroutine(changeChoice());
+            }
+            else
+            {
+                error.color = new Color(1, 1, 1, 1);
+            }
         }
     }
 

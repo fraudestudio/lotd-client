@@ -6,9 +6,6 @@ using UnityEngine.UI;
 
 public class VillageMenuLoaderScript : MonoBehaviour
 {
-
-    private bool stop = false;
-
     private Universe currentUniverse;
     public Universe CurrentUniverse { get => currentUniverse; set => currentUniverse = value; }
 
@@ -78,7 +75,7 @@ public class VillageMenuLoaderScript : MonoBehaviour
             createButton.GetComponent<Button>().interactable = false;
 
             villageState.text = "Village : " + currentUniverse.GetVillage(TemporaryScript.currentUser).Name;
-            villageState.fontSize = 26;
+            villageState.fontSize = 20;
             villageState.color = new Color(0, 0.9f, 0);
 
         }
@@ -89,19 +86,19 @@ public class VillageMenuLoaderScript : MonoBehaviour
             villageState.color = new Color(1, 0, 0);
 
             villageState.text = "Vous n'avez pas de village.";
-            villageState.fontSize = 28;
+            villageState.fontSize = 20;
         }
 
 
         numberPlayer.text = "Nombre de villages : " + currentUniverse.Users.Count;
-        numberPlayer.fontSize = 30;
+        numberPlayer.fontSize = 24;
 
-        numberOnline.text = "Nombre de chef present : " + 0;
+        numberOnline.text = "Nombre de chef présent : " + 0;
 
-        numberOnline.fontSize = 28;
+        numberOnline.fontSize = 24;
 
         majorFaction.text = "Faction majoritaire : " + currentUniverse.GetMajorFaction();
-        majorFaction.fontSize = 28;
+        majorFaction.fontSize = 24;
         majorFaction.color = new Color(1, 1, 0);
     }
 }

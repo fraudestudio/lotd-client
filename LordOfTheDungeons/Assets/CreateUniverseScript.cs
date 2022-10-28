@@ -10,26 +10,23 @@ public class CreateUniverseScript : MonoBehaviour, IPointerClickHandler
 
     public TMP_InputField nameFeild;
     public TMP_InputField passwordFeild;
+    public TMP_Text error;
 
     public void OnPointerClick(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            TemporaryScript.Universes.Add(new Universe(nameFeild.text, passwordFeild.text, TemporaryScript.currentUser));
+            if (nameFeild.text.ToUpper() != nameFeild.text.ToLower())
+            {
+                error.color = new Color(1, 1, 1, 0);
+                GameObject.Find("WaitingServer").GetComponent<WaitingForServerScript>().StartAnim();
+                GetComponent<ChangeMenuButtonScript>().go = true;
+                TemporaryScript.Universes.Add(new Universe(nameFeild.text, passwordFeild.text, TemporaryScript.currentUser));
+            }
+            else
+            {
+                error.color = new Color(1, 1, 1, 1);
+            }
         }
     }
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
 }

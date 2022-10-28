@@ -53,7 +53,6 @@ public class Universe
         int idwarf = 0;
         int ielve = 0;
         int ihobbit = 0;
-        string major = "";
         foreach (Village v in Villages)
         {
             switch (v.Faction)
@@ -68,13 +67,15 @@ public class Universe
 
         }
 
+        string major = "";
+
         if (ihuman > idwarf && ihuman > ielve && ihuman > ihobbit)
         {
             major = "humain";
         }
         else if (idwarf > ihuman && idwarf > ielve && idwarf > ihobbit)
         {
-            major = "dwarf";
+            major = "nain";
         }
         else if (ielve > idwarf && ielve > ihuman && ielve > ihobbit)
         {
@@ -99,7 +100,6 @@ public class Universe
             if (v.Owner == user)
             {
                 village = v;
-                Debug.Log("FEUR");
             }
         }
 

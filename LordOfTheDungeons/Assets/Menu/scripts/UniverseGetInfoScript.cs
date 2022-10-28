@@ -93,12 +93,11 @@ public class UniverseGetInfoScript : MonoBehaviour
 
         foreach (GameObject button in myUniverseButton)
         {
-            Debug.Log(button.GetComponent<UniverseButtonScript>().Owner);
             if (button.GetComponent<UniverseButtonScript>().Owner == TemporaryScript.currentUser)
             {
                 createUniverseButton.SetActive(false);
             }
-        }
+        } 
 
         GameObject.Find("WaitingServer").GetComponent<WaitingForServerScript>().StopAnim();
 

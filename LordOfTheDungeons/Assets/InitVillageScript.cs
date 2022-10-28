@@ -20,9 +20,9 @@ public class InitVillageScript : MonoBehaviour
         Village v = u.GetVillage(TemporaryScript.currentUser);
 
         nameVillage.text = "Village : " + v.Name;
-        owner.text = "Proprio : " + u.GetVillage(TemporaryScript.currentUser).Owner;
+        owner.text = "Proprio : " + v.Owner;
         universe.text = "Univer : " + u.UniverseName;
-        faction.text = "Faction : " + u.GetVillage(TemporaryScript.currentUser).Faction;
+        faction.text = "Faction : " + v.Faction;
 
     }
 

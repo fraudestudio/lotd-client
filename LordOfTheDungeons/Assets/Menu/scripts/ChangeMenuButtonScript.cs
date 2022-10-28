@@ -13,6 +13,7 @@ public class ChangeMenuButtonScript : MonoBehaviour, IPointerClickHandler
     public Canvas menuCanvas;
     public Canvas newMenuCanvas;
     public Canvas newMenuCanvasOptional;
+    public bool go = true;
 
 
     // Start is called before the first frame update
@@ -34,7 +35,10 @@ public class ChangeMenuButtonScript : MonoBehaviour, IPointerClickHandler
         {
             if (eventData.button == PointerEventData.InputButton.Left)
             {
-                StartCoroutine(LoadUniverseMenu());
+                if (go)
+                {
+                    StartCoroutine(LoadUniverseMenu());
+                }
             }
         }
     }
