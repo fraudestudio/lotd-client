@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class scriptGueriseur : MonoBehaviour
+public class WareHouseScript : MonoBehaviour
 {
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,14 +17,18 @@ public class scriptGueriseur : MonoBehaviour
         
     }
 
-    private void OnMouseEnter()
+    public void OnMouseDown()
     {
-        Debug.Log("Mouse is over Gueriseur");
-
+        Debug.Log("WareHouse Clicked");
     }
 
-    private void OnMouseExit()
+    public void OnMouseEnter()
     {
-        Debug.Log("Mouse is no longer on Gueriseur");
+        Debug.Log("WareHouse Mouse Enter");
+    }
+
+    public void OnMouseExit()
+    {
+        Debug.Log("WareHouse Mouse Exit");
     }
 }

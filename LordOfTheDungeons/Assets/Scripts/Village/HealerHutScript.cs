@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class scriptTrainingCamp : MonoBehaviour
+public class HealerHutScript : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -13,17 +13,21 @@ public class scriptTrainingCamp : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-    
+        
     }
 
-    private void OnMouseEnter() 
+    private void OnMouseEnter()
     {
-        Debug.Log("Mouse is over Training Camp");
-        
+        Debug.Log("Mouse is over Healer Hut");
     }
 
     private void OnMouseExit()
     {
-        Debug.Log("Mouse is no longer on Training Camp");
+        Debug.Log("Mouse is no longer over Healer Hut");
+    }
+
+    private void OnMouseDown()
+    {
+        Debug.Log("Healer Hut has been clicked");
     }
 }
