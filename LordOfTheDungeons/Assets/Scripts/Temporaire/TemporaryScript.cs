@@ -31,6 +31,13 @@ public static class TemporaryScript
         AddVillage(universes[1], "VILLAGE DE ALICE", "dwarf", "alice");
         universes.Add(new Universe("test", "456", "alice"));
         AddVillage(universes[2], "test", "elve", "alice");
+
+
+        /*universes.Add(new Universe("zear", "", "shinka"));
+        universes.Add(new Universe("qdsf", "", "shinka"));
+        universes.Add(new Universe("sq", "", "shinka"));
+        universes.Add(new Universe("azeraf", "", "shinka"));
+        universes.Add(new Universe("aze", "", "shinka"));*/
     }
 
     public static bool VerifyUser(string id, string mdp)
