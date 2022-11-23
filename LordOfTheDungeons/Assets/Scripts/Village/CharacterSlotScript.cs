@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.ExceptionServices;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -7,8 +8,11 @@ using UnityEngine.UI;
 public class CharacterSlotScript : MonoBehaviour, IDropHandler
 {
 
+    public SlotType Type = SlotType.RECRUIT;
+
+
     public GameObject SlotPreFab;
-    private bool slotIsEmpty = true;
+    public bool slotIsEmpty = true;
 
     public bool SlotIsEmpty { get => slotIsEmpty; set => slotIsEmpty = value; }
 
@@ -17,20 +21,33 @@ public class CharacterSlotScript : MonoBehaviour, IDropHandler
         GameObject drop = eventData.pointerDrag;
         if (SlotIsEmpty)
         {
-            if (!drop.GetComponent<CharacterImageSlotScript>().IsEngaged)
+            if (Type == SlotType.BUILDING)
             {
+                drop.GetComponent<CharacterImageSlotScript>().IsEngaged = false;
                 SlotIsEmpty = false;
-                transform.Find("PlusImage").GetComponent<Image>().color = new Color(1, 1, 1, 0);
-                GameObject d = Instantiate(SlotPreFab);
-                d.transform.SetParent(transform.parent);
-                d.transform.localScale = new Vector3(1, 1, 1);
-                drop.GetComponent<CharacterImageSlotScript>().IsEngaged = true;
+                drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag.GetComponent<CharacterSlotScript>().SlotIsEmpty = true;
+                if (drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag.GetComponent<CharacterSlotScript>().Type == SlotType.RECRUIT)
+                {
+                    drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag.gameObject.SetActive(false);
+                    Destroy(drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag);
+                }
                 drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag = transform;
             }
-        }
-        else
-        {
-            drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag = transform;
+            else if (Type == SlotType.RECRUIT)
+            {
+                if (!drop.GetComponent<CharacterImageSlotScript>().IsEngaged)
+                {
+                    SlotIsEmpty = false;
+                    transform.Find("PlusImage").GetComponent<Image>().color = new Color(1, 1, 1, 0);
+                    GameObject d = Instantiate(SlotPreFab);
+                    d.transform.SetParent(transform.parent);
+                    d.transform.localScale = new Vector3(1, 1, 1);
+                    drop.GetComponent<CharacterImageSlotScript>().IsEngaged = true;
+                    drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag.GetComponent<CharacterSlotScript>().SlotIsEmpty = true;
+                    drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag = transform;
+                }
+            }
+
         }
     }
 

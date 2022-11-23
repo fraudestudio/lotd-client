@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class CharacterImageSlotScript : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
 
+
     private Transform parentAfterDrag;
     private bool isEngaged = false;
 
