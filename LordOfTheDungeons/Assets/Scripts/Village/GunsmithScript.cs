@@ -4,16 +4,12 @@ using UnityEngine;
 
 public class GunsmithScript : MonoBehaviour
 {
+    public Canvas CanvasGunsmith;
     // Start is called before the first frame update
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        CanvasGunsmith = GameObject.Find("CanvasGunsmith").GetComponent<Canvas>();
+        CanvasGunsmith.enabled = false;
     }
 
     public void OnMouseDown()
@@ -24,10 +20,12 @@ public class GunsmithScript : MonoBehaviour
     public void OnMouseEnter()
     {
         Debug.Log("Gunsmith Mouse Enter");
+        CanvasGunsmith.enabled = true;
     }
 
     public void OnMouseExit()
     {
         Debug.Log("Gunsmith Mouse Exit");
+        CanvasGunsmith.enabled = false;
     }
 }
