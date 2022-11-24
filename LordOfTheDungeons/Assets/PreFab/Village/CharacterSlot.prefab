@@ -167,6 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4da06f16ba6839f44b0f606e6c9d99b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Type: 0
   SlotPreFab: {fileID: 5002436930003801801}
   slotIsEmpty: 1
 --- !u!1 &5224206029067549814
