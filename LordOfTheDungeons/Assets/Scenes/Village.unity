@@ -180,6 +180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99926d78899fc8e4f814dcd2c78b18b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CanvasHealerHut: {fileID: 0}
 --- !u!212 &255683621
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -480,6 +481,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9cd4de9ac1d4e741a012b0b05b0d148, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CanvasGunsmith: {fileID: 0}
 --- !u!61 &590241591
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -604,6 +606,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ba72f274f9dfbe4faa2c3bf1cca787d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CanvasTavern: {fileID: 0}
 --- !u!61 &640399345
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -661,6 +664,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0edfab92acca124aa414c1d0fd990ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CanvasTrainingCamp: {fileID: 0}
 --- !u!212 &652667214
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -785,6 +789,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cec9e14f5125eac43b5799a138887405, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CanvasWarehouse: {fileID: 0}
 --- !u!61 &662627887
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1591,7 +1596,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3767267721642181840, guid: 66d05e5c936fe0148b3ab23e54e763d3, type: 3}
       propertyPath: m_Name
-      value: CanvasHut
+      value: CanvasHealerHut
       objectReference: {fileID: 0}
     - target: {fileID: 4437977377202580441, guid: 66d05e5c936fe0148b3ab23e54e763d3, type: 3}
       propertyPath: m_SizeDelta.x
