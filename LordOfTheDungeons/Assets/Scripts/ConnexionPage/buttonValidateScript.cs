@@ -28,7 +28,7 @@ public class buttonValidateScript : MonoBehaviour, IPointerClickHandler
         if (eventData.button == PointerEventData.InputButton.Left)
         {
             GameObject.Find("WaitingServer").GetComponent<WaitingForServerScript>().StartAnim();
-            if (Server.VerifyUser(id.text, mdp.text))
+            if (TemporaryScript.VerifyUser(id.text, mdp.text))
             {
                 TemporaryScript.currentUser = id.text;
                 c.GetComponent<loaderScript>().Level("Menu");

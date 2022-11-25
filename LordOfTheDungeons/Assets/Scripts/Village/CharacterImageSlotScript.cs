@@ -18,23 +18,26 @@ public class CharacterImageSlotScript : MonoBehaviour, IBeginDragHandler, IEndDr
     {
         GetComponent<Image>().raycastTarget = false;
         parentAfterDrag = transform.parent;
+        CharacterSlotNotAllowedScript.RemoveSlot(transform.parent.gameObject);
         transform.SetParent(transform.root);
         transform.SetAsLastSibling();
-        Debug.Log("Begin");
+        CharacterSlotNotAllowedScript.ShowNotAllowedSlot();
+        //Debug.Log("Begin");
     }
 
     public void OnDrag(PointerEventData eventData)
     {
         transform.position = eventData.position;
-        Debug.Log("Drag");
+        //Debug.Log("Drag");
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        CharacterSlotNotAllowedScript.HideNotAllowedSlot();
         transform.SetParent(ParentAfterDrag);
         transform.position = parentAfterDrag.position;
         GetComponent<Image>().raycastTarget = true;
-        Debug.Log("End");
+        //Debug.Log("End");
     }
 
 

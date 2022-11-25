@@ -4,6 +4,7 @@ using System.Runtime.ExceptionServices;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using static UnityEngine.Rendering.DebugUI.Table;
 
 public class CharacterSlotScript : MonoBehaviour, IDropHandler
 {
@@ -28,9 +29,10 @@ public class CharacterSlotScript : MonoBehaviour, IDropHandler
                 drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag.GetComponent<CharacterSlotScript>().SlotIsEmpty = true;
                 if (drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag.GetComponent<CharacterSlotScript>().Type == SlotType.RECRUIT)
                 {
-                    drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag.gameObject.SetActive(false);
-                    Destroy(drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag);
+                    Destroy(drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag.gameObject);
                 }
+                CharacterSlotNotAllowedScript.AddSlot(transform.gameObject);
+                CharacterSlotNotAllowedScript.RemoveSlot(drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag.gameObject);
                 drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag = transform;
             }
             else if (Type == SlotType.RECRUIT)
@@ -45,6 +47,7 @@ public class CharacterSlotScript : MonoBehaviour, IDropHandler
                     drop.GetComponent<CharacterImageSlotScript>().IsEngaged = true;
                     drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag.GetComponent<CharacterSlotScript>().SlotIsEmpty = true;
                     drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag = transform;
+                    CharacterSlotNotAllowedScript.AddSlot(transform.gameObject);
                 }
             }
 
@@ -56,6 +59,7 @@ public class CharacterSlotScript : MonoBehaviour, IDropHandler
         if (transform.childCount > 2)
         {
             SlotIsEmpty = false;
+            CharacterSlotNotAllowedScript.AddSlot(transform.gameObject);
         }
         else
         {
