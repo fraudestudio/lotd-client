@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 321233661844815296}
   - component: {fileID: 321233661844815297}
-  - component: {fileID: 321233661844815298}
   - component: {fileID: 321233661844815327}
+  - component: {fileID: 5167594901084290410}
   m_Layer: 0
   m_Name: TrainingCamp
   m_TagString: Untagged
@@ -86,19 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &321233661844815298
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 321233661844815299}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0edfab92acca124aa414c1d0fd990ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CanvasTrainingCamp: {fileID: 0}
 --- !u!61 &321233661844815327
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -125,6 +112,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &5167594901084290410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 321233661844815299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea172f0984769c04da90a55262984aff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &321233661857178466
 GameObject:
   m_ObjectHideFlags: 0
@@ -136,7 +135,7 @@ GameObject:
   - component: {fileID: 321233661857178464}
   - component: {fileID: 321233661857178465}
   - component: {fileID: 321233661857178494}
-  - component: {fileID: 321233661857178495}
+  - component: {fileID: 626104501889247578}
   m_Layer: 0
   m_Name: Tavern
   m_TagString: Untagged
@@ -237,7 +236,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &321233661857178495
+--- !u!114 &626104501889247578
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -246,10 +245,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 321233661857178466}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ba72f274f9dfbe4faa2c3bf1cca787d, type: 3}
+  m_Script: {fileID: 11500000, guid: ea172f0984769c04da90a55262984aff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CanvasTavern: {fileID: 0}
 --- !u!1 &321233661870502562
 GameObject:
   m_ObjectHideFlags: 0
@@ -261,7 +259,7 @@ GameObject:
   - component: {fileID: 321233661870502590}
   - component: {fileID: 321233661870502591}
   - component: {fileID: 321233661870502560}
-  - component: {fileID: 321233661870502561}
+  - component: {fileID: 9183506747223800019}
   m_Layer: 0
   m_Name: WareHouse
   m_TagString: Untagged
@@ -362,7 +360,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &321233661870502561
+--- !u!114 &9183506747223800019
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -371,10 +369,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 321233661870502562}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cec9e14f5125eac43b5799a138887405, type: 3}
+  m_Script: {fileID: 11500000, guid: ea172f0984769c04da90a55262984aff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CanvasWarehouse: {fileID: 0}
 --- !u!1 &321233661940779964
 GameObject:
   m_ObjectHideFlags: 0
@@ -386,7 +383,7 @@ GameObject:
   - component: {fileID: 321233661940779962}
   - component: {fileID: 321233661940779963}
   - component: {fileID: 321233661940779960}
-  - component: {fileID: 321233661940779961}
+  - component: {fileID: 5083338036075243232}
   m_Layer: 0
   m_Name: Gunsmith
   m_TagString: Untagged
@@ -487,7 +484,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &321233661940779961
+--- !u!114 &5083338036075243232
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -496,10 +493,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 321233661940779964}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9cd4de9ac1d4e741a012b0b05b0d148, type: 3}
+  m_Script: {fileID: 11500000, guid: ea172f0984769c04da90a55262984aff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CanvasGunsmith: {fileID: 0}
 --- !u!1 &321233662546016429
 GameObject:
   m_ObjectHideFlags: 0
@@ -510,8 +506,8 @@ GameObject:
   m_Component:
   - component: {fileID: 321233662546016425}
   - component: {fileID: 321233662546016426}
-  - component: {fileID: 321233662546016427}
   - component: {fileID: 321233662546016428}
+  - component: {fileID: 4280936589436490994}
   m_Layer: 0
   m_Name: 'HealerHut '
   m_TagString: Untagged
@@ -586,19 +582,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &321233662546016427
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 321233662546016429}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99926d78899fc8e4f814dcd2c78b18b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CanvasHealerHut: {fileID: 0}
 --- !u!61 &321233662546016428
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -625,6 +608,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &4280936589436490994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 321233662546016429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea172f0984769c04da90a55262984aff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8030986256102920015
 GameObject:
   m_ObjectHideFlags: 0
