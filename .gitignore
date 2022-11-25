@@ -52,7 +52,8 @@ ExportedObj/
 sysinfo.txt
 
 # Unity generated log files
-.log
+*.log
+*.dwlt
 
 # Builds
 *.apk
