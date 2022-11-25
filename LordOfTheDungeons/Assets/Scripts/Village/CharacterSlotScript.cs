@@ -47,10 +47,15 @@ public class CharacterSlotScript : MonoBehaviour, IDropHandler
                     drop.GetComponent<CharacterImageSlotScript>().IsEngaged = true;
                     drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag.GetComponent<CharacterSlotScript>().SlotIsEmpty = true;
                     drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag = transform;
+                    CharacterSlotNotAllowedScript.RemoveSlot(drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag.gameObject);
                     CharacterSlotNotAllowedScript.AddSlot(transform.gameObject);
                 }
             }
 
+        }
+        else
+        {
+            CharacterSlotNotAllowedScript.AddSlot(drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag.gameObject);
         }
     }
 
