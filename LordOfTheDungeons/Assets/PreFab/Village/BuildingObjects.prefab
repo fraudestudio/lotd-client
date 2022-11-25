@@ -635,7 +635,7 @@ GameObject:
   m_Component:
   - component: {fileID: 820827371716966594}
   m_Layer: 0
-  m_Name: BuildingObjetcs
+  m_Name: BuildingObjects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
