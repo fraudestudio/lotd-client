@@ -8,8 +8,6 @@ using UnityEngine.UI;
 public class ModifyMenuScript : MonoBehaviour
 {
 
-    private Tavern tavern;
-
     public TMP_Text TitleText;
     public TMP_Text DescriptionText;
     public Button UpgradeButton;
@@ -19,7 +17,6 @@ public class ModifyMenuScript : MonoBehaviour
 
     void Start()
     {
-        tavern = Village.Tavern;
     }
 
     // Update is called once per frame
@@ -70,11 +67,11 @@ public class ModifyMenuScript : MonoBehaviour
             case "Tavern":
                 {
                     currentUsedBuilding = building;
-                    TitleText.text = "Tavern";
+                    TitleText.text = building;
                     DescriptionText.text = description;
                     
                     /// On regarde si la taverne est améliorable
-                    if (tavern.Level < 5)
+                    if (Village.Tavern.Level < 5)
                     {
                         UpgradeButton.gameObject.SetActive(true);
                         UpgradeButton.transform.Find("WoodCountLogo").transform.Find("WoodCount").gameObject.SetActive(true);
@@ -83,9 +80,9 @@ public class ModifyMenuScript : MonoBehaviour
                         UpgradeButton.transform.Find("WoodCountLogo").gameObject.SetActive(true);
                         UpgradeButton.transform.Find("StoneCountLogo").gameObject.SetActive(true);
                         UpgradeButton.transform.Find("IronCountLogo").gameObject.SetActive(true);
-                        UpgradeButton.transform.Find("WoodCountLogo").transform.Find("WoodCount").GetComponent<TMP_Text>().text = (tavern.BaseWoodNeeded * (tavern.WoodModification * tavern.Level)).ToString();
-                        UpgradeButton.transform.Find("StoneCountLogo").transform.Find("StoneCount").GetComponent<TMP_Text>().text = (tavern.BaseStoneNeeded * (tavern.StoneModification * tavern.Level)).ToString();
-                        UpgradeButton.transform.Find("IronCountLogo").transform.Find("IronCount").GetComponent<TMP_Text>().text = (tavern.BaseIronNeeded * (tavern.IronModification * tavern.Level)).ToString();
+                        UpgradeButton.transform.Find("WoodCountLogo").transform.Find("WoodCount").GetComponent<TMP_Text>().text = (Village.Tavern.BaseWoodNeeded * (Village.Tavern.WoodModification * Village.Tavern.Level)).ToString();
+                        UpgradeButton.transform.Find("StoneCountLogo").transform.Find("StoneCount").GetComponent<TMP_Text>().text = (Village.Tavern.BaseStoneNeeded * (Village.Tavern.StoneModification * Village.Tavern.Level)).ToString();
+                        UpgradeButton.transform.Find("IronCountLogo").transform.Find("IronCount").GetComponent<TMP_Text>().text = (Village.Tavern.BaseIronNeeded * (Village.Tavern.IronModification * Village.Tavern.Level)).ToString();
 
                     }
                     else
@@ -101,7 +98,7 @@ public class ModifyMenuScript : MonoBehaviour
 
                     /// On vérifie si la tavern est en construction
                     /// Si elle l'est pas on désactive le timer.
-                    if (tavern.InConstruction)
+                    if (Village.Tavern.InConstruction)
                     {
                         constructionTimer.SetActive(true);
                         constructionTimer.GetComponent<TimeLeftSliderScript>().Init(200, 300);
