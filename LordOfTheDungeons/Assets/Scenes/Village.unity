@@ -1358,6 +1358,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1553269484336562557, guid: ca7c1c54f428061408a99746bcab1487, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1553269484336562557, guid: ca7c1c54f428061408a99746bcab1487, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1553269485054966678, guid: ca7c1c54f428061408a99746bcab1487, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1445,6 +1453,10 @@ PrefabInstance:
     - target: {fileID: 1553269485054966698, guid: ca7c1c54f428061408a99746bcab1487, type: 3}
       propertyPath: m_Name
       value: GunsmithMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 6732417607456498275, guid: ca7c1c54f428061408a99746bcab1487, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -5.6606445
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca7c1c54f428061408a99746bcab1487, type: 3}

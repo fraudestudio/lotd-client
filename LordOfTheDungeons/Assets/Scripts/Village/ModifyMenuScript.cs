@@ -60,14 +60,14 @@ public class ModifyMenuScript : MonoBehaviour
     /// <param name="description"></param>
     /// <param name="isInConstruction"></param>
     /// <param name="timeRemaining"></param>
-    public void InitMenu(string building, string description,bool isInConstruction = false, int? timeRemaining = null)
+    public void InitMenu(string building, string description)
     {
         switch (building)
         {
             case "Tavern":
                 {
                     currentUsedBuilding = building;
-                    TitleText.text = building;
+                    TitleText.text = "Taverne";
                     DescriptionText.text = description;
                     
                     /// On regarde si la taverne est améliorable
@@ -107,10 +107,15 @@ public class ModifyMenuScript : MonoBehaviour
                     {
                         constructionTimer.SetActive(false);
                     }
-
-
-
-                } break;
+                } 
+                break;
+            case "Gunsmith":
+                {
+                    currentUsedBuilding = building;
+                    TitleText.text = "Armurier";
+                    DescriptionText.text = description;
+                }
+                break;
         }
     }
 }

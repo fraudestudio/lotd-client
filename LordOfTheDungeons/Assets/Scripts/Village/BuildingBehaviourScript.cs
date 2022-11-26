@@ -21,6 +21,7 @@ public class BuildingBehaviourScript : MonoBehaviour
         switch (transform.name)
         {
             case "Tavern": InitTavern(); break;
+            case "Gunsmith": InitGunsmith(); break;
         }
     }
 
@@ -41,6 +42,11 @@ public class BuildingBehaviourScript : MonoBehaviour
                         StartMenuTavern();
                     }
                     break;
+                case "Gunsmith":
+                    {
+                        StartGunsmith();
+                    }
+                    break;
             }
         }
     }
@@ -54,11 +60,39 @@ public class BuildingBehaviourScript : MonoBehaviour
         switch (name)
         {
             case "Tavern": StopTavern(); break;
+            case "Gunsmith": StopGunsmith(); break;
         }
     }
 
 
+    /// <summary>
+    /// Initialise les éléments de l'armurier
+    /// </summary>
+    private void InitGunsmith()
+    {
+        
+    }
 
+    private void StartGunsmith()
+    {
+        GameObject m = GameObject.Find("BuildingMenu");
+        GameObject g = GameObject.Find("GunsmithMenu");
+        Init(m);
+        Init(g);
+        m.GetComponent<ModifyMenuScript>().InitMenu("Gunsmith", "Endroit où améliorer l'équipement des héros");
+    }
+
+    /// <summary>
+    /// Arrête les éléments de l'Armurier
+    /// </summary>
+    private void StopGunsmith()
+    {
+
+    }
+
+    /// <summary>
+    /// Initialise les éléments de la taverne 
+    /// </summary>
     private void InitTavern()
     {
         GameObject t = GameObject.Find("TavernMenu");
