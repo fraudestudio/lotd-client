@@ -73,13 +73,7 @@ public class ModifyMenuScript : MonoBehaviour
                     /// On regarde si la taverne est améliorable
                     if (Village.Tavern.Level < 5)
                     {
-                        UpgradeButton.gameObject.SetActive(true);
-                        UpgradeButton.transform.Find("WoodCountLogo").transform.Find("WoodCount").gameObject.SetActive(true);
-                        UpgradeButton.transform.Find("StoneCountLogo").transform.Find("StoneCount").gameObject.SetActive(true);
-                        UpgradeButton.transform.Find("IronCountLogo").transform.Find("IronCount").gameObject.SetActive(true);
-                        UpgradeButton.transform.Find("WoodCountLogo").gameObject.SetActive(true);
-                        UpgradeButton.transform.Find("StoneCountLogo").gameObject.SetActive(true);
-                        UpgradeButton.transform.Find("IronCountLogo").gameObject.SetActive(true);
+                        SetActiveUpgrade(true);
                         UpgradeButton.transform.Find("WoodCountLogo").transform.Find("WoodCount").GetComponent<TMP_Text>().text = (Village.Tavern.BaseWoodNeeded * (Village.Tavern.WoodModification * Village.Tavern.Level)).ToString();
                         UpgradeButton.transform.Find("StoneCountLogo").transform.Find("StoneCount").GetComponent<TMP_Text>().text = (Village.Tavern.BaseStoneNeeded * (Village.Tavern.StoneModification * Village.Tavern.Level)).ToString();
                         UpgradeButton.transform.Find("IronCountLogo").transform.Find("IronCount").GetComponent<TMP_Text>().text = (Village.Tavern.BaseIronNeeded * (Village.Tavern.IronModification * Village.Tavern.Level)).ToString();
@@ -87,13 +81,7 @@ public class ModifyMenuScript : MonoBehaviour
                     }
                     else
                     {
-                        UpgradeButton.gameObject.SetActive(false);
-                        UpgradeButton.transform.Find("WoodCountLogo").transform.Find("WoodCount").gameObject.SetActive(false);
-                        UpgradeButton.transform.Find("StoneCountLogo").transform.Find("StoneCount").gameObject.SetActive(false);
-                        UpgradeButton.transform.Find("IronCountLogo").transform.Find("IronCount").gameObject.SetActive(false);
-                        UpgradeButton.transform.Find("WoodCountLogo").gameObject.SetActive(false);
-                        UpgradeButton.transform.Find("StoneCountLogo").gameObject.SetActive(false);
-                        UpgradeButton.transform.Find("IronCountLogo").gameObject.SetActive(false);
+                        SetActiveUpgrade(false);
                     }
 
                     /// On vérifie si la tavern est en construction
@@ -114,8 +102,49 @@ public class ModifyMenuScript : MonoBehaviour
                     currentUsedBuilding = building;
                     TitleText.text = "Armurier";
                     DescriptionText.text = description;
+
+                    /// On regarde si l'armurier est améliorable
+                    if (Village.Gunsmith.Level < 5)
+                    {
+                        SetActiveUpgrade(true);
+                        UpgradeButton.transform.Find("WoodCountLogo").transform.Find("WoodCount").GetComponent<TMP_Text>().text = (Village.Gunsmith.BaseWoodNeeded * (Village.Gunsmith.WoodModification * Village.Gunsmith.Level)).ToString();
+                        UpgradeButton.transform.Find("StoneCountLogo").transform.Find("StoneCount").GetComponent<TMP_Text>().text = (Village.Gunsmith.BaseStoneNeeded * (Village.Gunsmith.StoneModification * Village.Gunsmith.Level)).ToString();
+                        UpgradeButton.transform.Find("IronCountLogo").transform.Find("IronCount").GetComponent<TMP_Text>().text = (Village.Gunsmith.BaseIronNeeded * (Village.Gunsmith.IronModification * Village.Gunsmith.Level)).ToString();
+
+                    }
+                    else
+                    {
+                        SetActiveUpgrade(false);
+                    }
+
+                    /// On vérifie si la tavern est en construction
+                    /// Si elle l'est pas on désactive le timer.
+                    if (Village.Gunsmith.InConstruction)
+                    {
+                        constructionTimer.SetActive(true);
+                        constructionTimer.GetComponent<TimeLeftSliderScript>().Init(200, 300);
+                    }
+                    else
+                    {
+                        constructionTimer.SetActive(false);
+                    }
                 }
                 break;
+        }
+    }
+
+
+    private void SetActiveUpgrade(bool active)
+    {
+        if (active)
+        {
+            UpgradeButton.gameObject.SetActive(active);
+            UpgradeButton.transform.Find("WoodCountLogo").transform.Find("WoodCount").gameObject.SetActive(active);
+            UpgradeButton.transform.Find("StoneCountLogo").transform.Find("StoneCount").gameObject.SetActive(active);
+            UpgradeButton.transform.Find("IronCountLogo").transform.Find("IronCount").gameObject.SetActive(active);
+            UpgradeButton.transform.Find("WoodCountLogo").gameObject.SetActive(active);
+            UpgradeButton.transform.Find("StoneCountLogo").gameObject.SetActive(active);
+            UpgradeButton.transform.Find("IronCountLogo").gameObject.SetActive(active);
         }
     }
 }

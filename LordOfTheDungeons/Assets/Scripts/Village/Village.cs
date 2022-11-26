@@ -13,6 +13,7 @@ public class Village
     private TrainingCamp trainingCamp;
     public static Tavern Tavern;
     private Warehouse warehouse;
+    public static Gunsmith Gunsmith;
 
     public Village(string villageName, string villageFaction, string villageOwner)
     {
@@ -22,6 +23,7 @@ public class Village
 
         // Ici requête BDD pour la taverne
         Tavern = new Tavern(1, 50, 40, 1, 20, 30, 4, false, 300);
+        Gunsmith = new Gunsmith(1, 45, 60, 40,10,10,30, false);
 
     }
 
