@@ -11,7 +11,7 @@ public class Village
 
     private Hut hut;
     private TrainingCamp trainingCamp;
-    private Tavern tavern;
+    public static Tavern Tavern;
     private Warehouse warehouse;
 
     public Village(string villageName, string villageFaction, string villageOwner)
@@ -19,6 +19,10 @@ public class Village
         name = villageName;
         faction = villageFaction;
         owner = villageOwner;
+
+        // Ici requête BDD pour la taverne
+        Tavern = new Tavern(1, 50, 40, 1, 20, 30, 4, false, 300);
+
     }
 
     public string Name { get => name; set => name = value; }

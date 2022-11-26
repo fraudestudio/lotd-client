@@ -8,9 +8,9 @@ namespace Assets.Scripts.Village
 {
     public class Hut : Building
     {
-        public Hut(int Level)
+        public Hut(int level)
         {
-            level = Level;
+            Level = level;
         }
     }
 }

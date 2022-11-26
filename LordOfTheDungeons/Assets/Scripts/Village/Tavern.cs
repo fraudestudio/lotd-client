@@ -5,8 +5,26 @@ using UnityEngine;
 
 public class Tavern : Building
 {
-    public Tavern(int Level)
+
+
+    private static int timeMaxBeforeNewRecruit = 86400;
+    public static int TimeMaxBeforeNewRecruit { get => timeMaxBeforeNewRecruit; }
+
+    private int timeBeforeNewRecruit;
+    public int TimeBeforeNewRecruit { get => timeBeforeNewRecruit; set => timeBeforeNewRecruit = value; }
+
+    public Tavern(int level, int baseWood, int baseStone, int baseIron, int woodAugmentation, int stoneAugmentation, int ironAugmentation, bool inConstruction, int timeBeforeNewRecruit)
     {
-        level = Level;
+        this.Level = level;
+        this.BaseWoodNeeded = baseWood;
+        this.BaseStoneNeeded = baseStone;
+        this.BaseIronNeeded = baseIron;
+        this.WoodModification = woodAugmentation;
+        this.StoneModification = stoneAugmentation;
+        this.IronModification = ironAugmentation;
+        this.InConstruction = inConstruction;
+        this.TimeBeforeNewRecruit = timeBeforeNewRecruit;
     }
+
+
 }

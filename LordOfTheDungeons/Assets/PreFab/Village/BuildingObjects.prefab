@@ -124,6 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea172f0984769c04da90a55262984aff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slotPreFab: {fileID: 0}
 --- !u!1 &321233661857178466
 GameObject:
   m_ObjectHideFlags: 0
@@ -248,6 +249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea172f0984769c04da90a55262984aff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slotPreFab: {fileID: 5002436930003801801, guid: 99a90272e6433204184732ea9ad89dbc, type: 3}
 --- !u!1 &321233661870502562
 GameObject:
   m_ObjectHideFlags: 0
@@ -372,6 +374,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea172f0984769c04da90a55262984aff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slotPreFab: {fileID: 0}
 --- !u!1 &321233661940779964
 GameObject:
   m_ObjectHideFlags: 0
@@ -496,6 +499,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea172f0984769c04da90a55262984aff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slotPreFab: {fileID: 0}
 --- !u!1 &321233662546016429
 GameObject:
   m_ObjectHideFlags: 0
@@ -509,7 +513,7 @@ GameObject:
   - component: {fileID: 321233662546016428}
   - component: {fileID: 4280936589436490994}
   m_Layer: 0
-  m_Name: 'HealerHut '
+  m_Name: HealerHut
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -620,6 +624,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea172f0984769c04da90a55262984aff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slotPreFab: {fileID: 0}
 --- !u!1 &8030986256102920015
 GameObject:
   m_ObjectHideFlags: 0

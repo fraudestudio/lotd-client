@@ -754,6 +754,7 @@ GameObject:
   - component: {fileID: 5494774517688321291}
   - component: {fileID: 5494774517688321290}
   - component: {fileID: 5494774517688321293}
+  - component: {fileID: 1606033531119106351}
   m_Layer: 5
   m_Name: BuildingMenu
   m_TagString: Untagged
@@ -863,6 +864,22 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &1606033531119106351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5494774517688321292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ed0453f4ada7ce45be9d725558a355d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TitleText: {fileID: 4194126947609016884}
+  DescriptionText: {fileID: 5494774518118301433}
+  UpgradeButton: {fileID: 1655082077350933074}
+  constructionTimer: {fileID: 5494774518452659341}
 --- !u!1 &5494774517893690325
 GameObject:
   m_ObjectHideFlags: 0
@@ -1161,6 +1178,7 @@ GameObject:
   - component: {fileID: 5494774518452659338}
   - component: {fileID: 5494774518452659336}
   - component: {fileID: 5494774518452659339}
+  - component: {fileID: 1199430612051381679}
   m_Layer: 5
   m_Name: TimeSlider
   m_TagString: Untagged
@@ -1230,7 +1248,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 5494774517512547905}
   m_HandleRect: {fileID: 0}
@@ -1268,6 +1286,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeRemainingText: {fileID: 5494774517292488931}
   timerSlider: {fileID: 5494774518452659336}
+  init: 0
+--- !u!225 &1199430612051381679
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5494774518452659341}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &5494774518620506456
 GameObject:
   m_ObjectHideFlags: 0
@@ -1280,6 +1311,7 @@ GameObject:
   - component: {fileID: 5494774518620506452}
   - component: {fileID: 5494774518620506455}
   - component: {fileID: 5494774518620506454}
+  - component: {fileID: 1655425092553458071}
   m_Layer: 5
   m_Name: CloseButton
   m_TagString: Untagged
@@ -1390,6 +1422,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1655425092553458071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5494774518620506456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77b5c9ff8093ded4dadae95c555f868d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5494774518638102199
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,9 +8,9 @@ namespace Assets.Scripts.Village
 {
     public class Warehouse : Building
     {
-        public Warehouse(int Level)
+        public Warehouse(int level)
         {
-            level = Level;
+            Level = level;
         }
     }
 }

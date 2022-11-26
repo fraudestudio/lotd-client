@@ -8,9 +8,9 @@ namespace Assets.Scripts.Village
 {
     public class TrainingCamp : Building
     {
-        public TrainingCamp(int Level)
+        public TrainingCamp(int level)
         {
-            level = Level;
+            Level = level;
         }
     }
 }

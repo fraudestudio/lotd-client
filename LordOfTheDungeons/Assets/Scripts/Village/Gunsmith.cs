@@ -10,9 +10,9 @@ namespace Assets.Scripts.Village
     public class Gunsmith : Building
     {
         
-        public Gunsmith(int Level)
+        public Gunsmith(int level)
         {
-              level = Level;    
+            this.Level = Level;    
         }
 
     }
