@@ -9,6 +9,7 @@ public class CharacterImageSlotScript : MonoBehaviour, IBeginDragHandler, IEndDr
 
 
     private Transform parentAfterDrag;
+    private int oldLayer;
     private bool isEngaged = false;
 
     public Transform ParentAfterDrag { get => parentAfterDrag; set => parentAfterDrag = value; }
@@ -21,6 +22,8 @@ public class CharacterImageSlotScript : MonoBehaviour, IBeginDragHandler, IEndDr
         CharacterSlotNotAllowedScript.RemoveSlot(transform.parent.gameObject);
         transform.SetParent(transform.root);
         transform.SetAsLastSibling();
+        oldLayer = transform.parent.gameObject.GetComponent<Canvas>().sortingOrder;
+        transform.parent.gameObject.GetComponent<Canvas>().sortingOrder = 100;
         CharacterSlotNotAllowedScript.ShowNotAllowedSlot();
         //Debug.Log("Begin");
     }
@@ -33,6 +36,7 @@ public class CharacterImageSlotScript : MonoBehaviour, IBeginDragHandler, IEndDr
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        transform.parent.gameObject.GetComponent<Canvas>().sortingOrder = oldLayer;
         CharacterSlotNotAllowedScript.HideNotAllowedSlot();
         transform.SetParent(ParentAfterDrag);
         transform.position = parentAfterDrag.position;

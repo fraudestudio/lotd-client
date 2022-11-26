@@ -77,6 +77,17 @@ public class CharacterSlotScript : MonoBehaviour, IDropHandler
         }
     }
 
+
+    public void AddChar(GameObject c)
+    {
+        SlotIsEmpty = false;
+        transform.Find("PlusImage").GetComponent<Image>().color = new Color(1, 1, 1, 0);
+        c.transform.SetParent(transform);
+        c.transform.SetAsLastSibling();
+        c.transform.position = new Vector2(0, 110);
+        c.transform.localScale = new Vector2(1, 1);
+    }
+
     // Update is called once per frame
     void Update()
     {

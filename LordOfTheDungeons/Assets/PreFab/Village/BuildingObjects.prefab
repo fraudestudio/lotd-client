@@ -125,6 +125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slotPreFab: {fileID: 0}
+  testCharacterPreFab: {fileID: 0}
 --- !u!1 &321233661857178466
 GameObject:
   m_ObjectHideFlags: 0
@@ -250,6 +251,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slotPreFab: {fileID: 5002436930003801801, guid: 99a90272e6433204184732ea9ad89dbc, type: 3}
+  testCharacterPreFab: {fileID: 4938381154026789655, guid: 3d9db165aceacd14a9535a5eb052d522, type: 3}
 --- !u!1 &321233661870502562
 GameObject:
   m_ObjectHideFlags: 0
@@ -375,6 +377,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slotPreFab: {fileID: 0}
+  testCharacterPreFab: {fileID: 0}
 --- !u!1 &321233661940779964
 GameObject:
   m_ObjectHideFlags: 0
@@ -500,6 +503,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slotPreFab: {fileID: 0}
+  testCharacterPreFab: {fileID: 0}
 --- !u!1 &321233662546016429
 GameObject:
   m_ObjectHideFlags: 0
@@ -625,6 +629,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slotPreFab: {fileID: 0}
+  testCharacterPreFab: {fileID: 0}
 --- !u!1 &8030986256102920015
 GameObject:
   m_ObjectHideFlags: 0

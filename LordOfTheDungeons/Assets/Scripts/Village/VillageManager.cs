@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class VillageManager : MonoBehaviour
 {
-    private void Start()
+    private void Awake()
     {
         Village v = new Village("dsqfqesf", "qsdfqsd","ezaf") ;
     }

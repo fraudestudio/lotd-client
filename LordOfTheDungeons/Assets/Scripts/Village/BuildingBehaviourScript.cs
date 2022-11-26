@@ -13,6 +13,16 @@ public class BuildingBehaviourScript : MonoBehaviour
     public static bool CanBeClicked { get => canBeClicked; set => canBeClicked = value; }
 
     public GameObject slotPreFab;
+    public GameObject testCharacterPreFab;
+
+
+    private void Start()
+    {
+        switch (transform.name)
+        {
+            case "Tavern": InitTavern(); break;
+        }
+    }
 
 
     /// <summary>
@@ -48,17 +58,10 @@ public class BuildingBehaviourScript : MonoBehaviour
     }
 
 
-    /// <summary>
-    /// Initialise le menu de la taverne
-    /// </summary>
-    private void StartMenuTavern()
-    {
-        GameObject m = GameObject.Find("BuildingMenu");
-        GameObject t = GameObject.Find("TavernMenu");
-        Init(t);
-        Init(m);
-        m.GetComponent<ModifyMenuScript>().InitMenu("Tavern","Endroit ou les héros peuvent être recutés");
 
+    private void InitTavern()
+    {
+        GameObject t = GameObject.Find("TavernMenu");
         t.transform.Find("TimeSliderTavern").GetComponent<TimeLeftSliderScript>().Init(Village.Tavern.TimeBeforeNewRecruit, Tavern.TimeMaxBeforeNewRecruit);
         Transform heoresAvaiable = t.transform.Find("HeroesAvaiable");
 
@@ -69,8 +72,32 @@ public class BuildingBehaviourScript : MonoBehaviour
             d.GetComponent<CharacterSlotScript>().Type = SlotType.BUILDING;
             d.transform.SetParent(heoresAvaiable);
             d.transform.localScale = new Vector2(1f, 1f);
+            GameObject c = Instantiate(testCharacterPreFab);
+            d.GetComponent<CharacterSlotScript>().AddChar(c);
         }
 
+    }
+
+
+    /// <summary>
+    /// Initialise le menu de la taverne
+    /// </summary>
+    private void StartMenuTavern()
+    {
+        GameObject m = GameObject.Find("BuildingMenu");
+        GameObject t = GameObject.Find("TavernMenu");
+        Init(t);
+        for (int i = 0; i < GameObject.Find("TavernMenu").transform.Find("HeroesAvaiable").childCount; i++)
+        {
+            GameObject.Find("TavernMenu").transform.Find("HeroesAvaiable").GetChild(i).gameObject.SetActive(true);
+            if (!GameObject.Find("TavernMenu").transform.Find("HeroesAvaiable").GetChild(i).GetComponent<CharacterSlotScript>().SlotIsEmpty)
+            {
+                Debug.Log("LA MERDE QUOI MMH");
+                CharacterSlotNotAllowedScript.AddSlot(GameObject.Find("TavernMenu").transform.Find("HeroesAvaiable").GetChild(i).gameObject);
+            }
+        }
+        Init(m);
+        m.GetComponent<ModifyMenuScript>().InitMenu("Tavern","Endroit ou les héros peuvent être recutés");
     }
 
 
@@ -79,7 +106,12 @@ public class BuildingBehaviourScript : MonoBehaviour
     /// </summary>
     public void StopTavern()
     {
-        GameObject.Find("TavernMenu").transform.Find("TimeSliderTavern").GetComponent<TimeLeftSliderScript>().Stop();
+        for (int i = 0; i < GameObject.Find("TavernMenu").transform.Find("HeroesAvaiable").childCount; i++)
+        {
+            CharacterSlotNotAllowedScript.RemoveSlot(GameObject.Find("TavernMenu").transform.Find("HeroesAvaiable").GetChild(i).gameObject);
+            GameObject.Find("TavernMenu").transform.Find("HeroesAvaiable").GetChild(i).gameObject.SetActive(false);
+        }
+        //GameObject.Find("TavernMenu").transform.Find("TimeSliderTavern").GetComponent<TimeLeftSliderScript>().Stop();
     }
 
 
