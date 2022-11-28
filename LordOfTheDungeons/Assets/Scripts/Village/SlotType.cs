@@ -6,5 +6,7 @@ public enum SlotType
 {
     RECRUIT,
     BUILDING,
-    TAVERN
+    TAVERN,
+    INSTRUCTOR,
+    TRAINEE
 }

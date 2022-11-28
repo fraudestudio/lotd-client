@@ -1,3 +1,4 @@
+using Assets.Scripts.Village;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -25,9 +26,12 @@ public class BuildingBehaviourScript : MonoBehaviour
             case "Tavern": InitTavern(); break;
             case "Gunsmith": InitGunsmith(); break;
             case "Warehouse": InitWarehouse(); break;
+            case "TrainingCamp": InitTrainingCamp(); break;
         }
     }
 
+
+    #region Start and stop building
 
     /// <summary>
     /// Qaund on clique sur un bâtiment, on démarre le menu qu'on a besoin 
@@ -43,6 +47,7 @@ public class BuildingBehaviourScript : MonoBehaviour
                 case "Tavern": StartMenuTavern(); break;
                 case "Gunsmith": StartGunsmith(); break;
                 case "Warehouse": StartWarehouse(); break;
+                case "TrainingCamp": StartTrainingCamp(); break;
             }
         }
     }
@@ -58,8 +63,87 @@ public class BuildingBehaviourScript : MonoBehaviour
             case "Tavern": StopTavern(); break;
             case "Gunsmith": StopGunsmith(); break;
             case "Warehouse": StopWarehouse(); break;
+            case "TrainingCamp": StopTrainingCamp(); break;
         }
     }
+
+    #endregion
+
+    #region TrainingCamp
+
+    private void InitTrainingCamp()
+    {
+        if (Village.TrainingCamp.InFormation)
+        {
+            GameObject t = GameObject.Find("TimeSliderTrainingCamp");
+            t.SetActive(true);
+            t.GetComponent<TimeLeftSliderScript>().Init(Village.TrainingCamp.TimeBeforeTrainingIsFinished, TrainingCamp.TimeMaxTraining);
+        }
+        else
+        {
+
+            for (int i = 0; i < 1 + Village.TrainingCamp.Level; i++)
+            {
+                GameObject d = Instantiate(slotPreFab);
+                d.name = "Slot_" + i;
+                d.GetComponent<CharacterSlotScript>().SetType(SlotType.TRAINEE);
+                d.transform.SetParent(GameObject.Find("TraineeTitle").transform.Find("TraineesLayout"));
+                d.transform.localScale = new Vector2(1f, 1f);
+            }
+
+            if (!GameObject.Find("InstructorTitle").transform.Find("CharacterSlot").GetComponent<CharacterSlotScript>().SlotIsEmpty)
+            {
+                for (int i = 0; i < GameObject.Find("TraineeTitle").transform.Find("TraineesLayout").childCount; i++)
+                {
+                    if (GameObject.Find("TraineeTitle").transform.Find("TraineesLayout").GetChild(i).GetComponent<CharacterSlotScript>().SlotIsEmpty)
+                    {
+                        GameObject.Find("ButtonTrain").SetActive(true);
+                    }
+                }
+            }
+        }
+
+
+
+    }
+
+    private void StartTrainingCamp()
+    {
+        GameObject.Find("BuildingText").transform.Find("CanvasTrainingCamp").GetComponent<CanvasGroup>().alpha = 0;
+        GameObject m = GameObject.Find("BuildingMenu");
+        GameObject w = GameObject.Find("TrainingCampMenu");
+        Init(m);
+        Init(w);
+        m.GetComponent<ModifyMenuScript>().InitMenu("TrainingCamp", "Endroit où entrainez les aventuriers");
+
+        for (int i = 0; i < w.transform.Find("TraineeTitle").Find("TraineesLayout").childCount; i++)
+        {
+            w.transform.Find("TraineeTitle").Find("TraineesLayout").GetChild(i).gameObject.SetActive(true);
+            if (!w.transform.Find("TraineeTitle").Find("TraineesLayout").GetChild(i).GetComponent<CharacterSlotScript>().SlotIsEmpty)
+            {
+                CharacterSlotNotAllowedScript.AddSlot(w.transform.Find("TraineeTitle").Find("TraineesLayout").GetChild(i).gameObject);
+            }
+        }
+        if (!GameObject.Find("InstructorTitle").transform.Find("CharacterSlot").GetComponent<CharacterSlotScript>().SlotIsEmpty)
+        {
+            CharacterSlotNotAllowedScript.AddSlot(w.transform.Find("InstructorTitle").Find("CharacterSlot").gameObject);
+        }
+    }
+    
+    private void StopTrainingCamp()
+    {
+        for (int i = 0; i < GameObject.Find("TrainingCampMenu").transform.Find("TraineeTitle").Find("TraineesLayout").childCount; i++)
+        {
+            CharacterSlotNotAllowedScript.RemoveSlot(GameObject.Find("TrainingCampMenu").transform.Find("TraineeTitle").Find("TraineesLayout").GetChild(i).gameObject);
+            GameObject.Find("TrainingCampMenu").transform.Find("TraineeTitle").Find("TraineesLayout").GetChild(i).gameObject.SetActive(false);
+        }
+        if (!GameObject.Find("InstructorTitle").transform.Find("CharacterSlot").GetComponent<CharacterSlotScript>().SlotIsEmpty)
+        {
+            CharacterSlotNotAllowedScript.RemoveSlot(GameObject.Find("TrainingCampMenu").transform.Find("InstructorTitle").Find("CharacterSlot").gameObject);
+        }
+    }
+
+    #endregion
 
     #region Warehouse
     private void InitWarehouse()
@@ -89,7 +173,6 @@ public class BuildingBehaviourScript : MonoBehaviour
     }
     #endregion
 
-
     #region Gunsmith
     /// <summary>
     /// Initialise les éléments de l'armurier
@@ -118,7 +201,6 @@ public class BuildingBehaviourScript : MonoBehaviour
     }
     #endregion
 
-
     #region Tavern
     /// <summary>
     /// Initialise les éléments de la taverne 
@@ -133,7 +215,7 @@ public class BuildingBehaviourScript : MonoBehaviour
         {
             GameObject d = Instantiate(slotPreFab);
             d.name = "Slot_" + i;
-            d.GetComponent<CharacterSlotScript>().Type = SlotType.BUILDING;
+            d.GetComponent<CharacterSlotScript>().SetType(SlotType.BUILDING);
             d.transform.SetParent(heoresAvaiable);
             d.transform.localScale = new Vector2(1f, 1f);
             GameObject c = Instantiate(testCharacterPreFab);
@@ -206,7 +288,7 @@ public class BuildingBehaviourScript : MonoBehaviour
                 case "Tavern": GameObject.Find("BuildingText").transform.Find("CanvasTavern").GetComponent<CanvasGroup>().alpha = 1; break;
                 case "HealerHut": GameObject.Find("BuildingText").transform.Find("CanvasHealerHut").GetComponent<CanvasGroup>().alpha = 1; break;
                 case "Gunsmith": GameObject.Find("BuildingText").transform.Find("CanvasGunsmith").GetComponent<CanvasGroup>().alpha = 1; break;
-                case "WareHouse": GameObject.Find("BuildingText").transform.Find("CanvasWarehouse").GetComponent<CanvasGroup>().alpha = 1; break;
+                case "Warehouse": GameObject.Find("BuildingText").transform.Find("CanvasWarehouse").GetComponent<CanvasGroup>().alpha = 1; break;
                 case "TrainingCamp": GameObject.Find("BuildingText").transform.Find("CanvasTrainingCamp").GetComponent<CanvasGroup>().alpha = 1; break;
             }
         }
@@ -226,7 +308,7 @@ public class BuildingBehaviourScript : MonoBehaviour
                 case "Tavern": GameObject.Find("BuildingText").transform.Find("CanvasTavern").GetComponent<CanvasGroup>().alpha = 0; break;
                 case "HealerHut": GameObject.Find("BuildingText").transform.Find("CanvasHealerHut").GetComponent<CanvasGroup>().alpha = 0; break;
                 case "Gunsmith": GameObject.Find("BuildingText").transform.Find("CanvasGunsmith").GetComponent<CanvasGroup>().alpha = 0; break;
-                case "WareHouse": GameObject.Find("BuildingText").transform.Find("CanvasWarehouse").GetComponent<CanvasGroup>().alpha = 0; break;
+                case "Warehouse": GameObject.Find("BuildingText").transform.Find("CanvasWarehouse").GetComponent<CanvasGroup>().alpha = 0; break;
                 case "TrainingCamp": GameObject.Find("BuildingText").transform.Find("CanvasTrainingCamp").GetComponent<CanvasGroup>().alpha = 0; break;
             }
         }

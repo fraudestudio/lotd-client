@@ -10,7 +10,7 @@ public class Village
     private string owner;
 
     private Hut hut;
-    private TrainingCamp trainingCamp;
+    public static TrainingCamp TrainingCamp;
     public static Tavern Tavern;
     public static Warehouse Warehouse;
     public static Gunsmith Gunsmith;
@@ -24,7 +24,8 @@ public class Village
         // Ici requête BDD pour la taverne
         Tavern = new Tavern(1, 50, 40, 1, 20, 30, 4, false, 300);
         Gunsmith = new Gunsmith(1, 45, 60, 40,10,10,30, false);
-        Warehouse = new Warehouse(1,10,10,5,20,20,20,false,300,300,300); 
+        Warehouse = new Warehouse(1,10,10,5,20,20,20,false,300,300,300);
+        TrainingCamp = new TrainingCamp(1, 30, 50, 20, 10, 20, 30, false, false, 0);
 
     }
 

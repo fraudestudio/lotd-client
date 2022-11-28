@@ -1126,6 +1126,22 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1692713536026098987, guid: 40b3333abbaa3614790926801cdd3477, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1692713536026098987, guid: 40b3333abbaa3614790926801cdd3477, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1692713536520822597, guid: 40b3333abbaa3614790926801cdd3477, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1692713536520822597, guid: 40b3333abbaa3614790926801cdd3477, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1692713536940485265, guid: 40b3333abbaa3614790926801cdd3477, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1213,6 +1229,22 @@ PrefabInstance:
     - target: {fileID: 1692713536940485268, guid: 40b3333abbaa3614790926801cdd3477, type: 3}
       propertyPath: m_Name
       value: TrainingCampMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 1692713537618518007, guid: 40b3333abbaa3614790926801cdd3477, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1692713537618518007, guid: 40b3333abbaa3614790926801cdd3477, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5184453905360057007, guid: 40b3333abbaa3614790926801cdd3477, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7360520564451925363, guid: 40b3333abbaa3614790926801cdd3477, type: 3}
+      propertyPath: Type
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40b3333abbaa3614790926801cdd3477, type: 3}
@@ -2230,6 +2262,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6250328439061647776, guid: 74ecd20c7905fde4ea61759e922900bd, type: 3}
+      propertyPath: m_Name
+      value: GunsmithName
+      objectReference: {fileID: 0}
     - target: {fileID: 6650301966363456099, guid: 74ecd20c7905fde4ea61759e922900bd, type: 3}
       propertyPath: m_Name
       value: BuildingText
@@ -3011,6 +3047,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8157853638610187070, guid: 04b08d86ba4a6b044b7cc9be261177de, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 27.624512
+      objectReference: {fileID: 0}
     - target: {fileID: 8643089154556953018, guid: 04b08d86ba4a6b044b7cc9be261177de, type: 3}
       propertyPath: m_Name
       value: WarehouseMenu
@@ -3765,6 +3805,10 @@ PrefabInstance:
     - target: {fileID: 9068724894401598032, guid: e3b7b79ed9b4f9d45a6b32e11467892a, type: 3}
       propertyPath: m_PixelPerfect
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9068724894401598032, guid: e3b7b79ed9b4f9d45a6b32e11467892a, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3b7b79ed9b4f9d45a6b32e11467892a, type: 3}

@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea172f0984769c04da90a55262984aff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotPreFab: {fileID: 0}
+  slotPreFab: {fileID: 5002436930003801801, guid: 99a90272e6433204184732ea9ad89dbc, type: 3}
   testCharacterPreFab: {fileID: 0}
 --- !u!1 &321233661857178466
 GameObject:

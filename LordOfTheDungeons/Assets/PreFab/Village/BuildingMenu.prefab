@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 1325740927730257106}
   - component: {fileID: 647116320961076656}
   - component: {fileID: 4194126947609016884}
-  - component: {fileID: 1670224001765056297}
+  - component: {fileID: 5218845018077394679}
   m_Layer: 5
   m_Name: BuildingTitle
   m_TagString: Untagged
@@ -113,7 +113,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -290.8, y: 185.12}
+  m_AnchoredPosition: {x: -290.12128, y: 166.65}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &647116320961076656
@@ -171,15 +171,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 15
+  m_fontSizeBase: 15
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -213,7 +213,7 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &1670224001765056297
+--- !u!114 &5218845018077394679
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -625,7 +625,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -290, y: 124}
+  m_AnchoredPosition: {x: -289.9, y: 100.1}
   m_SizeDelta: {x: 90, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5494774517435081560
@@ -992,8 +992,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -291.5184, y: -23.1776}
-  m_SizeDelta: {x: 142.9633, y: 185.7404}
+  m_AnchoredPosition: {x: -291.5184, y: -35.1295}
+  m_SizeDelta: {x: 142.9633, y: 161.8365}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5494774518118301430
 CanvasRenderer:
@@ -1023,7 +1023,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: QSFKLFDMFDQSKFMQSKD?FQMS?DFMKQDS?FMKQSD?FQS?MLDF?QSMDF?QSFMQ?SMDLFQFD?QMLSDFM?LQSDFLM?SD?LFQ?MLSDF?Q
+  m_text: QSFKLFDMFDQSKFMQSKD?FQMS?DFMKQDS?FMKQSD?FQS?MLDF?QSMDF?QSaZEFAZEFAZEFAAFEEAZFAZqSDFQSFDQSD
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

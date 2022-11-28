@@ -62,10 +62,12 @@ public class ModifyMenuScript : MonoBehaviour
     /// <param name="timeRemaining"></param>
     public void InitMenu(string building, string description)
     {
+
         switch (building)
         {
             case "Tavern":
                 {
+                    #region Tavern
                     currentUsedBuilding = building;
                     TitleText.text = "Taverne";
                     DescriptionText.text = description;
@@ -95,10 +97,12 @@ public class ModifyMenuScript : MonoBehaviour
                     {
                         constructionTimer.SetActive(false);
                     }
-                } 
+                    #endregion
+                }
                 break;
             case "Gunsmith":
                 {
+                    #region Gunsmith
                     currentUsedBuilding = building;
                     TitleText.text = "Armurier";
                     DescriptionText.text = description;
@@ -128,10 +132,12 @@ public class ModifyMenuScript : MonoBehaviour
                     {
                         constructionTimer.SetActive(false);
                     }
+                    #endregion
                 }
                 break;
             case "Warehouse": 
                 {
+                    #region Warehouse
                     currentUsedBuilding = building;
                     TitleText.text = "Entrepôt";
                     DescriptionText.text = description;
@@ -161,7 +167,42 @@ public class ModifyMenuScript : MonoBehaviour
                     {
                         constructionTimer.SetActive(false);
                     }
+                    #endregion
                 };
+                break;
+            case "TrainingCamp":
+                {
+                    #region TrainingCamp
+                    currentUsedBuilding = building;
+                    TitleText.text = "Camp d'entraînement";
+                    DescriptionText.text = description;
+
+                    if (Village.TrainingCamp.Level < 5)
+                    {
+                        SetActiveUpgrade(true);
+                        UpgradeButton.transform.Find("WoodCountLogo").transform.Find("WoodCount").GetComponent<TMP_Text>().text = (Village.TrainingCamp.BaseWoodNeeded * (Village.TrainingCamp.WoodModification * Village.TrainingCamp.Level)).ToString();
+                        UpgradeButton.transform.Find("StoneCountLogo").transform.Find("StoneCount").GetComponent<TMP_Text>().text = (Village.TrainingCamp.BaseStoneNeeded * (Village.TrainingCamp.StoneModification * Village.TrainingCamp.Level)).ToString();
+                        UpgradeButton.transform.Find("IronCountLogo").transform.Find("IronCount").GetComponent<TMP_Text>().text = (Village.TrainingCamp.BaseIronNeeded * (Village.TrainingCamp.IronModification * Village.Warehouse.Level)).ToString();
+
+                    }
+                    else
+                    {
+                        SetActiveUpgrade(false);
+                    }
+
+                    /// On vérifie si la tavern est en construction
+                    /// Si elle l'est pas on désactive le timer.
+                    if (Village.TrainingCamp.InConstruction)
+                    {
+                        constructionTimer.SetActive(true);
+                        constructionTimer.GetComponent<TimeLeftSliderScript>().Init(200, 300);
+                    }
+                    else
+                    {
+                        constructionTimer.SetActive(false);
+                    }
+                    #endregion
+                }
                 break;
         }
     }
