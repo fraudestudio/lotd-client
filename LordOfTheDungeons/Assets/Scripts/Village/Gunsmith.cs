@@ -12,7 +12,6 @@ namespace Assets.Scripts.Village
         
         public Gunsmith(int level, int baseWood, int baseStone, int baseIron, int woodAugmentation, int stoneAugmentation, int ironAugmentation, bool inConstruction)
         {
-            this.Level = Level;
             this.Level = level;
             this.BaseWoodNeeded = baseWood;
             this.BaseStoneNeeded = baseStone;

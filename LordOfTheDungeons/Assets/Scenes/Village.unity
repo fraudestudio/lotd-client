@@ -2155,7 +2155,7 @@ GameObject:
   - component: {fileID: 976859769}
   - component: {fileID: 976859768}
   m_Layer: 5
-  m_Name: 'StoneSlider '
+  m_Name: StoneSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
