@@ -130,6 +130,39 @@ public class ModifyMenuScript : MonoBehaviour
                     }
                 }
                 break;
+            case "Warehouse": 
+                {
+                    currentUsedBuilding = building;
+                    TitleText.text = "Entrepôt";
+                    DescriptionText.text = description;
+
+                    /// On regarde si l'armurier est améliorable
+                    if (Village.Warehouse.Level < 5)
+                    {
+                        SetActiveUpgrade(true);
+                        UpgradeButton.transform.Find("WoodCountLogo").transform.Find("WoodCount").GetComponent<TMP_Text>().text = (Village.Warehouse.BaseWoodNeeded * (Village.Warehouse.WoodModification * Village.Warehouse.Level)).ToString();
+                        UpgradeButton.transform.Find("StoneCountLogo").transform.Find("StoneCount").GetComponent<TMP_Text>().text = (Village.Warehouse.BaseStoneNeeded * (Village.Warehouse.StoneModification * Village.Warehouse.Level)).ToString();
+                        UpgradeButton.transform.Find("IronCountLogo").transform.Find("IronCount").GetComponent<TMP_Text>().text = (Village.Warehouse.BaseIronNeeded * (Village.Warehouse.IronModification * Village.Warehouse.Level)).ToString();
+
+                    }
+                    else
+                    {
+                        SetActiveUpgrade(false);
+                    }
+
+                    /// On vérifie si la tavern est en construction
+                    /// Si elle l'est pas on désactive le timer.
+                    if (Village.Warehouse.InConstruction)
+                    {
+                        constructionTimer.SetActive(true);
+                        constructionTimer.GetComponent<TimeLeftSliderScript>().Init(200, 300);
+                    }
+                    else
+                    {
+                        constructionTimer.SetActive(false);
+                    }
+                };
+                break;
         }
     }
 

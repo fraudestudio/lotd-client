@@ -22,6 +22,7 @@ public class BuildingBehaviourScript : MonoBehaviour
         {
             case "Tavern": InitTavern(); break;
             case "Gunsmith": InitGunsmith(); break;
+            case "Warehouse": InitWarehouse(); break;
         }
     }
 
@@ -37,16 +38,9 @@ public class BuildingBehaviourScript : MonoBehaviour
             Debug.Log(transform.name + "has been click");
             switch (transform.name)
             {
-                case "Tavern":
-                    {
-                        StartMenuTavern();
-                    }
-                    break;
-                case "Gunsmith":
-                    {
-                        StartGunsmith();
-                    }
-                    break;
+                case "Tavern": StartMenuTavern(); break;
+                case "Gunsmith": StartGunsmith(); break;
+                case "Warehouse": StartWarehouse(); break;
             }
         }
     }
@@ -61,10 +55,34 @@ public class BuildingBehaviourScript : MonoBehaviour
         {
             case "Tavern": StopTavern(); break;
             case "Gunsmith": StopGunsmith(); break;
+            case "Warehouse": StopWarehouse(); break;
         }
     }
 
+    #region Warehouse
+    private void InitWarehouse()
+    {
 
+    }
+
+    private void StartWarehouse()
+    {
+        GameObject.Find("BuildingText").transform.Find("CanvasWarehouse").GetComponent<CanvasGroup>().alpha = 0;
+        GameObject m = GameObject.Find("BuildingMenu");
+        GameObject w = GameObject.Find("WarehouseMenu");
+        Init(m);
+        Init(w);
+        m.GetComponent<ModifyMenuScript>().InitMenu("Warehouse", "Endroit où les ressources sont stockés");
+    }
+
+    private void StopWarehouse()
+    {
+
+    }
+    #endregion
+
+
+    #region Gunsmith
     /// <summary>
     /// Initialise les éléments de l'armurier
     /// </summary>
@@ -75,6 +93,7 @@ public class BuildingBehaviourScript : MonoBehaviour
 
     private void StartGunsmith()
     {
+        GameObject.Find("BuildingText").transform.Find("CanvasGunsmith").GetComponent<CanvasGroup>().alpha = 0;
         GameObject m = GameObject.Find("BuildingMenu");
         GameObject g = GameObject.Find("GunsmithMenu");
         Init(m);
@@ -89,7 +108,10 @@ public class BuildingBehaviourScript : MonoBehaviour
     {
 
     }
+    #endregion
 
+
+    #region Tavern
     /// <summary>
     /// Initialise les éléments de la taverne 
     /// </summary>
@@ -118,6 +140,7 @@ public class BuildingBehaviourScript : MonoBehaviour
     /// </summary>
     private void StartMenuTavern()
     {
+        GameObject.Find("BuildingText").transform.Find("CanvasTavern").GetComponent<CanvasGroup>().alpha = 0;
         GameObject m = GameObject.Find("BuildingMenu");
         GameObject t = GameObject.Find("TavernMenu");
         Init(t);
@@ -148,8 +171,9 @@ public class BuildingBehaviourScript : MonoBehaviour
         //GameObject.Find("TavernMenu").transform.Find("TimeSliderTavern").GetComponent<TimeLeftSliderScript>().Stop();
     }
 
+    #endregion
 
- 
+
 
     /// <summary>
     /// Allume un menu souhaité

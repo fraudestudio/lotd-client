@@ -8,9 +8,17 @@ namespace Assets.Scripts.Village
 {
     public class Warehouse : Building
     {
-        public Warehouse(int level)
+        public Warehouse(int level, int baseWood, int baseStone, int baseIron, int woodAugmentation, int stoneAugmentation, int ironAugmentation, bool inConstruction)
         {
-            Level = level;
+            this.Level = Level;
+            this.Level = level;
+            this.BaseWoodNeeded = baseWood;
+            this.BaseStoneNeeded = baseStone;
+            this.BaseIronNeeded = baseIron;
+            this.WoodModification = woodAugmentation;
+            this.StoneModification = stoneAugmentation;
+            this.IronModification = ironAugmentation;
+            this.InConstruction = inConstruction;
         }
     }
 }
