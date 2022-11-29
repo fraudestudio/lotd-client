@@ -50,7 +50,35 @@ public class VillageManager : MonoBehaviour
             tavernButton.transform.Find("NotInConstructionTitle").gameObject.SetActive(false);
             tavernButton.transform.Find("TimeSliderCenter").gameObject.SetActive(true);
         }
-        #endregion 
+        #endregion
+        #region Warehouse
+        GameObject warehouse = Instantiate(villageCenterBlockPreFab);
+        warehouse.name = "WarehouseButton";
+        warehouse.transform.SetParent(villageCenterMenu);
+        warehouse.transform.localScale = new Vector2(1, 1);
+        warehouse.transform.Find("BuildingTitle").GetComponent<TMP_Text>().text = "Entrepôt";
+        warehouse.transform.Find("PeopleIcon").gameObject.SetActive(false);
+
+        if (Village.Warehouse.InConstruction)
+        {
+            warehouse.transform.Find("NotInConstructionTitle").gameObject.SetActive(false);
+            warehouse.transform.Find("TimeSliderCenter").gameObject.SetActive(true);
+        }
+        #endregion
+        #region TrainingCamp
+        GameObject trainingcamp = Instantiate(villageCenterBlockPreFab);
+        trainingcamp.name = "TrainingCampButton";
+        trainingcamp.transform.SetParent(villageCenterMenu);
+        trainingcamp.transform.localScale = new Vector2(1, 1);
+        trainingcamp.transform.Find("BuildingTitle").GetComponent<TMP_Text>().text = "Camp d'entraînement";
+        trainingcamp.transform.Find("BuildingTitle").GetComponent<TMP_Text>().fontSize = 13;
+
+        if (Village.TrainingCamp.InConstruction)
+        {
+            trainingcamp.transform.Find("NotInConstructionTitle").gameObject.SetActive(false);
+            trainingcamp.transform.Find("TimeSliderCenter").gameObject.SetActive(true);
+        }
+        #endregion
     }
 
     private void Start()
@@ -96,6 +124,48 @@ public class VillageManager : MonoBehaviour
         }
 
         gunsmith.transform.Find("PeopleIcon").Find("CharacterCount").GetComponent<TMP_Text>().text = "x" + countChar;
+        #endregion
+        #region Warehouse
+        Transform warehouse = GameObject.Find("VillageCenterMenu").transform.Find("VillageCenterObjects").Find("GunsmithButton");
+
+        if (Village.Warehouse.InConstruction)
+        {
+            warehouse.Find("TimeSliderCenter").gameObject.GetComponent<TimeLeftSliderScript>().Init(300, 500);
+        }
+
+        #endregion
+        #region TrainingCamp
+        Transform trainingCamp = GameObject.Find("VillageCenterMenu").transform.Find("VillageCenterObjects").Find("TrainingCampButton");
+
+        if (Village.Warehouse.InConstruction)
+        {
+            trainingCamp.Find("TimeSliderCenter").gameObject.GetComponent<TimeLeftSliderScript>().Init(300, 500);
+        }
+
+
+        countChar = 0;
+
+        for (int i = 0; i < GameObject.Find("TrainingCampMenu").transform.Find("TraineeTitle").Find("TraineesLayout").childCount; i++)
+        {
+            if (!GameObject.Find("TrainingCampMenu").transform.Find("TraineeTitle").Find("TraineesLayout").GetChild(i).GetComponent<CharacterSlotScript>().slotIsEmpty)
+            {
+                countChar++;
+            }
+        }
+
+        if (!GameObject.Find("TrainingCampMenu").transform.Find("InstructorTitle").Find("CharacterSlot").GetComponent<CharacterSlotScript>().slotIsEmpty)
+        {
+            countChar++;
+        }
+
+        trainingCamp.transform.Find("PeopleIcon").Find("CharacterCount").GetComponent<TMP_Text>().text = "x" + countChar;
+
+        if (Village.TrainingCamp.InFormation)
+        {
+            trainingCamp.transform.Find("PeopleIcon").Find("TimeSliderSpecific").gameObject.SetActive(true);
+            trainingCamp.transform.Find("PeopleIcon").Find("TimeSliderSpecific").GetComponent<TimeLeftSliderScript>().Init(Convert.ToInt32(GameObject.Find("TrainingCampMenu").transform.Find("TimeSliderTrainingCamp").GetComponent<Slider>().value), Convert.ToInt32(GameObject.Find("TrainingCampMenu").transform.Find("TimeSliderTrainingCamp").GetComponent<Slider>().maxValue));
+        }
+
         #endregion
     }
 }

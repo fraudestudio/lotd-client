@@ -75,6 +75,7 @@ public class BuildingBehaviourScript : MonoBehaviour
 
     private void StartVillageCenter()
     {
+        GameObject.Find("BuildingText").transform.Find("CanvasVillageCenter").GetComponent<CanvasGroup>().alpha = 0;
         Init(GameObject.Find("VillageCenterMenu"));
     }
 
@@ -86,7 +87,7 @@ public class BuildingBehaviourScript : MonoBehaviour
     {
         if (Village.TrainingCamp.InFormation)
         {
-            GameObject t = GameObject.Find("TimeSliderTrainingCamp");
+            GameObject t = GameObject.Find("TrainingCampMenu").transform.Find("TimeSliderTrainingCamp").gameObject;
             t.SetActive(true);
             t.GetComponent<TimeLeftSliderScript>().Init(Village.TrainingCamp.TimeBeforeTrainingIsFinished, TrainingCamp.TimeMaxTraining);
         }

@@ -100,6 +100,6 @@ public class TimeLeftSliderScript : MonoBehaviour
 
     public void GetPercentage(TMP_Text t)
     {
-        t.text = ((Math.Floor((timerSlider.value / timerSlider.maxValue) * 10000) - 100) * -1)+ "%";
+        t.text = "" + Math.Round((((timerSlider.value / timerSlider.maxValue) * 100) - 100) * -1,2) + "%";
     }
 }
