@@ -58,5 +58,11 @@ public class CharacterImageSlotScript : MonoBehaviour, IBeginDragHandler, IEndDr
     public void SetDrag(bool drag)
     {
         canDrag = drag;
+
+        switch (drag)
+        {
+            case true: GetComponent<Image>().color = new Color(1,1,1,1); break;
+            case false: GetComponent<Image>().color = new Color(1, 1, 1, 0.5f); break;
+        }
     }
 }
