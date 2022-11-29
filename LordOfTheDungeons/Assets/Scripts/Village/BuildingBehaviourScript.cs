@@ -31,6 +31,7 @@ public class BuildingBehaviourScript : MonoBehaviour
     }
 
 
+
     #region Start and stop building
 
     /// <summary>
@@ -48,6 +49,7 @@ public class BuildingBehaviourScript : MonoBehaviour
                 case "Gunsmith": StartGunsmith(); break;
                 case "Warehouse": StartWarehouse(); break;
                 case "TrainingCamp": StartTrainingCamp(); break;
+                case "VillageCenter": StartVillageCenter(); break;
             }
         }
     }
@@ -65,6 +67,15 @@ public class BuildingBehaviourScript : MonoBehaviour
             case "Warehouse": StopWarehouse(); break;
             case "TrainingCamp": StopTrainingCamp(); break;
         }
+    }
+
+    #endregion
+
+    #region VillageCenter
+
+    private void StartVillageCenter()
+    {
+        Init(GameObject.Find("VillageCenterMenu"));
     }
 
     #endregion
@@ -290,6 +301,7 @@ public class BuildingBehaviourScript : MonoBehaviour
                 case "Gunsmith": GameObject.Find("BuildingText").transform.Find("CanvasGunsmith").GetComponent<CanvasGroup>().alpha = 1; break;
                 case "Warehouse": GameObject.Find("BuildingText").transform.Find("CanvasWarehouse").GetComponent<CanvasGroup>().alpha = 1; break;
                 case "TrainingCamp": GameObject.Find("BuildingText").transform.Find("CanvasTrainingCamp").GetComponent<CanvasGroup>().alpha = 1; break;
+                case "VillageCenter": GameObject.Find("BuildingText").transform.Find("CanvasVillageCenter").GetComponent<CanvasGroup>().alpha = 1; break;
             }
         }
 
@@ -310,6 +322,7 @@ public class BuildingBehaviourScript : MonoBehaviour
                 case "Gunsmith": GameObject.Find("BuildingText").transform.Find("CanvasGunsmith").GetComponent<CanvasGroup>().alpha = 0; break;
                 case "Warehouse": GameObject.Find("BuildingText").transform.Find("CanvasWarehouse").GetComponent<CanvasGroup>().alpha = 0; break;
                 case "TrainingCamp": GameObject.Find("BuildingText").transform.Find("CanvasTrainingCamp").GetComponent<CanvasGroup>().alpha = 0; break;
+                case "VillageCenter": GameObject.Find("BuildingText").transform.Find("CanvasVillageCenter").GetComponent<CanvasGroup>().alpha = 0; break;
             }
         }
 
