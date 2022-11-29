@@ -8,5 +8,6 @@ public enum SlotType
     BUILDING,
     TAVERN,
     INSTRUCTOR,
-    TRAINEE
+    TRAINEE,
+    GUNSMITH
 }

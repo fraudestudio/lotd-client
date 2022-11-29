@@ -42,7 +42,6 @@ public class BuildingBehaviourScript : MonoBehaviour
         if (canBeClicked)
         {
             canBeClicked = false;
-            Debug.Log(transform.name + "has been click");
             switch (transform.name)
             {
                 case "Tavern": StartMenuTavern(); break;
@@ -131,7 +130,8 @@ public class BuildingBehaviourScript : MonoBehaviour
         for (int i = 0; i < w.transform.Find("TraineeTitle").Find("TraineesLayout").childCount; i++)
         {
             w.transform.Find("TraineeTitle").Find("TraineesLayout").GetChild(i).gameObject.SetActive(true);
-            if (!w.transform.Find("TraineeTitle").Find("TraineesLayout").GetChild(i).GetComponent<CharacterSlotScript>().SlotIsEmpty)
+
+            if (!w.transform.Find("TraineeTitle").Find("TraineesLayout").GetChild(i).GetComponent<CharacterSlotScript>().SlotIsEmpty || !w.transform.Find("TraineeTitle").Find("TraineesLayout").GetChild(i).GetComponent<CharacterSlotScript>().CanDrop)
             {
                 CharacterSlotNotAllowedScript.AddSlot(w.transform.Find("TraineeTitle").Find("TraineesLayout").GetChild(i).gameObject);
             }
@@ -202,6 +202,10 @@ public class BuildingBehaviourScript : MonoBehaviour
         Init(m);
         Init(g);
         m.GetComponent<ModifyMenuScript>().InitMenu("Gunsmith", "Endroit où améliorer l'équipement des héros");
+        if (!GameObject.Find("GunsmithMenu").transform.Find("CharacterSlot").GetComponent<CharacterSlotScript>().SlotIsEmpty)
+        {
+            CharacterSlotNotAllowedScript.AddSlot(GameObject.Find("GunsmithMenu").transform.Find("CharacterSlot").gameObject);
+        }
     }
 
     /// <summary>
@@ -209,7 +213,10 @@ public class BuildingBehaviourScript : MonoBehaviour
     /// </summary>
     private void StopGunsmith()
     {
-
+        if (!GameObject.Find("GunsmithMenu").transform.Find("CharacterSlot").GetComponent<CharacterSlotScript>().SlotIsEmpty)
+        {
+            CharacterSlotNotAllowedScript.RemoveSlot(GameObject.Find("GunsmithMenu").transform.Find("CharacterSlot").gameObject);
+        }
     }
     #endregion
 
@@ -227,7 +234,7 @@ public class BuildingBehaviourScript : MonoBehaviour
         {
             GameObject d = Instantiate(slotPreFab);
             d.name = "Slot_" + i;
-            d.GetComponent<CharacterSlotScript>().SetType(SlotType.BUILDING);
+            d.GetComponent<CharacterSlotScript>().SetType(SlotType.TAVERN);
             d.transform.SetParent(heoresAvaiable);
             d.transform.localScale = new Vector2(1f, 1f);
             GameObject c = Instantiate(testCharacterPreFab);
@@ -294,7 +301,6 @@ public class BuildingBehaviourScript : MonoBehaviour
     {
         if (canBeClicked)
         {
-            Debug.Log(transform.name + " entered");
             switch (transform.name)
             {
                 case "Tavern": GameObject.Find("BuildingText").transform.Find("CanvasTavern").GetComponent<CanvasGroup>().alpha = 1; break;
@@ -315,7 +321,6 @@ public class BuildingBehaviourScript : MonoBehaviour
     {
         if (canBeClicked)
         {
-            Debug.Log(transform.name + " exited");
             switch (transform.name)
             {
                 case "Tavern": GameObject.Find("BuildingText").transform.Find("CanvasTavern").GetComponent<CanvasGroup>().alpha = 0; break;

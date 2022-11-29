@@ -14,103 +14,154 @@ public class CharacterSlotScript : MonoBehaviour, IDropHandler
 
 
     public GameObject SlotPreFab;
+
+    private bool canDrop = true; 
+
     public bool slotIsEmpty = true;
 
     public bool SlotIsEmpty { get => slotIsEmpty; set => slotIsEmpty = value; }
+    public bool CanDrop { get => canDrop; set => canDrop = value; }
 
 
     private GameObject currentCharacter;
 
     public GameObject CurrentCharacter { get => currentCharacter; }
 
+
     public void OnDrop(PointerEventData eventData)
     {
         GameObject drop = eventData.pointerDrag;
 
-        if (drop.TryGetComponent(out CharacterImageSlotScript dropTest))
+        if (canDrop)
         {
-            if (dropTest.CanDrag)
+            if (drop.TryGetComponent(out CharacterImageSlotScript dropTest))
             {
-                if (SlotIsEmpty)
+                if (dropTest.CanDrag)
                 {
-
-                    if (Type != SlotType.RECRUIT)
+                    if (SlotIsEmpty)
                     {
-                        drop.GetComponent<CharacterImageSlotScript>().IsEngaged = false;
-                        SlotIsEmpty = false;
-                        drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag.GetComponent<CharacterSlotScript>().SlotIsEmpty = true;
 
-
-                        Debug.Log(drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag.GetComponent<CharacterSlotScript>().Type);
-
-                        if (drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag.GetComponent<CharacterSlotScript>().Type == SlotType.RECRUIT)
+                        if (Type != SlotType.RECRUIT)
                         {
-                            Destroy(drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag.gameObject);
-                        }
-                        #region Observateur camp d'entrainement (Remove)
-                        else if (drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag.GetComponent<CharacterSlotScript>().Type == SlotType.INSTRUCTOR)
-                        {
-                            GameObject.Find("TrainingCampMenu").GetComponent<CanTrainScript>().RemoveInstructor();
-                        }
-                        else if (drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag.GetComponent<CharacterSlotScript>().Type == SlotType.TRAINEE)
-                        {
-                            GameObject.Find("TrainingCampMenu").GetComponent<CanTrainScript>().RemoveTrainee(drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag.gameObject);
-                        }
-                        #endregion
+                            drop.GetComponent<CharacterImageSlotScript>().IsEngaged = false;
+                            SlotIsEmpty = false;
+                            drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag.GetComponent<CharacterSlotScript>().SlotIsEmpty = true;
 
-                        CharacterSlotNotAllowedScript.AddSlot(transform.gameObject);
-                        CharacterSlotNotAllowedScript.RemoveSlot(drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag.gameObject);
-
-
-                        #region Observateur camp d'entrainement (Add)
-                        if (transform.GetComponent<CharacterSlotScript>().Type == SlotType.INSTRUCTOR)
-                        {
-                            GameObject.Find("TrainingCampMenu").GetComponent<CanTrainScript>().AddInstructor(transform.gameObject);
-                        }
-                        else if (transform.GetComponent<CharacterSlotScript>().Type == SlotType.TRAINEE)
-                        {
-                            GameObject.Find("TrainingCampMenu").GetComponent<CanTrainScript>().AddTrainee(transform.gameObject);
-                        }
-                        #endregion
-
-                        drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag = transform;
-                        currentCharacter = drop;
-
-                    }
-                    else if (Type == SlotType.RECRUIT)
-                    {
-                        if (!drop.GetComponent<CharacterImageSlotScript>().IsEngaged)
-                        {
+                            if (drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag.GetComponent<CharacterSlotScript>().Type == SlotType.RECRUIT)
+                            {
+                                Destroy(drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag.gameObject);
+                            }
                             #region Observateur camp d'entrainement (Remove)
-                            if (drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag.GetComponent<CharacterSlotScript>().Type == SlotType.INSTRUCTOR)
+                            else if (drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag.GetComponent<CharacterSlotScript>().Type == SlotType.INSTRUCTOR)
                             {
                                 GameObject.Find("TrainingCampMenu").GetComponent<CanTrainScript>().RemoveInstructor();
+                                VillageManager.CharRemovedTrainingCamp();
                             }
                             else if (drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag.GetComponent<CharacterSlotScript>().Type == SlotType.TRAINEE)
                             {
                                 GameObject.Find("TrainingCampMenu").GetComponent<CanTrainScript>().RemoveTrainee(drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag.gameObject);
+                                VillageManager.CharRemovedTrainingCamp();
                             }
                             #endregion
-                            SlotIsEmpty = false;
-                            transform.Find("PlusImage").GetComponent<Image>().color = new Color(1, 1, 1, 0);
-                            GameObject d = Instantiate(SlotPreFab);
-                            d.transform.SetParent(transform.parent);
-                            d.transform.localScale = new Vector3(1, 1, 1);
-                            drop.GetComponent<CharacterImageSlotScript>().IsEngaged = true;
-                            drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag.GetComponent<CharacterSlotScript>().SlotIsEmpty = true;
-                            drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag = transform;
-                            CharacterSlotNotAllowedScript.RemoveSlot(drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag.gameObject);
+                            #region Observateur armurier (Remove)
+                            else if (drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag.GetComponent<CharacterSlotScript>().Type == SlotType.GUNSMITH)
+                            {
+                                VillageManager.CharRemovedGunsmith();
+                            }
+
+                            #endregion
+                            #region Observateur taverne (Remove)
+                            else if (drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag.GetComponent<CharacterSlotScript>().Type == SlotType.TAVERN)
+                            {
+                                VillageManager.CharRemovedTavern();
+                            }
+                            #endregion
+
                             CharacterSlotNotAllowedScript.AddSlot(transform.gameObject);
+                            CharacterSlotNotAllowedScript.RemoveSlot(drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag.gameObject);
+
+
+                            #region Observateur camp d'entrainement (Add)
+                            if (transform.GetComponent<CharacterSlotScript>().Type == SlotType.INSTRUCTOR)
+                            {
+                                GameObject.Find("TrainingCampMenu").GetComponent<CanTrainScript>().AddInstructor(transform.gameObject);
+                                VillageManager.CharAddedTrainingCamp();
+                            }
+                            else if (transform.GetComponent<CharacterSlotScript>().Type == SlotType.TRAINEE)
+                            {
+                                GameObject.Find("TrainingCampMenu").GetComponent<CanTrainScript>().AddTrainee(transform.gameObject);
+                                VillageManager.CharAddedTrainingCamp();
+                            }
+                            #endregion
+                            #region Observateur amurier (Add)
+                            else if (transform.GetComponent<CharacterSlotScript>().Type == SlotType.GUNSMITH)
+                            {
+                                VillageManager.CharAddedGunsmith();
+                            }
+                            #endregion
+                            #region Observateur taverne (Add)
+                            else if (transform.GetComponent<CharacterSlotScript>().Type == SlotType.TAVERN)
+                            {
+                                VillageManager.CharAddedTavern();
+                            }
+                            #endregion
+
+                            drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag = transform;
                             currentCharacter = drop;
+
+                        }
+                        else if (Type == SlotType.RECRUIT)
+                        {
+                            if (!drop.GetComponent<CharacterImageSlotScript>().IsEngaged)
+                            {
+                                #region Observateur camp d'entrainement (Remove)
+                                if (drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag.GetComponent<CharacterSlotScript>().Type == SlotType.INSTRUCTOR)
+                                {
+                                    GameObject.Find("TrainingCampMenu").GetComponent<CanTrainScript>().RemoveInstructor();
+                                    VillageManager.CharRemovedTrainingCamp();
+                                }
+                                else if (drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag.GetComponent<CharacterSlotScript>().Type == SlotType.TRAINEE)
+                                {
+                                    GameObject.Find("TrainingCampMenu").GetComponent<CanTrainScript>().RemoveTrainee(drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag.gameObject);
+                                    VillageManager.CharRemovedTrainingCamp();
+                                }
+                                #endregion
+                                #region Observateur armurier (Remove)
+                                else if (drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag.GetComponent<CharacterSlotScript>().Type == SlotType.GUNSMITH)
+                                {
+                                    VillageManager.CharRemovedGunsmith();
+                                }
+                                #endregion
+                                #region Observateur taverne (Remove)
+                                else if (drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag.GetComponent<CharacterSlotScript>().Type == SlotType.TAVERN)
+                                {
+                                    VillageManager.CharRemovedTavern();
+                                }
+                                #endregion
+
+
+                                SlotIsEmpty = false;
+                                transform.Find("PlusImage").GetComponent<Image>().color = new Color(1, 1, 1, 0);
+                                GameObject d = Instantiate(SlotPreFab);
+                                d.transform.SetParent(transform.parent);
+                                d.transform.localScale = new Vector3(1, 1, 1);
+                                drop.GetComponent<CharacterImageSlotScript>().IsEngaged = true;
+                                drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag.GetComponent<CharacterSlotScript>().SlotIsEmpty = true;
+                                drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag = transform;
+                                CharacterSlotNotAllowedScript.RemoveSlot(drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag.gameObject);
+                                CharacterSlotNotAllowedScript.AddSlot(transform.gameObject);
+                                currentCharacter = drop;
+                            }
                         }
                     }
-                }
-                else
-                {
-                    CharacterSlotNotAllowedScript.AddSlot(drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag.gameObject);
+                    else
+                    {
+                        CharacterSlotNotAllowedScript.AddSlot(drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag.gameObject);
+                    }
                 }
             }
         }
+
     }
 
     public void Awake()

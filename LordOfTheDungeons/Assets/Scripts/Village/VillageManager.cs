@@ -1,3 +1,4 @@
+using Assets.Scripts.Village;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,6 +10,10 @@ public class VillageManager : MonoBehaviour
 {
 
     public GameObject villageCenterBlockPreFab;
+
+    private static int countCharacterTrainingCamp = 0;
+    private static int countCharacterTavern = 0;
+
     private void Awake()
     {
         
@@ -93,17 +98,17 @@ public class VillageManager : MonoBehaviour
         }
 
 
-        int countChar = 0;
+        countCharacterTavern = 0;
 
         for (int i = 0; i < GameObject.Find("TavernMenu").transform.Find("HeroesAvaiable").childCount; i++)
         {
             if (!GameObject.Find("TavernMenu").transform.Find("HeroesAvaiable").GetChild(i).GetComponent<CharacterSlotScript>().slotIsEmpty)
             {
-                countChar++;
+                countCharacterTavern++;
             }
         }
 
-        tavernButton.transform.Find("PeopleIcon").Find("CharacterCount").GetComponent<TMP_Text>().text = "x" + countChar;
+        tavernButton.transform.Find("PeopleIcon").Find("CharacterCount").GetComponent<TMP_Text>().text = "x" + countCharacterTavern;
         tavernButton.transform.Find("PeopleIcon").Find("TimeSliderSpecific").gameObject.SetActive(true);
         tavernButton.transform.Find("PeopleIcon").Find("TimeSliderSpecific").GetComponent<TimeLeftSliderScript>().Init(Convert.ToInt32(GameObject.Find("TavernMenu").transform.Find("TimeSliderTavern").GetComponent<Slider>().value), Convert.ToInt32(GameObject.Find("TavernMenu").transform.Find("TimeSliderTavern").GetComponent<Slider>().maxValue));
         #endregion
@@ -116,7 +121,7 @@ public class VillageManager : MonoBehaviour
         }
 
 
-        countChar = 0;
+        int countChar = 0;
 
         if (!GameObject.Find("GunsmithMenu").transform.Find("CharacterSlot").GetComponent<CharacterSlotScript>().SlotIsEmpty)
         {
@@ -137,28 +142,26 @@ public class VillageManager : MonoBehaviour
         #region TrainingCamp
         Transform trainingCamp = GameObject.Find("VillageCenterMenu").transform.Find("VillageCenterObjects").Find("TrainingCampButton");
 
-        if (Village.Warehouse.InConstruction)
+        if (Village.TrainingCamp.InConstruction)
         {
             trainingCamp.Find("TimeSliderCenter").gameObject.GetComponent<TimeLeftSliderScript>().Init(300, 500);
         }
 
 
-        countChar = 0;
-
         for (int i = 0; i < GameObject.Find("TrainingCampMenu").transform.Find("TraineeTitle").Find("TraineesLayout").childCount; i++)
         {
             if (!GameObject.Find("TrainingCampMenu").transform.Find("TraineeTitle").Find("TraineesLayout").GetChild(i).GetComponent<CharacterSlotScript>().slotIsEmpty)
             {
-                countChar++;
+                countCharacterTrainingCamp++;
             }
         }
 
         if (!GameObject.Find("TrainingCampMenu").transform.Find("InstructorTitle").Find("CharacterSlot").GetComponent<CharacterSlotScript>().slotIsEmpty)
         {
-            countChar++;
+            countCharacterTrainingCamp++;
         }
 
-        trainingCamp.transform.Find("PeopleIcon").Find("CharacterCount").GetComponent<TMP_Text>().text = "x" + countChar;
+        trainingCamp.transform.Find("PeopleIcon").Find("CharacterCount").GetComponent<TMP_Text>().text = "x" + countCharacterTrainingCamp;
 
         if (Village.TrainingCamp.InFormation)
         {
@@ -168,4 +171,48 @@ public class VillageManager : MonoBehaviour
 
         #endregion
     }
+
+    #region Observeurs
+
+    public static void CharAddedTavern()
+    {
+        countCharacterTavern++;
+        GameObject.Find("VillageCenterMenu").transform.Find("VillageCenterObjects").Find("TavernButton").Find("PeopleIcon").Find("CharacterCount").GetComponent<TMP_Text>().text = "x" + countCharacterTavern;
+    }
+
+    public static void CharRemovedTavern()
+    {
+        countCharacterTavern--;
+        GameObject.Find("VillageCenterMenu").transform.Find("VillageCenterObjects").Find("TavernButton").Find("PeopleIcon").Find("CharacterCount").GetComponent<TMP_Text>().text = "x" + countCharacterTavern;
+    }
+
+    public static void TrainingStarted()
+    {
+        GameObject.Find("VillageCenterMenu").transform.Find("VillageCenterObjects").Find("TrainingCampButton").Find("PeopleIcon").Find("TimeSliderSpecific").gameObject.SetActive(true);
+        GameObject.Find("VillageCenterMenu").transform.Find("VillageCenterObjects").Find("TrainingCampButton").Find("PeopleIcon").Find("TimeSliderSpecific").GetComponent<TimeLeftSliderScript>().Init(Convert.ToInt32(GameObject.Find("TrainingCampMenu").transform.Find("TimeSliderTrainingCamp").GetComponent<Slider>().maxValue), Convert.ToInt32(GameObject.Find("TrainingCampMenu").transform.Find("TimeSliderTrainingCamp").GetComponent<Slider>().maxValue));
+    }
+
+    public static void CharAddedTrainingCamp()
+    {
+        countCharacterTrainingCamp++;
+        GameObject.Find("VillageCenterMenu").transform.Find("VillageCenterObjects").Find("TrainingCampButton").Find("PeopleIcon").Find("CharacterCount").GetComponent<TMP_Text>().text = "x" + countCharacterTrainingCamp;
+    }
+
+    public static void CharRemovedTrainingCamp()
+    {
+        countCharacterTrainingCamp--;
+        GameObject.Find("VillageCenterMenu").transform.Find("VillageCenterObjects").Find("TrainingCampButton").Find("PeopleIcon").Find("CharacterCount").GetComponent<TMP_Text>().text = "x" + countCharacterTrainingCamp;
+    }
+
+    public static void CharAddedGunsmith()
+    {
+        GameObject.Find("VillageCenterMenu").transform.Find("VillageCenterObjects").Find("GunsmithButton").transform.Find("PeopleIcon").Find("CharacterCount").GetComponent<TMP_Text>().text = "x" + 1;
+    }
+
+    public static void CharRemovedGunsmith()
+    {
+        GameObject.Find("VillageCenterMenu").transform.Find("VillageCenterObjects").Find("GunsmithButton").transform.Find("PeopleIcon").Find("CharacterCount").GetComponent<TMP_Text>().text = "x" + 0;
+    }
+
+    #endregion
 }
