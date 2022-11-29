@@ -159,9 +159,4 @@ public class CharacterSlotScript : MonoBehaviour, IDropHandler
         c.transform.position = new Vector2(0, 110);
         c.transform.localScale = new Vector2(1, 1);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-    }
 }

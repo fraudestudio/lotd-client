@@ -59,7 +59,6 @@ public class TimeLeftSliderScript : MonoBehaviour
             else
             {
                 timerSlider.value -= Convert.ToSingle(Math.Floor((DateTime.Now - pausedDateTime).TotalSeconds));
-                Debug.Log(Convert.ToSingle(Math.Floor((DateTime.Now - pausedDateTime).TotalSeconds)));
             }
 
         }
@@ -96,5 +95,11 @@ public class TimeLeftSliderScript : MonoBehaviour
     {
         TimeSpan t = TimeSpan.FromSeconds(timerSlider.value);
         return t.Days + " jours " + t.Hours + " heures " + t.Minutes + " minutes " + t.Seconds + " secondes";
+    }
+
+
+    public void GetPercentage(TMP_Text t)
+    {
+        t.text = ((Math.Floor((timerSlider.value / timerSlider.maxValue) * 10000) - 100) * -1)+ "%";
     }
 }
