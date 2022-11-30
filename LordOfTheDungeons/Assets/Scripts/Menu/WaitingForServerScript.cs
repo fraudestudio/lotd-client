@@ -8,6 +8,12 @@ public class WaitingForServerScript : MonoBehaviour
 
     public Animator animator;
     public Canvas Canvas;
+
+    private void Awake()
+    {
+        TemporaryScript.currentUser = "Test";
+    }
+
     void Start()
     {
         animator.SetTrigger("UnZoom");

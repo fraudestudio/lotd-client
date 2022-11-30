@@ -11,6 +11,10 @@ using Newtonsoft.Json;
 using System.Net.Security;
 using UnityEngine.Networking;
 using System.Runtime.InteropServices;
+using UnityEngine.Rendering;
+using System.Linq;
+using Assets.Scripts.Server;
+using static UnityEngine.Networking.UnityWebRequest;
 
 public static class Server
 {
@@ -23,7 +27,12 @@ public static class Server
     };
 
 
-
+    /// <summary>
+    /// Vérifie si les identifiants et mot de passe sont correctes pour se connecter
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="password"></param>
+    /// <returns></returns>
     public static bool VerifyUser(string id, string password)
     {
         System.Net.ServicePointManager.ServerCertificateValidationCallback = (s, ce, ca, p) => true;
@@ -53,22 +62,85 @@ public static class Server
     }
 
 
-    public static bool UserHasUniver()
+
+
+    public static List<UniverseInfo> GetAllUniverses()
     {
 
         System.Net.ServicePointManager.ServerCertificateValidationCallback = (s, ce, ca, p) => true;
 
         sharedClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "123456789012345678901234567890");
 
-        var response = sharedClient.GetAsync("api/universe/all");
+        var response = sharedClient.GetStringAsync("api/universe/all");
+
+        List<UniverseInfo> json = JsonConvert.DeserializeObject<List<UniverseInfo>>(response.Result.ToString());
+
+        return json;
+    }
+
+
+    public static List<UniverseInfo> GetUserJoinedUniverses()
+    {
+
+        System.Net.ServicePointManager.ServerCertificateValidationCallback = (s, ce, ca, p) => true;
+
+        sharedClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "123456789012345678901234567890");
+
+        var response = sharedClient.GetStringAsync("api/universe/joined");
+
+        List<UniverseInfo> json = JsonConvert.DeserializeObject<List<UniverseInfo>>(response.Result.ToString());
+
+        return json;
+    }
+
+
+    public static bool UserHasUniverse()
+    {
+
+        bool result = false;
+
+        System.Net.ServicePointManager.ServerCertificateValidationCallback = (s, ce, ca, p) => true;
+
+        sharedClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "123456789012345678901234567890");
+
+        var response = sharedClient.GetStringAsync("api/universe/owned");
 
         string json = response.Result.ToString();
 
-        Debug.Log(json);
 
-        return false;
+        if (!json.Contains("\"Id\": null"))
+        {
+            result = true;
+        }
+
+        return result;
         
     }
 
+    public static UniverseInfo GetUserUniverse()
+    {
+
+        UniverseInfo result = null;
+
+        System.Net.ServicePointManager.ServerCertificateValidationCallback = (s, ce, ca, p) => true;
+
+        sharedClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "123456789012345678901234567890");
+
+        var response = sharedClient.GetStringAsync("api/universe/owned");
+
+        //string json = response.Result.ToString();
+
+
+
+        UniverseInfo json = JsonConvert.DeserializeObject<UniverseInfo>(response.Result.ToString());
+
+        if (json.Id != "null")
+        {
+            result = json;
+        }
+
+        return json;
+
+    }
 
 }

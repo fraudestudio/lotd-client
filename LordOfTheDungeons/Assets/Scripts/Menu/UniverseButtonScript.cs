@@ -11,32 +11,15 @@ public class UniverseButtonScript : MonoBehaviour, IPointerClickHandler
     private string universeName;
     public string UniverseName { get => universeName; set => universeName = value; }
 
-    private string owner;
-    public string Owner { get => owner; set => owner = value; }
+    private int id;
+    public int Id { get => id; set => id = value; }
 
 
     private bool password;
     public bool Password { get => password; set => password = value; }
 
 
-    private string passwordString;
 
-    private List<string> users = new List<string>();
-    public List<string> Users { get => users; set => users = value; }
-
-    public string PasswordString
-    {
-        get { return passwordString; }
-        set
-        {
-            if (value != "")
-            {
-                passwordString = value;
-            }
-        }
-    }
-
-    
     private GameObject passwordCanvas;
     private GameObject universeCanvas;
     private GameObject universeSearchCanvas;
@@ -142,7 +125,7 @@ public class UniverseButtonScript : MonoBehaviour, IPointerClickHandler
 
     }
 
-    public bool VerifyPassword(string p)
+    /*public bool VerifyPassword(string p)
     {
         bool b = false;
         if (p == PasswordString)
@@ -152,5 +135,5 @@ public class UniverseButtonScript : MonoBehaviour, IPointerClickHandler
         }
 
         return b;
-    }
+    }*/
 }
