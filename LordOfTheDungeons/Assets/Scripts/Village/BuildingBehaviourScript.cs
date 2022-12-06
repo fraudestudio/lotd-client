@@ -27,6 +27,7 @@ public class BuildingBehaviourScript : MonoBehaviour
             case "Gunsmith": InitGunsmith(); break;
             case "Warehouse": InitWarehouse(); break;
             case "TrainingCamp": InitTrainingCamp(); break;
+            case "HealerHut": InitHealerHut(); break;
         }
     }
 
@@ -49,6 +50,7 @@ public class BuildingBehaviourScript : MonoBehaviour
                 case "Warehouse": StartWarehouse(); break;
                 case "TrainingCamp": StartTrainingCamp(); break;
                 case "VillageCenter": StartVillageCenter(); break;
+                case "HealerHut": StartHealerHut(); break;
             }
         }
     }
@@ -65,6 +67,52 @@ public class BuildingBehaviourScript : MonoBehaviour
             case "Gunsmith": StopGunsmith(); break;
             case "Warehouse": StopWarehouse(); break;
             case "TrainingCamp": StopTrainingCamp(); break;
+            case "HealerHut": StopHealerHut(); break;
+        }
+    }
+
+    #endregion
+
+    #region HealerHut
+
+    private void InitHealerHut()
+    {
+        for (int i = 0; i < Village.HealerHut.Level + 1; i++)
+        {
+            if (i % 2 == 0)
+            {
+                GameObject d = Instantiate(slotPreFab);
+                d.name = "Slot_" + i;
+                d.transform.Find("CharacterSlot").GetComponent<CharacterSlotScript>().SetType(SlotType.HEALER);
+                d.transform.SetParent(GameObject.Find("HealerHutMenu").transform.Find("SlotsHealer"));
+                d.transform.localScale = new Vector2(1f, 1f);
+            }
+        }
+    }
+
+    private void StartHealerHut()
+    {
+        GameObject.Find("BuildingText").transform.Find("CanvasHealerHut").GetComponent<CanvasGroup>().alpha = 0;
+        GameObject m = GameObject.Find("BuildingMenu");
+        GameObject w = GameObject.Find("HealerHutMenu");
+        Init(m);
+        Init(w);
+        m.GetComponent<ModifyMenuScript>().InitMenu("HealerHut", "Endroit où soigner les héros");
+
+        for (int i = 0; i < GameObject.Find("HealerHutMenu").transform.Find("SlotsHealer").childCount; i++)
+        {
+            if (!GameObject.Find("HealerHutMenu").transform.Find("SlotsHealer").GetChild(i).Find("CharacterSlot").GetComponent<CharacterSlotScript>().SlotIsEmpty)
+            {
+                CharacterSlotNotAllowedScript.AddSlot(GameObject.Find("HealerHutMenu").transform.Find("SlotsHealer").GetChild(i).Find("CharacterSlot").gameObject);
+            }
+        }
+    }
+
+    private void StopHealerHut()
+    {
+        for (int i = 0; i < GameObject.Find("HealerHutMenu").transform.Find("SlotsHealer").childCount; i++)
+        {
+            CharacterSlotNotAllowedScript.RemoveSlot(GameObject.Find("HealerHutMenu").transform.Find("SlotsHealer").GetChild(i).Find("CharacterSlot").gameObject);
         }
     }
 
@@ -232,13 +280,16 @@ public class BuildingBehaviourScript : MonoBehaviour
 
         for (int i = 0; i < Village.Tavern.Level + 1; i++)
         {
-            GameObject d = Instantiate(slotPreFab);
-            d.name = "Slot_" + i;
-            d.GetComponent<CharacterSlotScript>().SetType(SlotType.TAVERN);
-            d.transform.SetParent(heoresAvaiable);
-            d.transform.localScale = new Vector2(1f, 1f);
-            GameObject c = Instantiate(testCharacterPreFab);
-            d.GetComponent<CharacterSlotScript>().AddChar(c);
+            if (i % 2 == 0)
+            {
+                GameObject d = Instantiate(slotPreFab);
+                d.name = "Slot_" + i;
+                d.GetComponent<CharacterSlotScript>().SetType(SlotType.TAVERN);
+                d.transform.SetParent(heoresAvaiable);
+                d.transform.localScale = new Vector2(1f, 1f);
+                GameObject c = Instantiate(testCharacterPreFab);
+                d.GetComponent<CharacterSlotScript>().AddChar(c);
+            }
         }
 
     }

@@ -1,3 +1,4 @@
+using Assets.Scripts.Village;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.ExceptionServices;
@@ -51,6 +52,13 @@ public class CharacterSlotScript : MonoBehaviour, IDropHandler
                             {
                                 Destroy(drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag.gameObject);
                             }
+                            #region Observateur healer (Remove)
+                            else if (drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag.GetComponent<CharacterSlotScript>().Type == SlotType.HEALER)
+                            {
+                                transform.GetComponentInParent<CanHealScript>().NotifySlotIsNotEmpty(false);
+                                VillageManager.CharRemovedHealer();
+                            }
+                            #endregion
                             #region Observateur camp d'entrainement (Remove)
                             else if (drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag.GetComponent<CharacterSlotScript>().Type == SlotType.INSTRUCTOR)
                             {
@@ -105,6 +113,13 @@ public class CharacterSlotScript : MonoBehaviour, IDropHandler
                                 VillageManager.CharAddedTavern();
                             }
                             #endregion
+                            #region Observateur Healer (add)
+                            else if (transform.GetComponent<CharacterSlotScript>().Type == SlotType.HEALER)
+                            {
+                                transform.GetComponentInParent<CanHealScript>().NotifySlotIsNotEmpty(true);
+                                VillageManager.CharAddedHealer();
+                            }
+                            #endregion
 
                             drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag = transform;
                             currentCharacter = drop;
@@ -138,7 +153,13 @@ public class CharacterSlotScript : MonoBehaviour, IDropHandler
                                     VillageManager.CharRemovedTavern();
                                 }
                                 #endregion
-
+                                #region Observateur healer (Remove)
+                                else if (drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag.GetComponent<CharacterSlotScript>().Type == SlotType.HEALER)
+                                {
+                                    drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag.GetComponentInParent<CanHealScript>().NotifySlotIsNotEmpty(false);
+                                    VillageManager.CharRemovedHealer();
+                                }
+                                #endregion
 
                                 SlotIsEmpty = false;
                                 transform.Find("PlusImage").GetComponent<Image>().color = new Color(1, 1, 1, 0);

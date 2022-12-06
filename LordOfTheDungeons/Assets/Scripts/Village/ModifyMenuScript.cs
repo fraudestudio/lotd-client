@@ -204,6 +204,39 @@ public class ModifyMenuScript : MonoBehaviour
                     #endregion
                 }
                 break;
+            case "HealerHut":
+                {
+                    currentUsedBuilding = building;
+                    TitleText.text = "Hutte du guérisseur";
+                    DescriptionText.text = description;
+
+
+                    if (Village.HealerHut.Level < 5)
+                    {
+                        SetActiveUpgrade(true);
+                        UpgradeButton.transform.Find("WoodCountLogo").transform.Find("WoodCount").GetComponent<TMP_Text>().text = (Village.TrainingCamp.BaseWoodNeeded * (Village.TrainingCamp.WoodModification * Village.TrainingCamp.Level)).ToString();
+                        UpgradeButton.transform.Find("StoneCountLogo").transform.Find("StoneCount").GetComponent<TMP_Text>().text = (Village.TrainingCamp.BaseStoneNeeded * (Village.TrainingCamp.StoneModification * Village.TrainingCamp.Level)).ToString();
+                        UpgradeButton.transform.Find("IronCountLogo").transform.Find("IronCount").GetComponent<TMP_Text>().text = (Village.TrainingCamp.BaseIronNeeded * (Village.TrainingCamp.IronModification * Village.Warehouse.Level)).ToString();
+
+                    }
+                    else
+                    {
+                        SetActiveUpgrade(false);
+                    }
+
+                    /// On vérifie si la tavern est en construction
+                    /// Si elle l'est pas on désactive le timer.
+                    if (Village.HealerHut.InConstruction)
+                    {
+                        constructionTimer.SetActive(true);
+                        constructionTimer.GetComponent<TimeLeftSliderScript>().Init(200, 300);
+                    }
+                    else
+                    {
+                        constructionTimer.SetActive(false);
+                    }
+                }
+                break;
         }
     }
 

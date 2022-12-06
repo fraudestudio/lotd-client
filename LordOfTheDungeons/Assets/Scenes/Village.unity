@@ -1122,6 +1122,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: HealerHutMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 551472685772688057, guid: b32d748883066804dbc4b33dfde395bf, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 551472685772688057, guid: b32d748883066804dbc4b33dfde395bf, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 833795670360460415, guid: b32d748883066804dbc4b33dfde395bf, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1206,6 +1214,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1848251305197891429, guid: b32d748883066804dbc4b33dfde395bf, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1848251305197891429, guid: b32d748883066804dbc4b33dfde395bf, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2177613615682881530, guid: b32d748883066804dbc4b33dfde395bf, type: 3}
       propertyPath: m_Alpha
       value: 0
@@ -1247,6 +1263,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7866660855488741463, guid: b32d748883066804dbc4b33dfde395bf, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8249738249892101833, guid: b32d748883066804dbc4b33dfde395bf, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8249738249892101833, guid: b32d748883066804dbc4b33dfde395bf, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}

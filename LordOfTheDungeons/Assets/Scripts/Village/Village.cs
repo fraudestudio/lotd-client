@@ -9,7 +9,7 @@ public class Village
     private string faction;
     private string owner;
 
-    private Hut hut;
+    public static HealerHut HealerHut;
     public static TrainingCamp TrainingCamp;
     public static Tavern Tavern;
     public static Warehouse Warehouse;
@@ -26,6 +26,7 @@ public class Village
         Gunsmith = new Gunsmith(1, 45, 60, 40,10,10,30, false);
         Warehouse = new Warehouse(1,10,10,5,20,20,20,false,300,300,300);
         TrainingCamp = new TrainingCamp(1, 30, 50, 20, 10, 20, 30, false, false, 0);
+        HealerHut = new HealerHut(5,20,35,5,5,10,20, false);
 
     }
 

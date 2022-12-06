@@ -13,6 +13,7 @@ public class VillageManager : MonoBehaviour
 
     private static int countCharacterTrainingCamp = 0;
     private static int countCharacterTavern = 0;
+    private static int countCharacterHealer = 0;
 
     private void Awake()
     {
@@ -23,6 +24,7 @@ public class VillageManager : MonoBehaviour
         GameObject.Find("BuildingText").transform.Find("CanvasHealerHut").Find("HutName").Find("HutLevel").GetComponent<TMP_Text>().text = "Niveau " + Village.Gunsmith.Level;
         GameObject.Find("BuildingText").transform.Find("CanvasTavern").Find("TavernName").Find("TavernLevel").GetComponent<TMP_Text>().text = "Niveau " + Village.Tavern.Level;
         GameObject.Find("BuildingText").transform.Find("CanvasWarehouse").Find("WarehouseName").Find("WareHouseLevel").GetComponent<TMP_Text>().text = "Niveau " + Village.Warehouse.Level;
+        GameObject.Find("BuildingText").transform.Find("CanvasHealerHut").Find("HutName").Find("HutLevel").GetComponent<TMP_Text>().text = "Niveau " + Village.HealerHut.Level;
 
 
         Transform villageCenterMenu = GameObject.Find("VillageCenterMenu").transform.Find("VillageCenterObjects");
@@ -82,6 +84,20 @@ public class VillageManager : MonoBehaviour
         {
             trainingcamp.transform.Find("NotInConstructionTitle").gameObject.SetActive(false);
             trainingcamp.transform.Find("TimeSliderCenter").gameObject.SetActive(true);
+        }
+        #endregion
+        #region HealerHut
+        GameObject healerhutButton = Instantiate(villageCenterBlockPreFab);
+        healerhutButton.name = "HealerHutButton";
+        healerhutButton.transform.SetParent(villageCenterMenu);
+        healerhutButton.transform.localScale = new Vector2(1, 1);
+        healerhutButton.transform.Find("BuildingTitle").GetComponent<TMP_Text>().text = "Hutte du guérisseur";
+        healerhutButton.transform.Find("BuildingTitle").GetComponent<TMP_Text>().fontSize = 13;
+
+        if (Village.HealerHut.InConstruction)
+        {
+            healerhutButton.transform.Find("NotInConstructionTitle").gameObject.SetActive(false);
+            healerhutButton.transform.Find("TimeSliderCenter").gameObject.SetActive(true);
         }
         #endregion
     }
@@ -170,6 +186,28 @@ public class VillageManager : MonoBehaviour
         }
 
         #endregion
+        #region HealerHut
+        Transform healerHut = GameObject.Find("VillageCenterMenu").transform.Find("VillageCenterObjects").Find("HealerHutButton");
+
+        if (Village.HealerHut.InConstruction)
+        {
+            healerHut.Find("TimeSliderCenter").gameObject.GetComponent<TimeLeftSliderScript>().Init(300, 500);
+        }
+
+
+        for (int i = 0; i < GameObject.Find("HealerHutMenu").transform.Find("SlotsHealer").childCount; i++)
+        {
+            if (!GameObject.Find("HealerHutMenu").transform.Find("SlotsHealer").GetChild(i).Find("CharacterSlot").GetComponent<CharacterSlotScript>().SlotIsEmpty)
+            {
+                countCharacterHealer++;
+            }
+        }
+
+        healerHut.transform.Find("PeopleIcon").Find("CharacterCount").GetComponent<TMP_Text>().text = "x" + countCharacterHealer;
+
+
+
+        #endregion
     }
 
     #region Observeurs
@@ -212,6 +250,18 @@ public class VillageManager : MonoBehaviour
     public static void CharRemovedGunsmith()
     {
         GameObject.Find("VillageCenterMenu").transform.Find("VillageCenterObjects").Find("GunsmithButton").transform.Find("PeopleIcon").Find("CharacterCount").GetComponent<TMP_Text>().text = "x" + 0;
+    }
+
+    public static void CharAddedHealer()
+    {
+        countCharacterHealer++;
+        GameObject.Find("VillageCenterMenu").transform.Find("VillageCenterObjects").Find("HealerHutButton").Find("PeopleIcon").Find("CharacterCount").GetComponent<TMP_Text>().text = "x" + countCharacterHealer;
+    }
+
+    public static void CharRemovedHealer()
+    {
+        countCharacterHealer--;
+        GameObject.Find("VillageCenterMenu").transform.Find("VillageCenterObjects").Find("HealerHutButton").Find("PeopleIcon").Find("CharacterCount").GetComponent<TMP_Text>().text = "x" + countCharacterHealer;
     }
 
     #endregion

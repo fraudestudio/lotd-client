@@ -9,5 +9,6 @@ public enum SlotType
     TAVERN,
     INSTRUCTOR,
     TRAINEE,
-    GUNSMITH
+    GUNSMITH,
+    HEALER
 }
