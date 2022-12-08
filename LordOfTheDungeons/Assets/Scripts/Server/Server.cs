@@ -23,7 +23,7 @@ public static class Server
 
     private static HttpClient sharedClient = new()
     {
-        BaseAddress = new Uri("https://info-dij-sae001.iut21.u-bourgogne.fr"),
+        BaseAddress = new Uri("https://info-dij-sae001.iut21.u-bourgogne.fr:8443"),
     };
 
 
@@ -143,4 +143,82 @@ public static class Server
 
     }
 
+
+    public static bool UserHasVillageInUniverse(int universeID)
+    {
+
+        bool result = false;
+
+        System.Net.ServicePointManager.ServerCertificateValidationCallback = (s, ce, ca, p) => true;
+
+        sharedClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "123456789012345678901234567890");
+
+        var response = sharedClient.GetStringAsync(String.Format("api/universe/{0}", universeID));
+
+
+        if (response.Result.ToString().Contains("Town"))
+        {
+            result = true;
+        }
+
+
+        return result;
+
+    }
+
+    public static UniverseInfo UserGetVillageID(int universeID)
+    {
+
+        System.Net.ServicePointManager.ServerCertificateValidationCallback = (s, ce, ca, p) => true;
+
+        sharedClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "123456789012345678901234567890");
+
+        var response = sharedClient.GetStringAsync(String.Format("api/universe/{0}", universeID));
+
+        UniverseInfo json = JsonConvert.DeserializeObject<UniverseInfo>(response.Result.ToString());
+
+
+        return json;
+
+    }
+
+
+    public static UniverseInfo UserGetVillageName(int villageID)
+    {
+
+        System.Net.ServicePointManager.ServerCertificateValidationCallback = (s, ce, ca, p) => true;
+
+        sharedClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "123456789012345678901234567890");
+
+        var response = sharedClient.GetStringAsync(String.Format("api/universe/{0}Village", villageID));
+
+        UniverseInfo json = JsonConvert.DeserializeObject<UniverseInfo>(response.Result.ToString());
+
+
+        return json;
+
+    }
+
+
+
+    public static UniverseInfo UniverseGetMajorFaction(int universeID)
+    {
+        try
+        {
+            System.Net.ServicePointManager.ServerCertificateValidationCallback = (s, ce, ca, p) => true;
+
+            sharedClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "123456789012345678901234567890");
+
+            var response = sharedClient.GetStringAsync(String.Format("api/universe/{0}Faction", universeID));
+
+            UniverseInfo json = JsonConvert.DeserializeObject<UniverseInfo>(response.Result.ToString());
+
+            return json;
+        }
+        catch
+        {
+            return new UniverseInfo() { Faction = "None" };
+        }
+
+    }
 }

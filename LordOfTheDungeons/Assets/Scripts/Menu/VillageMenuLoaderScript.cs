@@ -1,3 +1,4 @@
+using Assets.Scripts.Server;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -66,15 +67,14 @@ public class VillageMenuLoaderScript : MonoBehaviour
         StartCoroutine(GoBackToUniverse());
     }
 
-    public void UpdateVillageButtons()
+    public void UpdateVillageButtons(int idUniverse)
     {
-
-        if (currentUniverse.Users.Contains(TemporaryScript.currentUser))
+        if (Server.UserHasVillageInUniverse(idUniverse))
         {
             joinButton.GetComponent<Button>().interactable = true;
             createButton.GetComponent<Button>().interactable = false;
 
-            villageState.text = "Village : " + currentUniverse.GetVillage(TemporaryScript.currentUser).Name;
+            villageState.text = "Village : " + Server.UserGetVillageName(Server.UserGetVillageID(idUniverse).Town).Name;
             villageState.fontSize = 20;
             villageState.color = new Color(0, 0.9f, 0);
 
@@ -90,14 +90,14 @@ public class VillageMenuLoaderScript : MonoBehaviour
         }
 
 
-        numberPlayer.text = "Nombre de villages : " + currentUniverse.Users.Count;
+        numberPlayer.text = "Nombre de villages : ?";
         numberPlayer.fontSize = 24;
 
         numberOnline.text = "Nombre de chef présent : " + 0;
 
         numberOnline.fontSize = 24;
 
-        majorFaction.text = "Faction majoritaire : " + currentUniverse.GetMajorFaction();
+        majorFaction.text = "Faction majoritaire : " + Server.UniverseGetMajorFaction(idUniverse).Faction;
         majorFaction.fontSize = 24;
         majorFaction.color = new Color(1, 1, 0);
     }
