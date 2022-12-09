@@ -98,7 +98,6 @@ public class UniverseButtonScript : MonoBehaviour, IPointerClickHandler
     {
         StartCoroutine(HidePassword());
         StartCoroutine(ChangeMenu());
-        GameObject.Find("VillageMenu").GetComponent<VillageMenuLoaderScript>().CurrentUniverse = TemporaryScript.GetUniverse(universeName);
     }
 
     private IEnumerator ChangeMenu()
@@ -118,7 +117,7 @@ public class UniverseButtonScript : MonoBehaviour, IPointerClickHandler
         universeCanvas.GetComponent<CanvasGroup>().alpha = 0;
         universeSearchAnimator.SetTrigger("GoBackIdle");
         universeSearchCanvas.GetComponent<CanvasGroup>().alpha = 0;
-        GameObject.Find("VillageMenu").GetComponent<VillageMenuLoaderScript>().UpdateVillageButtons();
+        GameObject.Find("VillageMenu").GetComponent<VillageMenuLoaderScript>().UpdateVillageButtons(id);
         GameObject.Find("WaitingServer").GetComponent<WaitingForServerScript>().StopAnim();
         villageCanvas.GetComponent<CanvasGroup>().interactable = true;
         villageCanvas.GetComponent<CanvasGroup>().blocksRaycasts = true;

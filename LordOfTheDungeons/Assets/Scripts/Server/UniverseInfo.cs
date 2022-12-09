@@ -11,5 +11,9 @@ namespace Assets.Scripts.Server
         public string Id { get; set; }
         public string Name { get; set; }
         public bool HasPassword { get; set; }
+
+        public int Town { get; set; }
+
+        public string Faction { get; set; }
     }
 }
