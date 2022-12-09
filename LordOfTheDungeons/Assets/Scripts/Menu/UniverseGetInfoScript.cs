@@ -80,7 +80,9 @@ public class UniverseGetInfoScript : MonoBehaviour
 
             UniverseInfo userUniverse = Server.GetUserUniverse();
 
-            if (userUniverse != null)
+            Debug.Log(userUniverse);
+
+            if (userUniverse.Id != null)
             {
                 GameObject button = Instantiate(buttonPreFab);
                 button.transform.Find("T").GetComponent<TMP_Text>().text = userUniverse.Name;

@@ -15,6 +15,7 @@ using UnityEngine.Rendering;
 using System.Linq;
 using Assets.Scripts.Server;
 using static UnityEngine.Networking.UnityWebRequest;
+using Mono.Cecil.Mdb;
 
 public static class Server
 {
@@ -105,10 +106,11 @@ public static class Server
 
         var response = sharedClient.GetStringAsync("api/universe/owned");
 
-        string json = response.Result.ToString();
+
+        UniverseInfo json = JsonConvert.DeserializeObject<UniverseInfo>(response.Result.ToString());
 
 
-        if (!json.Contains("\"Id\": null"))
+        if (json.Id != null)
         {
             result = true;
         }
@@ -190,7 +192,7 @@ public static class Server
 
         sharedClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "123456789012345678901234567890");
 
-        var response = sharedClient.GetStringAsync(String.Format("api/universe/{0}Village", villageID));
+        var response = sharedClient.GetStringAsync(String.Format("api/village/name/{0}", villageID));
 
         UniverseInfo json = JsonConvert.DeserializeObject<UniverseInfo>(response.Result.ToString());
 
@@ -201,24 +203,60 @@ public static class Server
 
 
 
-    public static UniverseInfo UniverseGetMajorFaction(int universeID)
+    public static string UniverseGetMajorFaction(int universeID)
     {
-        try
-        {
-            System.Net.ServicePointManager.ServerCertificateValidationCallback = (s, ce, ca, p) => true;
+        System.Net.ServicePointManager.ServerCertificateValidationCallback = (s, ce, ca, p) => true;
 
-            sharedClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "123456789012345678901234567890");
+        sharedClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "123456789012345678901234567890");
 
-            var response = sharedClient.GetStringAsync(String.Format("api/universe/{0}Faction", universeID));
+        var response = sharedClient.GetStringAsync(String.Format("api/universe/faction/{0}", universeID));
 
-            UniverseInfo json = JsonConvert.DeserializeObject<UniverseInfo>(response.Result.ToString());
+        UniverseInfo json = JsonConvert.DeserializeObject<UniverseInfo>(response.Result.ToString());
 
-            return json;
-        }
-        catch
-        {
-            return new UniverseInfo() { Faction = "None" };
-        }
-
+        return json.Faction;
     }
+
+
+
+    public static int UniverseCountVillage(int universeID)
+    {
+        System.Net.ServicePointManager.ServerCertificateValidationCallback = (s, ce, ca, p) => true;
+
+        sharedClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "123456789012345678901234567890");
+
+        var response = sharedClient.GetStringAsync(String.Format("api/universe/count/{0}", universeID));
+
+        UniverseInfo json = JsonConvert.DeserializeObject<UniverseInfo>(response.Result.ToString());
+
+
+        return json.NumberVillage;
+    }
+
+
+
+
+    public static void CreateUniverse(string name, string mdp)
+    {
+        System.Net.ServicePointManager.ServerCertificateValidationCallback = (s, ce, ca, p) => true;
+
+        bool pswd = false;
+
+        if (mdp != null)
+        {
+            pswd = true;
+        }
+
+        UniverseInfo info = new UniverseInfo
+        {
+            Name = name,
+            HasPassword = pswd,
+            Password = mdp
+        };
+
+
+        var response = sharedClient.PostAsync("api/universe/create", new StringContent(JsonConvert.SerializeObject(info),Encoding.UTF8, "application/json"));
+
+        Debug.Log(response.Result.ToString());
+    }
+
 }

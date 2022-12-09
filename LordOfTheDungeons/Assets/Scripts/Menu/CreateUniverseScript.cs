@@ -16,12 +16,22 @@ public class CreateUniverseScript : MonoBehaviour, IPointerClickHandler
     {
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            if (nameFeild.text.ToUpper() != nameFeild.text.ToLower())
+            if (nameFeild.text.ToUpper() != nameFeild.text.ToLower() || !string.IsNullOrEmpty(nameFeild.text))
             {
                 error.color = new Color(1, 1, 1, 0);
                 GameObject.Find("WaitingServer").GetComponent<WaitingForServerScript>().StartAnim();
                 GetComponent<ChangeMenuButtonScript>().go = true;
-                TemporaryScript.Universes.Add(new Universe(nameFeild.text, passwordFeild.text, TemporaryScript.currentUser));
+
+                if (string.IsNullOrEmpty(passwordFeild.text))
+                {
+                    Server.CreateUniverse(nameFeild.text, null);
+                }
+                else
+                {
+                    Server.CreateUniverse(nameFeild.text, passwordFeild.text);
+                }
+
+
             }
             else
             {

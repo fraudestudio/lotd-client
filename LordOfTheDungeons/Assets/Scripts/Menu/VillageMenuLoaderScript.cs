@@ -90,14 +90,14 @@ public class VillageMenuLoaderScript : MonoBehaviour
         }
 
 
-        numberPlayer.text = "Nombre de villages : ?";
+        numberPlayer.text = "Nombre de villages : " + Server.UniverseCountVillage(idUniverse);
         numberPlayer.fontSize = 24;
 
         numberOnline.text = "Nombre de chef présent : " + 0;
 
         numberOnline.fontSize = 24;
 
-        majorFaction.text = "Faction majoritaire : " + Server.UniverseGetMajorFaction(idUniverse).Faction;
+        majorFaction.text = "Faction majoritaire : " + Server.UniverseGetMajorFaction(idUniverse);
         majorFaction.fontSize = 24;
         majorFaction.color = new Color(1, 1, 0);
     }
