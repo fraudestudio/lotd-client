@@ -210,6 +210,7 @@ public class VillageManager : MonoBehaviour
         #endregion
     }
 
+
     #region Observeurs
 
     public static void CharAddedTavern()

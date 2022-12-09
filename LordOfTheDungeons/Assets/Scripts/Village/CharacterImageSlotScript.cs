@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
 
-public class CharacterImageSlotScript : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
+public class CharacterImageSlotScript : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerClickHandler
 {
 
 
@@ -13,10 +14,16 @@ public class CharacterImageSlotScript : MonoBehaviour, IBeginDragHandler, IEndDr
     private bool isEngaged = false;
 
     private bool canDrag = true;
+
+    private Character character;
+
     public bool CanDrag { get => canDrag; }
 
     public Transform ParentAfterDrag { get => parentAfterDrag; set => parentAfterDrag = value; }
     public bool IsEngaged { get => isEngaged; set => isEngaged = value; }
+
+
+    private bool onDrag = false; 
 
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -31,6 +38,7 @@ public class CharacterImageSlotScript : MonoBehaviour, IBeginDragHandler, IEndDr
             oldLayer = transform.parent.gameObject.GetComponent<Canvas>().sortingOrder;
             transform.parent.gameObject.GetComponent<Canvas>().sortingOrder = 100;
             CharacterSlotNotAllowedScript.ShowNotAllowedSlot();
+            onDrag = true;
         }
     }
 
@@ -51,9 +59,19 @@ public class CharacterImageSlotScript : MonoBehaviour, IBeginDragHandler, IEndDr
             transform.SetParent(ParentAfterDrag);
             transform.position = parentAfterDrag.position;
             GetComponent<Image>().raycastTarget = true;
+            onDrag = false;
         }
     }
 
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (eventData.button == PointerEventData.InputButton.Right)
+        {
+            GameObject.Find("CharacterInfoMenu").GetComponent<CanvasGroup>().alpha = 1;
+            GameObject.Find("CharacterInfoMenu").GetComponent<CanvasGroup>().interactable = true;
+            GameObject.Find("CharacterInfoMenu").GetComponent<CanvasGroup>().blocksRaycasts = true;
+        }
+    }
 
     public void SetDrag(bool drag)
     {
@@ -64,5 +82,11 @@ public class CharacterImageSlotScript : MonoBehaviour, IBeginDragHandler, IEndDr
             case true: GetComponent<Image>().color = new Color(1,1,1,1); break;
             case false: GetComponent<Image>().color = new Color(1, 1, 1, 0.5f); break;
         }
+    }
+
+
+    public void SetCharacter(Character c)
+    {
+        character = c;
     }
 }
