@@ -132,10 +132,6 @@ public static class Server
 
         var response = sharedClient.GetStringAsync("api/universe/owned");
 
-        //string json = response.Result.ToString();
-
-
-
         UniverseInfo json = JsonConvert.DeserializeObject<UniverseInfo>(response.Result.ToString());
 
         if (json.Id != "null")

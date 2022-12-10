@@ -86,8 +86,6 @@ public class UniverseGetInfoScript : MonoBehaviour
 
             UniverseInfo userUniverse = Server.GetUserUniverse();
 
-            Debug.Log(userUniverse);
-
             if (userUniverse.Id != null)
             {
                 GameObject button = Instantiate(buttonPreFab);
@@ -103,10 +101,10 @@ public class UniverseGetInfoScript : MonoBehaviour
             foreach (UniverseInfo u in Server.GetUserJoinedUniverses())
             {
                 GameObject button = Instantiate(buttonPreFab);
-                button.transform.Find("T").GetComponent<TMP_Text>().text = userUniverse.Name;
+                button.transform.Find("T").GetComponent<TMP_Text>().text = u.Name;
                 button.transform.SetParent(contentMyUniverse);
-                button.GetComponent<UniverseButtonScript>().UniverseName = userUniverse.Name;
-                button.GetComponent<UniverseButtonScript>().Id = Convert.ToInt32(userUniverse.Id);
+                button.GetComponent<UniverseButtonScript>().UniverseName = u.Name;
+                button.GetComponent<UniverseButtonScript>().Id = Convert.ToInt32(u.Id);
                 button.GetComponent<UniverseButtonScript>().Password = false;
                 myUniverseButton.Add(button);
             }
