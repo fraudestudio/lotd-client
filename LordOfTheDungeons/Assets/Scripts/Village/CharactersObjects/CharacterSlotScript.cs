@@ -75,6 +75,7 @@ public class CharacterSlotScript : MonoBehaviour, IDropHandler
                             else if (drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag.GetComponent<CharacterSlotScript>().Type == SlotType.GUNSMITH)
                             {
                                 VillageManager.CharRemovedGunsmith();
+                                transform.GetComponentInParent<UpgradePartGunSmithScript>().CanUpgradeObserver(false);
                             }
 
                             #endregion
@@ -105,6 +106,7 @@ public class CharacterSlotScript : MonoBehaviour, IDropHandler
                             else if (transform.GetComponent<CharacterSlotScript>().Type == SlotType.GUNSMITH)
                             {
                                 VillageManager.CharAddedGunsmith();
+                                transform.GetComponentInParent<UpgradePartGunSmithScript>().CanUpgradeObserver(true);
                             }
                             #endregion
                             #region Observateur taverne (Add)
@@ -145,6 +147,7 @@ public class CharacterSlotScript : MonoBehaviour, IDropHandler
                                 else if (drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag.GetComponent<CharacterSlotScript>().Type == SlotType.GUNSMITH)
                                 {
                                     VillageManager.CharRemovedGunsmith();
+                                    drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag.GetComponentInParent<UpgradePartGunSmithScript>().CanUpgradeObserver(false);
                                 }
                                 #endregion
                                 #region Observateur taverne (Remove)

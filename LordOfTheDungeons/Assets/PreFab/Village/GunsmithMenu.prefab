@@ -2131,7 +2131,6 @@ GameObject:
   - component: {fileID: 1553269485054966696}
   - component: {fileID: 1553269485054966699}
   - component: {fileID: 2422175326332628093}
-  - component: {fileID: 2562408308682592224}
   m_Layer: 5
   m_Name: GunsmithMenu
   m_TagString: Untagged
@@ -2236,19 +2235,6 @@ CanvasGroup:
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
---- !u!114 &2562408308682592224
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1553269485054966698}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84916a059e176d344ba84b3536b9e450, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Slot: {fileID: 5828339338622385037}
 --- !u!1 &1553269485114269661
 GameObject:
   m_ObjectHideFlags: 0
@@ -3111,3 +3097,16 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5002436930003801801, guid: 99a90272e6433204184732ea9ad89dbc, type: 3}
   m_PrefabInstance: {fileID: 1553269484719549764}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7531962504862967938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5828339338622385037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84916a059e176d344ba84b3536b9e450, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upgradePart: {fileID: 1553269483939327309}
