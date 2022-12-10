@@ -16,11 +16,13 @@ using System.Linq;
 using Assets.Scripts.Server;
 using static UnityEngine.Networking.UnityWebRequest;
 using Mono.Cecil.Mdb;
+using System.Security.Cryptography;
+using Assets.Scripts.Server.Menu;
 
 public static class Server
 {
 
-
+    private static int saveIdUniverse;
 
     private static HttpClient sharedClient = new()
     {
@@ -255,8 +257,57 @@ public static class Server
 
 
         var response = sharedClient.PostAsync("api/universe/create", new StringContent(JsonConvert.SerializeObject(info),Encoding.UTF8, "application/json"));
-
-        Debug.Log(response.Result.ToString());
     }
+
+    public static void CreateVillage(string name, string race, int idUnivers)
+    {
+        System.Net.ServicePointManager.ServerCertificateValidationCallback = (s, ce, ca, p) => true;
+
+        VillageInfo info = new VillageInfo
+        {
+            Name=name,
+            Faction = race,
+            IdUnivers = idUnivers
+        };
+
+
+        var response = sharedClient.PostAsync("api/village/create", new StringContent(JsonConvert.SerializeObject(info), Encoding.UTF8, "application/json"));
+    }
+
+
+    public static bool VerifyAcessUniverse(int idUniverse, string password)
+    {
+
+        bool result = false;
+
+        System.Net.ServicePointManager.ServerCertificateValidationCallback = (s, ce, ca, p) => true;
+
+
+        var content = new { Password = password };
+
+        var response = sharedClient.PostAsync(String.Format("api/universe/access/{0}",idUniverse), new StringContent(JsonConvert.SerializeObject(content), Encoding.UTF8, "application/json"));
+
+
+        if (response.Result.Content.ReadAsStringAsync().Result == "Success")
+        {
+            result = true;
+        }
+
+
+        return result;
+
+    }
+
+
+    public static void SaveIdUniverse(int value)
+    {
+        saveIdUniverse = value;
+    }
+
+    public static int GetSavedIdUniverse()
+    {
+        return saveIdUniverse;
+    }
+
 
 }

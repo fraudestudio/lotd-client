@@ -10,7 +10,6 @@ public class CreateVillageScript : MonoBehaviour, IPointerClickHandler
         if (eventData.button == PointerEventData.InputButton.Left)
         {
             GameObject.Find("loadscreen").GetComponent<loaderScript>().Level("VillageCreation");
-            SaveUniverseScript.Universe = GameObject.Find("VillageMenu").GetComponent<VillageMenuLoaderScript>().CurrentUniverse;
         }
     }
 

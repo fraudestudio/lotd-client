@@ -124,15 +124,17 @@ public class UniverseButtonScript : MonoBehaviour, IPointerClickHandler
 
     }
 
-    /*public bool VerifyPassword(string p)
+    public bool VerifyPassword(string p)
     {
         bool b = false;
-        if (p == PasswordString)
+
+       
+        if (Server.VerifyAcessUniverse(Id, p))
         {
             ShowVillage();
             b = true;
         }
 
         return b;
-    }*/
+    }
 }

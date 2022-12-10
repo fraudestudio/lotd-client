@@ -75,6 +75,12 @@ public class UniverseGetInfoScript : MonoBehaviour
                 button.GetComponent<UniverseButtonScript>().UniverseName = u.Name;
                 button.GetComponent<UniverseButtonScript>().Id = Convert.ToInt32(u.Id);
                 button.GetComponent<UniverseButtonScript>().Password = u.HasPassword;
+
+                if (u.HasPassword)
+                {
+                    button.transform.Find("Padlock").gameObject.SetActive(true);
+                }
+
                 buttons.Add(button);
             }
 

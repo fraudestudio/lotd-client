@@ -47,30 +47,34 @@ public class SelectRaceScript : MonoBehaviour
 
     private void OnMouseUp()
     {
+        string faction = "";
+
         switch (name)
         {
             case "humanshitbox":
                 {
-                    TemporaryScript.AddVillage(SaveUniverseScript.Universe, inputField.text, "human", TemporaryScript.currentUser);
+                    faction = "Humain";
                 }
                 break;
             case "elveshitbox":
                 {
-                    TemporaryScript.AddVillage(SaveUniverseScript.Universe, inputField.text, "elve", TemporaryScript.currentUser);
+                    faction = "Elfe";
                 }
                 break;
             case "dwarfshitbox":
                 {
-                    TemporaryScript.AddVillage(SaveUniverseScript.Universe, inputField.text, "dwarf", TemporaryScript.currentUser);
+                    faction = "Nain";
                 }
                 break;
             case "hobbitshitbox":
                 {
-                    TemporaryScript.AddVillage(SaveUniverseScript.Universe, inputField.text, "hobbit", TemporaryScript.currentUser);
+                    faction = "Hobbit";
                 }
                 break;
 
         }
+
+        Server.CreateVillage(inputField.text, faction, Server.GetSavedIdUniverse());
 
         GameObject.Find("loadscreen").GetComponent<loaderScript>().Level("Village");
     }

@@ -69,6 +69,8 @@ public class VillageMenuLoaderScript : MonoBehaviour
 
     public void UpdateVillageButtons(int idUniverse)
     {
+        Server.SaveIdUniverse(idUniverse);
+
         if (Server.UserHasVillageInUniverse(idUniverse))
         {
             joinButton.GetComponent<Button>().interactable = true;

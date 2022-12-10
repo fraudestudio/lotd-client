@@ -29,13 +29,14 @@ public class PasswordVerifierScript : MonoBehaviour, IPointerClickHandler
 
     public void verify(string s)
     {
-        /*if (!CurrentButton.GetComponent<UniverseButtonScript>().VerifyPassword(s))
+        if (!CurrentButton.GetComponent<UniverseButtonScript>().VerifyPassword(s))
         {
             error.color = new Color(1, 1, 1, 1);
         }
         else
         {
             error.color = new Color(1, 1, 1, 0);
-        }*/
+        }
+        inputField.text = "";
     }
 }
