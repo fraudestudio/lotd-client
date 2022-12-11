@@ -21,23 +21,33 @@ namespace Assets.Scripts.Village
 
         private int level;
 
-        private int strengh;
-
         private int life;
+
+        private int maxLife;
+
+        private int PA_MAX;
+
+        private int PM_MAX;
 
         private Weapon weapon;
 
         private Armor armor;
+        public Weapon Weapon { get => weapon; set => weapon = value; }
+        public Armor Armor { get => armor; set => armor = value; }
 
-        public Character(Sprite image, Sprite icon, string name, string race, int level, int strengh, int life)
+        public Character(Sprite image, Sprite icon, string name, string race, int level, int life, int maxLife, int PA_MAX, int PM_MAX)
         {
             this.image = image;
             this.iconImage = icon;
             this.name = name;
             this.race = race;
             this.level = level;
-            this.strengh = strengh;
             this.life = life;
+            this.maxLife = maxLife;
+            this.PA_MAX = PA_MAX;
+            this.PM_MAX = PM_MAX;
         }
+
+
     }
 }

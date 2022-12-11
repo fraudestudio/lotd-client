@@ -88,4 +88,9 @@ public class CharacterImageSlotScript : MonoBehaviour, IBeginDragHandler, IEndDr
     {
         character = c;
     }
+
+    public void ChangeSprite(Sprite sprite)
+    {
+        GetComponent<Image>().sprite = sprite;
+    }
 }

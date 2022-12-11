@@ -287,7 +287,7 @@ public class BuildingBehaviourScript : MonoBehaviour
                 d.GetComponent<CharacterSlotScript>().SetType(SlotType.TAVERN);
                 d.transform.SetParent(heoresAvaiable);
                 d.transform.localScale = new Vector2(1f, 1f);
-                GameObject c = Instantiate(testCharacterPreFab);
+                GameObject c = GameObject.Find("CharacterFactory").GetComponent<CharacterFactory>().CreateCharacter(Random.Range(0, 2), "qsfdlmq", "Hobbit", 1, 10, 10, 4, 5);
                 d.GetComponent<CharacterSlotScript>().AddChar(c);
             }
         }

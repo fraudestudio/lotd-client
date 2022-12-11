@@ -12,6 +12,8 @@ public class CharacterFactory : MonoBehaviour
 {
     [Serializable]
     public class Icon : ImageIconList<Sprite> { }
+
+    [Serializable]
     public class ImageChar : ImageCharList<Sprite> { }
     public Icon Icons;
     public ImageChar ImageCharacter;
@@ -20,13 +22,15 @@ public class CharacterFactory : MonoBehaviour
     public GameObject PreFabCharacter;
 
 
-    public GameObject CreateCharacter(int image, string name, string race, int level, int strengh, int life)
+    public GameObject CreateCharacter(int image, string name, string race, int level, int life, int maxLife, int PA_MAX, int PM_MAX)
     {
         GameObject character = Instantiate(PreFabCharacter);
 
-        character.GetComponent<CharacterImageSlotScript>().Character = new Character(ImageCharacter.CharacterImage[image], Icons.CharacterIcon[image],name,race,level,strengh,life);
+        character.GetComponent<CharacterImageSlotScript>().Character = new Character(ImageCharacter.CharacterImage[image], Icons.CharacterIcon[image],name,race,level,life,maxLife,PA_MAX,PM_MAX);
 
-        return null;
+        character.GetComponent<CharacterImageSlotScript>().ChangeSprite(Icons.CharacterIcon[image]);
+
+        return character;
     }
 
 }
