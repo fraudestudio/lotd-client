@@ -4,15 +4,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Assets.Scripts.Village
 {
     public class Character
     {
 
-        private Image image; 
+        private Sprite image; 
 
-        private Image iconImage; 
+        private Sprite iconImage; 
 
         private string race;
 
@@ -28,7 +29,7 @@ namespace Assets.Scripts.Village
 
         private Armor armor;
 
-        public Character(Image image, Image icon, string name, string race, int level, int strengh, int life)
+        public Character(Sprite image, Sprite icon, string name, string race, int level, int strengh, int life)
         {
             this.image = image;
             this.iconImage = icon;

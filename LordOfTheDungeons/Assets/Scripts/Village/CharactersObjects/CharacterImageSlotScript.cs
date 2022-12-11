@@ -1,8 +1,8 @@
+using Assets.Scripts.Village;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
 
 public class CharacterImageSlotScript : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerClickHandler
@@ -18,10 +18,9 @@ public class CharacterImageSlotScript : MonoBehaviour, IBeginDragHandler, IEndDr
     private Character character;
 
     public bool CanDrag { get => canDrag; }
-
     public Transform ParentAfterDrag { get => parentAfterDrag; set => parentAfterDrag = value; }
     public bool IsEngaged { get => isEngaged; set => isEngaged = value; }
-
+    public Character Character { get => character; set => character = value; }
 
     private bool onDrag = false; 
 
