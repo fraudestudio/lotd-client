@@ -7,8 +7,6 @@ using UnityEngine.UI;
 
 public class VillageMenuLoaderScript : MonoBehaviour
 {
-    private Universe currentUniverse;
-    public Universe CurrentUniverse { get => currentUniverse; set => currentUniverse = value; }
 
 
     public GameObject joinButton;

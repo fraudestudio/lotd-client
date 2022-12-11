@@ -92,7 +92,7 @@ public class BuildingBehaviourScript : MonoBehaviour
 
     private void StartHealerHut()
     {
-        GameObject.Find("BuildingText").transform.Find("CanvasHealerHut").GetComponent<CanvasGroup>().alpha = 0;
+        GameObject.Find("BuildingObjects").transform.Find("HealerHut").Find("CanvasHealerHut").GetComponent<CanvasGroup>().alpha = 0;
         GameObject m = GameObject.Find("BuildingMenu");
         GameObject w = GameObject.Find("HealerHutMenu");
         Init(m);
@@ -122,7 +122,7 @@ public class BuildingBehaviourScript : MonoBehaviour
 
     private void StartVillageCenter()
     {
-        GameObject.Find("BuildingText").transform.Find("CanvasVillageCenter").GetComponent<CanvasGroup>().alpha = 0;
+        GameObject.Find("BuildingObjects").transform.Find("VillageCenter").Find("CanvasVillageCenter").GetComponent<CanvasGroup>().alpha = 0;
         Init(GameObject.Find("VillageCenterMenu"));
     }
 
@@ -168,7 +168,7 @@ public class BuildingBehaviourScript : MonoBehaviour
 
     private void StartTrainingCamp()
     {
-        GameObject.Find("BuildingText").transform.Find("CanvasTrainingCamp").GetComponent<CanvasGroup>().alpha = 0;
+        GameObject.Find("BuildingObjects").transform.Find("TrainingCamp").Find("CanvasTrainingCamp").GetComponent<CanvasGroup>().alpha = 0;
         GameObject m = GameObject.Find("BuildingMenu");
         GameObject w = GameObject.Find("TrainingCampMenu");
         Init(m);
@@ -219,7 +219,7 @@ public class BuildingBehaviourScript : MonoBehaviour
 
     private void StartWarehouse()
     {
-        GameObject.Find("BuildingText").transform.Find("CanvasWarehouse").GetComponent<CanvasGroup>().alpha = 0;
+        GameObject.Find("BuildingObjects").transform.Find("Warehouse").Find("CanvasWarehouse").GetComponent<CanvasGroup>().alpha = 0;
         GameObject m = GameObject.Find("BuildingMenu");
         GameObject w = GameObject.Find("WarehouseMenu");
         Init(m);
@@ -244,7 +244,7 @@ public class BuildingBehaviourScript : MonoBehaviour
 
     private void StartGunsmith()
     {
-        GameObject.Find("BuildingText").transform.Find("CanvasGunsmith").GetComponent<CanvasGroup>().alpha = 0;
+        GameObject.Find("BuildingObjects").transform.Find("Gunsmith").Find("CanvasGunsmith").GetComponent<CanvasGroup>().alpha = 0;
         GameObject m = GameObject.Find("BuildingMenu");
         GameObject g = GameObject.Find("GunsmithMenu");
         Init(m);
@@ -300,7 +300,7 @@ public class BuildingBehaviourScript : MonoBehaviour
     /// </summary>
     private void StartMenuTavern()
     {
-        GameObject.Find("BuildingText").transform.Find("CanvasTavern").GetComponent<CanvasGroup>().alpha = 0;
+        GameObject.Find("BuildingObjects").transform.Find("Tavern").Find("CanvasTavern").GetComponent<CanvasGroup>().alpha = 0;
         GameObject m = GameObject.Find("BuildingMenu");
         GameObject t = GameObject.Find("TavernMenu");
         Init(t);
@@ -354,12 +354,12 @@ public class BuildingBehaviourScript : MonoBehaviour
         {
             switch (transform.name)
             {
-                case "Tavern": GameObject.Find("BuildingText").transform.Find("CanvasTavern").GetComponent<CanvasGroup>().alpha = 1; break;
-                case "HealerHut": GameObject.Find("BuildingText").transform.Find("CanvasHealerHut").GetComponent<CanvasGroup>().alpha = 1; break;
-                case "Gunsmith": GameObject.Find("BuildingText").transform.Find("CanvasGunsmith").GetComponent<CanvasGroup>().alpha = 1; break;
-                case "Warehouse": GameObject.Find("BuildingText").transform.Find("CanvasWarehouse").GetComponent<CanvasGroup>().alpha = 1; break;
-                case "TrainingCamp": GameObject.Find("BuildingText").transform.Find("CanvasTrainingCamp").GetComponent<CanvasGroup>().alpha = 1; break;
-                case "VillageCenter": GameObject.Find("BuildingText").transform.Find("CanvasVillageCenter").GetComponent<CanvasGroup>().alpha = 1; break;
+                case "Tavern": GameObject.Find("BuildingObjects").transform.Find("Tavern").Find("CanvasTavern").GetComponent<CanvasGroup>().alpha = 1; break;
+                case "HealerHut": GameObject.Find("BuildingObjects").transform.Find("HealerHut").Find("CanvasHealerHut").GetComponent<CanvasGroup>().alpha = 1; break;
+                case "Gunsmith": GameObject.Find("BuildingObjects").transform.Find("Gunsmith").Find("CanvasGunsmith").GetComponent<CanvasGroup>().alpha = 1; break;
+                case "Warehouse": GameObject.Find("BuildingObjects").transform.Find("Warehouse").Find("CanvasWarehouse").GetComponent<CanvasGroup>().alpha = 1; break;
+                case "TrainingCamp": GameObject.Find("BuildingObjects").transform.Find("TrainingCamp").Find("CanvasTrainingCamp").GetComponent<CanvasGroup>().alpha = 1; break;
+                case "VillageCenter": GameObject.Find("BuildingObjects").transform.Find("VillageCenter").Find("CanvasVillageCenter").GetComponent<CanvasGroup>().alpha = 1; break;
             }
         }
 
@@ -374,12 +374,12 @@ public class BuildingBehaviourScript : MonoBehaviour
         {
             switch (transform.name)
             {
-                case "Tavern": GameObject.Find("BuildingText").transform.Find("CanvasTavern").GetComponent<CanvasGroup>().alpha = 0; break;
-                case "HealerHut": GameObject.Find("BuildingText").transform.Find("CanvasHealerHut").GetComponent<CanvasGroup>().alpha = 0; break;
-                case "Gunsmith": GameObject.Find("BuildingText").transform.Find("CanvasGunsmith").GetComponent<CanvasGroup>().alpha = 0; break;
-                case "Warehouse": GameObject.Find("BuildingText").transform.Find("CanvasWarehouse").GetComponent<CanvasGroup>().alpha = 0; break;
-                case "TrainingCamp": GameObject.Find("BuildingText").transform.Find("CanvasTrainingCamp").GetComponent<CanvasGroup>().alpha = 0; break;
-                case "VillageCenter": GameObject.Find("BuildingText").transform.Find("CanvasVillageCenter").GetComponent<CanvasGroup>().alpha = 0; break;
+                case "Tavern": GameObject.Find("BuildingObjects").transform.Find("Tavern").Find("CanvasTavern").GetComponent<CanvasGroup>().alpha = 0; break;
+                case "HealerHut": GameObject.Find("BuildingObjects").transform.Find("HealerHut").Find("CanvasHealerHut").GetComponent<CanvasGroup>().alpha = 0; break;
+                case "Gunsmith": GameObject.Find("BuildingObjects").transform.Find("Gunsmith").Find("CanvasGunsmith").GetComponent<CanvasGroup>().alpha = 0; break;
+                case "Warehouse": GameObject.Find("BuildingObjects").transform.Find("Warehouse").Find("CanvasWarehouse").GetComponent<CanvasGroup>().alpha = 0; break;
+                case "TrainingCamp": GameObject.Find("BuildingObjects").transform.Find("TrainingCamp").Find("CanvasTrainingCamp").GetComponent<CanvasGroup>().alpha = 0; break;
+                case "VillageCenter": GameObject.Find("BuildingObjects").transform.Find("VillageCenter").Find("CanvasVillageCenter").GetComponent<CanvasGroup>().alpha = 0; break;
             }
         }
 

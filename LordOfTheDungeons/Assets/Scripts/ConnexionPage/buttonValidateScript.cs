@@ -14,7 +14,6 @@ public class buttonValidateScript : MonoBehaviour, IPointerClickHandler
     // Start is called before the first frame update
     void Start()
     {
-        TemporaryScript.Init();
     }
 
     // Update is called once per frame
@@ -30,7 +29,6 @@ public class buttonValidateScript : MonoBehaviour, IPointerClickHandler
             GameObject.Find("WaitingServer").GetComponent<WaitingForServerScript>().StartAnim();
             if (Server.VerifyUser(id.text, mdp.text))
             {
-                TemporaryScript.currentUser = id.text;
                 c.GetComponent<loaderScript>().Level("Menu");
             }
             else

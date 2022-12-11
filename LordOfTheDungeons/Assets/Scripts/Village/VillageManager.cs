@@ -18,13 +18,12 @@ public class VillageManager : MonoBehaviour
     private void Awake()
     {
         
-        Village v = new Village("dsqfqesf", "qsdfqsd","ezaf") ;
-        GameObject.Find("BuildingText").transform.Find("CanvasGunsmith").Find("GunsmithName").Find("GunsmithLevel").GetComponent<TMP_Text>().text = "Niveau " + Village.Gunsmith.Level;
-        GameObject.Find("BuildingText").transform.Find("CanvasTrainingCamp").Find("TrainingCampName").Find("TrainingCampLevel").GetComponent<TMP_Text>().text = "Niveau " + Village.Gunsmith.Level;
-        GameObject.Find("BuildingText").transform.Find("CanvasHealerHut").Find("HutName").Find("HutLevel").GetComponent<TMP_Text>().text = "Niveau " + Village.Gunsmith.Level;
-        GameObject.Find("BuildingText").transform.Find("CanvasTavern").Find("TavernName").Find("TavernLevel").GetComponent<TMP_Text>().text = "Niveau " + Village.Tavern.Level;
-        GameObject.Find("BuildingText").transform.Find("CanvasWarehouse").Find("WarehouseName").Find("WareHouseLevel").GetComponent<TMP_Text>().text = "Niveau " + Village.Warehouse.Level;
-        GameObject.Find("BuildingText").transform.Find("CanvasHealerHut").Find("HutName").Find("HutLevel").GetComponent<TMP_Text>().text = "Niveau " + Village.HealerHut.Level;
+        Village v = new Village("la coulante", "Hobbit",666) ;
+        GameObject.Find("BuildingObjects").transform.Find("Gunsmith").Find("CanvasGunsmith").Find("GunsmithText").GetComponent<TMP_Text>().text = "Armurier\nNiveau " + Village.Gunsmith.Level;
+        GameObject.Find("BuildingObjects").transform.Find("Tavern").Find("CanvasTavern").Find("TavernText").GetComponent<TMP_Text>().text = "Taverne\nNiveau " + Village.Tavern.Level;
+        GameObject.Find("BuildingObjects").transform.Find("HealerHut").Find("CanvasHealerHut").Find("HealerHutText").GetComponent<TMP_Text>().text = "Hutte du guérisseur\nNiveau " + Village.HealerHut.Level;
+        GameObject.Find("BuildingObjects").transform.Find("Warehouse").Find("CanvasWarehouse").Find("WarehouseText").GetComponent<TMP_Text>().text = "Entrepôt\nNiveau " + Village.Warehouse.Level;
+        GameObject.Find("BuildingObjects").transform.Find("TrainingCamp").Find("CanvasTrainingCamp").Find("TrainingCampText").GetComponent<TMP_Text>().text = "Camp d'entraînement\nNiveau " + Village.TrainingCamp.Level;
 
 
         Transform villageCenterMenu = GameObject.Find("VillageCenterMenu").transform.Find("VillageCenterObjects");

@@ -7,7 +7,7 @@ public class Village
 {
     private string name;
     private string faction;
-    private string owner;
+    private int owner;
 
     public static HealerHut HealerHut;
     public static TrainingCamp TrainingCamp;
@@ -15,7 +15,7 @@ public class Village
     public static Warehouse Warehouse;
     public static Gunsmith Gunsmith;
 
-    public Village(string villageName, string villageFaction, string villageOwner)
+    public Village(string villageName, string villageFaction, int villageOwner)
     {
         name = villageName;
         faction = villageFaction;
@@ -32,5 +32,5 @@ public class Village
 
     public string Name { get => name; set => name = value; }
     public string Faction { get => faction; set => faction = value; }
-    public string Owner { get => owner; set => owner = value; }
+    public int Owner { get => owner; set => owner = value; }
 }

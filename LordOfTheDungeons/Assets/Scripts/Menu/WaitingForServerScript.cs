@@ -11,7 +11,6 @@ public class WaitingForServerScript : MonoBehaviour
 
     private void Awake()
     {
-        TemporaryScript.currentUser = "Test";
     }
 
     void Start()
