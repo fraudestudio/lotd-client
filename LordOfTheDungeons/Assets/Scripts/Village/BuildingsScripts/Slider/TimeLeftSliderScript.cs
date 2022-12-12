@@ -9,6 +9,8 @@ using UnityEngine.UI;
 using static UnityEngine.Rendering.DebugUI;
 using static UnityEngine.UI.Slider;
 using System;
+using System.Runtime.CompilerServices;
+using System.Security;
 
 public class TimeLeftSliderScript : MonoBehaviour
 {
@@ -74,9 +76,21 @@ public class TimeLeftSliderScript : MonoBehaviour
         {
             yield return new WaitForSeconds(1f);
             timerSlider.value -= 1;
+            if (timerSlider.value == 0)
+            {
+                NotifyObserver();
+            }
         }
     }
 
+
+    private void NotifyObserver()
+    {
+        switch (name)
+        {
+            case "TimeSliderCenter": VillageManager.NotifyConstructFinished(transform.parent.name, name); break;
+        }
+    }
 
     /// <summary>
     /// Change le texte en fonction de la valeur du slider

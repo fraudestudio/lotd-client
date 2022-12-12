@@ -26,7 +26,7 @@ public static class Server
 
     private static HttpClient sharedClient = new()
     {
-        BaseAddress = new Uri("https://info-dij-sae001.iut21.u-bourgogne.fr:8443"),
+        BaseAddress = new Uri("https://info-dij-sae001.iut21.u-bourgogne.fr"),//:8443"),
     };
 
 

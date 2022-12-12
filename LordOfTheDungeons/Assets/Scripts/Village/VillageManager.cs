@@ -109,7 +109,7 @@ public class VillageManager : MonoBehaviour
 
         if (Village.Tavern.InConstruction)
         {
-           tavernButton.Find("TimeSliderCenter").gameObject.GetComponent<TimeLeftSliderScript>().Init(300, 500);
+           tavernButton.Find("TimeSliderCenter").gameObject.GetComponent<TimeLeftSliderScript>().Init(10, 500);
         }
 
 
@@ -130,7 +130,7 @@ public class VillageManager : MonoBehaviour
         #region Gunsmith
         Transform gunsmith = GameObject.Find("VillageCenterMenu").transform.Find("VillageCenterObjects").Find("GunsmithButton");
 
-        if (Village.Tavern.InConstruction)
+        if (Village.Gunsmith.InConstruction)
         {
             tavernButton.Find("TimeSliderCenter").gameObject.GetComponent<TimeLeftSliderScript>().Init(300, 500);
         }
@@ -211,6 +211,36 @@ public class VillageManager : MonoBehaviour
 
 
     #region Observeurs
+
+    public static void NotifyConstructFinished(string building,string slidername)
+    {
+        switch (building)
+        {
+            case "TavernButton":
+                {
+                    Village.Tavern.InConstruction = false;
+                    Village.Tavern.Level += 1;
+                    StopTimerConstructInMenu("Tavern");
+                }
+                break;
+        }
+    }
+
+
+    private static void StopTimerConstructInMenu(string building)
+    {
+        GameObject tavernButton = GameObject.Find("VillageCenterMenu").transform.Find("VillageCenterObjects").Find(building+"Button").gameObject;
+        tavernButton.transform.Find("NotInConstructionTitle").gameObject.SetActive(true);
+        tavernButton.transform.Find("TimeSliderCenter").gameObject.SetActive(false);
+    }
+
+
+    public static float GetConstructionTimeTavern()
+    {
+
+        return GameObject.Find("VillageCenterMenu").transform.Find("VillageCenterObjects").Find("TavernButton").Find("TimeSliderCenter").GetComponent<Slider>().value;
+
+    }
 
     public static void CharAddedTavern()
     {

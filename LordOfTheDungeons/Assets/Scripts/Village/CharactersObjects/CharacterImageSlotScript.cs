@@ -66,9 +66,11 @@ public class CharacterImageSlotScript : MonoBehaviour, IBeginDragHandler, IEndDr
     {
         if (eventData.button == PointerEventData.InputButton.Right)
         {
+            BuildingBehaviourScript.CanBeClicked = false;
             GameObject.Find("CharacterInfoMenu").GetComponent<CanvasGroup>().alpha = 1;
             GameObject.Find("CharacterInfoMenu").GetComponent<CanvasGroup>().interactable = true;
             GameObject.Find("CharacterInfoMenu").GetComponent<CanvasGroup>().blocksRaycasts = true;
+            GameObject.Find("CharacterInfoMenu").GetComponent<ChangeInfoMenuScript>().ChangeInfoMenu(character);
         }
     }
 

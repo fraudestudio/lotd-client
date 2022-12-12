@@ -91,7 +91,7 @@ public class ModifyMenuScript : MonoBehaviour
                     if (Village.Tavern.InConstruction)
                     {
                         constructionTimer.SetActive(true);
-                        constructionTimer.GetComponent<TimeLeftSliderScript>().Init(200, 300);
+                        constructionTimer.GetComponent<TimeLeftSliderScript>().Init((int)VillageManager.GetConstructionTimeTavern(), 300);
                     }
                     else
                     {
