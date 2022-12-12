@@ -382,6 +382,73 @@ public class BuildingBehaviourScript : MonoBehaviour
                 case "VillageCenter": GameObject.Find("BuildingObjects").transform.Find("VillageCenter").Find("CanvasVillageCenter").GetComponent<CanvasGroup>().alpha = 0; break;
             }
         }
+    }
 
+
+    public void RefreshBuilding(string building)
+    {
+        switch (building)
+        {
+            case "Tavern":
+                {
+                    if (Village.Tavern.Level % 2 == 0)
+                    {
+                        GameObject Slot = Instantiate(slotPreFab);
+                        Slot.GetComponent<CharacterSlotScript>().SetType(SlotType.TAVERN);
+                        Slot.transform.SetParent(GameObject.Find("TavernMenu").transform.Find("HeroesAvaiable").transform);
+                        Slot.transform.localScale = new Vector2(1, 1);
+                    }
+
+                } break;
+            case "Gunsmith":
+                {
+                    if (!GameObject.Find("GunsmithMenu").transform.Find("CharacterSlot").GetComponent<CharacterSlotScript>().SlotIsEmpty)
+                    {
+                        // do things...
+                    }
+                }
+                break;
+            case "Warehouse":
+                {
+                    GameObject.Find("WarehouseMenu").transform.Find("Icon&Capacity").Find("IronIcon").Find("MaxIronCapacity").GetComponent<TMP_Text>().text = (Village.Warehouse.BaseMaxIron * Village.Warehouse.Level).ToString();
+                    GameObject.Find("WarehouseMenu").transform.Find("Icon&Capacity").Find("WoodIcon").Find("MaxWoodCapacity").GetComponent<TMP_Text>().text = (Village.Warehouse.BaseMaxWood * Village.Warehouse.Level).ToString();
+                    GameObject.Find("WarehouseMenu").transform.Find("Icon&Capacity").Find("StoneIcon").Find("MaxStoneCapacity").GetComponent<TMP_Text>().text = (Village.Warehouse.BaseMaxStone * Village.Warehouse.Level).ToString();
+
+                    GameObject.Find("ATHVillage").transform.Find("Background").Find("IronSlider").GetComponent<Slider>().maxValue = Village.Warehouse.BaseMaxIron * Village.Warehouse.Level;
+                    GameObject.Find("ATHVillage").transform.Find("Background").Find("WoodSlider").GetComponent<Slider>().maxValue = Village.Warehouse.BaseMaxWood * Village.Warehouse.Level;
+                    GameObject.Find("ATHVillage").transform.Find("Background").Find("StoneSlider").GetComponent<Slider>().maxValue = Village.Warehouse.BaseMaxStone * Village.Warehouse.Level;
+                }
+                break;
+            case "TrainingCamp":
+                {
+                    if (Village.TrainingCamp.Level % 2 == 0)
+                    {
+                        GameObject Slot = Instantiate(slotPreFab);
+
+                        if (Village.TrainingCamp.InFormation)
+                        {
+                            Slot.GetComponent<CharacterSlotScript>().CanDrop = false;
+                            CharacterSlotNotAllowedScript.AddSlot(Slot);
+                        }
+
+                        Slot.GetComponent<CharacterSlotScript>().SetType(SlotType.TRAINEE);
+                        Slot.transform.SetParent(GameObject.Find("TrainingCampMenu").transform.Find("TraineeTitle").Find("TraineesLayout"));
+                        Slot.transform.localScale = new Vector2(1, 1);
+                    }
+                }
+                break;
+            case "HealerHut":
+                {
+                    if (Village.HealerHut.Level % 2 == 0)
+                    {
+                        GameObject Slot = Instantiate(slotPreFab);
+                        Slot.transform.Find("CharacterSlot").GetComponent<CharacterSlotScript>().SetType(SlotType.HEALER);
+                        Slot.transform.SetParent(GameObject.Find("HealerHutMenu").transform.Find("SlotsHealer").transform);
+                        Slot.transform.localScale = new Vector2(1, 1);
+                    }
+
+                }
+                break;
+        }
     }
 }

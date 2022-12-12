@@ -88,7 +88,7 @@ public class TimeLeftSliderScript : MonoBehaviour
     {
         switch (name)
         {
-            case "TimeSliderCenter": VillageManager.NotifyConstructFinished(transform.parent.name, name); break;
+            case "TimeSliderCenter": VillageManager.NotifyConstructFinished(transform.parent.name); break;
         }
     }
 
