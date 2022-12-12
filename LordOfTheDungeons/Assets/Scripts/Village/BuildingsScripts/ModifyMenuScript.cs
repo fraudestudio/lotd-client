@@ -91,7 +91,7 @@ public class ModifyMenuScript : MonoBehaviour
                     if (Village.Tavern.InConstruction)
                     {
                         constructionTimer.SetActive(true);
-                        constructionTimer.GetComponent<TimeLeftSliderScript>().Init(VillageManager.GetConstructionTime("Tavern"), 300);
+                        constructionTimer.GetComponent<TimeLeftSliderScript>().Init(VillageManager.GetConstructionTime("Tavern"), 86400);
                     }
                     else
                     {
@@ -126,7 +126,7 @@ public class ModifyMenuScript : MonoBehaviour
                     if (Village.Gunsmith.InConstruction)
                     {
                         constructionTimer.SetActive(true);
-                        constructionTimer.GetComponent<TimeLeftSliderScript>().Init(VillageManager.GetConstructionTime("Gunsmith"), 300);
+                        constructionTimer.GetComponent<TimeLeftSliderScript>().Init(VillageManager.GetConstructionTime("Gunsmith"), 86400);
                     }
                     else
                     {
@@ -161,7 +161,7 @@ public class ModifyMenuScript : MonoBehaviour
                     if (Village.Warehouse.InConstruction)
                     {
                         constructionTimer.SetActive(true);
-                        constructionTimer.GetComponent<TimeLeftSliderScript>().Init(VillageManager.GetConstructionTime("Warehouse"), 300);
+                        constructionTimer.GetComponent<TimeLeftSliderScript>().Init(VillageManager.GetConstructionTime("Warehouse"), 86400);
                     }
                     else
                     {
@@ -195,7 +195,7 @@ public class ModifyMenuScript : MonoBehaviour
                     if (Village.TrainingCamp.InConstruction)
                     {
                         constructionTimer.SetActive(true);
-                        constructionTimer.GetComponent<TimeLeftSliderScript>().Init(VillageManager.GetConstructionTime("TrainingCamp"), 300);
+                        constructionTimer.GetComponent<TimeLeftSliderScript>().Init(VillageManager.GetConstructionTime("TrainingCamp"), 86400);
                     }
                     else
                     {
@@ -230,7 +230,7 @@ public class ModifyMenuScript : MonoBehaviour
                     if (Village.HealerHut.InConstruction)
                     {
                         constructionTimer.SetActive(true);
-                        constructionTimer.GetComponent<TimeLeftSliderScript>().Init(VillageManager.GetConstructionTime("HealerHut"), 300);
+                        constructionTimer.GetComponent<TimeLeftSliderScript>().Init(VillageManager.GetConstructionTime("HealerHut"), 86400);
                     }
                     else
                     {
@@ -257,6 +257,13 @@ public class ModifyMenuScript : MonoBehaviour
                             UpgradeButton.transform.Find("WoodCountLogo").transform.Find("WoodCount").GetComponent<TMP_Text>().text = (Village.Tavern.BaseWoodNeeded * (Village.Tavern.WoodModification * Village.Tavern.Level)).ToString();
                             UpgradeButton.transform.Find("StoneCountLogo").transform.Find("StoneCount").GetComponent<TMP_Text>().text = (Village.Tavern.BaseStoneNeeded * (Village.Tavern.StoneModification * Village.Tavern.Level)).ToString();
                             UpgradeButton.transform.Find("IronCountLogo").transform.Find("IronCount").GetComponent<TMP_Text>().text = (Village.Tavern.BaseIronNeeded * (Village.Tavern.IronModification * Village.Tavern.Level)).ToString();
+                        }
+
+                        if (Village.Tavern.InConstruction)
+                        {
+                            constructionTimer.SetActive(true);
+                            constructionTimer.GetComponent<TimeLeftSliderScript>().Init(VillageManager.GetConstructionTime("Tavern"), 86400);
+                            SetActiveUpgrade(false);
                         }
                     }
 
@@ -319,6 +326,12 @@ public class ModifyMenuScript : MonoBehaviour
                 }
                 break;
         }
+    }
+
+
+    public bool CanBuy(string building)
+    {
+        return true;
     }
 
     private void SetActiveUpgrade(bool active)

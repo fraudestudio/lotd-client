@@ -19,6 +19,10 @@ public class VillageManager : MonoBehaviour
     {
         
         Village v = new Village("la coulante", "Hobbit",666) ;
+
+
+
+
         GameObject.Find("BuildingObjects").transform.Find("Gunsmith").Find("CanvasGunsmith").Find("GunsmithText").GetComponent<TMP_Text>().text = "Armurier\nNiveau " + Village.Gunsmith.Level;
         GameObject.Find("BuildingObjects").transform.Find("Tavern").Find("CanvasTavern").Find("TavernText").GetComponent<TMP_Text>().text = "Taverne\nNiveau " + Village.Tavern.Level;
         GameObject.Find("BuildingObjects").transform.Find("HealerHut").Find("CanvasHealerHut").Find("HealerHutText").GetComponent<TMP_Text>().text = "Hutte du guérisseur\nNiveau " + Village.HealerHut.Level;
@@ -109,7 +113,7 @@ public class VillageManager : MonoBehaviour
 
         if (Village.Tavern.InConstruction)
         {
-           tavernButton.Find("TimeSliderCenter").gameObject.GetComponent<TimeLeftSliderScript>().Init(10, 500);
+           tavernButton.Find("TimeSliderCenter").gameObject.GetComponent<TimeLeftSliderScript>().Init(10, 86400);
         }
 
 
@@ -132,7 +136,7 @@ public class VillageManager : MonoBehaviour
 
         if (Village.Gunsmith.InConstruction)
         {
-            gunsmith.Find("TimeSliderCenter").gameObject.GetComponent<TimeLeftSliderScript>().Init(10, 500);
+            gunsmith.Find("TimeSliderCenter").gameObject.GetComponent<TimeLeftSliderScript>().Init(10, 86400);
         }
 
 
@@ -150,7 +154,7 @@ public class VillageManager : MonoBehaviour
 
         if (Village.Warehouse.InConstruction)
         {
-            warehouse.Find("TimeSliderCenter").gameObject.GetComponent<TimeLeftSliderScript>().Init(10, 500);
+            warehouse.Find("TimeSliderCenter").gameObject.GetComponent<TimeLeftSliderScript>().Init(10, 86400);
         }
 
         #endregion
@@ -159,7 +163,7 @@ public class VillageManager : MonoBehaviour
 
         if (Village.TrainingCamp.InConstruction)
         {
-            trainingCamp.Find("TimeSliderCenter").gameObject.GetComponent<TimeLeftSliderScript>().Init(30, 500);
+            trainingCamp.Find("TimeSliderCenter").gameObject.GetComponent<TimeLeftSliderScript>().Init(30, 86400);
         }
 
 
@@ -190,7 +194,7 @@ public class VillageManager : MonoBehaviour
 
         if (Village.HealerHut.InConstruction)
         {
-            healerHut.Find("TimeSliderCenter").gameObject.GetComponent<TimeLeftSliderScript>().Init(20, 500);
+            healerHut.Find("TimeSliderCenter").gameObject.GetComponent<TimeLeftSliderScript>().Init(20, 86400);
         }
 
 
@@ -220,6 +224,24 @@ public class VillageManager : MonoBehaviour
 
 
     #region Observeurs
+
+
+    public static void NotifyConstructStarted(string building)
+    {
+        switch (building)
+        {
+            case "Tavern":
+                {
+                    Village.Tavern.InConstruction = true;
+
+                    GameObject.Find("VillageCenterMenu").transform.Find("VillageCenterObjects").Find("TavernButton").transform.Find("NotInConstructionTitle").gameObject.SetActive(false);
+                    GameObject.Find("VillageCenterMenu").transform.Find("VillageCenterObjects").Find("TavernButton").transform.Find("TimeSliderCenter").gameObject.SetActive(true);
+                    GameObject.Find("VillageCenterMenu").transform.Find("VillageCenterObjects").Find("TavernButton").transform.Find("TimeSliderCenter").GetComponent<TimeLeftSliderScript>().Init(86400, 86400);
+                    GameObject.Find("BuildingMenu").GetComponent<ModifyMenuScript>().RefreshMenu("Tavern");
+                }    
+                break;
+        }
+    }
 
     public static void NotifyConstructFinished(string building)
     {
