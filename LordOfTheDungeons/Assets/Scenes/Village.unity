@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 69394217}
   - component: {fileID: 69394216}
   m_Layer: 5
-  m_Name: IronCount
+  m_Name: GoldCount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4711,9 +4711,17 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8073532068455283742, guid: 04b08d86ba4a6b044b7cc9be261177de, type: 3}
+      propertyPath: m_Name
+      value: GoldIcon
+      objectReference: {fileID: 0}
     - target: {fileID: 8157853638610187070, guid: 04b08d86ba4a6b044b7cc9be261177de, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 27.624512
+      objectReference: {fileID: 0}
+    - target: {fileID: 8243992168055650810, guid: 04b08d86ba4a6b044b7cc9be261177de, type: 3}
+      propertyPath: m_Name
+      value: MaxGoldCapacity
       objectReference: {fileID: 0}
     - target: {fileID: 8643089154556953018, guid: 04b08d86ba4a6b044b7cc9be261177de, type: 3}
       propertyPath: m_Name

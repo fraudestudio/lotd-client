@@ -2,6 +2,7 @@ using Assets.Scripts.Village;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -229,6 +230,11 @@ public class VillageManager : MonoBehaviour
 
     #region Observeurs
 
+
+    public static void NotifyTrainingFinished()
+    {
+
+    }
     public static void NotifyNewArrival()
     {
 
