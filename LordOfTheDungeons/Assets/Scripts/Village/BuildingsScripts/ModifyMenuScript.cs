@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -78,8 +79,9 @@ public class ModifyMenuScript : MonoBehaviour
                         SetActiveUpgrade(true);
                         UpgradeButton.transform.Find("WoodCountLogo").transform.Find("WoodCount").GetComponent<TMP_Text>().text = (Village.Tavern.BaseWoodNeeded * (Village.Tavern.WoodModification * Village.Tavern.Level)).ToString();
                         UpgradeButton.transform.Find("StoneCountLogo").transform.Find("StoneCount").GetComponent<TMP_Text>().text = (Village.Tavern.BaseStoneNeeded * (Village.Tavern.StoneModification * Village.Tavern.Level)).ToString();
-                        UpgradeButton.transform.Find("IronCountLogo").transform.Find("IronCount").GetComponent<TMP_Text>().text = (Village.Tavern.BaseIronNeeded * (Village.Tavern.IronModification * Village.Tavern.Level)).ToString();
+                        UpgradeButton.transform.Find("GoldCountLogo").transform.Find("GoldCount").GetComponent<TMP_Text>().text = (Village.Tavern.BaseGoldNeeded * (Village.Tavern.GoldModification * Village.Tavern.Level)).ToString();
 
+                        InteractableTest();
                     }
                     else
                     {
@@ -113,7 +115,8 @@ public class ModifyMenuScript : MonoBehaviour
                         SetActiveUpgrade(true);
                         UpgradeButton.transform.Find("WoodCountLogo").transform.Find("WoodCount").GetComponent<TMP_Text>().text = (Village.Gunsmith.BaseWoodNeeded * (Village.Gunsmith.WoodModification * Village.Gunsmith.Level)).ToString();
                         UpgradeButton.transform.Find("StoneCountLogo").transform.Find("StoneCount").GetComponent<TMP_Text>().text = (Village.Gunsmith.BaseStoneNeeded * (Village.Gunsmith.StoneModification * Village.Gunsmith.Level)).ToString();
-                        UpgradeButton.transform.Find("IronCountLogo").transform.Find("IronCount").GetComponent<TMP_Text>().text = (Village.Gunsmith.BaseIronNeeded * (Village.Gunsmith.IronModification * Village.Gunsmith.Level)).ToString();
+                        UpgradeButton.transform.Find("GoldCountLogo").transform.Find("GoldCount").GetComponent<TMP_Text>().text = (Village.Gunsmith.BaseGoldNeeded * (Village.Gunsmith.GoldModification * Village.Gunsmith.Level)).ToString();
+                        InteractableTest();
 
                     }
                     else
@@ -148,8 +151,9 @@ public class ModifyMenuScript : MonoBehaviour
                         SetActiveUpgrade(true);
                         UpgradeButton.transform.Find("WoodCountLogo").transform.Find("WoodCount").GetComponent<TMP_Text>().text = (Village.Warehouse.BaseWoodNeeded * (Village.Warehouse.WoodModification * Village.Warehouse.Level)).ToString();
                         UpgradeButton.transform.Find("StoneCountLogo").transform.Find("StoneCount").GetComponent<TMP_Text>().text = (Village.Warehouse.BaseStoneNeeded * (Village.Warehouse.StoneModification * Village.Warehouse.Level)).ToString();
-                        UpgradeButton.transform.Find("IronCountLogo").transform.Find("IronCount").GetComponent<TMP_Text>().text = (Village.Warehouse.BaseIronNeeded * (Village.Warehouse.IronModification * Village.Warehouse.Level)).ToString();
+                        UpgradeButton.transform.Find("GoldCountLogo").transform.Find("GoldCount").GetComponent<TMP_Text>().text = (Village.Warehouse.BaseGoldNeeded * (Village.Warehouse.GoldModification * Village.Warehouse.Level)).ToString();
 
+                        InteractableTest();
                     }
                     else
                     {
@@ -182,8 +186,9 @@ public class ModifyMenuScript : MonoBehaviour
                         SetActiveUpgrade(true);
                         UpgradeButton.transform.Find("WoodCountLogo").transform.Find("WoodCount").GetComponent<TMP_Text>().text = (Village.TrainingCamp.BaseWoodNeeded * (Village.TrainingCamp.WoodModification * Village.TrainingCamp.Level)).ToString();
                         UpgradeButton.transform.Find("StoneCountLogo").transform.Find("StoneCount").GetComponent<TMP_Text>().text = (Village.TrainingCamp.BaseStoneNeeded * (Village.TrainingCamp.StoneModification * Village.TrainingCamp.Level)).ToString();
-                        UpgradeButton.transform.Find("IronCountLogo").transform.Find("IronCount").GetComponent<TMP_Text>().text = (Village.TrainingCamp.BaseIronNeeded * (Village.TrainingCamp.IronModification * Village.Warehouse.Level)).ToString();
+                        UpgradeButton.transform.Find("GoldCountLogo").transform.Find("GoldCount").GetComponent<TMP_Text>().text = (Village.TrainingCamp.BaseGoldNeeded * (Village.TrainingCamp.GoldModification * Village.TrainingCamp.Level)).ToString();
 
+                        InteractableTest();
                     }
                     else
                     {
@@ -217,8 +222,9 @@ public class ModifyMenuScript : MonoBehaviour
                         SetActiveUpgrade(true);
                         UpgradeButton.transform.Find("WoodCountLogo").transform.Find("WoodCount").GetComponent<TMP_Text>().text = (Village.TrainingCamp.BaseWoodNeeded * (Village.TrainingCamp.WoodModification * Village.TrainingCamp.Level)).ToString();
                         UpgradeButton.transform.Find("StoneCountLogo").transform.Find("StoneCount").GetComponent<TMP_Text>().text = (Village.TrainingCamp.BaseStoneNeeded * (Village.TrainingCamp.StoneModification * Village.TrainingCamp.Level)).ToString();
-                        UpgradeButton.transform.Find("IronCountLogo").transform.Find("IronCount").GetComponent<TMP_Text>().text = (Village.TrainingCamp.BaseIronNeeded * (Village.TrainingCamp.IronModification * Village.Warehouse.Level)).ToString();
+                        UpgradeButton.transform.Find("GoldCountLogo").transform.Find("GoldCount").GetComponent<TMP_Text>().text = (Village.TrainingCamp.BaseGoldNeeded * (Village.TrainingCamp.GoldModification * Village.Warehouse.Level)).ToString();
 
+                        InteractableTest();
                     }
                     else
                     {
@@ -256,7 +262,8 @@ public class ModifyMenuScript : MonoBehaviour
                             SetActiveUpgrade(true);
                             UpgradeButton.transform.Find("WoodCountLogo").transform.Find("WoodCount").GetComponent<TMP_Text>().text = (Village.Tavern.BaseWoodNeeded * (Village.Tavern.WoodModification * Village.Tavern.Level)).ToString();
                             UpgradeButton.transform.Find("StoneCountLogo").transform.Find("StoneCount").GetComponent<TMP_Text>().text = (Village.Tavern.BaseStoneNeeded * (Village.Tavern.StoneModification * Village.Tavern.Level)).ToString();
-                            UpgradeButton.transform.Find("IronCountLogo").transform.Find("IronCount").GetComponent<TMP_Text>().text = (Village.Tavern.BaseIronNeeded * (Village.Tavern.IronModification * Village.Tavern.Level)).ToString();
+                            UpgradeButton.transform.Find("GoldCountLogo").transform.Find("GoldCount").GetComponent<TMP_Text>().text = (Village.Tavern.BaseGoldNeeded * (Village.Tavern.GoldModification * Village.Tavern.Level)).ToString();
+                            InteractableTest();
                         }
 
                         if (Village.Tavern.InConstruction)
@@ -278,7 +285,16 @@ public class ModifyMenuScript : MonoBehaviour
                             SetActiveUpgrade(true);
                             UpgradeButton.transform.Find("WoodCountLogo").transform.Find("WoodCount").GetComponent<TMP_Text>().text = (Village.Gunsmith.BaseWoodNeeded * (Village.Gunsmith.WoodModification * Village.Gunsmith.Level)).ToString();
                             UpgradeButton.transform.Find("StoneCountLogo").transform.Find("StoneCount").GetComponent<TMP_Text>().text = (Village.Gunsmith.BaseStoneNeeded * (Village.Gunsmith.StoneModification * Village.Gunsmith.Level)).ToString();
-                            UpgradeButton.transform.Find("IronCountLogo").transform.Find("IronCount").GetComponent<TMP_Text>().text = (Village.Gunsmith.BaseIronNeeded * (Village.Gunsmith.IronModification * Village.Gunsmith.Level)).ToString();
+                            UpgradeButton.transform.Find("GoldCountLogo").transform.Find("GoldCount").GetComponent<TMP_Text>().text = (Village.Gunsmith.BaseGoldNeeded * (Village.Gunsmith.GoldModification * Village.Gunsmith.Level)).ToString();
+                            InteractableTest();
+                        }
+
+
+                        if (Village.Gunsmith.InConstruction)
+                        {
+                            constructionTimer.SetActive(true);
+                            constructionTimer.GetComponent<TimeLeftSliderScript>().Init(VillageManager.GetConstructionTime("Gunsmith"), 86400);
+                            SetActiveUpgrade(false);
                         }
                     }
                 }
@@ -292,7 +308,16 @@ public class ModifyMenuScript : MonoBehaviour
                             SetActiveUpgrade(true);
                             UpgradeButton.transform.Find("WoodCountLogo").transform.Find("WoodCount").GetComponent<TMP_Text>().text = (Village.Warehouse.BaseWoodNeeded * (Village.Warehouse.WoodModification * Village.Warehouse.Level)).ToString();
                             UpgradeButton.transform.Find("StoneCountLogo").transform.Find("StoneCount").GetComponent<TMP_Text>().text = (Village.Warehouse.BaseStoneNeeded * (Village.Warehouse.StoneModification * Village.Warehouse.Level)).ToString();
-                            UpgradeButton.transform.Find("IronCountLogo").transform.Find("IronCount").GetComponent<TMP_Text>().text = (Village.Warehouse.BaseIronNeeded * (Village.Warehouse.IronModification * Village.Warehouse.Level)).ToString();
+                            UpgradeButton.transform.Find("GoldCountLogo").transform.Find("GoldCount").GetComponent<TMP_Text>().text = (Village.Warehouse.BaseGoldNeeded * (Village.Warehouse.GoldModification * Village.Warehouse.Level)).ToString();
+                            InteractableTest();
+
+                        }
+
+                        if (Village.Warehouse.InConstruction)
+                        {
+                            constructionTimer.SetActive(true);
+                            constructionTimer.GetComponent<TimeLeftSliderScript>().Init(VillageManager.GetConstructionTime("Warehouse"), 86400);
+                            SetActiveUpgrade(false);
                         }
                     }
                 }
@@ -306,7 +331,15 @@ public class ModifyMenuScript : MonoBehaviour
                             SetActiveUpgrade(true);
                             UpgradeButton.transform.Find("WoodCountLogo").transform.Find("WoodCount").GetComponent<TMP_Text>().text = (Village.TrainingCamp.BaseWoodNeeded * (Village.TrainingCamp.WoodModification * Village.TrainingCamp.Level)).ToString();
                             UpgradeButton.transform.Find("StoneCountLogo").transform.Find("StoneCount").GetComponent<TMP_Text>().text = (Village.TrainingCamp.BaseStoneNeeded * (Village.TrainingCamp.StoneModification * Village.TrainingCamp.Level)).ToString();
-                            UpgradeButton.transform.Find("IronCountLogo").transform.Find("IronCount").GetComponent<TMP_Text>().text = (Village.TrainingCamp.BaseIronNeeded * (Village.TrainingCamp.IronModification * Village.TrainingCamp.Level)).ToString();
+                            UpgradeButton.transform.Find("GoldCountLogo").transform.Find("GoldCount").GetComponent<TMP_Text>().text = (Village.TrainingCamp.BaseGoldNeeded * (Village.TrainingCamp.GoldModification * Village.TrainingCamp.Level)).ToString();
+                            InteractableTest();
+                        }
+
+                        if (Village.TrainingCamp.InConstruction)
+                        {
+                            constructionTimer.SetActive(true);
+                            constructionTimer.GetComponent<TimeLeftSliderScript>().Init(VillageManager.GetConstructionTime("TrainingCamp"), 86400);
+                            SetActiveUpgrade(false);
                         }
                     }
                 }
@@ -320,7 +353,16 @@ public class ModifyMenuScript : MonoBehaviour
                             SetActiveUpgrade(true);
                             UpgradeButton.transform.Find("WoodCountLogo").transform.Find("WoodCount").GetComponent<TMP_Text>().text = (Village.HealerHut.BaseWoodNeeded * (Village.HealerHut.WoodModification * Village.HealerHut.Level)).ToString();
                             UpgradeButton.transform.Find("StoneCountLogo").transform.Find("StoneCount").GetComponent<TMP_Text>().text = (Village.HealerHut.BaseStoneNeeded * (Village.HealerHut.StoneModification * Village.HealerHut.Level)).ToString();
-                            UpgradeButton.transform.Find("IronCountLogo").transform.Find("IronCount").GetComponent<TMP_Text>().text = (Village.HealerHut.BaseIronNeeded * (Village.HealerHut.IronModification * Village.HealerHut.Level)).ToString();
+                            UpgradeButton.transform.Find("GoldCountLogo").transform.Find("GoldCount").GetComponent<TMP_Text>().text = (Village.HealerHut.BaseGoldNeeded * (Village.HealerHut.GoldModification * Village.HealerHut.Level)).ToString();
+                            InteractableTest();
+
+                        }
+
+                        if (Village.HealerHut.InConstruction)
+                        {
+                            constructionTimer.SetActive(true);
+                            constructionTimer.GetComponent<TimeLeftSliderScript>().Init(VillageManager.GetConstructionTime("HealerHut"), 86400);
+                            SetActiveUpgrade(false);
                         }
                     }
                 }
@@ -329,19 +371,69 @@ public class ModifyMenuScript : MonoBehaviour
     }
 
 
-    public bool CanBuy(string building)
+    public bool CanBuy()
     {
-        return true;
+        bool result = false;
+
+        int currentGold = GameObject.Find("ATHVillage").transform.Find("Background").Find("GoldSlider").GetComponent<MaterialSliderScript>().GetValue();
+        int currentWood = GameObject.Find("ATHVillage").transform.Find("Background").Find("WoodSlider").GetComponent<MaterialSliderScript>().GetValue();
+        int currentStone = GameObject.Find("ATHVillage").transform.Find("Background").Find("StoneSlider").GetComponent<MaterialSliderScript>().GetValue();
+
+        int neededWood = int.Parse(UpgradeButton.transform.Find("WoodCountLogo").transform.Find("WoodCount").GetComponent<TMP_Text>().text);
+        int neededGold = int.Parse(UpgradeButton.transform.Find("GoldCountLogo").transform.Find("GoldCount").GetComponent<TMP_Text>().text);
+        int neededStone = int.Parse(UpgradeButton.transform.Find("StoneCountLogo").transform.Find("StoneCount").GetComponent<TMP_Text>().text);
+
+        if (currentGold >= neededGold &&  currentWood >= neededWood &&  currentStone >= neededStone)
+        {
+            result = true;
+        }
+
+
+        return result;
     }
+
+    public int GetWoodBuyValue()
+    {
+        return int.Parse(UpgradeButton.transform.Find("WoodCountLogo").transform.Find("WoodCount").GetComponent<TMP_Text>().text);
+    }
+
+    public int GetGoldBuyValue()
+    {
+        return int.Parse(UpgradeButton.transform.Find("GoldCountLogo").transform.Find("GoldCount").GetComponent<TMP_Text>().text);
+    }
+
+    public int GetStoneBuyValue()
+    {
+        return int.Parse(UpgradeButton.transform.Find("StoneCountLogo").transform.Find("StoneCount").GetComponent<TMP_Text>().text);
+    }
+
 
     private void SetActiveUpgrade(bool active)
     {
         UpgradeButton.gameObject.SetActive(active);
         UpgradeButton.transform.Find("WoodCountLogo").transform.Find("WoodCount").gameObject.SetActive(active);
         UpgradeButton.transform.Find("StoneCountLogo").transform.Find("StoneCount").gameObject.SetActive(active);
-        UpgradeButton.transform.Find("IronCountLogo").transform.Find("IronCount").gameObject.SetActive(active);
+        UpgradeButton.transform.Find("GoldCountLogo").transform.Find("GoldCount").gameObject.SetActive(active);
         UpgradeButton.transform.Find("WoodCountLogo").gameObject.SetActive(active);
         UpgradeButton.transform.Find("StoneCountLogo").gameObject.SetActive(active);
-        UpgradeButton.transform.Find("IronCountLogo").gameObject.SetActive(active);
+        UpgradeButton.transform.Find("GoldCountLogo").gameObject.SetActive(active);
+    }
+
+
+    private void InteractableTest()
+    {
+        if (CanBuy())
+        {
+            SetInteractableUpgrade(true);
+        }
+        else
+        {
+            SetInteractableUpgrade(false);
+        }
+    }
+
+    private void SetInteractableUpgrade(bool interactable)
+    {
+        UpgradeButton.GetComponent<Button>().interactable = interactable;
     }
 }

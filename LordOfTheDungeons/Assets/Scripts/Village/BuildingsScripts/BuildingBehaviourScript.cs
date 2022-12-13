@@ -208,13 +208,19 @@ public class BuildingBehaviourScript : MonoBehaviour
     #region Warehouse
     private void InitWarehouse()
     {
-        GameObject.Find("WarehouseMenu").transform.Find("Icon&Capacity").Find("IronIcon").Find("MaxIronCapacity").GetComponent<TMP_Text>().text = (Village.Warehouse.BaseMaxIron * Village.Warehouse.Level).ToString();
+        GameObject.Find("WarehouseMenu").transform.Find("Icon&Capacity").Find("GoldIcon").Find("MaxGoldCapacity").GetComponent<TMP_Text>().text = (Village.Warehouse.BaseMaxIron * Village.Warehouse.Level).ToString();
         GameObject.Find("WarehouseMenu").transform.Find("Icon&Capacity").Find("WoodIcon").Find("MaxWoodCapacity").GetComponent<TMP_Text>().text = (Village.Warehouse.BaseMaxWood * Village.Warehouse.Level).ToString();
         GameObject.Find("WarehouseMenu").transform.Find("Icon&Capacity").Find("StoneIcon").Find("MaxStoneCapacity").GetComponent<TMP_Text>().text = (Village.Warehouse.BaseMaxStone * Village.Warehouse.Level).ToString();
 
-        GameObject.Find("ATHVillage").transform.Find("Background").Find("IronSlider").GetComponent<Slider>().maxValue = Village.Warehouse.BaseMaxIron * Village.Warehouse.Level;
-        GameObject.Find("ATHVillage").transform.Find("Background").Find("WoodSlider").GetComponent<Slider>().maxValue = Village.Warehouse.BaseMaxWood * Village.Warehouse.Level;
-        GameObject.Find("ATHVillage").transform.Find("Background").Find("StoneSlider").GetComponent<Slider>().maxValue = Village.Warehouse.BaseMaxStone * Village.Warehouse.Level;
+        GameObject.Find("ATHVillage").transform.Find("Background").Find("GoldSlider").GetComponent<MaterialSliderScript>().ChangeMax(Village.Warehouse.BaseMaxIron * Village.Warehouse.Level);
+        GameObject.Find("ATHVillage").transform.Find("Background").Find("WoodSlider").GetComponent<MaterialSliderScript>().ChangeMax(Village.Warehouse.BaseMaxWood * Village.Warehouse.Level);
+        GameObject.Find("ATHVillage").transform.Find("Background").Find("StoneSlider").GetComponent<MaterialSliderScript>().ChangeMax(Village.Warehouse.BaseMaxStone * Village.Warehouse.Level);
+
+
+        GameObject.Find("ATHVillage").transform.Find("Background").Find("GoldSlider").GetComponent<MaterialSliderScript>().SetValue(Village.Warehouse.BaseMaxIron * Village.Warehouse.Level);
+        GameObject.Find("ATHVillage").transform.Find("Background").Find("WoodSlider").GetComponent<MaterialSliderScript>().SetValue(Village.Warehouse.BaseMaxWood * Village.Warehouse.Level);
+        GameObject.Find("ATHVillage").transform.Find("Background").Find("StoneSlider").GetComponent<MaterialSliderScript>().SetValue(Village.Warehouse.BaseMaxStone * Village.Warehouse.Level);
+
     }
 
     private void StartWarehouse()
@@ -410,13 +416,13 @@ public class BuildingBehaviourScript : MonoBehaviour
                 break;
             case "Warehouse":
                 {
-                    GameObject.Find("WarehouseMenu").transform.Find("Icon&Capacity").Find("IronIcon").Find("MaxIronCapacity").GetComponent<TMP_Text>().text = (Village.Warehouse.BaseMaxIron * Village.Warehouse.Level).ToString();
+                    GameObject.Find("WarehouseMenu").transform.Find("Icon&Capacity").Find("GoldIcon").Find("MaxGoldCapacity").GetComponent<TMP_Text>().text = (Village.Warehouse.BaseMaxIron * Village.Warehouse.Level).ToString();
                     GameObject.Find("WarehouseMenu").transform.Find("Icon&Capacity").Find("WoodIcon").Find("MaxWoodCapacity").GetComponent<TMP_Text>().text = (Village.Warehouse.BaseMaxWood * Village.Warehouse.Level).ToString();
                     GameObject.Find("WarehouseMenu").transform.Find("Icon&Capacity").Find("StoneIcon").Find("MaxStoneCapacity").GetComponent<TMP_Text>().text = (Village.Warehouse.BaseMaxStone * Village.Warehouse.Level).ToString();
 
-                    GameObject.Find("ATHVillage").transform.Find("Background").Find("IronSlider").GetComponent<Slider>().maxValue = Village.Warehouse.BaseMaxIron * Village.Warehouse.Level;
-                    GameObject.Find("ATHVillage").transform.Find("Background").Find("WoodSlider").GetComponent<Slider>().maxValue = Village.Warehouse.BaseMaxWood * Village.Warehouse.Level;
-                    GameObject.Find("ATHVillage").transform.Find("Background").Find("StoneSlider").GetComponent<Slider>().maxValue = Village.Warehouse.BaseMaxStone * Village.Warehouse.Level;
+                    GameObject.Find("ATHVillage").transform.Find("Background").Find("GoldSlider").GetComponent<MaterialSliderScript>().ChangeMax(Village.Warehouse.BaseMaxIron * Village.Warehouse.Level);
+                    GameObject.Find("ATHVillage").transform.Find("Background").Find("WoodSlider").GetComponent<MaterialSliderScript>().ChangeMax(Village.Warehouse.BaseMaxWood * Village.Warehouse.Level);
+                    GameObject.Find("ATHVillage").transform.Find("Background").Find("StoneSlider").GetComponent<MaterialSliderScript>().ChangeMax(Village.Warehouse.BaseMaxStone * Village.Warehouse.Level);
                 }
                 break;
             case "TrainingCamp":

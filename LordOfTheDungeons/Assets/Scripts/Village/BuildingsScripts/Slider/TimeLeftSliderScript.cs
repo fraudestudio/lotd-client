@@ -89,6 +89,7 @@ public class TimeLeftSliderScript : MonoBehaviour
         switch (name)
         {
             case "TimeSliderCenter": VillageManager.NotifyConstructFinished(transform.parent.name); break;
+            case "TimeSliderTavern": GameObject.Find("BuildingObjects").transform.Find("Tavern").GetComponent<BuildingBehaviourScript>(); break;
         }
     }
 

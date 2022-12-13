@@ -24,7 +24,7 @@ public class Village
         // Ici requête BDD pour la taverne
         Tavern = new Tavern(1, 5, 4, 1, 20, 30, 4, false, 300);
         Gunsmith = new Gunsmith(1, 4, 6, 4,10,10,30, false);
-        Warehouse = new Warehouse(1,1,1,5,20,20,20,false,300,300,300);
+        Warehouse = new Warehouse(1,1,1,5,20,20,20,true,300,300,300);
         TrainingCamp = new TrainingCamp(1, 3, 5, 20, 10, 20, 30, false, false, 0);
         HealerHut = new HealerHut(1,2,8,5,5,10,20, false);
 

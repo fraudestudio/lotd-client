@@ -13,15 +13,15 @@ namespace Assets.Scripts.Village
 
         public static int TimeMaxHealing { get => timeMaxHealing; }
 
-        public HealerHut(int level, int baseWood, int baseStone, int baseIron, int woodAugmentation, int stoneAugmentation, int ironAugmentation, bool inConstruction)
+        public HealerHut(int level, int baseWood, int baseStone, int baseGold, int woodAugmentation, int stoneAugmentation, int goldAugmentation, bool inConstruction)
         {
             this.Level = level;
             this.BaseWoodNeeded = baseWood;
             this.BaseStoneNeeded = baseStone;
-            this.BaseIronNeeded = baseIron;
+            this.BaseGoldNeeded = baseGold;
             this.WoodModification = woodAugmentation;
             this.StoneModification = stoneAugmentation;
-            this.IronModification = ironAugmentation;
+            this.GoldModification = goldAugmentation;
             this.InConstruction = inConstruction;
         }
     }

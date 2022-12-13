@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -9,13 +10,35 @@ public class MaterialSliderScript : MonoBehaviour
 
     public Slider currentSlider;
     public TMP_Text currentValue;
-    void Start()
+
+
+
+    public int GetValue()
     {
-        
+        return (int)currentSlider.value;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetValue(int value)
+    {
+        currentSlider.value = value;
+    }
+
+    public void AddValue(int value)
+    {
+        currentSlider.value += value;
+    }
+
+    public void DeleteValue(int value)
+    {
+        currentSlider.value -= value;
+    }
+
+    public void ChangeMax(int value)
+    {
+        currentSlider.maxValue = value;
+    }
+
+    public void OnValueChanged()
     {
         currentValue.text = currentSlider.value.ToString();
     }

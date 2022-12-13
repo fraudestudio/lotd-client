@@ -17,16 +17,16 @@ namespace Assets.Scripts.Village
         public int BaseMaxIron { get => baseMaxIron; set => baseMaxIron = value; }
         public int BaseMaxStone { get => baseMaxStone; set => baseMaxStone = value; }
 
-        public Warehouse(int level, int baseWood, int baseStone, int baseIron, int woodAugmentation, int stoneAugmentation, int ironAugmentation, bool inConstruction, int maxWood, int maxStone, int maxIron)
+        public Warehouse(int level, int baseWood, int baseStone, int baseGold, int woodAugmentation, int stoneAugmentation, int goldAugmentation, bool inConstruction, int maxWood, int maxStone, int maxIron)
         {
             this.Level = Level;
             this.Level = level;
             this.BaseWoodNeeded = baseWood;
             this.BaseStoneNeeded = baseStone;
-            this.BaseIronNeeded = baseIron;
+            this.BaseGoldNeeded = baseGold;
             this.WoodModification = woodAugmentation;
             this.StoneModification = stoneAugmentation;
-            this.IronModification = ironAugmentation;
+            this.GoldModification = goldAugmentation;
             this.InConstruction = inConstruction;
             this.baseMaxWood = maxWood;
             this.baseMaxStone = maxStone;

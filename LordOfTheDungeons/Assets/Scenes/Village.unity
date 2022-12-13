@@ -1953,7 +1953,19 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 396523751}
+        m_TargetAssemblyTypeName: MaterialSliderScript, Assembly-CSharp
+        m_MethodName: OnValueChanged
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
 --- !u!114 &396523751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3949,7 +3961,19 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 976859768}
+        m_TargetAssemblyTypeName: MaterialSliderScript, Assembly-CSharp
+        m_MethodName: OnValueChanged
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
 --- !u!1 &1010006429
 GameObject:
   m_ObjectHideFlags: 0
@@ -6377,7 +6401,7 @@ GameObject:
   - component: {fileID: 1922956070}
   - component: {fileID: 1922956069}
   m_Layer: 5
-  m_Name: IronSlider
+  m_Name: GoldSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6469,7 +6493,19 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1922956069}
+        m_TargetAssemblyTypeName: MaterialSliderScript, Assembly-CSharp
+        m_MethodName: OnValueChanged
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
 --- !u!1 &1962178809
 GameObject:
   m_ObjectHideFlags: 0
@@ -7254,7 +7290,7 @@ GameObject:
   - component: {fileID: 2130488508}
   - component: {fileID: 2130488507}
   m_Layer: 5
-  m_Name: IronText
+  m_Name: GoldText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7314,7 +7350,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Fer
+  m_text: Or
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -7713,6 +7749,14 @@ PrefabInstance:
     - target: {fileID: 5494774518668220219, guid: aec90c7acb167194da4acf76b3af734c, type: 3}
       propertyPath: m_Color.r
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6575811656794949369, guid: aec90c7acb167194da4acf76b3af734c, type: 3}
+      propertyPath: m_Name
+      value: GoldCountLogo
+      objectReference: {fileID: 0}
+    - target: {fileID: 6592999917897678364, guid: aec90c7acb167194da4acf76b3af734c, type: 3}
+      propertyPath: m_Name
+      value: GoldCount
       objectReference: {fileID: 0}
     - target: {fileID: 7215577335849624102, guid: aec90c7acb167194da4acf76b3af734c, type: 3}
       propertyPath: m_SizeDelta.x
