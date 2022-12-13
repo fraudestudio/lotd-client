@@ -76,7 +76,7 @@ public class TimeLeftSliderScript : MonoBehaviour
         {
             yield return new WaitForSeconds(1f);
             timerSlider.value -= 1;
-            if (timerSlider.value == 0)
+            if (timerSlider.value <= 0)
             {
                 NotifyObserver();
             }
@@ -89,7 +89,7 @@ public class TimeLeftSliderScript : MonoBehaviour
         switch (name)
         {
             case "TimeSliderCenter": VillageManager.NotifyConstructFinished(transform.parent.name); break;
-            case "TimeSliderTavern": GameObject.Find("BuildingObjects").transform.Find("Tavern").GetComponent<BuildingBehaviourScript>(); break;
+            case "TimeSliderTavern": VillageManager.NotifyNewArrival(); break;
         }
     }
 

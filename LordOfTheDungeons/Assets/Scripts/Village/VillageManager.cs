@@ -229,6 +229,13 @@ public class VillageManager : MonoBehaviour
 
     #region Observeurs
 
+    public static void NotifyNewArrival()
+    {
+
+        GameObject.Find("BuildingObjects").transform.Find("Tavern").GetComponent<BuildingBehaviourScript>().NewArrival();
+        GameObject.Find("VillageCenterMenu").transform.Find("VillageCenterObjects").Find("TavernButton").Find("PeopleIcon").Find("TimeSliderSpecific").GetComponent<TimeLeftSliderScript>().Stop();
+        GameObject.Find("VillageCenterMenu").transform.Find("VillageCenterObjects").Find("TavernButton").Find("PeopleIcon").Find("TimeSliderSpecific").GetComponent<TimeLeftSliderScript>().Init(Convert.ToInt32(GameObject.Find("TavernMenu").transform.Find("TimeSliderTavern").GetComponent<Slider>().value), Convert.ToInt32(GameObject.Find("TavernMenu").transform.Find("TimeSliderTavern").GetComponent<Slider>().maxValue));
+    }
 
     public static void NotifyConstructStarted(string building)
     {

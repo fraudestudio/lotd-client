@@ -336,6 +336,13 @@ public class BuildingBehaviourScript : MonoBehaviour
         //GameObject.Find("TavernMenu").transform.Find("TimeSliderTavern").GetComponent<TimeLeftSliderScript>().Stop();
     }
 
+    public void NewArrival()
+    {
+
+        GameObject.Find("TavernMenu").transform.Find("TimeSliderTavern").GetComponent<TimeLeftSliderScript>().Stop();
+        GameObject.Find("TavernMenu").transform.Find("TimeSliderTavern").GetComponent<TimeLeftSliderScript>().Init(Tavern.TimeMaxBeforeNewRecruit, Tavern.TimeMaxBeforeNewRecruit);
+    }
+
     #endregion
 
 
