@@ -91,6 +91,7 @@ public class TimeLeftSliderScript : MonoBehaviour
             case "TimeSliderCenter": VillageManager.NotifyConstructFinished(transform.parent.name); break;
             case "TimeSliderTavern": VillageManager.NotifyNewArrival(); break;
             case "TimeSliderTrainingCamp": VillageManager.NotifyTrainingFinished(); break;
+            case "TimeSliderMed": VillageManager.NotifySlotMedFinished(transform.parent.name); break;
         }
     }
 

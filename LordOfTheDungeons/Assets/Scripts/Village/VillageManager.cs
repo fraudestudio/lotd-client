@@ -230,9 +230,22 @@ public class VillageManager : MonoBehaviour
 
     #region Observeurs
 
+    public static void NotifySlotMedFinished(string slot)
+    {
+        GameObject.Find("HealerHutMenu").transform.Find("SlotsHealer").Find(slot).Find("CharacterSlot").GetComponent<CharacterSlotScript>().CurrentCharacter.GetComponent<CharacterImageSlotScript>().Character.SetMaxHealt();
+        GameObject.Find("HealerHutMenu").transform.Find("SlotsHealer").Find(slot).Find("CharacterSlot").GetComponent<CharacterSlotScript>().CurrentCharacter.GetComponent<CharacterImageSlotScript>().SetDrag(true);
+        GameObject.Find("HealerHutMenu").transform.Find("SlotsHealer").Find(slot).Find("CharacterSlot").GetComponent<CharacterSlotScript>().CanDrop = true;
+        GameObject.Find("HealerHutMenu").transform.Find("SlotsHealer").Find(slot).Find("TimeSliderMed").GetComponent<TimeLeftSliderScript>().Stop();
+        GameObject.Find("HealerHutMenu").transform.Find("SlotsHealer").Find(slot).Find("TimeSliderMed").gameObject.SetActive(false);
+        GameObject.Find("HealerHutMenu").transform.Find("SlotsHealer").Find(slot).Find("Button").gameObject.SetActive(true);
+
+    }
 
     public static void NotifyTrainingFinished()
     {
+        Transform trainingCamp = GameObject.Find("VillageCenterMenu").transform.Find("VillageCenterObjects").Find("TrainingCampButton");
+        trainingCamp.transform.Find("PeopleIcon").Find("TimeSliderSpecific").GetComponent<TimeLeftSliderScript>().Stop();
+        trainingCamp.transform.Find("PeopleIcon").Find("TimeSliderSpecific").gameObject.SetActive(false);
         GameObject.Find("BuildingObjects").transform.Find("TrainingCamp").GetComponent<BuildingBehaviourScript>().TrainingIsFinished();
     }
     public static void NotifyNewArrival()
@@ -416,7 +429,7 @@ public class VillageManager : MonoBehaviour
     public static void TrainingStarted()
     {
         GameObject.Find("VillageCenterMenu").transform.Find("VillageCenterObjects").Find("TrainingCampButton").Find("PeopleIcon").Find("TimeSliderSpecific").gameObject.SetActive(true);
-        GameObject.Find("VillageCenterMenu").transform.Find("VillageCenterObjects").Find("TrainingCampButton").Find("PeopleIcon").Find("TimeSliderSpecific").GetComponent<TimeLeftSliderScript>().Init(Convert.ToInt32(GameObject.Find("TrainingCampMenu").transform.Find("TimeSliderTrainingCamp").GetComponent<Slider>().maxValue), Convert.ToInt32(GameObject.Find("TrainingCampMenu").transform.Find("TimeSliderTrainingCamp").GetComponent<Slider>().maxValue));
+        GameObject.Find("VillageCenterMenu").transform.Find("VillageCenterObjects").Find("TrainingCampButton").Find("PeopleIcon").Find("TimeSliderSpecific").GetComponent<TimeLeftSliderScript>().Init(Convert.ToInt32(GameObject.Find("TrainingCampMenu").transform.Find("TimeSliderTrainingCamp").GetComponent<Slider>().value), Convert.ToInt32(GameObject.Find("TrainingCampMenu").transform.Find("TimeSliderTrainingCamp").GetComponent<Slider>().maxValue));
     }
 
     public static void CharAddedTrainingCamp()

@@ -336,7 +336,7 @@ GameObject:
   - component: {fileID: 4876101684554943895}
   - component: {fileID: 7318646501433039867}
   m_Layer: 5
-  m_Name: TimeSlider
+  m_Name: TimeSliderMed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -82,7 +82,7 @@ public class BuildingBehaviourScript : MonoBehaviour
             if (i % 2 == 0)
             {
                 GameObject d = Instantiate(slotPreFab);
-                d.name = "Slot_" + i;
+                d.name = "SlotMed";
                 d.transform.Find("CharacterSlot").GetComponent<CharacterSlotScript>().SetType(SlotType.HEALER);
                 d.transform.SetParent(GameObject.Find("HealerHutMenu").transform.Find("SlotsHealer"));
                 d.transform.localScale = new Vector2(1f, 1f);
@@ -481,7 +481,7 @@ public class BuildingBehaviourScript : MonoBehaviour
                             Slot.GetComponent<CharacterSlotScript>().CanDrop = false;
                             CharacterSlotNotAllowedScript.AddSlot(Slot);
                         }
-
+                        Slot.name = "SlotMed";
                         Slot.GetComponent<CharacterSlotScript>().SetType(SlotType.TRAINEE);
                         Slot.transform.SetParent(GameObject.Find("TrainingCampMenu").transform.Find("TraineeTitle").Find("TraineesLayout"));
                         Slot.transform.localScale = new Vector2(1, 1);

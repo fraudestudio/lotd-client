@@ -62,5 +62,10 @@ namespace Assets.Scripts.Village
             level += value;
         }
 
+        public void SetMaxHealt()
+        {
+            life = maxLife;
+        }
+
     }
 }

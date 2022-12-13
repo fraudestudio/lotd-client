@@ -16,7 +16,7 @@ public class HealButtonBehaviour : MonoBehaviour, IPointerClickHandler
             slot.GetComponent<CharacterSlotScript>().CanDrop = false;
             slot.GetComponent<CharacterSlotScript>().CurrentCharacter.GetComponent<CharacterImageSlotScript>().SetDrag(false);
             slider.SetActive(true);
-            slider.GetComponent<TimeLeftSliderScript>().Init(HealerHut.TimeMaxHealing, HealerHut.TimeMaxHealing);
+            slider.GetComponent<TimeLeftSliderScript>().Init(10, 10);//HealerHut.TimeMaxHealing, HealerHut.TimeMaxHealing);
             transform.gameObject.SetActive(false);
         }
     }
