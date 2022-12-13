@@ -233,7 +233,7 @@ public class VillageManager : MonoBehaviour
 
     public static void NotifyTrainingFinished()
     {
-
+        GameObject.Find("BuildingObjects").transform.Find("TrainingCamp").GetComponent<BuildingBehaviourScript>().TrainingIsFinished();
     }
     public static void NotifyNewArrival()
     {

@@ -1845,6 +1845,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrainingCampMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 1692713536940485269, guid: 40b3333abbaa3614790926801cdd3477, type: 3}
+      propertyPath: m_Alpha
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1692713537618518007, guid: 40b3333abbaa3614790926801cdd3477, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0

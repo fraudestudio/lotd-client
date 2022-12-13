@@ -22,7 +22,7 @@ public class Village
         owner = villageOwner;
 
         // Ici requête BDD pour la taverne
-        Tavern = new Tavern(1, 5, 4, 1, 20, 30, 4, false, 40);
+        Tavern = new Tavern(2, 5, 4, 1, 20, 30, 4, false, 40);
         Gunsmith = new Gunsmith(1, 4, 6, 4,10,10,30, false);
         Warehouse = new Warehouse(1,1,1,5,20,20,20,true,300,300,300);
         TrainingCamp = new TrainingCamp(1, 3, 5, 20, 10, 20, 30, false, false, 0);

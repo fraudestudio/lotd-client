@@ -203,6 +203,39 @@ public class BuildingBehaviourScript : MonoBehaviour
         }
     }
 
+
+    public void TrainingIsFinished()
+    {
+        GameObject t = GameObject.Find("TrainingCampMenu");
+
+        t.transform.Find("TimeSliderTrainingCamp").GetComponent<TimeLeftSliderScript>().Stop();
+        t.transform.Find("TimeSliderTrainingCamp").gameObject.SetActive(false);
+
+
+        for (int i = 0; i < t.transform.Find("TraineeTitle").Find("TraineesLayout").childCount; i++)
+        {
+            t.transform.Find("TraineeTitle").Find("TraineesLayout").GetChild(i).gameObject.SetActive(true);
+
+            t.transform.Find("TraineeTitle").Find("TraineesLayout").GetChild(i).GetComponent<CharacterSlotScript>().CanDrop = true;
+
+            if (!t.transform.Find("TraineeTitle").Find("TraineesLayout").GetChild(i).GetComponent<CharacterSlotScript>().SlotIsEmpty)
+            {
+                t.transform.Find("TraineeTitle").Find("TraineesLayout").GetChild(i).GetComponent<CharacterSlotScript>().CurrentCharacter.GetComponent<CharacterImageSlotScript>().SetDrag(true);
+                t.transform.Find("TraineeTitle").Find("TraineesLayout").GetChild(i).GetComponent<CharacterSlotScript>().CurrentCharacter.GetComponent<CharacterImageSlotScript>().Character.AddLevel(1);
+            }
+            else
+            {
+                CharacterSlotNotAllowedScript.RemoveSlot(t.transform.Find("TraineeTitle").Find("TraineesLayout").GetChild(i).gameObject);
+            }
+
+            t.transform.Find("InstructorTitle").transform.Find("CharacterSlot").GetComponent<CharacterSlotScript>().CanDrop = true;
+            t.transform.Find("InstructorTitle").transform.Find("CharacterSlot").GetComponent<CharacterSlotScript>().CurrentCharacter.GetComponent<CharacterImageSlotScript>().SetDrag(true);
+        }
+
+        t.GetComponent<CanTrainScript>().VerifyCond();
+
+    }
+
     #endregion
 
     #region Warehouse
@@ -293,10 +326,14 @@ public class BuildingBehaviourScript : MonoBehaviour
                 d.GetComponent<CharacterSlotScript>().SetType(SlotType.TAVERN);
                 d.transform.SetParent(heoresAvaiable);
                 d.transform.localScale = new Vector2(1f, 1f);
-                GameObject c = GameObject.Find("CharacterFactory").GetComponent<CharacterFactory>().CreateCharacter(Random.Range(0, 2), "qsfdlmq", "Hobbit", 1, 10, 10, 4, 5);
-                d.GetComponent<CharacterSlotScript>().AddChar(c);
             }
         }
+
+        GameObject c = GameObject.Find("CharacterFactory").GetComponent<CharacterFactory>().CreateCharacter(0, "Fatéo Mavard", "Hobbit", 1, 10, 10, 4, 5);
+        GameObject c1 = GameObject.Find("CharacterFactory").GetComponent<CharacterFactory>().CreateCharacter(1, "Pucas Lires", "Hobbit", 2, 10, 15, 10, 9);
+
+        heoresAvaiable.GetChild(0).GetComponent<CharacterSlotScript>().AddChar(c);
+        heoresAvaiable.GetChild(1).GetComponent<CharacterSlotScript>().AddChar(c1);
 
     }
 
@@ -306,6 +343,7 @@ public class BuildingBehaviourScript : MonoBehaviour
     /// </summary>
     private void StartMenuTavern()
     {
+
         GameObject.Find("BuildingObjects").transform.Find("Tavern").Find("CanvasTavern").GetComponent<CanvasGroup>().alpha = 0;
         GameObject m = GameObject.Find("BuildingMenu");
         GameObject t = GameObject.Find("TavernMenu");

@@ -57,5 +57,10 @@ namespace Assets.Scripts.Village
         }
 
 
+        public void AddLevel(int value)
+        {
+            level += value;
+        }
+
     }
 }

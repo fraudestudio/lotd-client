@@ -48,6 +48,8 @@ public class CharacterSlotScript : MonoBehaviour, IDropHandler
                             SlotIsEmpty = false;
                             drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag.GetComponent<CharacterSlotScript>().SlotIsEmpty = true;
 
+                            currentCharacter = drop;
+
                             if (drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag.GetComponent<CharacterSlotScript>().Type == SlotType.RECRUIT)
                             {
                                 Destroy(drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag.gameObject);
@@ -122,9 +124,7 @@ public class CharacterSlotScript : MonoBehaviour, IDropHandler
                                 VillageManager.CharAddedHealer();
                             }
                             #endregion
-
                             drop.GetComponent<CharacterImageSlotScript>().ParentAfterDrag = transform;
-                            currentCharacter = drop;
 
                         }
                         else if (Type == SlotType.RECRUIT)
