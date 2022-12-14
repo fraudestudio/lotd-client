@@ -17,6 +17,11 @@ public class ChangeInfoMenuScript : MonoBehaviour
     public TMP_Text Life;
 
 
+    public Image WeaponImage;
+    public TMP_Text WeaponName;
+    public TMP_Text WeaponLevel;
+    public TMP_Text WeaponPower;
+
     public void ChangeInfoMenu (Character c)
     {
         Image.sprite = c.Image;
@@ -26,5 +31,11 @@ public class ChangeInfoMenuScript : MonoBehaviour
         PA.text = "PA MAX : " + c.PA_MAX;
         PM.text = "PM MAX : " + c.PM_MAX;
         Life.text = "Life : " + c.Life +"/"+c.MaxLife;
+        Class.text = "Classe : " + c.Classe;
+
+        WeaponImage.sprite = c.Weapon.Image;
+        WeaponName.text = c.Weapon.Name;
+        WeaponLevel.text = "Level : " + c.Weapon.Level;
+        WeaponPower.text = "Puissance : " + c.Weapon.Power;
     }
 }

@@ -22,13 +22,14 @@ public class CharacterFactory : MonoBehaviour
     public GameObject PreFabCharacter;
 
 
-    public GameObject CreateCharacter(int image, string name, string race, int level, int life, int maxLife, int PA_MAX, int PM_MAX)
+    public GameObject CreateCharacter(int image, string name, string race, int level, int life, int maxLife, int PA_MAX, int PM_MAX, string classe, Weapon weapon)
     {
         GameObject character = Instantiate(PreFabCharacter);
 
-        character.GetComponent<CharacterImageSlotScript>().Character = new Character(ImageCharacter.CharacterImage[image], Icons.CharacterIcon[image],name,race,level,life,maxLife,PA_MAX,PM_MAX);
+        character.GetComponent<CharacterImageSlotScript>().Character = new Character(ImageCharacter.CharacterImage[image], Icons.CharacterIcon[image],name,race,level,life,maxLife,PA_MAX,PM_MAX,classe, weapon);
 
         character.GetComponent<CharacterImageSlotScript>().ChangeSprite(Icons.CharacterIcon[image]);
+
 
         return character;
     }

@@ -4,31 +4,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Assets.Scripts.Village
 {
     public class Weapon
     {
 
-        private Image image;
+        private Sprite image;
 
         private string name;
 
         private int level;
 
-        private int attackPoint;
+        private int power;
 
-        public Weapon(Image image, string name, int level, int attackPoint)
+        public Weapon(Sprite image, string name, int level, int power)
         {
             this.image = image;
             this.name = name;
             this.level = level;
-            this.attackPoint = attackPoint;
+            this.power = power;
         }
 
-        public Image Image { get => image; set => image = value; }
+        public Sprite Image { get => image; }
         public string Name { get => name; set => name = value; }
         public int Level { get => level; set => level = value; }
-        public int AttackPoint { get => attackPoint; set => attackPoint = value; }
+        public int Power { get => power; set => power = value; }
     }
 }

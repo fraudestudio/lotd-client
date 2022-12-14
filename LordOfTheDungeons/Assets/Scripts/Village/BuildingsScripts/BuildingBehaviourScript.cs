@@ -1,4 +1,5 @@
 using Assets.Scripts.Village;
+using Assets.Scripts.Village.CharactersInfo;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -329,8 +330,10 @@ public class BuildingBehaviourScript : MonoBehaviour
             }
         }
 
-        GameObject c = GameObject.Find("CharacterFactory").GetComponent<CharacterFactory>().CreateCharacter(0, "Fatéo Mavard", "Hobbit", 1, 10, 10, 4, 5);
-        GameObject c1 = GameObject.Find("CharacterFactory").GetComponent<CharacterFactory>().CreateCharacter(1, "Pucas Lires", "Hobbit", 2, 10, 15, 10, 9);
+        Weapon w = GameObject.Find("CharacterFactory").GetComponent<WeaponFactory>().CreateWeapon(1, "Petite épée", 1, 10);
+        Weapon w1 = GameObject.Find("CharacterFactory").GetComponent<WeaponFactory>().CreateWeapon(0, "Fronde", 1, 5);
+        GameObject c = GameObject.Find("CharacterFactory").GetComponent<CharacterFactory>().CreateCharacter(0, "Fatéo Mavard", "Hobbit", 1, 10, 10, 4, 5,"Archer",w1);
+        GameObject c1 = GameObject.Find("CharacterFactory").GetComponent<CharacterFactory>().CreateCharacter(1, "Pucas Lires", "Hobbit", 2, 10, 15, 10, 9,"Guerrier",w);
 
         heoresAvaiable.GetChild(0).GetComponent<CharacterSlotScript>().AddChar(c);
         heoresAvaiable.GetChild(1).GetComponent<CharacterSlotScript>().AddChar(c1);
