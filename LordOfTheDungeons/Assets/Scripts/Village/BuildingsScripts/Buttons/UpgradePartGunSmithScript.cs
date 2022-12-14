@@ -32,6 +32,9 @@ public class UpgradePartGunSmithScript : MonoBehaviour
     {
         upgradePart.SetActive(value);
 
+
+        upgradePart.transform.Find("WeaponIcon").Find("ErrorRessources").gameObject.SetActive(false);
+        upgradePart.transform.Find("WeaponIcon").Find("ErrorLevel").gameObject.SetActive(false);
         upgradePart.transform.Find("ArmorIcon").Find("ErrorRessources").gameObject.SetActive(false);
         upgradePart.transform.Find("ArmorIcon").Find("ErrorLevel").gameObject.SetActive(false);
 
