@@ -2602,6 +2602,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: -5.6606445
       objectReference: {fileID: 0}
+    - target: {fileID: 7531962504862967938, guid: ca7c1c54f428061408a99746bcab1487, type: 3}
+      propertyPath: ArmorIcon
+      value: 
+      objectReference: {fileID: 919128977}
+    - target: {fileID: 7531962504862967938, guid: ca7c1c54f428061408a99746bcab1487, type: 3}
+      propertyPath: WeaponIcon
+      value: 
+      objectReference: {fileID: 1163500505}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca7c1c54f428061408a99746bcab1487, type: 3}
 --- !u!1 &494432090
@@ -2885,6 +2893,7 @@ GameObject:
   - component: {fileID: 528070276}
   - component: {fileID: 528070275}
   - component: {fileID: 528070277}
+  - component: {fileID: 528070278}
   m_Layer: 0
   m_Name: CharacterFactory
   m_TagString: Untagged
@@ -2944,6 +2953,21 @@ MonoBehaviour:
     WeaponIcons:
     - {fileID: 21300000, guid: 116f1c1fb51e3d243a73ab6c8d6fdfe2, type: 3}
     - {fileID: 21300000, guid: 741418db175b33d46909e7a5e35c5758, type: 3}
+--- !u!114 &528070278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 528070274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2800f76401602704ab8471104a1e9335, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Icons:
+    ArmorIcons:
+    - {fileID: 21300000, guid: 0a6813a956d1f9b47997cca3a27a9667, type: 3}
 --- !u!1 &533940042
 GameObject:
   m_ObjectHideFlags: 0
@@ -4810,6 +4834,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 917558172}
   m_CullTransparentMesh: 1
+--- !u!114 &919128977 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1553269483749029582, guid: ca7c1c54f428061408a99746bcab1487, type: 3}
+  m_PrefabInstance: {fileID: 464425350}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &952640027
 GameObject:
   m_ObjectHideFlags: 0
@@ -5269,6 +5304,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1010006429}
   m_CullTransparentMesh: 1
+--- !u!114 &1163500505 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1553269484081536675, guid: ca7c1c54f428061408a99746bcab1487, type: 3}
+  m_PrefabInstance: {fileID: 464425350}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1185734193
 GameObject:
   m_ObjectHideFlags: 0
@@ -9400,6 +9446,10 @@ MonoBehaviour:
   WeaponName: {fileID: 687789554}
   WeaponLevel: {fileID: 409131343}
   WeaponPower: {fileID: 884506098}
+  ArmorImage: {fileID: 2058775095}
+  ArmorName: {fileID: 917558175}
+  ArmorLevel: {fileID: 47563891}
+  ArmorResistance: {fileID: 2056436242}
 --- !u!1001 &5494774517395911086
 PrefabInstance:
   m_ObjectHideFlags: 0

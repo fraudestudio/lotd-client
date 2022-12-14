@@ -9,7 +9,11 @@ public class CloseCharacterInfoMenuScript : MonoBehaviour, IPointerClickHandler
     {
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            BuildingBehaviourScript.CanBeClicked = true;
+            if (GameObject.Find("BuildingMenu").GetComponent<ModifyMenuScript>().GetCurrentUsedBuilding() == "")
+            {
+                BuildingBehaviourScript.CanBeClicked = true;
+            }
+
             GameObject.Find("CharacterInfoMenu").GetComponent<CanvasGroup>().alpha = 0;
             GameObject.Find("CharacterInfoMenu").GetComponent<CanvasGroup>().interactable = false;
             GameObject.Find("CharacterInfoMenu").GetComponent<CanvasGroup>().blocksRaycasts = false;

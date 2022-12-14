@@ -27,6 +27,17 @@ namespace Assets.Scripts.Village
             this.power = power;
         }
 
+
+        public void AddLevel()
+        {
+            level++;
+        }
+
+        public int GetTotalPower()
+        {
+            return level * power;
+        }
+
         public Sprite Image { get => image; }
         public string Name { get => name; set => name = value; }
         public int Level { get => level; set => level = value; }

@@ -46,7 +46,7 @@ namespace Assets.Scripts.Village
         public int PM_MAX { get => pM_MAX; set => pM_MAX = value; }
         public string Classe { get => classe; set => classe = value; }
 
-        public Character(Sprite image, Sprite icon, string name, string race, int level, int life, int maxLife, int PA_MAX, int PM_MAX, string classe, Weapon weapon)
+        public Character(Sprite image, Sprite icon, string name, string race, int level, int life, int maxLife, int PA_MAX, int PM_MAX, string classe, Weapon weapon, Armor armor)
         {
             this.image = image;
             this.iconImage = icon;
@@ -59,6 +59,7 @@ namespace Assets.Scripts.Village
             this.PM_MAX = PM_MAX;
             this.classe = classe;
             this.weapon = weapon;
+            this.armor = armor;
         }
 
 

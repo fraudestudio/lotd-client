@@ -22,6 +22,12 @@ public class ChangeInfoMenuScript : MonoBehaviour
     public TMP_Text WeaponLevel;
     public TMP_Text WeaponPower;
 
+
+    public Image ArmorImage;
+    public TMP_Text ArmorName;
+    public TMP_Text ArmorLevel;
+    public TMP_Text ArmorResistance;
+
     public void ChangeInfoMenu (Character c)
     {
         Image.sprite = c.Image;
@@ -36,6 +42,12 @@ public class ChangeInfoMenuScript : MonoBehaviour
         WeaponImage.sprite = c.Weapon.Image;
         WeaponName.text = c.Weapon.Name;
         WeaponLevel.text = "Level : " + c.Weapon.Level;
-        WeaponPower.text = "Puissance : " + c.Weapon.Power;
+        WeaponPower.text = "Puissance : " + c.Weapon.GetTotalPower();
+
+
+        ArmorImage.sprite = c.Armor.Image;
+        ArmorName.text = c.Armor.Name;
+        ArmorLevel.text = "Level : " + c.Armor.Level;
+        ArmorResistance.text = "Résistance  : " + c.Armor.GetTotalResistance();
     }
 }

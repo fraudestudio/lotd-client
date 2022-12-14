@@ -88,7 +88,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 5.9, y: -12.591}
+  m_AnchoredPosition: {x: 0, y: -20.4}
   m_SizeDelta: {x: 200, y: 47.8365}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3117026037288581708
@@ -119,7 +119,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 100%
+  m_text: 0 jours 0 heures 0 minutes 1 secondes
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -146,8 +146,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 7
+  m_fontSizeBase: 7
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -417,16 +417,16 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4876101684554943895}
         m_TargetAssemblyTypeName: TimeLeftSliderScript, Assembly-CSharp
-        m_MethodName: GetPercentage
-        m_Mode: 2
+        m_MethodName: changeText
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 9144018681473310850}
-          m_ObjectArgumentAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
+        m_CallState: 1
 --- !u!114 &4876101684554943895
 MonoBehaviour:
   m_ObjectHideFlags: 0
