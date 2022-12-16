@@ -1473,6 +1473,7 @@ GameObject:
   - component: {fileID: 178562426}
   - component: {fileID: 178562425}
   - component: {fileID: 178562428}
+  - component: {fileID: 178562429}
   m_Layer: 5
   m_Name: connected
   m_TagString: Untagged
@@ -1621,6 +1622,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 30340d06c119fd74898a9e75daa1d5c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &178562429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 178562423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc89ad19428f8424d8968a39d35d1942, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &215315569
@@ -3764,19 +3777,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 467474300}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1794959881}
-        m_TargetAssemblyTypeName: loaderScript, Assembly-CSharp
-        m_MethodName: Level
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Village
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &467474300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3824,7 +3825,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 467474297}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8680d81f6c8dbf0468e4789c7eaefa52, type: 3}
+  m_Script: {fileID: 11500000, guid: 52353aec7cf4b17438c47811290a2bd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &467712847
@@ -7882,7 +7883,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 74, y: 161.47275}
+  m_AnchoredPosition: {x: 74, y: 161.47272}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1439000102
@@ -8441,7 +8442,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: DECONEXION
+  m_text: DECONNEXION
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: eef50040cca06554492da4dbafd848ea, type: 2}
   m_sharedMaterial: {fileID: -2874410466189963502, guid: eef50040cca06554492da4dbafd848ea, type: 2}
@@ -14895,7 +14896,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1276524348}
   m_HandleRect: {fileID: 1276524347}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:

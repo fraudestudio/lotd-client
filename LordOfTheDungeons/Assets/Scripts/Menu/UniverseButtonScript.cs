@@ -96,6 +96,7 @@ public class UniverseButtonScript : MonoBehaviour, IPointerClickHandler
 
     private void ShowVillage()
     {
+        GameObject.Find("VillageMenu").transform.Find("JoinVillageButton").GetComponent<JoinVillageButtonScript>().CurrentUniverse = id;
         StartCoroutine(HidePassword());
         StartCoroutine(ChangeMenu());
     }

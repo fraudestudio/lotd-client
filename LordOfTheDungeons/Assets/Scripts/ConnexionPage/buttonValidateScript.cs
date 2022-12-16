@@ -27,15 +27,36 @@ public class buttonValidateScript : MonoBehaviour, IPointerClickHandler
         if (eventData.button == PointerEventData.InputButton.Left)
         {
             GameObject.Find("WaitingServer").GetComponent<WaitingForServerScript>().StartAnim();
-            if (Server.VerifyUser(id.text, mdp.text))
+            if (VerifyResponse(Server.VerifyUser(id.text, mdp.text)))
             {
                 c.GetComponent<loaderScript>().Level("Menu");
             }
-            else
-            {
-                error.color = new Color(1, 0, 0, 1);
-            }
             GameObject.Find("WaitingServer").GetComponent<WaitingForServerScript>().StopAnim();
         }
+    }
+
+
+    public bool VerifyResponse(string response)
+    {
+        bool res = false;
+
+        Debug.Log(response);
+
+        if (response == "Error")
+        {
+            error.color = new Color(1, 0, 0, 1);
+            error.text = "INFORMATIONS INCORRECTES\r\nRÉESSAYER";
+        }
+        else if (response == "NotValid")
+        {
+            error.color = new Color(1, 0, 0, 1);
+            error.text = "VOTRE COMPTE N'EST\nPAS VALIDE";
+        }
+        else
+        {
+            res = true;
+        }
+
+        return res;
     }
 }

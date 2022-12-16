@@ -1,3 +1,4 @@
+using Assets.Scripts.Server.Model;
 using Assets.Scripts.Village;
 using Assets.Scripts.Village.CharactersInfo;
 using System.Collections;
@@ -250,10 +251,11 @@ public class BuildingBehaviourScript : MonoBehaviour
         GameObject.Find("ATHVillage").transform.Find("Background").Find("WoodSlider").GetComponent<MaterialSliderScript>().ChangeMax(Village.Warehouse.BaseMaxWood * Village.Warehouse.Level);
         GameObject.Find("ATHVillage").transform.Find("Background").Find("StoneSlider").GetComponent<MaterialSliderScript>().ChangeMax(Village.Warehouse.BaseMaxStone * Village.Warehouse.Level);
 
+        Ressources r = Server.GetRessources();
 
-        GameObject.Find("ATHVillage").transform.Find("Background").Find("GoldSlider").GetComponent<MaterialSliderScript>().SetValue(Village.Warehouse.BaseMaxIron * Village.Warehouse.Level);
-        GameObject.Find("ATHVillage").transform.Find("Background").Find("WoodSlider").GetComponent<MaterialSliderScript>().SetValue(Village.Warehouse.BaseMaxWood * Village.Warehouse.Level);
-        GameObject.Find("ATHVillage").transform.Find("Background").Find("StoneSlider").GetComponent<MaterialSliderScript>().SetValue(Village.Warehouse.BaseMaxStone * Village.Warehouse.Level);
+        GameObject.Find("ATHVillage").transform.Find("Background").Find("GoldSlider").GetComponent<MaterialSliderScript>().SetValue(r.Or);
+        GameObject.Find("ATHVillage").transform.Find("Background").Find("WoodSlider").GetComponent<MaterialSliderScript>().SetValue(r.Bois);
+        GameObject.Find("ATHVillage").transform.Find("Background").Find("StoneSlider").GetComponent<MaterialSliderScript>().SetValue(r.Pierre);
 
     }
 
@@ -331,13 +333,13 @@ public class BuildingBehaviourScript : MonoBehaviour
         }
 
         Armor a = GameObject.Find("CharacterFactory").GetComponent<ArmorFactory>().CreateArmor(0, "Armure en cuir", 1, 3);
-        Weapon w = GameObject.Find("CharacterFactory").GetComponent<WeaponFactory>().CreateWeapon(1, "Petite épée", 1, 10);
+        //Weapon w = GameObject.Find("CharacterFactory").GetComponent<WeaponFactory>().CreateWeapon(1, "Petite épée", 1, 10);
         Weapon w1 = GameObject.Find("CharacterFactory").GetComponent<WeaponFactory>().CreateWeapon(0, "Fronde", 1, 5);
         GameObject c = GameObject.Find("CharacterFactory").GetComponent<CharacterFactory>().CreateCharacter(0, "Fatéo Mavard", "Hobbit", 1, 10, 10, 4, 5,"Archer",w1,a);
-        GameObject c1 = GameObject.Find("CharacterFactory").GetComponent<CharacterFactory>().CreateCharacter(1, "Pucas Lires", "Hobbit", 2, 10, 15, 10, 9,"Guerrier",w,a);
+        //GameObject c1 = GameObject.Find("CharacterFactory").GetComponent<CharacterFactory>().CreateCharacter(1, "Pucas Lires", "Hobbit", 2, 10, 15, 10, 9,"Guerrier",w,a);
 
         heoresAvaiable.GetChild(0).GetComponent<CharacterSlotScript>().AddChar(c);
-        heoresAvaiable.GetChild(1).GetComponent<CharacterSlotScript>().AddChar(c1);
+        //heoresAvaiable.GetChild(1).GetComponent<CharacterSlotScript>().AddChar(c1);
 
     }
 

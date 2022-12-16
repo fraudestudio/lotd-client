@@ -9,6 +9,6 @@ namespace Assets.Scripts.Server.Model.Connexion
     public class SignInSuccess
     {
         public bool Validated { get; set; }
-        public string Token { get; set; }
+        public string SessionToken { get; set; }
     }
 }

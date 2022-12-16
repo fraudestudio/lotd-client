@@ -74,7 +74,11 @@ public class SelectRaceScript : MonoBehaviour
 
         }
 
+
         Server.CreateVillage(inputField.text, faction, Server.GetSavedIdUniverse());
+        Server.SetCurrentVillage(Server.UserGetVillageID(Server.GetSavedIdUniverse()).Town);
+        Debug.Log(Server.GetCurrentVillage());
+        Server.InitVillage(Server.GetCurrentVillage());
 
         GameObject.Find("loadscreen").GetComponent<loaderScript>().Level("Village");
     }

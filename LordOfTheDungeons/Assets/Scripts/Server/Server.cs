@@ -18,15 +18,24 @@ using static UnityEngine.Networking.UnityWebRequest;
 using Mono.Cecil.Mdb;
 using System.Security.Cryptography;
 using Assets.Scripts.Server.Menu;
+using Assets.Scripts.Server.Model;
+using Assets.Scripts.Village;
+using Assets.Scripts.Server.Model.Connexion;
+using System.Net;
 
 public static class Server
 {
 
     private static int saveIdUniverse;
+    private static int saveIdVillage;
+    private static string name;
+
+    public static string Name { get => name; }
+
 
     private static HttpClient sharedClient = new()
     {
-        BaseAddress = new Uri("https://info-dij-sae001.iut21.u-bourgogne.fr"),//:8443"),
+        BaseAddress = new Uri("https://info-dij-sae001.iut21.u-bourgogne.fr"),
     };
 
 
@@ -36,10 +45,11 @@ public static class Server
     /// <param name="id"></param>
     /// <param name="password"></param>
     /// <returns></returns>
-    public static bool VerifyUser(string id, string password)
+    public static string VerifyUser(string id, string password)
     {
+        string res = "";
+
         System.Net.ServicePointManager.ServerCertificateValidationCallback = (s, ce, ca, p) => true;
-        bool b = false;
 
         string auth = Convert.ToBase64String(Encoding.UTF8.GetBytes(id+":"+password));
 
@@ -49,19 +59,29 @@ public static class Server
 
         var response = sharedClient.PostAsync("api/account/signin", content);
 
+        SignInSuccess json = JsonConvert.DeserializeObject<SignInSuccess>(response.Result.Content.ReadAsStringAsync().Result);
 
-        string[] jsonstring = response.Result.ToString().Split(',');
 
-        foreach (string str in jsonstring)
+        if (response.Result.StatusCode == HttpStatusCode.OK)
         {
-            if (str.Contains("ReasonPhrase: 'OK'"))
+            if (json.Validated)
             {
-                b = true;
+                name = id;
+                res = "Success";
+                sharedClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", json.SessionToken);
             }
+            else
+            {
+                res = "NotValid";
+            }
+
+        }
+        else
+        {
+            res = "Error";
         }
 
-
-        return b;
+        return res;
     }
 
 
@@ -69,11 +89,6 @@ public static class Server
 
     public static List<UniverseInfo> GetAllUniverses()
     {
-
-        System.Net.ServicePointManager.ServerCertificateValidationCallback = (s, ce, ca, p) => true;
-
-        sharedClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "123456789012345678901234567890");
-
         var response = sharedClient.GetStringAsync("api/universe/all");
 
         List<UniverseInfo> json = JsonConvert.DeserializeObject<List<UniverseInfo>>(response.Result.ToString());
@@ -84,10 +99,6 @@ public static class Server
 
     public static List<UniverseInfo> GetUserJoinedUniverses()
     {
-
-        System.Net.ServicePointManager.ServerCertificateValidationCallback = (s, ce, ca, p) => true;
-
-        sharedClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "123456789012345678901234567890");
 
         var response = sharedClient.GetStringAsync("api/universe/joined");
 
@@ -101,10 +112,6 @@ public static class Server
     {
 
         bool result = false;
-
-        System.Net.ServicePointManager.ServerCertificateValidationCallback = (s, ce, ca, p) => true;
-
-        sharedClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "123456789012345678901234567890");
 
         var response = sharedClient.GetStringAsync("api/universe/owned");
 
@@ -126,10 +133,6 @@ public static class Server
 
         UniverseInfo result = null;
 
-        System.Net.ServicePointManager.ServerCertificateValidationCallback = (s, ce, ca, p) => true;
-
-        sharedClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "123456789012345678901234567890");
-
         var response = sharedClient.GetStringAsync("api/universe/owned");
 
         UniverseInfo json = JsonConvert.DeserializeObject<UniverseInfo>(response.Result.ToString());
@@ -149,10 +152,6 @@ public static class Server
 
         bool result = false;
 
-        System.Net.ServicePointManager.ServerCertificateValidationCallback = (s, ce, ca, p) => true;
-
-        sharedClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "123456789012345678901234567890");
-
         var response = sharedClient.GetStringAsync(String.Format("api/universe/{0}", universeID));
 
 
@@ -169,10 +168,6 @@ public static class Server
     public static UniverseInfo UserGetVillageID(int universeID)
     {
 
-        System.Net.ServicePointManager.ServerCertificateValidationCallback = (s, ce, ca, p) => true;
-
-        sharedClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "123456789012345678901234567890");
-
         var response = sharedClient.GetStringAsync(String.Format("api/universe/{0}", universeID));
 
         UniverseInfo json = JsonConvert.DeserializeObject<UniverseInfo>(response.Result.ToString());
@@ -186,11 +181,7 @@ public static class Server
     public static UniverseInfo UserGetVillageName(int villageID)
     {
 
-        System.Net.ServicePointManager.ServerCertificateValidationCallback = (s, ce, ca, p) => true;
-
-        sharedClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "123456789012345678901234567890");
-
-        var response = sharedClient.GetStringAsync(String.Format("api/village/name/{0}", villageID));
+        var response = sharedClient.GetStringAsync(String.Format("api/village/{0}/name", villageID));
 
         UniverseInfo json = JsonConvert.DeserializeObject<UniverseInfo>(response.Result.ToString());
 
@@ -203,9 +194,6 @@ public static class Server
 
     public static string UniverseGetMajorFaction(int universeID)
     {
-        System.Net.ServicePointManager.ServerCertificateValidationCallback = (s, ce, ca, p) => true;
-
-        sharedClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "123456789012345678901234567890");
 
         var response = sharedClient.GetStringAsync(String.Format("api/universe/faction/{0}", universeID));
 
@@ -218,9 +206,6 @@ public static class Server
 
     public static int UniverseCountVillage(int universeID)
     {
-        System.Net.ServicePointManager.ServerCertificateValidationCallback = (s, ce, ca, p) => true;
-
-        sharedClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "123456789012345678901234567890");
 
         var response = sharedClient.GetStringAsync(String.Format("api/universe/count/{0}", universeID));
 
@@ -235,7 +220,6 @@ public static class Server
 
     public static void CreateUniverse(string name, string mdp)
     {
-        System.Net.ServicePointManager.ServerCertificateValidationCallback = (s, ce, ca, p) => true;
 
         bool pswd = false;
 
@@ -257,7 +241,6 @@ public static class Server
 
     public static void CreateVillage(string name, string race, int idUnivers)
     {
-        System.Net.ServicePointManager.ServerCertificateValidationCallback = (s, ce, ca, p) => true;
 
         VillageInfo info = new VillageInfo
         {
@@ -276,9 +259,6 @@ public static class Server
 
         bool result = false;
 
-        System.Net.ServicePointManager.ServerCertificateValidationCallback = (s, ce, ca, p) => true;
-
-
         var content = new { Password = password };
 
         var response = sharedClient.PostAsync(String.Format("api/universe/access/{0}",idUniverse), new StringContent(JsonConvert.SerializeObject(content), Encoding.UTF8, "application/json"));
@@ -294,6 +274,101 @@ public static class Server
 
     }
 
+    public static bool InitVillage(int idVillage)
+    {
+
+        var response = sharedClient.GetStringAsync(String.Format("api/village/{0}/init", idVillage));
+
+        bool json = JsonConvert.DeserializeObject<bool>(response.Result.ToString());
+
+
+        return json;
+    }
+
+    public static Dictionary<string,int> GetLevelVillage()
+    {
+
+        var response = sharedClient.GetStringAsync(String.Format("api/village/{0}/level", GetCurrentVillage()));
+
+        Dictionary<string,int> json = JsonConvert.DeserializeObject<Dictionary<string,int>>(response.Result.ToString());
+
+        return json;
+    }
+
+
+    public static bool GetInConstructionVillage(string building)
+    {
+
+        var response = sharedClient.GetStringAsync(String.Format("api/village/{0}/{1}/construction/get", GetCurrentVillage(),building));
+
+        bool json = JsonConvert.DeserializeObject<bool>(response.Result.ToString());
+
+        return json;
+    }
+
+    public static bool SetInConstructionVillage(string building)
+    {
+
+        var response = sharedClient.GetStringAsync(String.Format("api/village/{0}/{1}/construction/set", GetCurrentVillage(), building));
+
+        bool json = JsonConvert.DeserializeObject<bool>(response.Result.ToString());
+
+        return json;
+    }
+
+    public static int GetInConstructionVillageTime(string building)
+    {
+
+        var response = sharedClient.GetStringAsync(String.Format("api/village/{0}/{1}/construction/gettime", GetCurrentVillage(), building));
+
+        int json = JsonConvert.DeserializeObject<int>(response.Result.ToString());
+
+        return json;
+    }
+
+    public static bool LevelUpBuilding(string building)
+    {
+
+        var response = sharedClient.GetStringAsync(String.Format("api/village/{0}/{1}/construction/up", GetCurrentVillage(), building));
+
+        bool json = JsonConvert.DeserializeObject<bool>(response.Result.ToString());
+
+        return json;
+    }
+
+    public static Ressources GetRessources()
+    {
+
+        var response = sharedClient.GetStringAsync(String.Format("api/village/{0}/ressources/get", GetCurrentVillage()));
+
+        Ressources json = JsonConvert.DeserializeObject<Ressources>(response.Result.ToString());
+
+        return json;
+    }
+
+
+    public static bool SetRessources(int wood, int stone, int gold)
+    {
+        bool res = false;
+
+
+        Ressources r = new Ressources
+        {
+            Bois = wood,
+            Pierre = stone,
+            Or = gold
+        };
+
+        var response = sharedClient.PostAsync(String.Format("api/village/{0}/ressources/set", GetCurrentVillage()), new StringContent(JsonConvert.SerializeObject(r), Encoding.UTF8, "application/json"));
+
+
+        if (response.Result.Content.ReadAsStringAsync().Result == "true")
+        {
+            res = true;
+        }
+
+        return res;
+    }
 
     public static void SaveIdUniverse(int value)
     {
@@ -305,5 +380,16 @@ public static class Server
         return saveIdUniverse;
     }
 
+
+    public static int GetCurrentVillage()
+    {
+        return saveIdVillage;
+
+    }
+
+    public static void SetCurrentVillage(int value)
+    {
+        saveIdVillage = value;
+    }
 
 }

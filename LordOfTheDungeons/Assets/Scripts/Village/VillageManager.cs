@@ -112,7 +112,7 @@ public class VillageManager : MonoBehaviour
 
         if (Village.Tavern.InConstruction)
         {
-           tavernButton.Find("TimeSliderCenter").gameObject.GetComponent<TimeLeftSliderScript>().Init(10, 86400);
+           tavernButton.Find("TimeSliderCenter").gameObject.GetComponent<TimeLeftSliderScript>().Init(86400 - Server.GetInConstructionVillageTime("TAVERN"), 86400);
         }
 
 
@@ -135,7 +135,7 @@ public class VillageManager : MonoBehaviour
 
         if (Village.Gunsmith.InConstruction)
         {
-            gunsmith.Find("TimeSliderCenter").gameObject.GetComponent<TimeLeftSliderScript>().Init(10, 86400);
+            gunsmith.Find("TimeSliderCenter").gameObject.GetComponent<TimeLeftSliderScript>().Init(86400 - Server.GetInConstructionVillageTime("GUNSMITH"), 86400);
         }
 
 
@@ -153,7 +153,7 @@ public class VillageManager : MonoBehaviour
 
         if (Village.Warehouse.InConstruction)
         {
-            warehouse.Find("TimeSliderCenter").gameObject.GetComponent<TimeLeftSliderScript>().Init(10, 86400);
+            warehouse.Find("TimeSliderCenter").gameObject.GetComponent<TimeLeftSliderScript>().Init(86400 - Server.GetInConstructionVillageTime("WAREHOUSE"), 86400);
         }
 
         #endregion
@@ -162,7 +162,7 @@ public class VillageManager : MonoBehaviour
 
         if (Village.TrainingCamp.InConstruction)
         {
-            trainingCamp.Find("TimeSliderCenter").gameObject.GetComponent<TimeLeftSliderScript>().Init(30, 86400);
+            trainingCamp.Find("TimeSliderCenter").gameObject.GetComponent<TimeLeftSliderScript>().Init(86400 - Server.GetInConstructionVillageTime("TRAINING_CAMP"), 86400);
         }
 
 
@@ -193,7 +193,7 @@ public class VillageManager : MonoBehaviour
 
         if (Village.HealerHut.InConstruction)
         {
-            healerHut.Find("TimeSliderCenter").gameObject.GetComponent<TimeLeftSliderScript>().Init(20, 86400);
+            healerHut.Find("TimeSliderCenter").gameObject.GetComponent<TimeLeftSliderScript>().Init(86400 - Server.GetInConstructionVillageTime("HEALER_HUT"), 86400);
         }
 
 
@@ -218,6 +218,10 @@ public class VillageManager : MonoBehaviour
         GameObject.Find("ATHVillage").transform.Find("Background").Find("GoldSlider").GetComponent<MaterialSliderScript>().DeleteValue(gold);
         GameObject.Find("ATHVillage").transform.Find("Background").Find("StoneSlider").GetComponent<MaterialSliderScript>().DeleteValue(stone);
         GameObject.Find("ATHVillage").transform.Find("Background").Find("WoodSlider").GetComponent<MaterialSliderScript>().DeleteValue(wood);
+
+        Server.SetRessources(GameObject.Find("ATHVillage").transform.Find("Background").Find("WoodSlider").GetComponent<MaterialSliderScript>().GetValue(),
+            GameObject.Find("ATHVillage").transform.Find("Background").Find("StoneSlider").GetComponent<MaterialSliderScript>().GetValue(),
+            GameObject.Find("ATHVillage").transform.Find("Background").Find("GoldSlider").GetComponent<MaterialSliderScript>().GetValue());
     }
 
     private static void StopTimerConstructInMenu(string building)
@@ -263,7 +267,7 @@ public class VillageManager : MonoBehaviour
             case "Tavern":
                 {
                     Village.Tavern.InConstruction = true;
-
+                    Server.SetInConstructionVillage("TAVERN");
                     GameObject.Find("VillageCenterMenu").transform.Find("VillageCenterObjects").Find("TavernButton").transform.Find("NotInConstructionTitle").gameObject.SetActive(false);
                     GameObject.Find("VillageCenterMenu").transform.Find("VillageCenterObjects").Find("TavernButton").transform.Find("TimeSliderCenter").gameObject.SetActive(true);
                     GameObject.Find("VillageCenterMenu").transform.Find("VillageCenterObjects").Find("TavernButton").transform.Find("TimeSliderCenter").GetComponent<TimeLeftSliderScript>().Init(86400, 86400);
@@ -273,7 +277,7 @@ public class VillageManager : MonoBehaviour
             case "Gunsmith":
                 {
                     Village.Gunsmith.InConstruction = true;
-
+                    Server.SetInConstructionVillage("GUNSMITH");
                     GameObject.Find("VillageCenterMenu").transform.Find("VillageCenterObjects").Find("GunsmithButton").transform.Find("NotInConstructionTitle").gameObject.SetActive(false);
                     GameObject.Find("VillageCenterMenu").transform.Find("VillageCenterObjects").Find("GunsmithButton").transform.Find("TimeSliderCenter").gameObject.SetActive(true);
                     GameObject.Find("VillageCenterMenu").transform.Find("VillageCenterObjects").Find("GunsmithButton").transform.Find("TimeSliderCenter").GetComponent<TimeLeftSliderScript>().Init(86400, 86400);
@@ -283,7 +287,7 @@ public class VillageManager : MonoBehaviour
             case "Warehouse":
                 {
                     Village.Warehouse.InConstruction = true;
-
+                    Server.SetInConstructionVillage("WAREHOUSE");
                     GameObject.Find("VillageCenterMenu").transform.Find("VillageCenterObjects").Find("WarehouseButton").transform.Find("NotInConstructionTitle").gameObject.SetActive(false);
                     GameObject.Find("VillageCenterMenu").transform.Find("VillageCenterObjects").Find("WarehouseButton").transform.Find("TimeSliderCenter").gameObject.SetActive(true);
                     GameObject.Find("VillageCenterMenu").transform.Find("VillageCenterObjects").Find("WarehouseButton").transform.Find("TimeSliderCenter").GetComponent<TimeLeftSliderScript>().Init(86400, 86400);
@@ -293,7 +297,7 @@ public class VillageManager : MonoBehaviour
             case "TrainingCamp":
                 {
                     Village.TrainingCamp.InConstruction = true;
-
+                    Server.SetInConstructionVillage("TRAINING_CAMP");
                     GameObject.Find("VillageCenterMenu").transform.Find("VillageCenterObjects").Find("TrainingCampButton").transform.Find("NotInConstructionTitle").gameObject.SetActive(false);
                     GameObject.Find("VillageCenterMenu").transform.Find("VillageCenterObjects").Find("TrainingCampButton").transform.Find("TimeSliderCenter").gameObject.SetActive(true);
                     GameObject.Find("VillageCenterMenu").transform.Find("VillageCenterObjects").Find("TrainingCampButton").transform.Find("TimeSliderCenter").GetComponent<TimeLeftSliderScript>().Init(86400, 86400);
@@ -303,7 +307,7 @@ public class VillageManager : MonoBehaviour
             case "HealerHut":
                 {
                     Village.HealerHut.InConstruction = true;
-
+                    Server.SetInConstructionVillage("HEALER_HUT");
                     GameObject.Find("VillageCenterMenu").transform.Find("VillageCenterObjects").Find("HealerHutButton").transform.Find("NotInConstructionTitle").gameObject.SetActive(false);
                     GameObject.Find("VillageCenterMenu").transform.Find("VillageCenterObjects").Find("HealerHutButton").transform.Find("TimeSliderCenter").gameObject.SetActive(true);
                     GameObject.Find("VillageCenterMenu").transform.Find("VillageCenterObjects").Find("HealerHutButton").transform.Find("TimeSliderCenter").GetComponent<TimeLeftSliderScript>().Init(86400, 86400);
@@ -321,6 +325,7 @@ public class VillageManager : MonoBehaviour
                 {
                     Village.Tavern.InConstruction = false;
                     Village.Tavern.Level += 1;
+                    Server.LevelUpBuilding("TAVERN");
                     StopTimerConstructInMenu("Tavern");
                     GameObject.Find("BuildingMenu").transform.Find("TimeSlider").gameObject.SetActive(false);
                     GameObject.Find("BuildingMenu").GetComponent<ModifyMenuScript>().RefreshMenu("Tavern");
@@ -332,6 +337,7 @@ public class VillageManager : MonoBehaviour
                 {
                     Village.Gunsmith.InConstruction = false;
                     Village.Gunsmith.Level += 1;
+                    Server.LevelUpBuilding("GUNSMITH");
                     StopTimerConstructInMenu("Gunsmith");
                     GameObject.Find("BuildingMenu").transform.Find("TimeSlider").gameObject.SetActive(false);
                     GameObject.Find("BuildingMenu").GetComponent<ModifyMenuScript>().RefreshMenu("Gunsmith");
@@ -344,6 +350,7 @@ public class VillageManager : MonoBehaviour
                     Village.Warehouse.InConstruction = false;
                     Village.Warehouse.Level += 1;
                     StopTimerConstructInMenu("Warehouse");
+                    Server.LevelUpBuilding("WAREHOUSE");
                     GameObject.Find("BuildingMenu").transform.Find("TimeSlider").gameObject.SetActive(false);
                     GameObject.Find("BuildingMenu").GetComponent<ModifyMenuScript>().RefreshMenu("Warehouse");
                     GameObject.Find("BuildingObjects").transform.Find("Warehouse").GetComponent<BuildingBehaviourScript>().RefreshBuilding("Warehouse");
@@ -356,6 +363,7 @@ public class VillageManager : MonoBehaviour
                     Village.TrainingCamp.InConstruction = false;
                     Village.TrainingCamp.Level += 1;
                     StopTimerConstructInMenu("TrainingCamp");
+                    Server.LevelUpBuilding("TRAINING_CAMP");
                     GameObject.Find("BuildingMenu").transform.Find("TimeSlider").gameObject.SetActive(false);
                     GameObject.Find("BuildingMenu").GetComponent<ModifyMenuScript>().RefreshMenu("TrainingCamp");
                     GameObject.Find("BuildingObjects").transform.Find("TrainingCamp").GetComponent<BuildingBehaviourScript>().RefreshBuilding("TrainingCamp");
@@ -366,6 +374,7 @@ public class VillageManager : MonoBehaviour
                 {
                     Village.HealerHut.InConstruction = false;
                     Village.HealerHut.Level += 1;
+                    Server.LevelUpBuilding("HEALER_HUT");
                     StopTimerConstructInMenu("HealerHut");
                     GameObject.Find("BuildingMenu").transform.Find("TimeSlider").gameObject.SetActive(false);
                     GameObject.Find("BuildingMenu").GetComponent<ModifyMenuScript>().RefreshMenu("HealerHut");
