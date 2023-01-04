@@ -1,0 +1,18 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Assets.Scripts.ProceduralGeneration.Salles
+{
+    public class SalleVide : Salle
+    {
+        public SalleVide(int ligne, int colonne) : base(ligne, colonne)
+        {
+        }
+
+        public override TypeSalle Type => TypeSalle.VIDE;
+        public override bool EstVide => true;
+    }
+}
