@@ -9,12 +9,16 @@ namespace Assets.Scripts.ProceduralGeneration
     public class Carte
     {
         //Taille des cartes
-        public static int Taille => 6;
+        private static int taille;
+        public static int Taille { get => taille; set => taille = value; }
 
         /// <summary>
         /// Tableau des salles (0,0) en haut à gauche
         /// </summary>
         public Salle[,] Salles => salles;
+
+
+
         private Salle[,] salles;
 
         public Carte()

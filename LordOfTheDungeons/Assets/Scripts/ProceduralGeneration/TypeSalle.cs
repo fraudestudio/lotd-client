@@ -11,6 +11,6 @@ namespace Assets.Scripts.ProceduralGeneration
     /// </summary>
     public enum TypeSalle
     {
-        NORMALE, BOSS, START, VIDE
+        NORMALE, BOSS, START, VIDE, TILENORMALE, TILEFULL
     }
 }

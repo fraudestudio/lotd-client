@@ -1,12 +1,14 @@
 using Assets.Scripts.ProceduralGeneration;
+using Assets.Scripts.ProceduralGeneration.Objets;
 using Assets.Scripts.ProceduralGeneration.Salles;
 using JetBrains.Annotations;
+using Microsoft.Unity.VisualStudio.Editor;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MapGenerator : MonoBehaviour
+public class MapGenerator : MonoBehaviour, IGeneratorAlgo
 {
     [SerializeField]
     private GameObject salleBoss;
@@ -19,17 +21,18 @@ public class MapGenerator : MonoBehaviour
     [SerializeField]
     private Camera camera;
     [SerializeField]
-    private Camera mainCamera;
-    [SerializeField]
     private GameObject arrow;
 
     private Carte carte;
 
+    private GameObject firstRoom;
+
+    public GameObject FirstRoom { get => firstRoom; }
+
+
     // Start is called before the first frame update
     void Start()
     {
-        mainCamera = Camera.main;
-        GenerateMap(new AlgorithmeEliminationSimple().Generer(new System.Random().Next().ToString()));
     }
 
     public void GenerateMap(Carte carte)
@@ -51,7 +54,8 @@ public class MapGenerator : MonoBehaviour
                     salle.GetComponent<SalleObjectScript>().Salle = carte.Salles[ligne, colonne];
                     if (carte.Salles[ligne, colonne].Type == TypeSalle.START)
                     {
-                        arrow.transform.position = new Vector2(colonne, ligne);
+                        firstRoom = salle;
+                        arrow.transform.position = new Vector3(colonne, ligne,-8);
                     }
 
                     if (carte.Salles[ligne, colonne].Type != TypeSalle.VIDE)
@@ -67,8 +71,7 @@ public class MapGenerator : MonoBehaviour
         camera.orthographicSize = mapBounds.size.x / 1.2f;
     }
 
-
-    private GameObject GetObjectSalle(TypeSalle salle)
+    public GameObject GetObjectSalle(TypeSalle salle)
     {
         GameObject result;
 
@@ -81,6 +84,5 @@ public class MapGenerator : MonoBehaviour
         }
 
         return result;
-
     }
 }

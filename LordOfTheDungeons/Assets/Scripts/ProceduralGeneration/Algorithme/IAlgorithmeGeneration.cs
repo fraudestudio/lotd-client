@@ -13,6 +13,6 @@ namespace Assets.Scripts.ProceduralGeneration
         /// </summary>
         /// <param name="seed">Seed de la carte</param>
         /// <returns>La carte générée</returns>
-        Carte Generer(String seed);
+        Carte Generer(int seed);
     }
 }

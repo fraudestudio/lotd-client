@@ -10,10 +10,11 @@ namespace Assets.Scripts.ProceduralGeneration.Salles
 {
     public class AlgorithmeEliminationSimple : IAlgorithmeGeneration
     {
-        public Carte Generer(string seed)
+        public Carte Generer(int seed)
         {
+            Carte.Taille = 6;
             Graphe g = new Graphe();
-            GenerateurAleatoire.SetSeedGlobal(seed);
+            GenerateurAleatoire.Instance.SetSeedGlobal(seed);
 
             List<Coordonnees> coordonnees = new List<Coordonnees>();
 
@@ -21,7 +22,7 @@ namespace Assets.Scripts.ProceduralGeneration.Salles
             while (coordonnees.Count < 3)
             {
                 bool add = true;
-                Coordonnees c = GenerateurAleatoire.NextCoordonnees();
+                Coordonnees c = GenerateurAleatoire.Instance.NextCoordonnees();
 
                 if (coordonnees.Count >= 1)
                 {
@@ -56,7 +57,7 @@ namespace Assets.Scripts.ProceduralGeneration.Salles
 
             for (int i = 0; i < 2; i++)
             {
-                int startint = GenerateurAleatoire.Next(g.GetSommet(coordonnees[i].Ligne, coordonnees[i].Colonne).Voisins.Count);
+                int startint = GenerateurAleatoire.Instance.Next(g.GetSommet(coordonnees[i].Ligne, coordonnees[i].Colonne).Voisins.Count);
                 for (int j = 0; j < g.GetSommet(coordonnees[i].Ligne, coordonnees[i].Colonne).Voisins.Count; j++)
                 {
                     if (j != startint)
@@ -80,22 +81,22 @@ namespace Assets.Scripts.ProceduralGeneration.Salles
             }
 
 
-            List<Sommet> listeDesSommets = g.Parcours(g.GetSommet(coordonnees[2].Ligne, coordonnees[2].Colonne), null);
+            List<Sommet> listeDesSommets = g.Parcours(g.GetSommet(coordonnees[1].Ligne, coordonnees[1].Colonne), null);
             for (int i = 0; i < 40; i++)
             {
-                listeDesSommets = this.SupprimerSommet(g, listeDesSommets, g.GetSommet(coordonnees[2].Ligne, coordonnees[2].Colonne), g.GetSommet(coordonnees[0].Ligne, coordonnees[0].Colonne), g.GetSommet(coordonnees[1].Ligne, coordonnees[1].Colonne));
+                listeDesSommets = this.SupprimerSommet(g, listeDesSommets, g.GetSommet(coordonnees[0].Ligne, coordonnees[0].Colonne), g.GetSommet(coordonnees[1].Ligne, coordonnees[1].Colonne));
             }
             return g.ToCarte();
         }
-        private List<Sommet> SupprimerSommet(Graphe graphe, List<Sommet> listeDesSommets, Sommet SalleDepart, Sommet SalleBoss, Sommet SalleItem)
+        private List<Sommet> SupprimerSommet(Graphe graphe, List<Sommet> listeDesSommets, Sommet SalleDepart, Sommet SalleBoss)
         {
-            Sommet sommetAEnlever = listeDesSommets[GenerateurAleatoire.Next(listeDesSommets.Count)];
+            Sommet sommetAEnlever = listeDesSommets[GenerateurAleatoire.Instance.Next(listeDesSommets.Count)];
             List<Sommet> resultat = listeDesSommets;
             if (sommetAEnlever != SalleDepart)
             {
                 List<Sommet> newListeDesSommets = graphe.Parcours(SalleDepart, sommetAEnlever);
 
-                if (newListeDesSommets.Contains(SalleBoss) && newListeDesSommets.Contains(SalleItem) && newListeDesSommets.Count > 15)
+                if (newListeDesSommets.Contains(SalleBoss) && newListeDesSommets.Count > 15)
                 {
                     resultat = newListeDesSommets;
                     for (int i = 0; i < Carte.Taille; i++)

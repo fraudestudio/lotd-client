@@ -17,11 +17,7 @@ namespace Assets.Scripts.ProceduralGeneration.Salles
 
         public override void Generation()
         {
-            //Génération fixe que l'on modifiera plus tard
             base.Generation();
-            GenerateurAleatoire.SetSeedLocale(this);
-            this.NbMonstre = GenerateurAleatoire.Next() % 5 + 1;
-            this.NbItems = GenerateurAleatoire.Next() % 3;
         }
 
         public override TypeSalle Type => TypeSalle.NORMALE;

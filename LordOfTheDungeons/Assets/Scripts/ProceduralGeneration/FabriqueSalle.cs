@@ -25,6 +25,8 @@ namespace Assets.Scripts.ProceduralGeneration
                 case TypeSalle.BOSS: salle = new SalleBoss(ligne, colonne); break;
                 case TypeSalle.START: salle = new SalleStart(ligne, colonne); break;
                 case TypeSalle.VIDE: salle = new SalleVide(ligne, colonne); break;
+                case TypeSalle.TILENORMALE: salle = new SalleTileNormal(ligne, colonne); break;
+                case TypeSalle.TILEFULL: salle = new SalleTileFull(ligne, colonne); break;
             }
             return salle;
         }

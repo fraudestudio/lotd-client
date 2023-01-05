@@ -9,8 +9,18 @@ using Random = System.Random;
 
 public class GenerateurAleatoire
 {
-    private static GenerateurAleatoire instance = new GenerateurAleatoire();
-    public static GenerateurAleatoire Instance { get => instance; set => instance = value; }
+    private static GenerateurAleatoire instance;
+    public static GenerateurAleatoire Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = new GenerateurAleatoire();
+            }
+            return instance;
+        }
+    }
 
     private Random random;
 
@@ -23,32 +33,32 @@ public class GenerateurAleatoire
     }
 
 
-    public static void SetSeedGlobal(string seed)
+    public void SetSeedGlobal(int seed)
     {
-        MD5 md5Hasher = MD5.Create();
-        var hashed = md5Hasher.ComputeHash(Encoding.UTF8.GetBytes(seed));
-        Instance.seedGlobale = BitConverter.ToInt32(hashed, 0);
+        //MD5 md5Hasher = MD5.Create();
+        //var hashed = md5Hasher.ComputeHash(Encoding.UTF8.GetBytes(seed));
+        Instance.seedGlobale = seed;
         Instance.random = new Random(Instance.seedGlobale);
         Instance.seedLocale = 0;
     }
 
-    public static void SetSeedLocale(object o)
+    public void SetSeedLocale(object o)
     {
         Instance.seedLocale = o.GetHashCode();
         Instance.random = new Random(Instance.seedGlobale + Instance.seedLocale);
     }
 
-    public static int Next()
+    public int Next()
     {
         return Instance.random.Next();
     }
 
-    public static int Next(int borneMax)
+    public int Next(int borneMax)
     {
         return Instance.random.Next(borneMax);
     }
 
-    public static Coordonnees NextCoordonnees()
+    public Coordonnees NextCoordonnees()
     {
         return new Coordonnees(Next(Carte.Taille), Next(Carte.Taille));
     }
