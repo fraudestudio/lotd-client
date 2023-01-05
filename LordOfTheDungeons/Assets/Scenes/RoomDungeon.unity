@@ -485,6 +485,7 @@ MonoBehaviour:
   tileNormale: {fileID: 2188946610316862480, guid: 94c75aac59cc2b94a8e8b1ff732619ea, type: 3}
   tileFull: {fileID: 2188946610316862480, guid: a6652709af08a6b48a4157df331675df, type: 3}
   mainCamera: {fileID: 1581490990}
+  mapSkinLoader: {fileID: 1915601236}
 --- !u!4 &619482795
 Transform:
   m_ObjectHideFlags: 0
@@ -970,7 +971,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1915601238}
-  - component: {fileID: 1915601237}
+  - component: {fileID: 1915601239}
   m_Layer: 0
   m_Name: MapSkinLoader
   m_TagString: Untagged
@@ -978,18 +979,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1915601237
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1915601236}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e95821272f243f42b597b383d1caa31, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1915601238
 Transform:
   m_ObjectHideFlags: 0
@@ -1005,6 +994,37 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1915601239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1915601236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f6611c640aca0945b7662687cf8b722, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprites:
+  - name: BIG_LEFT_UP
+    sprite: {fileID: -1316385300, guid: 48c16cdaed5fd864c81ba00c76f19992, type: 3}
+  - name: BIG_LEFT_MIDDLE
+    sprite: {fileID: 938201328, guid: 48c16cdaed5fd864c81ba00c76f19992, type: 3}
+  - name: BIG_LEFT_DOWN
+    sprite: {fileID: -1046055174, guid: 48c16cdaed5fd864c81ba00c76f19992, type: 3}
+  - name: BIG_MIDDLE_UP
+    sprite: {fileID: 710874885, guid: 48c16cdaed5fd864c81ba00c76f19992, type: 3}
+  - name: BIG_MIDDLE_DOWN
+    sprite: {fileID: 148499764, guid: 48c16cdaed5fd864c81ba00c76f19992, type: 3}
+  - name: BIG_RIGHT_UP
+    sprite: {fileID: -2071781937, guid: 48c16cdaed5fd864c81ba00c76f19992, type: 3}
+  - name: BIG_RIGHT_MIDDLE
+    sprite: {fileID: 1984666114, guid: 48c16cdaed5fd864c81ba00c76f19992, type: 3}
+  - name: BIG_RIGHT_DOWN
+    sprite: {fileID: 2082187268, guid: 48c16cdaed5fd864c81ba00c76f19992, type: 3}
+  - name: BIG_MIDDLE_MIDDLE
+    sprite: {fileID: 333617554, guid: 48c16cdaed5fd864c81ba00c76f19992, type: 3}
 --- !u!1 &2130161130
 GameObject:
   m_ObjectHideFlags: 0

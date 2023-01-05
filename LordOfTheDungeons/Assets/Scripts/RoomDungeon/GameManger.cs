@@ -12,16 +12,14 @@ public class GameManger : MonoBehaviour
     private GameObject roomGenerator;
     void Start()
     {
-
-        System.Random r = new System.Random(123);
-        for (int i = 0; i < 10; i++)
-        {
-            Debug.Log(r.Next(100));
-        }
-
-
         mapGenerator.GetComponent<MapGenerator>().GenerateMap(new AlgorithmeEliminationSimple().Generer(123));
         roomGenerator.GetComponent<RoomGenerator>().GenerateRoom(new AlgorithmeRoomGeneration().Generer(123));
+    }
+
+
+    public void GenerateRoom()
+    {
+        roomGenerator.GetComponent<RoomGenerator>().GenerateRoom(new AlgorithmeRoomGeneration().Generer(new System.Random().Next()));
     }
 
     // Update is called once per frame

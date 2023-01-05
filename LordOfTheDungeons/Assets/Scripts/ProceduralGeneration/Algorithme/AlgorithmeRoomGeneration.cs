@@ -6,17 +6,21 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using Unity.Burst;
+using UnityEditor;
 using UnityEngine.UIElements.Experimental;
 
 namespace Assets.Scripts.ProceduralGeneration.Algorithme
 {
+
     public class AlgorithmeRoomGeneration : IAlgorithmeGeneration
     {
+        private List<Coordonnees> valideFigure = new List<Coordonnees>();
         public Carte Generer(int seed)
         {
             Carte.Taille = 15;
             Graphe g = new Graphe();
             GenerateurAleatoire.Instance.SetSeedLocale(seed);
+
 
             // We set all the tiles to normal
             for (int ligne = 0; ligne < Carte.Taille; ligne++)
@@ -27,7 +31,7 @@ namespace Assets.Scripts.ProceduralGeneration.Algorithme
                 }
             }
 
-            for (int i = 0; i < GenerateurAleatoire.Instance.Next(6) + 2; i++)
+            for (int i = 0; i < GenerateurAleatoire.Instance.Next(6) + 6; i++)
             {
 
                 Coordonnees c = GenerateurAleatoire.Instance.NextCoordonnees();
@@ -52,12 +56,12 @@ namespace Assets.Scripts.ProceduralGeneration.Algorithme
             bool result = true;
 
 
-            if (ligne + taille >= Carte.Taille - taille)
+            if (ligne + taille > Carte.Taille)
             {
                 result = false;
             }
 
-            if (colonne + taille >= Carte.Taille - taille)
+            if (colonne + taille > Carte.Taille)
             {
                 result = false;
             }
@@ -74,32 +78,18 @@ namespace Assets.Scripts.ProceduralGeneration.Algorithme
 
             if (result)
             {
-                if (ligne > 0 && colonne > 0)
+                for(int i = 0; i < taille - 1; i++)
                 {
-                    for (int i = -1; i < taille + 1; i++)
+                    for(int j = 0; j < taille - 1; j++)
                     {
-                        for (int j = -1; j < taille + 1; j++)
+                        Coordonnees coordinate = new Coordonnees(ligne + i, colonne + j);
+                        foreach(Coordonnees valideCoordinate in valideFigure)
                         {
-                            if (g.GetSommet(ligne + i, colonne + j).TypeSalle == TypeSalle.TILEFULL)
+                            if (coordinate.Distance(valideCoordinate) < 1)
                             {
                                 result = false;
                             }
                         }
-                    }
-                }
-
-                if (ligne != 0)
-                {
-                    if (g.GetSommet(ligne -1, colonne).TypeSalle == TypeSalle.TILEFULL)
-                    {
-                        result = false;
-                    }
-                }
-                if (colonne != 0)
-                {
-                    if (g.GetSommet(ligne, colonne - 1).TypeSalle == TypeSalle.TILEFULL)
-                    {
-                        result = false;
                     }
                 }
             }
@@ -117,6 +107,7 @@ namespace Assets.Scripts.ProceduralGeneration.Algorithme
                 for (int j = 0; j < taille; j++)
                 {
                     graphe.GetSommet(ligne + i, colonne + j).TypeSalle = TypeSalle.TILEFULL;
+                    valideFigure.Add(new Coordonnees(ligne + i, colonne + j));
                 }
             }
 
