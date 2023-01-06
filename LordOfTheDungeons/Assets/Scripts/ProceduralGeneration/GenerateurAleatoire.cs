@@ -50,16 +50,13 @@ public class GenerateurAleatoire
 
     public int Next()
     {
-        int n = Instance.random.Next();
-        UnityEngine.Debug.Log(String.Format("next: {0}", n));
-        return n;
+        return Instance.random.Next();
+       
     }
 
     public int Next(int borneMax)
     {
-        int n = Instance.random.Next(borneMax);
-        UnityEngine.Debug.Log(String.Format("next (max {1}): {0}", n, borneMax));
-        return n;
+        return Instance.random.Next(borneMax);
     }
 
     public Coordonnees NextCoordonnees()
