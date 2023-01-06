@@ -24,7 +24,7 @@ namespace Assets.Scripts.RoomDungeon
         private SkinRoom[] sprites;
 
 
-        private void Start()
+        private void Awake()
         {
             foreach (SkinRoom sk in sprites)
             {

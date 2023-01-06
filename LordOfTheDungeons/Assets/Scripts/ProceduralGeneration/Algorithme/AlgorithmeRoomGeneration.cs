@@ -78,14 +78,14 @@ namespace Assets.Scripts.ProceduralGeneration.Algorithme
 
             if (result)
             {
-                for(int i = 0; i < taille - 1; i++)
+                for(int i = 0; i < taille; i++)
                 {
-                    for(int j = 0; j < taille - 1; j++)
+                    for(int j = 0; j < taille; j++)
                     {
                         Coordonnees coordinate = new Coordonnees(ligne + i, colonne + j);
                         foreach(Coordonnees valideCoordinate in valideFigure)
                         {
-                            if (coordinate.Distance(valideCoordinate) < 1)
+                            if (coordinate.Distance(valideCoordinate) < 2)
                             {
                                 result = false;
                             }

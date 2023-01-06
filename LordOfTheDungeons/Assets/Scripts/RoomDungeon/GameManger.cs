@@ -10,16 +10,26 @@ public class GameManger : MonoBehaviour
     private GameObject mapGenerator;
     [SerializeField]
     private GameObject roomGenerator;
+
+    private GameObject currentRoom;
+
     void Start()
     {
         mapGenerator.GetComponent<MapGenerator>().GenerateMap(new AlgorithmeEliminationSimple().Generer(123));
-        roomGenerator.GetComponent<RoomGenerator>().GenerateRoom(new AlgorithmeRoomGeneration().Generer(123));
+        roomGenerator.GetComponent<RoomGenerator>().GenerateRoom(new AlgorithmeRoomGeneration().Generer(mapGenerator.GetComponent<MapGenerator>().FirstRoom.GetComponent<SalleObjectScript>().Seed));
+        currentRoom = mapGenerator.GetComponent<MapGenerator>().FirstRoom;
     }
 
 
     public void GenerateRoom()
     {
         roomGenerator.GetComponent<RoomGenerator>().GenerateRoom(new AlgorithmeRoomGeneration().Generer(new System.Random().Next()));
+    }
+
+
+    public void ChangeRoom()
+    {
+
     }
 
     // Update is called once per frame
