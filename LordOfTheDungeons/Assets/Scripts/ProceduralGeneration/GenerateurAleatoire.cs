@@ -52,7 +52,8 @@ public class GenerateurAleatoire
     /// <param name="seed">the local seed</param>
     public void SetSeedLocale(int seed)
     {
-        Instance.random = new Random(Instance.seedGlobale + seed);
+        Instance.seedLocale = seed;
+        Instance.random = new Random(Instance.seedGlobale + Instance.seedLocale);
     }
 
     /// <summary>
@@ -76,9 +77,9 @@ public class GenerateurAleatoire
     }
 
     /// <summary>
-    /// Generate a new coordinates base on the map length
+    /// Generate a new coordinates base 
     /// </summary>
-    /// <returns>the generated coordinates</returns>
+    /// <returns></returns>
     public Coordonnees NextCoordonnees()
     {
         return new Coordonnees(Next(Carte.Taille), Next(Carte.Taille));

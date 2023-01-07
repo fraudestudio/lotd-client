@@ -37,9 +37,9 @@ namespace Assets.Scripts.ProceduralGeneration
             //Création de la salle
             Salle salle = FabriqueSalle.Creer(typeSalle, ligne, colonne);
             //Positionnement de la salle
-            for (int i = ligne; i < ligne + salle.Hauteur; i++)
+            for (int i = ligne; i < ligne + 1; i++)
             {
-                for (int j = colonne; j < colonne + salle.Largeur; j++)
+                for (int j = colonne; j < colonne + 1; j++)
                 {
                     this.salles[i, j] = salle;
                 }

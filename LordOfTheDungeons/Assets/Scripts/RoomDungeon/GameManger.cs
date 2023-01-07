@@ -38,7 +38,7 @@ public class GameManger : MonoBehaviour
     public void GenerateRoom(GameObject room)
     {
 
-        roomGenerator.GetComponent<RoomGenerator>().GenerateRoom(new AlgorithmeRoomGeneration().Generer(currentRoom.GetComponent<SalleObjectScript>().Seed));
+        roomGenerator.GetComponent<RoomGenerator>().GenerateRoom(new AlgorithmeRoomGeneration().Generer(room.GetComponent<SalleObjectScript>().Seed));
     }
 
 

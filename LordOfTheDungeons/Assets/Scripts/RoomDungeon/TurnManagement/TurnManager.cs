@@ -29,6 +29,9 @@ public class TurnManager : MonoBehaviour
     [SerializeField]
     private GameObject turnDisplayText;
 
+    [SerializeField]
+    private TMP_Text timeRemainingText;
+
     /// <summary>
     /// Start to manage who has the turn
     /// </summary>
@@ -65,7 +68,7 @@ public class TurnManager : MonoBehaviour
                 break;
         }
         turnDisplayText.GetComponent<Animator>().SetTrigger("StartAnim");
-        //StartTimer();
+        StartTimer();
     }
 
 
@@ -80,6 +83,7 @@ public class TurnManager : MonoBehaviour
             // Every second we add one
             yield return new WaitForSeconds(1f);
             timeRemaining -= 1;
+            ChangeTimeText();
             // We stop the timer if the time is 0
             if (timeRemaining <= 0)
             {
@@ -94,24 +98,32 @@ public class TurnManager : MonoBehaviour
     private void StartTimer()
     {
         timeRemaining = 90;
+        canCountTime = true;
+        ChangeTimeText();
         StartCoroutine(StartCountTurn());
     }
 
 
     /// <summary>
     /// When the application is stopped, we saved the time
-    /// When it is up, 
+    /// When it is up, it rewrite the time that has been passed
     /// </summary>
     /// <param name="pause"></param>
     private void OnApplicationPause(bool pause)
     {
-        if (pause)
+        if (canCountTime)
         {
-            pausedDateTime = DateTime.Now;
+            if (pause)
+            {
+                pausedDateTime = DateTime.Now;
+            }
+            else
+            {
+                timeRemaining -= Convert.ToInt32((DateTime.Now - pausedDateTime).TotalSeconds);
+                ChangeTimeText();
+            }
         }
-        else
-        {
-        }
+
     }
 
 
@@ -124,5 +136,11 @@ public class TurnManager : MonoBehaviour
     {
         this.playerOneName = playerOneName;
         this.playerTwoName = playerTwoName;
+    }
+
+
+    private void ChangeTimeText()
+    {
+        timeRemainingText.text = "Temps restant : " + timeRemaining + " secondes";
     }
 }
