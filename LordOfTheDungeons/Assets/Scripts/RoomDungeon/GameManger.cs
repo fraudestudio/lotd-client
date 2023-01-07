@@ -23,12 +23,18 @@ public class GameManger : MonoBehaviour
         currentRoom = mapGenerator.GetComponent<MapGenerator>().FirstRoom;
     }
 
-
+    /// <summary>
+    /// Generate a random room 
+    /// </summary>
     public void GenerateRoom()
     {
         roomGenerator.GetComponent<RoomGenerator>().GenerateRoom(new AlgorithmeRoomGeneration().Generer(new System.Random().Next()));
     }
 
+    /// <summary>
+    /// Generate a room with the seed of the given room
+    /// </summary>
+    /// <param name="room">Room we want to generate</param>
     public void GenerateRoom(GameObject room)
     {
 
@@ -41,7 +47,11 @@ public class GameManger : MonoBehaviour
         StartCoroutine(FadeStartAnim());
     }
 
-
+    /// <summary>
+    /// Change wich to generate room in function of the arrow that has been clicked
+    /// Then it stores the generated room in the current room
+    /// </summary>
+    /// <param name="direction"></param>
     public void GetArrow(string direction)
     {
         switch (direction)
@@ -72,11 +82,16 @@ public class GameManger : MonoBehaviour
                 break;
         }
 
+        // Set the arrow position on the right room 
         mapGenerator.GetComponent<MapGenerator>().SetArrowPosition(currentRoom.GetComponent<SalleObjectScript>().Salle.Ligne, currentRoom.GetComponent<SalleObjectScript>().Salle.Colonne);
         StartCoroutine(FadeStopAnim());
     }
 
 
+    /// <summary>
+    /// Stop the animations and goes back to the normal game
+    /// </summary>
+    /// <returns></returns>
     public IEnumerator FadeStopAnim()
     {
 
@@ -89,6 +104,9 @@ public class GameManger : MonoBehaviour
         GameObject.Find("ChangeRoom").transform.Find("Door").GetComponent<Animator>().SetTrigger("StartAnimZoom");
         yield return new WaitForSeconds(2f);
         GameObject.Find("ChangeRoom").transform.Find("Door").GetComponent<Animator>().SetTrigger("StopAnimZoom");
+        GameObject.Find("ChangeRoom").transform.Find("Door").GetComponent<CanvasGroup>().alpha = 0;
+        GameObject.Find("ChangeRoom").GetComponent<Animator>().SetTrigger("StartAnimFadeOut");
+        yield return new WaitForSeconds(1f);
         GameObject.Find("ChangeRoom").GetComponent<Animator>().SetTrigger("StopAnim");
         GameObject.Find("ChangeRoom").GetComponent<CanvasGroup>().alpha = 0;
         GameObject.Find("ChangeRoom").GetComponent<CanvasGroup>().interactable = false;
@@ -96,22 +114,35 @@ public class GameManger : MonoBehaviour
 
     }
 
+
+    /// <summary>
+    /// Start the fade animation with the door
+    /// It stops when the buttons to select a room shows up
+    /// </summary>
+    /// <returns></returns>
     public IEnumerator FadeStartAnim()
     {
-        GameObject.Find("ChangeRoom").GetComponent<Animator>().SetTrigger("StartAnim");
+        GameObject.Find("ChangeRoom").GetComponent<Animator>().SetTrigger("StartAnimFade");
         yield return new WaitForSeconds(1.5f);
         GameObject.Find("ChangeRoom").GetComponent<CanvasGroup>().alpha = 1;
         GameObject.Find("ChangeRoom").GetComponent<CanvasGroup>().interactable = true;
         GameObject.Find("ChangeRoom").GetComponent<CanvasGroup>().blocksRaycasts = true;
         GameObject.Find("ChangeRoom").transform.Find("Door").GetComponent<Animator>().SetTrigger("StartAnimDoor");
+        GameObject.Find("ChangeRoom").transform.Find("Door").GetComponent<CanvasGroup>().alpha = 1;
         yield return new WaitForSeconds(2f);
-        GameObject.Find("ChangeRoom").transform.Find("Door").GetComponent<Animator>().SetTrigger("StopAnimDoor");
+
 
         GameObject.Find("ChangeRoom").transform.Find("MiniMap").GetComponent<CanvasGroup>().alpha = 1;
 
         GameObject.Find("ChangeRoom").transform.Find("MiniMap").GetComponent<Animator>().SetTrigger("Zoom");
         GameObject.Find("ChangeRoom").transform.Find("Buttons").GetComponent<Animator>().SetTrigger("Zoom");
 
+        yield return new WaitForSeconds(0.3f);
+        GameObject.Find("ChangeRoom").transform.Find("Door").GetComponent<Animator>().SetTrigger("StopAnimDoor");
+
+
+
+        // We check wich arrow to select
         if (currentRoom.GetComponent<SalleObjectScript>().Left == null)
         {
             GameObject.Find("ChangeRoom").transform.Find("Buttons").transform.Find("LeftButton").GetComponent<CanvasGroup>().alpha = 0;

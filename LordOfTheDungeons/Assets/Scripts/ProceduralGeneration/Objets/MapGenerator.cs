@@ -48,7 +48,7 @@ public class MapGenerator : MonoBehaviour, IGeneratorAlgo
                     salle.transform.position = new Vector2(colonne, ligne);
                     
                     salle.GetComponent<SalleObjectScript>().Salle = carte.Salles[ligne, colonne];
-                    salle.GetComponent<SalleObjectScript>().Seed = ligne + colonne;
+                    salle.GetComponent<SalleObjectScript>().Seed = int.Parse(ligne.ToString() + colonne.ToString());
 
                     salles[ligne,colonne] = salle;
 
@@ -138,6 +138,6 @@ public class MapGenerator : MonoBehaviour, IGeneratorAlgo
 
     public void SetArrowPosition(int ligne, int colonne)
     {
-        arrow.transform.position = new Vector3(ligne, colonne, -8);
+        arrow.transform.position = new Vector3(colonne, ligne, -8);
     }
 }

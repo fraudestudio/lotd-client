@@ -8,7 +8,8 @@ public class SalleObjectScript : MonoBehaviour
 {
     private Salle salle;
     public Salle Salle { get => salle; set => salle = value; }
-    
+
+    [SerializeField]
     private int seed;
     public int Seed { get => seed; set => seed = value; }
 

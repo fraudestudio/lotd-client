@@ -8,9 +8,12 @@ namespace Assets.Scripts.ProceduralGeneration
 {
     public class Coordonnees
     {
+        // Line of the coordinates
         private int ligne;
+
         public int Ligne { get => ligne; set => ligne = value; }
 
+        /// Column of the coordinates
         private int colonne;
         public int Colonne { get => colonne; set => colonne = value; }
 
@@ -33,6 +36,11 @@ namespace Assets.Scripts.ProceduralGeneration
             return HashCode.Combine(ligne, colonne);
         }
 
+        /// <summary>
+        /// Send back the distance with the specify coordinates
+        /// </summary>
+        /// <param name="cible"></param>
+        /// <returns>the distance</returns>
         public int Distance(Coordonnees cible)
         {
             return Math.Abs(cible.Ligne - Ligne) + Math.Abs(cible.Colonne - Colonne);

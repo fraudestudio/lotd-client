@@ -13,6 +13,5 @@ namespace Assets.Scripts.ProceduralGeneration.Salles
         }
 
         public override TypeSalle Type => TypeSalle.TILEFULL;
-        public override bool EstVide => true;
     }
 }

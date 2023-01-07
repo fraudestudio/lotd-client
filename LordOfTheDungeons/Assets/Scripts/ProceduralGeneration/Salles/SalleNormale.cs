@@ -15,11 +15,6 @@ namespace Assets.Scripts.ProceduralGeneration.Salles
         {
         }
 
-        public override void Generation()
-        {
-            base.Generation();
-        }
-
         public override TypeSalle Type => TypeSalle.NORMALE;
     }
 }

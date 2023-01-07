@@ -1,4 +1,5 @@
 using Assets.Scripts.ProceduralGeneration;
+using Assets.Scripts.ProceduralGeneration.Algorithme;
 using Assets.Scripts.ProceduralGeneration.Objets;
 using Assets.Scripts.ProceduralGeneration.Salles;
 using Assets.Scripts.RoomDungeon;
@@ -20,7 +21,10 @@ public class RoomGenerator : MonoBehaviour, IGeneratorAlgo
     private GameObject mapSkinLoader;
     [SerializeField]
     private GameObject border;
+    [SerializeField]
+    private int roomSize = 18;
 
+    private Bounds roomCameraBounds;
 
     private Carte carte;
 
@@ -28,9 +32,15 @@ public class RoomGenerator : MonoBehaviour, IGeneratorAlgo
     private List<GameObject> fullTiles = new List<GameObject>();
     private List<GameObject> borders = new List<GameObject>();
 
+
+    private void Awake()
+    {
+        AlgorithmeRoomGeneration.RoomSize = roomSize;
+    }
+
+
     public void GenerateRoom(Carte carte)
     {
-
         this.carte = carte; 
 
         CreateBorders();
@@ -59,13 +69,13 @@ public class RoomGenerator : MonoBehaviour, IGeneratorAlgo
         }
 
 
-        Bounds mapBounds = new Bounds(tiles[0].transform.position, Vector3.zero);
+        roomCameraBounds = new Bounds(tiles[0].transform.position, Vector3.zero);
 
         foreach (GameObject tile in tiles)
         {
-            if (!mapBounds.Contains(tile.transform.position))
+            if (!roomCameraBounds.Contains(tile.transform.position))
             {
-                mapBounds.Encapsulate(tile.transform.position);
+                roomCameraBounds.Encapsulate(tile.transform.position);
             }
         }
 
@@ -73,8 +83,8 @@ public class RoomGenerator : MonoBehaviour, IGeneratorAlgo
         SetSkin();
 
 
-        mainCamera.transform.position = new Vector3(mapBounds.center.x + 5, mapBounds.center.y, -10);
-        mainCamera.orthographicSize = mapBounds.size.x / 1.6f;
+        mainCamera.transform.position = new Vector3(roomCameraBounds.center.x + 5, roomCameraBounds.center.y, -10);
+        mainCamera.orthographicSize = roomCameraBounds.size.x / 1.6f;
     }
 
     public GameObject GetObjectSalle(TypeSalle salle)

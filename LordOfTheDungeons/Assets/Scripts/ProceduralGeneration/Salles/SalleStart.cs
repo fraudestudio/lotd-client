@@ -13,6 +13,5 @@ namespace Assets.Scripts.ProceduralGeneration.Salles
         }
 
         public override TypeSalle Type => TypeSalle.START;
-        public override bool EstVide => true;
     }
 }

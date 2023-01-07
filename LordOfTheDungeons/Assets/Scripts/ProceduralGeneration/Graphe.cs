@@ -10,6 +10,10 @@ namespace Assets.Scripts.ProceduralGeneration.Salles
     public class Graphe
     {
         private Dictionary<Coordonnees, Sommet> sommets = new Dictionary<Coordonnees, Sommet>();
+        
+        /// <summary>
+        /// Generate all the vertex in function of size
+        /// </summary>
         public Graphe()
         {
             for (int x = 0; x < Carte.Taille; x++)
@@ -41,6 +45,13 @@ namespace Assets.Scripts.ProceduralGeneration.Salles
             }
         }
 
+
+        /// <summary>
+        /// Send back the sommet that match the line and column
+        /// </summary>
+        /// <param name="ligne"></param>
+        /// <param name="colonne"></param>
+        /// <returns>Send back the sommet</returns>
         public Sommet GetSommet(int ligne, int colonne)
         {
             Sommet sommet = null;
@@ -53,6 +64,10 @@ namespace Assets.Scripts.ProceduralGeneration.Salles
             return sommet;
         }
 
+        /// <summary>
+        /// Convert the graph in map
+        /// </summary>
+        /// <returns>The generated map</returns>
         public Carte ToCarte()
         {
             Carte carte = new Carte();
@@ -64,7 +79,12 @@ namespace Assets.Scripts.ProceduralGeneration.Salles
             return carte;
         }
 
-
+        /// <summary>
+        /// Pathwidth of the startpoint to the arrival
+        /// </summary>
+        /// <param name="depart"></param>
+        /// <param name="aEnlever"></param>
+        /// <returns>Renvoie le parcours</returns>
         public List<Sommet> Parcours(Sommet depart, Sommet aEnlever)
         {
             List<Sommet> resultat = new List<Sommet>();
