@@ -27,7 +27,7 @@ public class CharacterManager : MonoBehaviour
 
 
     // Speed deplacement of the playable when moving
-    private int playableDeplacementSpeed = 5;
+    private int playableDeplacementSpeed = 2;
 
     // the current where the playable is when moving it
     private int currentNodePath;
@@ -35,13 +35,15 @@ public class CharacterManager : MonoBehaviour
     // the current position of the node
     private Vector3 currentPosition;
 
+    // Timer for the movement of the playable
     private float timer;
 
 
     [SerializeField]
     private GameObject playablePreFab;
 
-
+    [SerializeField]
+    private GameObject cameraManager;
 
     [SerializeField]
     private GameObject selectionTileManager;
@@ -136,6 +138,7 @@ public class CharacterManager : MonoBehaviour
         pathToMovePlayable = path;
         CheckNode();
         canMoveCurrentPlayable = true;
+        cameraManager.GetComponent<CameraManager>().CenterOnObjects(path,3f,0.2f);
     }
 
     /// <summary>
@@ -166,10 +169,23 @@ public class CharacterManager : MonoBehaviour
             canMoveCurrentPlayable = false;
             ModifyRoomPlayer(currentSelectedPlayable, true);
             selectionTileManager.GetComponent<SelectionTileManager>().DeleteSelectionTiles();
+            StartCoroutine(WaitForCamera(0.8f, 0.2f));
         }
 
     }
     
+    /// <summary>
+    /// Wait before calling the room camera
+    /// </summary>
+    /// <param name="time">amount of time needed</param>
+    /// <param name="cameraSpeed">speed of the camera</param>
+    /// <returns></returns>
+    private IEnumerator WaitForCamera(float time, float cameraSpeed)
+    {
+        yield return new WaitForSeconds(time);
+        cameraManager.GetComponent<CameraManager>().CenterOnRoom(cameraSpeed);
+    }
+
 
     /// <summary>
     /// Move the player on the path that has been given

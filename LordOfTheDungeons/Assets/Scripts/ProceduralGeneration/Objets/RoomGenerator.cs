@@ -16,13 +16,14 @@ public class RoomGenerator : MonoBehaviour, IGeneratorAlgo
     [SerializeField]
     private GameObject tileFull;
     [SerializeField]
-    private Camera mainCamera;
-    [SerializeField]
     private GameObject mapSkinLoader;
     [SerializeField]
     private GameObject border;
     [SerializeField]
     private int roomSize = 18;
+
+    [SerializeField]
+    private GameObject cameraManager;
 
     private Bounds roomCameraBounds;
 
@@ -85,8 +86,9 @@ public class RoomGenerator : MonoBehaviour, IGeneratorAlgo
         SetSkin();
 
 
-        mainCamera.transform.position = new Vector3(roomCameraBounds.center.x + 5, roomCameraBounds.center.y, -10);
-        mainCamera.orthographicSize = roomCameraBounds.size.x / 1.6f;
+        cameraManager.GetComponent<CameraManager>().RoomBounds = roomCameraBounds;
+        cameraManager.GetComponent<CameraManager>().CenterOnRoom(1000);
+
     }
 
     public GameObject GetObjectSalle(TypeSalle salle)
