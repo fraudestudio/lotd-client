@@ -16,6 +16,9 @@ namespace Assets.Scripts.ProceduralGeneration
         public int Colonne { get => colonne; set => colonne = value; }
         private int colonne;
 
+
+        private bool hasPlayer;
+        public bool HasPlayer { get => hasPlayer; set => hasPlayer = value; }
         protected Salle(int ligne, int colonne)
         {
             this.ligne = ligne;
@@ -23,6 +26,7 @@ namespace Assets.Scripts.ProceduralGeneration
         }
 
         public abstract TypeSalle Type { get; }
+
 
         public override bool Equals(object? obj)
         {
@@ -35,7 +39,5 @@ namespace Assets.Scripts.ProceduralGeneration
         {
             return HashCode.Combine(ligne, colonne);
         }
-
-
     }
 }

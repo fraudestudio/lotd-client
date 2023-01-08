@@ -7,21 +7,35 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class GameManger : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     [SerializeField]
     private GameObject mapGenerator;
     [SerializeField]
     private GameObject roomGenerator;
+    [SerializeField]
+    private GameObject characterManager;
 
     private GameObject currentRoom;
+
+    public static int roomPosition => 50;
 
     void Start()
     {
         mapGenerator.GetComponent<MapGenerator>().GenerateMap(new AlgorithmeEliminationSimple().Generer(123));
         roomGenerator.GetComponent<RoomGenerator>().GenerateRoom(new AlgorithmeRoomGeneration().Generer(mapGenerator.GetComponent<MapGenerator>().FirstRoom.GetComponent<SalleObjectScript>().Seed));
         currentRoom = mapGenerator.GetComponent<MapGenerator>().FirstRoom;
+        InitPlayers();
     }
+
+    /// <summary>
+    /// Create the player in the room 
+    /// </summary>
+    private void InitPlayers()
+    {
+        characterManager.GetComponent<CharacterManager>().CreatePlayableCharacters(roomGenerator.GetComponent<RoomGenerator>().Carte);
+    }
+
 
     /// <summary>
     /// Generate a random room 
@@ -29,6 +43,7 @@ public class GameManger : MonoBehaviour
     public void GenerateRoom()
     {
         roomGenerator.GetComponent<RoomGenerator>().GenerateRoom(new AlgorithmeRoomGeneration().Generer(new System.Random().Next()));
+        InitPlayers();
     }
 
     /// <summary>
@@ -37,8 +52,8 @@ public class GameManger : MonoBehaviour
     /// <param name="room">Room we want to generate</param>
     public void GenerateRoom(GameObject room)
     {
-
         roomGenerator.GetComponent<RoomGenerator>().GenerateRoom(new AlgorithmeRoomGeneration().Generer(room.GetComponent<SalleObjectScript>().Seed));
+        InitPlayers();
     }
 
 
@@ -200,9 +215,4 @@ public class GameManger : MonoBehaviour
         GameObject.Find("ChangeRoom").transform.Find("Buttons").GetComponent<CanvasGroup>().blocksRaycasts = true;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

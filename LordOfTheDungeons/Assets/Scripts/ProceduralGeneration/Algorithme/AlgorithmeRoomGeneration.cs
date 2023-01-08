@@ -15,7 +15,7 @@ namespace Assets.Scripts.ProceduralGeneration.Algorithme
     public class AlgorithmeRoomGeneration : IAlgorithmeGeneration
     {
         // Size of the room 
-        private static int roomSize = 18;
+        private static int roomSize = 15;
         public static int RoomSize { get => roomSize; set => roomSize = value; }
 
 
@@ -42,19 +42,19 @@ namespace Assets.Scripts.ProceduralGeneration.Algorithme
             }
 
             // We create some squares
-            for (int i = 0; i < GenerateurAleatoire.Instance.Next(6) + 6; i++)
+            for (int i = 0; i < GenerateurAleatoire.Instance.Next(12) + 6; i++)
             {
 
                 // We take a random coordinates and length
                 Coordonnees c = GenerateurAleatoire.Instance.NextCoordonnees();
-                int taille = GenerateurAleatoire.Instance.Next(2) + 2;
+                int taille = GenerateurAleatoire.Instance.Next(4) + 2;
 
                 // We make sure that we can create the square
                 // If we can't, we redo it until we can
                 while(!CanCreateSquare(g,c.Colonne, c.Ligne, taille))
                 {
                     c = GenerateurAleatoire.Instance.NextCoordonnees();
-                    taille = GenerateurAleatoire.Instance.Next(2) + 2;
+                    taille = GenerateurAleatoire.Instance.Next(4) + 2;
                 }
                 g = CreateSquare(g, c.Colonne, c.Ligne, taille);
             }
@@ -112,7 +112,7 @@ namespace Assets.Scripts.ProceduralGeneration.Algorithme
                         Coordonnees coordinate = new Coordonnees(ligne + i, colonne + j);
                         foreach(Coordonnees valideCoordinate in valideFigure)
                         {
-                            if (coordinate.Distance(valideCoordinate) < 2)
+                            if (coordinate.Distance(valideCoordinate) < 3)
                             {
                                 result = false;
                             }

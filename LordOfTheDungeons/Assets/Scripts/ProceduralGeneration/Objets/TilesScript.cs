@@ -8,4 +8,5 @@ public class TilesScript : MonoBehaviour
     private Salle salle;
 
     public Salle Salle { get => salle; set => salle = value; }
+
 }

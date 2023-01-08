@@ -27,10 +27,12 @@ public class RoomGenerator : MonoBehaviour, IGeneratorAlgo
     private Bounds roomCameraBounds;
 
     private Carte carte;
+    public Carte Carte { get => carte; set => carte = value; }
 
     private List<GameObject> tiles = new List<GameObject>();
     private List<GameObject> fullTiles = new List<GameObject>();
     private List<GameObject> borders = new List<GameObject>();
+
 
 
     private void Awake()
@@ -57,7 +59,7 @@ public class RoomGenerator : MonoBehaviour, IGeneratorAlgo
                     GameObject salle = GetObjectSalle(carte.Salles[ligne, colonne].Type);
                     salle.name = "Tile" + ligne + "_" + colonne + "_" + carte.Salles[ligne, colonne].Type.ToString();
                     salle.GetComponent<TilesScript>().Salle = carte.Salles[ligne, colonne];
-                    salle.transform.position = new Vector2(colonne + 50, ligne + 50);
+                    salle.transform.position = new Vector2(colonne + GameManager.roomPosition, ligne + GameManager.roomPosition);
                     tiles.Add(salle);
 
                     if (carte.Salles[ligne, colonne].Type == TypeSalle.TILEFULL)
@@ -173,40 +175,40 @@ public class RoomGenerator : MonoBehaviour, IGeneratorAlgo
         for (int i = 0; i < Carte.Taille; i++)
         {
             GameObject borderObject = Instantiate(border);
-            borderObject.transform.position = new Vector3(50 + i, 49);
+            borderObject.transform.position = new Vector3(GameManager.roomPosition + i, GameManager.roomPosition - 1);
             borderObject.GetComponent<SpriteRenderer>().sprite = mapSkinLoader.GetComponent<SkinRoomDictionnary>().GetSprite("BIG_MIDDLE_UP");
             borders.Add(borderObject);
             GameObject borderObject2 = Instantiate(border);
-            borderObject2.transform.position = new Vector3(50 + i, 50 + Carte.Taille);
+            borderObject2.transform.position = new Vector3(GameManager.roomPosition + i, GameManager.roomPosition + Carte.Taille);
             borderObject2.GetComponent<SpriteRenderer>().sprite = mapSkinLoader.GetComponent<SkinRoomDictionnary>().GetSprite("BIG_MIDDLE_DOWN");
             borders.Add(borderObject2);
         }
         for (int i = 0; i < Carte.Taille; i++)
         {
             GameObject borderObject = Instantiate(border);
-            borderObject.transform.position = new Vector3(49, 50 + i);
+            borderObject.transform.position = new Vector3(GameManager.roomPosition - 1, GameManager.roomPosition + i);
             borderObject.GetComponent<SpriteRenderer>().sprite = mapSkinLoader.GetComponent<SkinRoomDictionnary>().GetSprite("BIG_RIGHT_MIDDLE");
             borders.Add(borderObject);
             GameObject borderObject2 = Instantiate(border);
-            borderObject2.transform.position = new Vector3(50 + Carte.Taille, 50 + i);
+            borderObject2.transform.position = new Vector3(GameManager.roomPosition + Carte.Taille, GameManager.roomPosition + i);
             borderObject2.GetComponent<SpriteRenderer>().sprite = mapSkinLoader.GetComponent<SkinRoomDictionnary>().GetSprite("BIG_LEFT_MIDDLE");
             borders.Add(borderObject2);
         }
 
         GameObject borderObject3 = Instantiate(border);
-        borderObject3.transform.position = new Vector3(49, 49);
+        borderObject3.transform.position = new Vector3(GameManager.roomPosition - 1, GameManager.roomPosition - 1);
         borderObject3.GetComponent<SpriteRenderer>().sprite = mapSkinLoader.GetComponent<SkinRoomDictionnary>().GetSprite("BIG_CORNER_LEFT_DOWN");
         borders.Add(borderObject3);
         GameObject borderObject4 = Instantiate(border);
-        borderObject4.transform.position = new Vector3(50 + Carte.Taille, 49);
+        borderObject4.transform.position = new Vector3(GameManager.roomPosition + Carte.Taille, GameManager.roomPosition - 1);
         borderObject4.GetComponent<SpriteRenderer>().sprite = mapSkinLoader.GetComponent<SkinRoomDictionnary>().GetSprite("BIG_CORNER_RIGHT_DOWN");
         borders.Add(borderObject4);
         GameObject borderObject5 = Instantiate(border);
-        borderObject5.transform.position = new Vector3(49, 50 + Carte.Taille);
+        borderObject5.transform.position = new Vector3(GameManager.roomPosition - 1, GameManager.roomPosition + Carte.Taille);
         borderObject5.GetComponent<SpriteRenderer>().sprite = mapSkinLoader.GetComponent<SkinRoomDictionnary>().GetSprite("BIG_RIGHT_MIDDLE");
         borders.Add(borderObject5);
         GameObject borderObject6 = Instantiate(border);
-        borderObject6.transform.position = new Vector3(50 + Carte.Taille, 50 + Carte.Taille);
+        borderObject6.transform.position = new Vector3(GameManager.roomPosition + Carte.Taille, GameManager.roomPosition + Carte.Taille);
         borderObject6.GetComponent<SpriteRenderer>().sprite = mapSkinLoader.GetComponent<SkinRoomDictionnary>().GetSprite("BIG_LEFT_MIDDLE");
         borders.Add(borderObject6);
     }
