@@ -77,6 +77,18 @@ public class SelectionTileManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Turn all the selection tiles to white
+    /// </summary>
+    private void HideAllSelectionTile()
+    {
+        foreach (GameObject tile in selectionTiles)
+        {
+            tile.GetComponent<SelectionTileScript>().Hide();
+        }
+    }
+
+
 
     /// <summary>
     /// Create the tiles that allows the playable to do actions 
@@ -406,5 +418,14 @@ public class SelectionTileManager : MonoBehaviour
     private void SetCurrentPlayabe(GameObject playable)
     {
         characterManager.GetComponent<CharacterManager>().CurrentSelectedPlayable = playable;
+    }
+
+    /// <summary>
+    /// Tells the character manager to move the playable with the given path
+    /// </summary>
+    public void MovePlayable()
+    {
+        HideAllSelectionTile();
+        characterManager.GetComponent<CharacterManager>().MoveCurrentPlayer(currentPath);
     }
 }

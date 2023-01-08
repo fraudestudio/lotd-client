@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -16,6 +17,25 @@ public class CharacterManager : MonoBehaviour
     // the current selected playable by the player
     private GameObject currentSelectedPlayable;
     public GameObject CurrentSelectedPlayable { get => currentSelectedPlayable; set => currentSelectedPlayable = value; }
+
+
+    // Given path to move the current playable
+    private List<GameObject> pathToMovePlayable;
+
+    // Say if we can move the current playable on it path
+    private bool canMoveCurrentPlayable;
+
+
+    // Speed deplacement of the playable when moving
+    private int playableDeplacementSpeed = 5;
+
+    // the current where the playable is when moving it
+    private int currentNodePath;
+
+    // the current position of the node
+    private Vector3 currentPosition;
+
+    private float timer;
 
 
     [SerializeField]
@@ -64,9 +84,18 @@ public class CharacterManager : MonoBehaviour
             playables.Add(playable);
 
 
-            selectionTileManager.GetComponent<SelectionTileManager>().Carte = carte;
+            GiveSelectionManagerMap();
         }
     }
+
+    /// <summary>
+    /// Give the map to the selection manager
+    /// </summary>
+    private void GiveSelectionManagerMap()
+    {
+        selectionTileManager.GetComponent<SelectionTileManager>().Carte = carte;
+    }
+
 
     /// <summary>
     /// Verify if a playable can be place in a room
@@ -102,7 +131,65 @@ public class CharacterManager : MonoBehaviour
     /// <param name="path"></param>
     public void MoveCurrentPlayer(List<GameObject> path)
     {
+        ModifyRoomPlayer(currentSelectedPlayable, false);
+        currentNodePath = 0;
+        pathToMovePlayable = path;
+        CheckNode();
+        canMoveCurrentPlayable = true;
+    }
 
+    /// <summary>
+    /// Modify the hasPlayer of the tile of a playable
+    /// </summary>
+    /// <param name="hasPlayer"></param>
+    private void ModifyRoomPlayer(GameObject playable,bool hasPlayer)
+    {
+        carte.Salles[Convert.ToInt32(playable.transform.position.y) - GameManager.roomPosition, Convert.ToInt32(playable.transform.position.x) - GameManager.roomPosition].HasPlayer = hasPlayer;
+    }
+
+
+    /// <summary>
+    /// Check if a node can be selected an pick the next one in consequence
+    /// </summary>
+    private void CheckNode()
+    {
+        if (currentNodePath < pathToMovePlayable.Count)
+        {
+            timer = 0;
+            currentPosition = pathToMovePlayable[currentNodePath].transform.position;
+        }
+        else
+        {
+            // When it is done, we calcule the map and goes back to normal
+            GiveSelectionManagerMap();
+            currentSelectedPlayable.transform.position = currentPosition;
+            canMoveCurrentPlayable = false;
+            ModifyRoomPlayer(currentSelectedPlayable, true);
+            selectionTileManager.GetComponent<SelectionTileManager>().DeleteSelectionTiles();
+        }
+
+    }
+    
+
+    /// <summary>
+    /// Move the player on the path that has been given
+    /// </summary>
+    private void Update()
+    {
+        if (canMoveCurrentPlayable)
+        {
+
+            if (currentSelectedPlayable.transform.position != currentPosition)
+            {
+                timer += Time.deltaTime * playableDeplacementSpeed;
+                currentSelectedPlayable.transform.position = Vector3.Lerp(currentSelectedPlayable.transform.position, currentPosition, timer);
+            }
+            else
+            {
+                currentNodePath++;
+                CheckNode();
+            }
+        }
     }
 
 }

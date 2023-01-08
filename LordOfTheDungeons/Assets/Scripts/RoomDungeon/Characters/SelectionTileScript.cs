@@ -55,7 +55,10 @@ public class SelectionTileScript : MonoBehaviour
     /// </summary>
     public void OnMouseEnter()
     {
-        selectionTileManager.GetComponent<SelectionTileManager>().CreateSelectionTrail(gameObject);
+        if (canUse)
+        {
+            selectionTileManager.GetComponent<SelectionTileManager>().CreateSelectionTrail(gameObject);
+        }
     }
 
     /// <summary>
@@ -63,11 +66,22 @@ public class SelectionTileScript : MonoBehaviour
     /// </summary>
     public void OnMouseExit()
     {
-        selectionTileManager.GetComponent<SelectionTileManager>().ResetTrail();  
+        if (canUse)
+        {
+            selectionTileManager.GetComponent<SelectionTileManager>().ResetTrail();
+        }
+
     }
 
-    public void OnMouseOver()
+    /// <summary>
+    /// Tells the selection manager that the player want to move his playable here
+    /// </summary>
+    public void OnMouseDown()
     {
+        if (canUse)
+        {
+            selectionTileManager.GetComponent<SelectionTileManager>().MovePlayable();
+        }
     }
 
 
@@ -85,5 +99,14 @@ public class SelectionTileScript : MonoBehaviour
     public void TurnWhite()
     {
         gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0.3f);
+    }
+
+    /// <summary>
+    /// Hide selection tile
+    /// </summary>
+    public void Hide()
+    {
+        canUse = false;
+        gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0f);
     }
 }
