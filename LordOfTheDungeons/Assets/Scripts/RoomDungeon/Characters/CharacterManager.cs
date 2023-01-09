@@ -27,6 +27,7 @@ public class CharacterManager : MonoBehaviour
 
 
     // Speed deplacement of the playable when moving
+    [SerializeField]
     private int playableDeplacementSpeed = 2;
 
     // the current where the playable is when moving it
@@ -47,6 +48,9 @@ public class CharacterManager : MonoBehaviour
 
     [SerializeField]
     private GameObject selectionTileManager;
+    
+    [SerializeField]
+    private GameObject playerActionManager;
 
     // List of thep playable in the room
     private List<GameObject> playables = new List<GameObject>();
@@ -66,7 +70,7 @@ public class CharacterManager : MonoBehaviour
 
         this.carte = carte;
 
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 6; i++)
         {
             int ligne = GenerateurAleatoire.Instance.Next(3) + 1;
             int colonne = GenerateurAleatoire.Instance.Next(3) + 1;
@@ -83,6 +87,7 @@ public class CharacterManager : MonoBehaviour
             carte.Salles[ligne, colonne].HasPlayer = true;
             GameObject playable = Instantiate(playablePreFab);
             playable.transform.position = new Vector3(GameManager.roomPosition + colonne, GameManager.roomPosition + ligne, - 1);
+            playable.GetComponent<PlayableCharacterScript>().ChangeTeam(i % 2);
             playables.Add(playable);
 
 
@@ -137,8 +142,9 @@ public class CharacterManager : MonoBehaviour
         currentNodePath = 0;
         pathToMovePlayable = path;
         CheckNode();
-        canMoveCurrentPlayable = true;
-        cameraManager.GetComponent<CameraManager>().CenterOnObjects(path,3f,0.2f);
+        cameraManager.GetComponent<CameraManager>().CenterOnObjects(path, 3f, 0.2f);
+        playerActionManager.GetComponent<PlayerActionManager>().CanDoAnything = false;
+        StartCoroutine(WaitForAmountsSeconds(0.3f));
     }
 
     /// <summary>
@@ -183,6 +189,7 @@ public class CharacterManager : MonoBehaviour
     private IEnumerator WaitForCamera(float time, float cameraSpeed)
     {
         yield return new WaitForSeconds(time);
+        playerActionManager.GetComponent<PlayerActionManager>().CanDoAnything = true;
         cameraManager.GetComponent<CameraManager>().CenterOnRoom(cameraSpeed);
     }
 
@@ -206,6 +213,17 @@ public class CharacterManager : MonoBehaviour
                 CheckNode();
             }
         }
+    }
+
+    /// <summary>
+    /// Wait for the amount of time given
+    /// </summary>
+    /// <param name="time">time in seconds</param>
+    /// <returns></returns>
+    private IEnumerator WaitForAmountsSeconds(float time)
+    {
+        yield return new WaitForSeconds(time);
+        canMoveCurrentPlayable = true;
     }
 
 }

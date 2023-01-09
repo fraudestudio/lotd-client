@@ -9,9 +9,17 @@ public class TurnManager : MonoBehaviour
 {
 
     [SerializeField]
+    // The team of the current player
+    private TypeTurn currentPlayer;
+    public TypeTurn CurrentPlayer { get => currentPlayer; set => currentPlayer = value; }
+
+
+
     // Current turn of the game
+    [SerializeField]
     private TypeTurn currentTurn;
-    public TypeTurn CurrentTurn { get => currentTurn; set => currentTurn = value; }
+    public TypeTurn CurrentTurn { get { DisplayIsYourTurn(); return currentTurn; } set => currentTurn = value; }
+
 
     // Name of the player one
     private string playerOneName = "PlayerOne";
@@ -32,11 +40,15 @@ public class TurnManager : MonoBehaviour
     [SerializeField]
     private TMP_Text timeRemainingText;
 
+    [SerializeField]
+    private GameObject yourTurnText;
+
     /// <summary>
     /// Start to manage who has the turn
     /// </summary>
     public void StartManage()
     {
+        DisplayIsYourTurn();
         DisplayTurn();
     }
 
@@ -138,9 +150,28 @@ public class TurnManager : MonoBehaviour
         this.playerTwoName = playerTwoName;
     }
 
-
+    /// <summary>
+    /// Change the text of the remaining time
+    /// </summary>
     private void ChangeTimeText()
     {
         timeRemainingText.text = "Temps restant : " + timeRemaining + " secondes";
+    }
+
+    /// <summary>
+    /// Display if it is your turn
+    /// </summary>
+    private void DisplayIsYourTurn()
+    {
+        if (currentPlayer == currentTurn)
+        {
+            yourTurnText.GetComponent<TMP_Text>().text = "C'est votre tour !";
+            yourTurnText.GetComponent<TMP_Text>().color = new Color(1, 1, 0, 1);
+        }
+        else
+        {
+            yourTurnText.GetComponent<TMP_Text>().text = "Tour de " + currentTurn.ToString();
+            yourTurnText.GetComponent<TMP_Text>().color = new Color(1, 1, 0, 1);
+        }
     }
 }
