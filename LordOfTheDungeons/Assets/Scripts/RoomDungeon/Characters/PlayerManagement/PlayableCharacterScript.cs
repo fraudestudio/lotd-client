@@ -1,3 +1,4 @@
+using Assets.Scripts.RoomDungeon.Characters.Selection;
 using Assets.Scripts.RoomDungeon.TurnManagement;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using UnityEngine;
 public class PlayableCharacterScript : MonoBehaviour
 {
     // The movement of the player 
-    private int movement = 3;
+    private int movement = 10;
     public int Movement { get => movement; set => movement = value; }
 
     // Team of the player
@@ -60,7 +61,7 @@ public class PlayableCharacterScript : MonoBehaviour
     {
         if (VerifyCanUse() && playerActionManager.GetComponent<PlayerActionManager>().CanDoAnything)
         {
-            selectionTileManager.GetComponent<SelectionTileManager>().CreateSelectionTiles(movement, gameObject);
+            selectionTileManager.GetComponent<SelectionTileManager>().CreateSelectionTiles(movement,TypeSelection.Deplacement, gameObject);
         }
     }
 

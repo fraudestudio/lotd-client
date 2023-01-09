@@ -1,4 +1,5 @@
 using Assets.Scripts.ProceduralGeneration;
+using Assets.Scripts.RoomDungeon.Characters.Selection;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,6 +7,7 @@ using System.ComponentModel.Design;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.UIElements;
 
 public class SelectionTileManager : MonoBehaviour
 {
@@ -95,12 +97,15 @@ public class SelectionTileManager : MonoBehaviour
     /// </summary>
     /// <param name="movement"></param>
     /// <param name="playable"></param>
-    public void CreateSelectionTiles(int actionCount, GameObject playable)
+    public void CreateSelectionTiles(int actionCount, TypeSelection type, GameObject playable)
     {
-
         DeleteSelectionTiles();
 
-        SetCurrentPlayabe(playable);
+        if (type == TypeSelection.Deplacement)
+        {
+            SetCurrentPlayabe(playable);
+        }
+
 
         int colonne = Convert.ToInt32(characterManager.GetComponent<CharacterManager>().CurrentSelectedPlayable.transform.position.x) - GameManager.roomPosition;
         int ligne = Convert.ToInt32(characterManager.GetComponent<CharacterManager>().CurrentSelectedPlayable.transform.position.y) - GameManager.roomPosition;
@@ -108,11 +113,12 @@ public class SelectionTileManager : MonoBehaviour
 
 
         // We create all the tiles needed
-        GenerateCreationTile(movement, ligne, colonne);
+        GenerateCreationTile(movement, ligne, colonne,type);
 
 
         // On récupére les voisins
         DefineSelectionTileVoisins();
+
 
 
 
@@ -150,7 +156,7 @@ public class SelectionTileManager : MonoBehaviour
             }
         }
 
-
+        // If the center is in the remove list, we delete it from it 
         if (tileToDestroy.Contains(selectionTiles[0]))
         {
             tileToDestroy.Remove(selectionTiles[0]);
@@ -167,6 +173,10 @@ public class SelectionTileManager : MonoBehaviour
             selectionTiles.Remove(tileToDestroy[i]);
         }
         tileToDestroy.Clear();
+
+
+        // We set the tile to the asked type
+        SetType(selectionTiles, type);
     }
 
 
@@ -194,7 +204,7 @@ public class SelectionTileManager : MonoBehaviour
         }
     }
 
-    private void GenerateCreationTile(int movement, int ligne, int colonne)
+    private void GenerateCreationTile(int movement, int ligne, int colonne, TypeSelection type)
     {
 
         // We create the point 0
@@ -203,25 +213,13 @@ public class SelectionTileManager : MonoBehaviour
 
         for (int i = 0; i < movement; i++)
         {
-            if (colonne <= Carte.Taille - 1 && colonne >= 0 && ligne + i + 1 <= Carte.Taille - 1 && ligne + i + 1 >= 0)
-            {
-                if (carte.Salles[ligne + i + 1, colonne].Type != TypeSalle.TILEFULL && !carte.Salles[ligne + i + 1, colonne].HasPlayer)
-                {
-                    CreateSelectionTile(ligne + i + 1, colonne);
-                }
-            }
+            CreateTileCondition(ligne + i + 1, colonne , type);
         }
 
 
         for (int i = 0; i < movement; i++)
         {
-            if (colonne <= Carte.Taille - 1 && colonne >= 0 && ligne - i - 1 <= Carte.Taille - 1 && ligne - i - 1 >= 0)
-            {
-                if (carte.Salles[ligne - i - 1, colonne].Type != TypeSalle.TILEFULL && !carte.Salles[ligne - i - 1, colonne].HasPlayer)
-                {
-                    CreateSelectionTile(ligne - i - 1, colonne);
-                }
-            }
+            CreateTileCondition(ligne - i - 1, colonne, type);
         }
 
 
@@ -230,50 +228,62 @@ public class SelectionTileManager : MonoBehaviour
             //Horizontal Haut
             for (int j = 0; j < movement - i; j++)
             {
-                if (colonne + j + 1 <= Carte.Taille - 1 && colonne + j + 1 >= 0 && ligne + i <= Carte.Taille - 1 && ligne + i >= 0)
-                {
-                    if (carte.Salles[ligne + i, colonne + j + 1].Type != TypeSalle.TILEFULL && !carte.Salles[ligne + i, colonne + j + 1].HasPlayer)
-                    {
-                        CreateSelectionTile(ligne + i, colonne + j + 1);
-                    }
-                }
+                CreateTileCondition(ligne + i, colonne + j + 1, type);
             }
 
             for (int j = 0; j < movement - i; j++)
             {
-                if (colonne - j - 1 <= Carte.Taille - 1 && colonne - j - 1 >= 0 && ligne + i <= Carte.Taille - 1 && ligne + i >= 0)
-                {
-                    if (carte.Salles[ligne + i, colonne - j - 1].Type != TypeSalle.TILEFULL && !carte.Salles[ligne + i, colonne - j - 1].HasPlayer)
-                    {
-                        CreateSelectionTile(ligne + i, colonne - j - 1);
-                    }
-                }
+                CreateTileCondition(ligne + i ,colonne - j - 1, type);
             }
 
             // Horizontal Bas
             for (int j = 0; j < movement - i - 1; j++)
             {
-                if (colonne + j + 1 <= Carte.Taille - 1 && colonne + j + 1 >= 0 && ligne - i - 1 <= Carte.Taille - 1 && ligne - i - 1 >= 0)
-                {
-                    if (carte.Salles[ligne - i - 1, colonne + j + 1].Type != TypeSalle.TILEFULL && !carte.Salles[ligne - i - 1, colonne + j + 1].HasPlayer)
-                    {
-                        CreateSelectionTile(ligne - i - 1, colonne + j + 1);
-                    }
-                }
+                CreateTileCondition(ligne - i - 1,colonne + j + 1, type);
             }
 
             for (int j = 0; j < movement - i - 1; j++)
             {
-                if (colonne - j - 1 <= Carte.Taille - 1 && colonne - j - 1 >= 0 && ligne - i - 1 <= Carte.Taille - 1 && ligne - i - 1 >= 0)
-                {
-                    if (carte.Salles[ligne - i - 1, colonne - j - 1].Type != TypeSalle.TILEFULL && !carte.Salles[ligne - i - 1, colonne - j - 1].HasPlayer)
-                    {
-                        CreateSelectionTile(ligne - i - 1, colonne - j - 1);
-                    }
-                }
+                CreateTileCondition(ligne - i - 1, colonne - j - 1, type);
             }
         }
     }
+
+    /// <summary>
+    /// Create the tile with the given line and column condition for the type given
+    /// </summary>
+    /// <param name="ligneCondition">the line condition</param>
+    /// <param name="colonneCondition">the column condition</param>
+    /// <param name="type">the type we want to create</param>
+    private void CreateTileCondition(int ligneCondition, int colonneCondition, TypeSelection type)
+    {
+        switch (type)
+        {
+            case TypeSelection.Deplacement:
+                {
+                    if (colonneCondition <= Carte.Taille - 1 && colonneCondition >= 0 && ligneCondition <= Carte.Taille - 1 && ligneCondition >= 0)
+                    {
+                        if (carte.Salles[ligneCondition, colonneCondition].Type != TypeSalle.TILEFULL && !carte.Salles[ligneCondition, colonneCondition].HasPlayer)
+                        {
+                            CreateSelectionTile(ligneCondition, colonneCondition);
+                        }
+                    }
+                }
+                break;
+            case TypeSelection.Attack:
+                {
+                    if (colonneCondition <= Carte.Taille - 1 && colonneCondition >= 0 && ligneCondition <= Carte.Taille - 1 && ligneCondition >= 0)
+                    {
+                        if (carte.Salles[ligneCondition, colonneCondition].Type != TypeSalle.TILEFULL)
+                        {
+                            CreateSelectionTile(ligneCondition, colonneCondition);
+                        }
+                    }
+                }
+                break;
+        }
+    }
+
 
     /// <summary>
     /// Calcul a distance from a selection tile
@@ -427,5 +437,14 @@ public class SelectionTileManager : MonoBehaviour
     {
         HideAllSelectionTile();
         characterManager.GetComponent<CharacterManager>().MoveCurrentPlayer(currentPath);
+    }
+
+
+    private void SetType(List<GameObject> tiles,TypeSelection type)
+    {
+        foreach(GameObject selectionTile in tiles)
+        {
+            selectionTile.GetComponent<SelectionTileScript>().SetType(type);
+        }
     }
 }

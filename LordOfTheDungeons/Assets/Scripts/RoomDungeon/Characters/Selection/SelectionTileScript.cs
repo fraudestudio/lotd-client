@@ -1,3 +1,4 @@
+using Assets.Scripts.RoomDungeon.Characters.Selection;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,8 @@ public class SelectionTileScript : MonoBehaviour
     private int colonne;
     public int Colonne { get => colonne; set => colonne = value; }
 
+    // The type of the selection
+    private TypeSelection selectionType;
 
     private GameObject selectionTileManager;
 
@@ -57,7 +60,10 @@ public class SelectionTileScript : MonoBehaviour
     {
         if (canUse)
         {
-            selectionTileManager.GetComponent<SelectionTileManager>().CreateSelectionTrail(gameObject);
+            if (selectionType == TypeSelection.Deplacement)
+            {
+                selectionTileManager.GetComponent<SelectionTileManager>().CreateSelectionTrail(gameObject);
+            }
         }
     }
 
@@ -68,7 +74,10 @@ public class SelectionTileScript : MonoBehaviour
     {
         if (canUse)
         {
-            selectionTileManager.GetComponent<SelectionTileManager>().ResetTrail();
+            if (selectionType == TypeSelection.Deplacement)
+            {
+                selectionTileManager.GetComponent<SelectionTileManager>().ResetTrail();
+            }
         }
 
     }
@@ -80,7 +89,10 @@ public class SelectionTileScript : MonoBehaviour
     {
         if (canUse)
         {
-            selectionTileManager.GetComponent<SelectionTileManager>().MovePlayable();
+            if (selectionType == TypeSelection.Deplacement)
+            {
+                selectionTileManager.GetComponent<SelectionTileManager>().MovePlayable();
+            }
         }
     }
 
@@ -108,5 +120,25 @@ public class SelectionTileScript : MonoBehaviour
     {
         canUse = false;
         gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0f);
+    }
+
+
+    public void SetType(TypeSelection type)
+    {
+        switch (type)
+        {
+            case TypeSelection.Deplacement:
+                {
+                    type = TypeSelection.Deplacement;
+                    TurnWhite();
+                }
+                break;
+            case TypeSelection.Attack:
+                {
+                    type = TypeSelection.Attack;
+                    TurnRed();
+                }
+                break;
+        }
     }
 }

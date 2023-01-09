@@ -48,7 +48,7 @@ public class TurnManager : MonoBehaviour
     /// </summary>
     public void StartManage()
     {
-        DisplayIsYourTurn();
+
         DisplayTurn();
     }
 
@@ -57,18 +57,19 @@ public class TurnManager : MonoBehaviour
     /// </summary>
     public void DisplayTurn()
     {
+        DisplayIsYourTurn();
         string baseTurnText = "AU TOUR DE";
         switch (currentTurn)
         {
             case TypeTurn.Player_1:
                 {
-                    turnDisplayText.GetComponent<TMP_Text>().color = Color.yellow;
+                    turnDisplayText.GetComponent<TMP_Text>().color = Color.blue;
                     turnDisplayText.GetComponent<TMP_Text>().text = baseTurnText + " " + playerOneName + " !";
                 }
                 break;
             case TypeTurn.Player_2:
                 {
-                    turnDisplayText.GetComponent<TMP_Text>().color = Color.green;
+                    turnDisplayText.GetComponent<TMP_Text>().color = Color.yellow;
                     turnDisplayText.GetComponent<TMP_Text>().text = baseTurnText + " " + playerTwoName + " !";
                 }
                 break;

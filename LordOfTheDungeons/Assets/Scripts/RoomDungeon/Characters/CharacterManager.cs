@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.IO;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.UIElements;
 
 public class CharacterManager : MonoBehaviour
@@ -42,6 +43,8 @@ public class CharacterManager : MonoBehaviour
 
     [SerializeField]
     private GameObject playablePreFab;
+    [SerializeField]
+    private GameObject enemiesPreFab;
 
     [SerializeField]
     private GameObject cameraManager;
@@ -55,6 +58,7 @@ public class CharacterManager : MonoBehaviour
     // List of thep playable in the room
     private List<GameObject> playables = new List<GameObject>();
 
+    private List<GameObject> enemies = new List<GameObject>();
     
 
 
@@ -66,13 +70,14 @@ public class CharacterManager : MonoBehaviour
     {
 
         DeletePlayable();
+        DeleteEnemies();
         selectionTileManager.GetComponent<SelectionTileManager>().DeleteSelectionTiles();
 
         this.carte = carte;
 
         for (int i = 0; i < 6; i++)
         {
-            int ligne = GenerateurAleatoire.Instance.Next(3) + 1;
+            int ligne = GenerateurAleatoire.Instance.Next(Carte.Taille - 1) + 1;
             int colonne = GenerateurAleatoire.Instance.Next(3) + 1;
 
 
@@ -84,15 +89,41 @@ public class CharacterManager : MonoBehaviour
             }
 
 
-            carte.Salles[ligne, colonne].HasPlayer = true;
+            //carte.Salles[ligne, colonne].HasPlayer = true;
             GameObject playable = Instantiate(playablePreFab);
             playable.transform.position = new Vector3(GameManager.roomPosition + colonne, GameManager.roomPosition + ligne, - 1);
+            ModifyRoomPlayer(playable, true);
             playable.GetComponent<PlayableCharacterScript>().ChangeTeam(i % 2);
             playables.Add(playable);
 
 
             GiveSelectionManagerMap();
         }
+
+
+        for (int i = 0; i < 6; i++)
+        {
+            int ligne = GenerateurAleatoire.Instance.Next(Carte.Taille - 1) + 1;
+            int colonne = Carte.Taille - 5 + GenerateurAleatoire.Instance.Next(3) + 1;
+
+
+            // If we can't put the enemy, we retry with another coordinates
+            while (!PlayableCanBePlaced(ligne, colonne))
+            {
+                ligne = GenerateurAleatoire.Instance.Next(Carte.Taille - 1) + 1;
+                colonne = Carte.Taille - 5 + GenerateurAleatoire.Instance.Next(3) + 1;
+            }
+
+
+            GameObject enemy = Instantiate(enemiesPreFab);
+            enemy.transform.position = new Vector3(GameManager.roomPosition + colonne, GameManager.roomPosition + ligne, -1);
+            ModifyRoomPlayer(enemy, true);
+            enemies.Add(enemy);
+
+
+            GiveSelectionManagerMap();
+        }
+
     }
 
     /// <summary>
@@ -133,6 +164,18 @@ public class CharacterManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Delete all the playable on the terrain
+    /// </summary>
+    public void DeleteEnemies()
+    {
+        for (int i = 0; i < enemies.Count; i++)
+        {
+            Destroy(enemies[i]);
+        }
+        enemies.Clear();
+    }
+
+    /// <summary>
     /// Move the player on the path that has been given
     /// </summary>
     /// <param name="path"></param>
@@ -142,7 +185,7 @@ public class CharacterManager : MonoBehaviour
         currentNodePath = 0;
         pathToMovePlayable = path;
         CheckNode();
-        cameraManager.GetComponent<CameraManager>().CenterOnObjects(path, 3f, 0.2f);
+        cameraManager.GetComponent<CameraManager>().CenterOnObjects(path, 5f, 0.2f);
         playerActionManager.GetComponent<PlayerActionManager>().CanDoAnything = false;
         StartCoroutine(WaitForAmountsSeconds(0.3f));
     }
