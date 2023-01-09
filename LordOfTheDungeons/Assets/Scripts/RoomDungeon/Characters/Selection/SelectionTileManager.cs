@@ -439,7 +439,11 @@ public class SelectionTileManager : MonoBehaviour
         characterManager.GetComponent<CharacterManager>().MoveCurrentPlayer(currentPath);
     }
 
-
+    /// <summary>
+    /// Set the type the list of tiles given
+    /// </summary>
+    /// <param name="tiles">the list of tiles we want to change</param>
+    /// <param name="type">the type we want to give</param>
     private void SetType(List<GameObject> tiles,TypeSelection type)
     {
         foreach(GameObject selectionTile in tiles)
