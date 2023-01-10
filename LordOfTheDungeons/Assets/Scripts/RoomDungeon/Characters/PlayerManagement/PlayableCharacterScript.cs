@@ -7,7 +7,7 @@ using UnityEngine;
 public class PlayableCharacterScript : MonoBehaviour
 {
     // The movement of the player 
-    private int movement = 10;
+    private int movement = 5;
     public int Movement { get => movement; set => movement = value; }
     
     private int action = 2;

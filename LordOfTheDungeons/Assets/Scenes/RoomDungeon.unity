@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36b078e80ce45ee43aa7327ff387d9e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playableDeplacementSpeed: 8
+  playableDeplacementSpeed: 14
   playablePreFab: {fileID: 2197349053614314655, guid: 918b240db102cc44d8d810992c02b7d7, type: 3}
   enemiesPreFab: {fileID: 5448437786539140116, guid: 885fd52f6f4d68043b9fb1865d584520, type: 3}
   cameraManager: {fileID: 1463303537}
@@ -1747,7 +1747,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 30
+  m_SortingOrder: 9
   m_TargetDisplay: 0
 --- !u!224 &726199620
 RectTransform:
