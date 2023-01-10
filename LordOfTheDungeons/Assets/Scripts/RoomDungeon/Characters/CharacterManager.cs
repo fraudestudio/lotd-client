@@ -1,5 +1,7 @@
 using Assets.Scripts.ProceduralGeneration;
 using Assets.Scripts.ProceduralGeneration.Salles;
+using Assets.Scripts.RoomDungeon.Characters.Selection;
+using Assets.Scripts.RoomDungeon.TurnManagement;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -62,6 +64,8 @@ public class CharacterManager : MonoBehaviour
     
 
 
+
+
     /// <summary>
     /// Create the playables on the room
     /// </summary>
@@ -88,8 +92,6 @@ public class CharacterManager : MonoBehaviour
                 colonne = GenerateurAleatoire.Instance.Next(3) + 1;
             }
 
-
-            //carte.Salles[ligne, colonne].HasPlayer = true;
             GameObject playable = Instantiate(playablePreFab);
             playable.transform.position = new Vector3(GameManager.roomPosition + colonne, GameManager.roomPosition + ligne, - 1);
             ModifyRoomPlayer(playable, true);
@@ -151,6 +153,7 @@ public class CharacterManager : MonoBehaviour
         return result;
     }
 
+
     /// <summary>
     /// Delete all the playable on the terrain
     /// </summary>
@@ -181,6 +184,7 @@ public class CharacterManager : MonoBehaviour
     /// <param name="path"></param>
     public void MoveCurrentPlayer(List<GameObject> path)
     {
+        playerActionManager.GetComponent<PlayerActionManager>().ShowAttackATH(false);
         ModifyRoomPlayer(currentSelectedPlayable, false);
         currentNodePath = 0;
         pathToMovePlayable = path;
@@ -267,6 +271,22 @@ public class CharacterManager : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
         canMoveCurrentPlayable = true;
+    }
+
+
+
+    /// <summary>
+    /// Change the type of selction of the playable
+    /// </summary>
+    /// <param name="type"></param>
+    public void ChangeTypeSelection(TypeSelection type)
+    {
+        switch (type)
+        {
+            case TypeSelection.Deplacement: selectionTileManager.GetComponent<SelectionTileManager>().CreateSelectionTiles(currentSelectedPlayable.GetComponent<PlayableCharacterScript>().Movement, type, currentSelectedPlayable); break;
+            case TypeSelection.Attack: selectionTileManager.GetComponent<SelectionTileManager>().CreateSelectionTiles(currentSelectedPlayable.GetComponent<PlayableCharacterScript>().Action, type, currentSelectedPlayable); break;
+        }
+
     }
 
 }

@@ -18,6 +18,9 @@ public class SelectionTileManager : MonoBehaviour
     [SerializeField]
     private GameObject selectionTilePreFab;
 
+    [SerializeField]
+    private GameObject playerActionManager;
+
 
     // the current path that has been selected
     private List<GameObject> currentPath = new List<GameObject>();
@@ -418,6 +421,7 @@ public class SelectionTileManager : MonoBehaviour
         {
             SetCurrentPlayabe(null);
             DeleteSelectionTiles();
+            playerActionManager.GetComponent<PlayerActionManager>().ShowAttackATH(false);
         }
     }
 

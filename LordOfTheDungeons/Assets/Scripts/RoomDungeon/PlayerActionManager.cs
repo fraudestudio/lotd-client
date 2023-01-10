@@ -8,4 +8,23 @@ public class PlayerActionManager : MonoBehaviour
     [SerializeField]
     private bool canDoAnything = true;
     public bool CanDoAnything { get => canDoAnything; set => canDoAnything = value; }
+    
+    [SerializeField]
+    private GameObject buttonAttack;
+    [SerializeField]
+    private GameObject buttonMove;
+    public void ShowAttackATH(bool show)
+    {
+        buttonAttack.SetActive(show);
+    }
+
+    public void ShowMoveATH(bool show)
+    {
+        buttonMove.SetActive(show);
+    }
+
+    private void Start()
+    {
+        ShowAttackATH(false);
+    }
 }

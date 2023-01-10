@@ -9,6 +9,9 @@ public class PlayableCharacterScript : MonoBehaviour
     // The movement of the player 
     private int movement = 10;
     public int Movement { get => movement; set => movement = value; }
+    
+    private int action = 2;
+    public int Action { get => action; set => action = value; }
 
     // Team of the player
     private TypeTurn team;
@@ -61,6 +64,7 @@ public class PlayableCharacterScript : MonoBehaviour
     {
         if (VerifyCanUse() && playerActionManager.GetComponent<PlayerActionManager>().CanDoAnything)
         {
+            playerActionManager.GetComponent<PlayerActionManager>().ShowAttackATH(true);
             selectionTileManager.GetComponent<SelectionTileManager>().CreateSelectionTiles(movement,TypeSelection.Deplacement, gameObject);
         }
     }

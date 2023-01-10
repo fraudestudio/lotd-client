@@ -129,13 +129,13 @@ public class SelectionTileScript : MonoBehaviour
         {
             case TypeSelection.Deplacement:
                 {
-                    type = TypeSelection.Deplacement;
+                    selectionType = TypeSelection.Deplacement;
                     TurnWhite();
                 }
                 break;
             case TypeSelection.Attack:
                 {
-                    type = TypeSelection.Attack;
+                    selectionType = TypeSelection.Attack;
                     TurnRed();
                 }
                 break;
