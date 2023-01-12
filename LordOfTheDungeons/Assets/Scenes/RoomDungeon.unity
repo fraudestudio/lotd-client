@@ -778,19 +778,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 322555311}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 56909921}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &322555311
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -850,7 +838,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 322555308}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: acc4b4c8c5cd95245aa1273db9e7712e, type: 3}
+  m_Script: {fileID: 11500000, guid: 82980f0eb2b61b946a14ad8c423de979, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &511873128
@@ -1482,7 +1470,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 626870966}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4bf03cd91be28c945bc09179b278843d, type: 3}
+  m_Script: {fileID: 11500000, guid: 9868501311ae59c41b6e4cb18bcafdb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &636086271
