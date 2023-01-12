@@ -7,6 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.IO;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.UIElements;
@@ -94,6 +95,7 @@ public class CharacterManager : MonoBehaviour
 
             GameObject playable = Instantiate(playablePreFab);
             playable.transform.position = new Vector3(GameManager.roomPosition + colonne, GameManager.roomPosition + ligne, - 1);
+            playable.name = "Playable_" + i;
             ModifyRoomPlayer(playable, true);
             playable.GetComponent<PlayableCharacterScript>().ChangeTeam(i % 2);
             playables.Add(playable);
@@ -209,7 +211,6 @@ public class CharacterManager : MonoBehaviour
         center.Add(currentSelectedPlayable);
         cameraManager.GetComponent<CameraManager>().CenterOnObjects(center, 5f, 0.2f);
         playerActionManager.GetComponent<PlayerActionManager>().CanDoAnything = false;
-        StartCoroutine(WaitForAmountsSeconds(0.5f));
         enemy.GetComponent<EnemyScript>().Hurt(playerPower);
         selectionTileManager.GetComponent<SelectionTileManager>().DeleteSelectionTiles();
         playerActionManager.GetComponent<PlayerActionManager>().CanDoAnything = false;
@@ -249,7 +250,9 @@ public class CharacterManager : MonoBehaviour
         }
 
     }
-    
+
+
+
     /// <summary>
     /// Wait before calling the room camera
     /// </summary>
@@ -271,7 +274,6 @@ public class CharacterManager : MonoBehaviour
     {
         if (canMoveCurrentPlayable)
         {
-
             if (currentSelectedPlayable.transform.position != currentPosition)
             {
                 timer += Time.deltaTime * playableDeplacementSpeed;
