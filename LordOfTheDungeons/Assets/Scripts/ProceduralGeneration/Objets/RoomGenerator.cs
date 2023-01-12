@@ -20,20 +20,29 @@ public class RoomGenerator : MonoBehaviour, IGeneratorAlgo
     [SerializeField]
     private GameObject border;
     [SerializeField]
+    private GameObject torchPreFab;
+    [SerializeField]
+    // The size of the room
     private int roomSize = 18;
 
     [SerializeField]
     private GameObject cameraManager;
 
+    // the room bounds for the camera
     private Bounds roomCameraBounds;
 
+    // the map of the room
     private Carte carte;
     public Carte Carte { get => carte; set => carte = value; }
 
+    // all the tiles of the room
     private List<GameObject> tiles = new List<GameObject>();
+    // all the tiles that have type "full"
     private List<GameObject> fullTiles = new List<GameObject>();
+    // borders of the room 
     private List<GameObject> borders = new List<GameObject>();
-
+    // torches of the room
+    private List<GameObject> torches = new List<GameObject>();
 
 
     private void Awake()
@@ -41,7 +50,10 @@ public class RoomGenerator : MonoBehaviour, IGeneratorAlgo
         AlgorithmeRoomGeneration.RoomSize = roomSize;
     }
 
-
+    /// <summary>
+    /// Generate the room with the given map
+    /// </summary>
+    /// <param name="carte">the map you want to generate</param>
     public void GenerateRoom(Carte carte)
     {
         this.carte = carte; 
@@ -50,6 +62,7 @@ public class RoomGenerator : MonoBehaviour, IGeneratorAlgo
 
         ClearTiles();
 
+        DestroyTorches();
 
         for (int ligne = 0; ligne < Carte.Taille; ligne++)
         {
@@ -91,6 +104,11 @@ public class RoomGenerator : MonoBehaviour, IGeneratorAlgo
 
     }
 
+    /// <summary>
+    /// Create a gameobject in function of the given room
+    /// </summary>
+    /// <param name="salle"></param>
+    /// <returns></returns>
     public GameObject GetObjectSalle(TypeSalle salle)
     {
         GameObject result;
@@ -104,6 +122,9 @@ public class RoomGenerator : MonoBehaviour, IGeneratorAlgo
         return result;
     }
 
+    /// <summary>
+    /// Destroy all the tiles
+    /// </summary>
     private void ClearTiles()
     {
         for (int i = 0; i < tiles.Count; i++)
@@ -114,6 +135,9 @@ public class RoomGenerator : MonoBehaviour, IGeneratorAlgo
         fullTiles.Clear();
     }
 
+    /// <summary>
+    /// Set the skin on all the full tiles
+    /// </summary>
     private void SetSkin()
     {
         foreach (GameObject tile in fullTiles)
@@ -159,13 +183,39 @@ public class RoomGenerator : MonoBehaviour, IGeneratorAlgo
                     PositionLigne = "MIDDLE";
                 }
             }
+            
+            if (Larger + "_" + PositionLigne + "_" + PositionColonne == "BIG_MIDDLE_DOWN")
+            {
+                if (GenerateurAleatoire.Instance.Next(100) + 1 > 70)
+                {
+                    GameObject torch = Instantiate(torchPreFab);
+                    torch.transform.position = new Vector3(currColonne + GameManager.roomPosition, currLigne + GameManager.roomPosition, -7);
+                    torches.Add(torch);
+                }
+            }
 
 
             tile.GetComponent<SpriteRenderer>().sprite = mapSkinLoader.GetComponent<SkinRoomDictionnary>().GetSprite(Larger + "_" + PositionLigne + "_" + PositionColonne);
 
+
         }
     }
 
+    /// <summary>
+    /// Destroy all the torches
+    /// </summary>
+    private void DestroyTorches()
+    {
+        for (int i = 0; i < torches.Count; i++)
+        {
+            Destroy(torches[i]);
+        }
+        torches.Clear();
+    }
+
+    /// <summary>
+    /// Create the border of the room
+    /// </summary>
     private void CreateBorders()
     {
         for (int i = 0; i < borders.Count; i++)

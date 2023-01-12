@@ -215,4 +215,11 @@ public class GameManager : MonoBehaviour
         GameObject.Find("ChangeRoom").transform.Find("Buttons").GetComponent<CanvasGroup>().blocksRaycasts = true;
     }
 
+
+
+    public void EnemyAttackPlayer(int linePlayable, int columnPlayable, int lineEnemy, int columnEnemy)
+    {
+        characterManager.GetComponent<CharacterManager>().EnemyAttackPlayable(linePlayable,columnPlayable,lineEnemy,columnEnemy);
+    }
+
 }

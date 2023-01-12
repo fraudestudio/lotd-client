@@ -444,6 +444,15 @@ public class SelectionTileManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Tells the character manager to attack the playable
+    /// </summary>
+    public void AttackPlayable(int line, int column)
+    {
+        HideAllSelectionTile();
+        characterManager.GetComponent<CharacterManager>().AttackEnemy(line, column);
+    }
+
+    /// <summary>
     /// Set the type the list of tiles given
     /// </summary>
     /// <param name="tiles">the list of tiles we want to change</param>

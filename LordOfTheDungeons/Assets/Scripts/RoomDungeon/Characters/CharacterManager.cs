@@ -195,6 +195,29 @@ public class CharacterManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Attack the given enemy
+    /// </summary>
+    public void AttackEnemy(int line, int column)
+    {
+
+        int playerPower = currentSelectedPlayable.GetComponent<PlayableCharacterScript>().Power;
+
+        playerActionManager.GetComponent<PlayerActionManager>().ShowMoveATH(false);
+        GameObject enemy = GetEnemy(line, column);
+        List<GameObject> center = new List<GameObject>();
+        center.Add(enemy);
+        center.Add(currentSelectedPlayable);
+        cameraManager.GetComponent<CameraManager>().CenterOnObjects(center, 5f, 0.2f);
+        playerActionManager.GetComponent<PlayerActionManager>().CanDoAnything = false;
+        StartCoroutine(WaitForAmountsSeconds(0.5f));
+        enemy.GetComponent<EnemyScript>().Hurt(playerPower);
+        selectionTileManager.GetComponent<SelectionTileManager>().DeleteSelectionTiles();
+        playerActionManager.GetComponent<PlayerActionManager>().CanDoAnything = false;
+        StartCoroutine(WaitForCamera(1f, 0.2f));
+
+    }
+
+    /// <summary>
     /// Modify the hasPlayer of the tile of a playable
     /// </summary>
     /// <param name="hasPlayer"></param>
@@ -286,6 +309,46 @@ public class CharacterManager : MonoBehaviour
             case TypeSelection.Deplacement: selectionTileManager.GetComponent<SelectionTileManager>().CreateSelectionTiles(currentSelectedPlayable.GetComponent<PlayableCharacterScript>().Movement, type, currentSelectedPlayable); break;
             case TypeSelection.Attack: selectionTileManager.GetComponent<SelectionTileManager>().CreateSelectionTiles(currentSelectedPlayable.GetComponent<PlayableCharacterScript>().Action, type, currentSelectedPlayable); break;
         }
+
+    }
+
+    /// <summary>
+    /// Return the enemy with the coordinates given
+    /// </summary>
+    /// <param name="line">it line</param>
+    /// <param name="column">it column</param>
+    /// <returns>the enemy wanted if found, null otherwise</returns>
+    public GameObject GetEnemy(int line, int column)
+    {
+
+        GameObject result = null;
+
+        foreach (GameObject enemy in enemies)
+        {
+            if (enemy.transform.position.x == line + GameManager.roomPosition && enemy.transform.position.y == column + GameManager.roomPosition)
+            {
+                result = enemy;
+            }
+        }
+
+        return result;
+    }
+
+    /// <summary>
+    /// Kill the given character
+    /// </summary>
+    /// <param name="enemy"></param>
+    public void KillCharacter(GameObject character)
+    {
+
+        ModifyRoomPlayer(character, false);
+        playables.Remove(character);
+        enemies.Remove(character);
+        Destroy(character);
+    }
+
+    public void EnemyAttackPlayable(int linePlayable, int columnPlayable, int lineEnemy, int columnEnemy)
+    {
 
     }
 

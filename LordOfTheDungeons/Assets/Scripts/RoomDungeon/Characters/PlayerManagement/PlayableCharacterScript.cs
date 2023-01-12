@@ -12,6 +12,10 @@ public class PlayableCharacterScript : MonoBehaviour
     
     private int action = 2;
     public int Action { get => action; set => action = value; }
+    
+    private int power = 15;
+    public int Power { get => power; }
+
 
     // Team of the player
     private TypeTurn team;

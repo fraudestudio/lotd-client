@@ -60,9 +60,18 @@ public class SelectionTileScript : MonoBehaviour
     {
         if (canUse)
         {
-            if (selectionType == TypeSelection.Deplacement)
+            switch (selectionType)
             {
-                selectionTileManager.GetComponent<SelectionTileManager>().CreateSelectionTrail(gameObject);
+                case TypeSelection.Deplacement:
+                    {
+                        selectionTileManager.GetComponent<SelectionTileManager>().CreateSelectionTrail(gameObject);
+                    }
+                    break;                
+                case TypeSelection.Attack:
+                    {
+                        TurnWhite();
+                    }
+                    break;
             }
         }
     }
@@ -74,9 +83,18 @@ public class SelectionTileScript : MonoBehaviour
     {
         if (canUse)
         {
-            if (selectionType == TypeSelection.Deplacement)
+            switch (selectionType)
             {
-                selectionTileManager.GetComponent<SelectionTileManager>().ResetTrail();
+                case TypeSelection.Deplacement:
+                    {
+                        selectionTileManager.GetComponent<SelectionTileManager>().ResetTrail();
+                    }
+                    break;
+                case TypeSelection.Attack:
+                    {
+                        TurnRed();
+                    }
+                    break;
             }
         }
 
@@ -89,9 +107,19 @@ public class SelectionTileScript : MonoBehaviour
     {
         if (canUse)
         {
-            if (selectionType == TypeSelection.Deplacement)
+
+            switch (selectionType)
             {
-                selectionTileManager.GetComponent<SelectionTileManager>().MovePlayable();
+                case TypeSelection.Deplacement:
+                    {
+                        selectionTileManager.GetComponent<SelectionTileManager>().MovePlayable();
+                    }
+                    break;                
+                case TypeSelection.Attack:
+                    {
+                        selectionTileManager.GetComponent<SelectionTileManager>().AttackPlayable(ligne,colonne);
+                    }
+                    break;
             }
         }
     }
@@ -122,7 +150,10 @@ public class SelectionTileScript : MonoBehaviour
         gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0f);
     }
 
-
+    /// <summary>
+    /// Set the type of the selection tile
+    /// </summary>
+    /// <param name="type">the type wanted</param>
     public void SetType(TypeSelection type)
     {
         switch (type)
