@@ -201,21 +201,21 @@ public class CharacterManager : MonoBehaviour
     /// </summary>
     public void AttackEnemy(int line, int column)
     {
-
-        int playerPower = currentSelectedPlayable.GetComponent<PlayableCharacterScript>().Power;
-
-        playerActionManager.GetComponent<PlayerActionManager>().ShowMoveATH(false);
         GameObject enemy = GetEnemy(line, column);
-        List<GameObject> center = new List<GameObject>();
-        center.Add(enemy);
-        center.Add(currentSelectedPlayable);
-        cameraManager.GetComponent<CameraManager>().CenterOnObjects(center, 5f, 0.2f);
-        playerActionManager.GetComponent<PlayerActionManager>().CanDoAnything = false;
-        enemy.GetComponent<EnemyScript>().Hurt(playerPower);
-        selectionTileManager.GetComponent<SelectionTileManager>().DeleteSelectionTiles();
-        playerActionManager.GetComponent<PlayerActionManager>().CanDoAnything = false;
-        StartCoroutine(WaitForCamera(1f, 0.2f));
-
+        if (enemy != null)
+        {
+            int playerPower = currentSelectedPlayable.GetComponent<PlayableCharacterScript>().Power;
+            playerActionManager.GetComponent<PlayerActionManager>().ShowMoveATH(false);
+            List<GameObject> center = new List<GameObject>();
+            center.Add(enemy);
+            center.Add(currentSelectedPlayable);
+            cameraManager.GetComponent<CameraManager>().CenterOnObjects(center, 5f, 0.2f);
+            playerActionManager.GetComponent<PlayerActionManager>().CanDoAnything = false;
+            enemy.GetComponent<EnemyScript>().Hurt(playerPower);
+            selectionTileManager.GetComponent<SelectionTileManager>().DeleteSelectionTiles();
+            playerActionManager.GetComponent<PlayerActionManager>().CanDoAnything = false;
+            StartCoroutine(WaitForCamera(1f, 0.2f));
+        }
     }
 
     /// <summary>

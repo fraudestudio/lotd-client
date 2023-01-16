@@ -66,10 +66,12 @@ public class UniverseGetInfoScript : MonoBehaviour
     {
         bool stop = false;
 
+        // Destroy all the buttons 
         DestroyUniverseButton();
-
         DestroyMyUniverseButton();
 
+
+        // Check if the user has an universe
         if (Server.UserHasUniverse())
         {
             createUniverseButton.SetActive(false);
@@ -79,8 +81,11 @@ public class UniverseGetInfoScript : MonoBehaviour
             createUniverseButton.SetActive(true);
         }
 
+        // Create all the buttons
         while (!stop)
         {
+
+            // Create all the buttons in the universe section
             foreach (UniverseInfo u in Server.GetAllUniverses())
             {
                 GameObject button = Instantiate(buttonPreFab);
@@ -100,6 +105,7 @@ public class UniverseGetInfoScript : MonoBehaviour
 
             UniverseInfo userUniverse = Server.GetUserUniverse();
 
+            // Create the universe of the user if it exists
             if (userUniverse.Id != null)
             {
                 GameObject button = Instantiate(buttonPreFab);
@@ -111,7 +117,8 @@ public class UniverseGetInfoScript : MonoBehaviour
                 myUniverseButton.Add(button);
             }
 
-
+            
+            // Create the buttons of the universes joined
             foreach (UniverseInfo u in Server.GetUserJoinedUniverses())
             {
                 GameObject button = Instantiate(buttonPreFab);
@@ -131,6 +138,10 @@ public class UniverseGetInfoScript : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Display 
+    /// </summary>
+    /// <param name="search"></param>
     public void SearchUniverses(string search)
     {
         if (search != "")
