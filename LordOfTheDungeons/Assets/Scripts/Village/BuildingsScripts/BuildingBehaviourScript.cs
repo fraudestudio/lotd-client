@@ -11,7 +11,7 @@ public class BuildingBehaviourScript : MonoBehaviour
 {
 
     /// <summary>
-    /// Pour savoir sur les bâtiments peuvent être cliquer ou non
+    /// Pour savoir sur les bï¿½timents peuvent ï¿½tre cliquer ou non
     /// </summary>
     private static bool canBeClicked = true;
 
@@ -38,7 +38,7 @@ public class BuildingBehaviourScript : MonoBehaviour
     #region Start and stop building
 
     /// <summary>
-    /// Qaund on clique sur un bâtiment, on démarre le menu qu'on a besoin 
+    /// Qaund on clique sur un bï¿½timent, on dï¿½marre le menu qu'on a besoin 
     /// </summary>
     private void OnMouseDown()
     {
@@ -58,7 +58,7 @@ public class BuildingBehaviourScript : MonoBehaviour
     }
 
     /// <summary>
-    /// Arrête les éléments du menu que l'on souhaite
+    /// Arrï¿½te les ï¿½lï¿½ments du menu que l'on souhaite
     /// </summary>
     /// <param name="name"></param>
     public void StopBuilding(string name)
@@ -99,7 +99,7 @@ public class BuildingBehaviourScript : MonoBehaviour
         GameObject w = GameObject.Find("HealerHutMenu");
         Init(m);
         Init(w);
-        m.GetComponent<ModifyMenuScript>().InitMenu("HealerHut", "Endroit où soigner les héros");
+        m.GetComponent<ModifyMenuScript>().InitMenu("HealerHut", "Endroit oï¿½ soigner les hï¿½ros");
 
         for (int i = 0; i < GameObject.Find("HealerHutMenu").transform.Find("SlotsHealer").childCount; i++)
         {
@@ -175,7 +175,7 @@ public class BuildingBehaviourScript : MonoBehaviour
         GameObject w = GameObject.Find("TrainingCampMenu");
         Init(m);
         Init(w);
-        m.GetComponent<ModifyMenuScript>().InitMenu("TrainingCamp", "Endroit où entrainez les aventuriers");
+        m.GetComponent<ModifyMenuScript>().InitMenu("TrainingCamp", "Endroit oï¿½ entrainez les aventuriers");
 
         for (int i = 0; i < w.transform.Find("TraineeTitle").Find("TraineesLayout").childCount; i++)
         {
@@ -266,7 +266,7 @@ public class BuildingBehaviourScript : MonoBehaviour
         GameObject w = GameObject.Find("WarehouseMenu");
         Init(m);
         Init(w);
-        m.GetComponent<ModifyMenuScript>().InitMenu("Warehouse", "Endroit où les ressources sont stockés");
+        m.GetComponent<ModifyMenuScript>().InitMenu("Warehouse", "Endroit oï¿½ les ressources sont stockï¿½s");
     }
 
     private void StopWarehouse()
@@ -277,7 +277,7 @@ public class BuildingBehaviourScript : MonoBehaviour
 
     #region Gunsmith
     /// <summary>
-    /// Initialise les éléments de l'armurier
+    /// Initialise les ï¿½lï¿½ments de l'armurier
     /// </summary>
     private void InitGunsmith()
     {
@@ -291,7 +291,7 @@ public class BuildingBehaviourScript : MonoBehaviour
         GameObject g = GameObject.Find("GunsmithMenu");
         Init(m);
         Init(g);
-        m.GetComponent<ModifyMenuScript>().InitMenu("Gunsmith", "Endroit où améliorer l'équipement des héros");
+        m.GetComponent<ModifyMenuScript>().InitMenu("Gunsmith", "Endroit oï¿½ amï¿½liorer l'ï¿½quipement des hï¿½ros");
         if (!GameObject.Find("GunsmithMenu").transform.Find("CharacterSlot").GetComponent<CharacterSlotScript>().SlotIsEmpty)
         {
             CharacterSlotNotAllowedScript.AddSlot(GameObject.Find("GunsmithMenu").transform.Find("CharacterSlot").gameObject);
@@ -299,7 +299,7 @@ public class BuildingBehaviourScript : MonoBehaviour
     }
 
     /// <summary>
-    /// Arrête les éléments de l'Armurier
+    /// Arrï¿½te les ï¿½lï¿½ments de l'Armurier
     /// </summary>
     private void StopGunsmith()
     {
@@ -312,7 +312,7 @@ public class BuildingBehaviourScript : MonoBehaviour
 
     #region Tavern
     /// <summary>
-    /// Initialise les éléments de la taverne 
+    /// Initialise les ï¿½lï¿½ments de la taverne 
     /// </summary>
     private void InitTavern()
     {
@@ -332,10 +332,11 @@ public class BuildingBehaviourScript : MonoBehaviour
             }
         }
 
+        
         Armor a = GameObject.Find("CharacterFactory").GetComponent<ArmorFactory>().CreateArmor(0, "Armure en cuir", 1, 3);
-        //Weapon w = GameObject.Find("CharacterFactory").GetComponent<WeaponFactory>().CreateWeapon(1, "Petite épée", 1, 10);
+        //Weapon w = GameObject.Find("CharacterFactory").GetComponent<WeaponFactory>().CreateWeapon(1, "Petite ï¿½pï¿½e", 1, 10);
         Weapon w1 = GameObject.Find("CharacterFactory").GetComponent<WeaponFactory>().CreateWeapon(0, "Fronde", 1, 5);
-        GameObject c = GameObject.Find("CharacterFactory").GetComponent<CharacterFactory>().CreateCharacter(0, "Fatéo Mavard", "Hobbit", 1, 10, 10, 4, 5,"Archer",w1,a);
+        GameObject c = GameObject.Find("CharacterFactory").GetComponent<CharacterFactory>().CreateCharacter(0, "Fatï¿½o Mavard", "Hobbit", 1, 10, 10, 4, 5,"Archer",w1,a);
         //GameObject c1 = GameObject.Find("CharacterFactory").GetComponent<CharacterFactory>().CreateCharacter(1, "Pucas Lires", "Hobbit", 2, 10, 15, 10, 9,"Guerrier",w,a);
 
         heoresAvaiable.GetChild(0).GetComponent<CharacterSlotScript>().AddChar(c);
@@ -363,12 +364,12 @@ public class BuildingBehaviourScript : MonoBehaviour
             }
         }
         Init(m);
-        m.GetComponent<ModifyMenuScript>().InitMenu("Tavern","Endroit ou les héros peuvent être recutés");
+        m.GetComponent<ModifyMenuScript>().InitMenu("Tavern","Endroit ou les hï¿½ros peuvent ï¿½tre recutï¿½s");
     }
 
 
     /// <summary>
-    /// Arrête les élements de la tavern que l'on souhaite
+    /// Arrï¿½te les ï¿½lements de la tavern que l'on souhaite
     /// </summary>
     public void StopTavern()
     {
@@ -392,7 +393,7 @@ public class BuildingBehaviourScript : MonoBehaviour
 
 
     /// <summary>
-    /// Allume un menu souhaité
+    /// Allume un menu souhaitï¿½
     /// </summary>
     /// <param name="g"></param>
     private void Init(GameObject g)
@@ -403,7 +404,7 @@ public class BuildingBehaviourScript : MonoBehaviour
     }
 
     /// <summary>
-    /// Affiche les informations du bâtiments
+    /// Affiche les informations du bï¿½timents
     /// </summary>
     private void OnMouseEnter()
     {
@@ -423,7 +424,7 @@ public class BuildingBehaviourScript : MonoBehaviour
     }
 
     /// <summary>
-    /// Enlève les informations du bâtiments
+    /// Enlï¿½ve les informations du bï¿½timents
     /// </summary>
     private void OnMouseExit()
     {

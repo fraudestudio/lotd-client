@@ -31,6 +31,8 @@ namespace Assets.Scripts.Village
 
         private string classe;
 
+        private string idEquipement;
+
         private Weapon weapon;
 
         private Armor armor;
