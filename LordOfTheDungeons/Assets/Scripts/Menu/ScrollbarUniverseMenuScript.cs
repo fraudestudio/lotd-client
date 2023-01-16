@@ -5,14 +5,18 @@ using UnityEngine.UI;
 
 public class ScrollbarUniverseMenuScript : MonoBehaviour
 {
-    // Start is called before the first frame update
+    /// <summary>
+    /// Set the scroobar size
+    /// </summary>
     void Start()
     {
         GetComponent<Scrollbar>().size = 0.01f;
         enabled = true;
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// Set the scroolbar size
+    /// </summary>
     void Update()
     {
         GetComponent<Scrollbar>().size = 0.01f;

@@ -5,23 +5,15 @@ using UnityEngine.EventSystems;
 
 public class QuitButtonScript : MonoBehaviour, IPointerClickHandler
 {
+    /// <summary>
+    /// When clicked, quit the application
+    /// </summary>
+    /// <param name="eventData"></param>
     public void OnPointerClick(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Left)
         {
             Application.Quit();
         }
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

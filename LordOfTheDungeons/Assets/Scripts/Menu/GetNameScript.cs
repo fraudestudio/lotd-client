@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class GetNameScript : MonoBehaviour
 {
-    // Start is called before the first frame update
+    /// <summary>
+    /// Get the name of the player
+    /// </summary>
     void Start()
     {
         GameObject.Find("Menu").transform.Find("connected").GetComponent<TMP_Text>().text = "Connexion : " + Server.Name;

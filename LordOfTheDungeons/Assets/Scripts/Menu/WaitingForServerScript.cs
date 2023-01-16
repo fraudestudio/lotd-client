@@ -6,12 +6,12 @@ public class WaitingForServerScript : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    public Animator animator;
-    public Canvas Canvas;
-
-    private void Awake()
-    {
-    }
+    [SerializeField]
+    // Animator of the pop up 
+    private Animator animator;
+    [SerializeField]
+    // Canvas of the text
+    private Canvas Canvas;
 
     void Start()
     {
@@ -23,7 +23,9 @@ public class WaitingForServerScript : MonoBehaviour
     {
     }
 
-
+    /// <summary>
+    /// Start the animation
+    /// </summary>
     public void StartAnim()
     {
         animator.SetTrigger("Zoom");
@@ -33,7 +35,9 @@ public class WaitingForServerScript : MonoBehaviour
 
     }
 
-
+    /// <summary>
+    /// Stop the animation
+    /// </summary>
     public void StopAnim()
     {
         Canvas.GetComponent<CanvasGroup>().interactable = false;

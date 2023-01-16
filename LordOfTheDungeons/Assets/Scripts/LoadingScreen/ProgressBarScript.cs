@@ -6,7 +6,10 @@ public class ProgressBarScript : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    public static float Progress;
+    private static float progress;
+
+    public static float Progress { get => progress; set => progress = value; }
+
     void Start()
     {
     }

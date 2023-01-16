@@ -8,29 +8,31 @@ using UnityEngine.UI;
 public class VillageMenuLoaderScript : MonoBehaviour
 {
 
+    [SerializeField]
+    // game object of the join button
+    private GameObject joinButton;
+    [SerializeField]
+    // gme object of the create button
+    private GameObject createButton;
 
-    public GameObject joinButton;
-    public GameObject createButton;
-
-    public TMP_Text villageState;
-    public TMP_Text numberPlayer;
-    public TMP_Text numberOnline;
-    public TMP_Text majorFaction;
-
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [SerializeField]
+    // text state of the village
+    private TMP_Text villageState;
+    [SerializeField]
+    // text of the number of player in the village
+    private TMP_Text numberPlayer;
+    [SerializeField]
+    // text of the number of player connected
+    private TMP_Text numberOnline;
+    [SerializeField]
+    // text of the major faction
+    private TMP_Text majorFaction;
 
 
+    /// <summary>
+    /// Change the menu to the universe menu
+    /// </summary>
+    /// <returns></returns>
     public IEnumerator GoBackToUniverse()
     {
         GameObject universeCanvas = GameObject.Find("UniversesMenu");
@@ -60,15 +62,25 @@ public class VillageMenuLoaderScript : MonoBehaviour
         searchCanvas.GetComponent<CanvasGroup>().blocksRaycasts = true;
     }
 
+    /// <summary>
+    /// Change the menu to the universe menu
+    /// </summary>
     public void ChangeMenu()
     {
         StartCoroutine(GoBackToUniverse());
     }
 
+    /// <summary>
+    /// Update all of the village buttons
+    /// </summary>
+    /// <param name="idUniverse">id of the universe</param>
     public void UpdateVillageButtons(int idUniverse)
     {
+        // The the id for the server
         Server.SaveIdUniverse(idUniverse);
 
+
+        // Check if the player has a village
         if (Server.UserHasVillageInUniverse(idUniverse))
         {
             joinButton.GetComponent<Button>().interactable = true;

@@ -7,11 +7,18 @@ using UnityEngine.EventSystems;
 
 public class CreateUniverseScript : MonoBehaviour, IPointerClickHandler
 {
+    [SerializeField]
+    private TMP_InputField nameFeild;
+    [SerializeField]
+    private  TMP_InputField passwordFeild;
+    [SerializeField]
+    private TMP_Text error;
 
-    public TMP_InputField nameFeild;
-    public TMP_InputField passwordFeild;
-    public TMP_Text error;
 
+    /// <summary>
+    /// When the object is clicked, it open the create universe menu
+    /// </summary>
+    /// <param name="eventData"></param>
     public void OnPointerClick(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Left)
@@ -20,7 +27,7 @@ public class CreateUniverseScript : MonoBehaviour, IPointerClickHandler
             {
                 error.color = new Color(1, 1, 1, 0);
                 GameObject.Find("WaitingServer").GetComponent<WaitingForServerScript>().StartAnim();
-                GetComponent<ChangeMenuButtonScript>().go = true;
+                GetComponent<ChangeMenuButtonScript>().Go = true;
 
                 if (string.IsNullOrEmpty(passwordFeild.text))
                 {

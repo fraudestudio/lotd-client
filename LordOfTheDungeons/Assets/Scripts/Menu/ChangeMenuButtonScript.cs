@@ -5,36 +5,45 @@ using UnityEngine.EventSystems;
 
 public class ChangeMenuButtonScript : MonoBehaviour, IPointerClickHandler
 {
+    [SerializeField]
+    // transition menu animator 
+    private Animator transitionMenu;
+    [SerializeField]
+    // the new menu transition 
+    private Animator transitionNewMenu;
+    [SerializeField]
+    // transition menu optional 
+    private Animator transitionMenuOptional;   
+    [SerializeField]
+    // second old menu (optional)
+    private Animator scdMenuOptional;
+    [SerializeField]
+    // the old menu canvas
+    private Canvas menuCanvas;
+    [SerializeField]
+    // the new menu canvas 
+    private Canvas newMenuCanvas;
+    [SerializeField]
+    // the second new menu canvas (optional change)
+    private Canvas newMenuCanvasOptional;
+    [SerializeField]
+    // bool that tell if the menu can change
+    private bool go = true;
 
-    public Animator transitionMenu;
-    public Animator transitionNewMenu;
-    public Animator transitionMenuOptional;
-    public Animator scdMenuOptional;
-    public Canvas menuCanvas;
-    public Canvas newMenuCanvas;
-    public Canvas newMenuCanvasOptional;
-    public bool go = true;
+    public bool Go { get => go; set => go = value; }
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-
+    /// <summary>
+    /// When you click on the button, it change of menu 
+    /// </summary>
+    /// <param name="eventData"></param>
     public void OnPointerClick(PointerEventData eventData)
     {
         if (menuCanvas.GetComponent<CanvasGroup>().interactable == true)
         {
+            // When it is clicked
             if (eventData.button == PointerEventData.InputButton.Left)
             {
+                // if the menu can change
                 if (go)
                 {
                     StartCoroutine(LoadUniverseMenu());
@@ -43,6 +52,10 @@ public class ChangeMenuButtonScript : MonoBehaviour, IPointerClickHandler
         }
     }
 
+    /// <summary>
+    /// Change to the universe menu 
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator LoadUniverseMenu()
     {
         transitionMenu.SetTrigger("HideMenu");

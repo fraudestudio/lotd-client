@@ -12,17 +12,23 @@ using static UnityEngine.EventSystems.EventTrigger;
 
 public class UniverseGetInfoScript : MonoBehaviour
 {
-    // Start is called before the first frame update
+    // Prefab of the button
+    [SerializeField]
+    private GameObject buttonPreFab;
 
-    public GameObject buttonPreFab;
-
+    // Content of the scroll view my universe
     private Transform contentMyUniverse;
+    // Content of the scool view my global universe
     private Transform contentGlobalUniverse;
 
-    public GameObject createUniverseButton;
+    // Button prefab
+    [SerializeField]
+    private GameObject createUniverseButton;
 
 
+    // List of the buttons 
     List<GameObject> buttons = new List<GameObject>();
+    // List of the buttons in the myUniverse feild
     List<GameObject> myUniverseButton = new List<GameObject>();
 
     void Start()
@@ -31,30 +37,38 @@ public class UniverseGetInfoScript : MonoBehaviour
         contentGlobalUniverse = GameObject.Find("GlobalUniverse").transform.Find("Viewport").transform.Find("Content");
     }
 
-    // Update is called once per frame
-    void Update()
+
+
+    private void DestroyMyUniverseButton()
     {
-        
-    }
-
-
-    public void GetUniverses()
-    {
-        bool stop = false;
-        
-        foreach (GameObject button in buttons)
-        {
-            Destroy(button);
-        }
-
-        buttons.Clear();
-
         foreach (GameObject button in myUniverseButton)
         {
             Destroy(button);
         }
 
+        myUniverseButton.Clear();
+    }
+
+    private void DestroyUniverseButton()
+    {
+        foreach (GameObject button in buttons)
+        {
+            Destroy(button);
+        }
         buttons.Clear();
+    }
+
+
+    /// <summary>
+    /// Get the universes and displayed it 
+    /// </summary>
+    public void GetUniverses()
+    {
+        bool stop = false;
+
+        DestroyUniverseButton();
+
+        DestroyMyUniverseButton();
 
         if (Server.UserHasUniverse())
         {

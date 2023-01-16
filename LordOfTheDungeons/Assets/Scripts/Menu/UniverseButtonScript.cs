@@ -7,14 +7,16 @@ using UnityEngine.SocialPlatforms;
 
 public class UniverseButtonScript : MonoBehaviour, IPointerClickHandler
 {
-
+    // name of the universe
     private string universeName;
     public string UniverseName { get => universeName; set => universeName = value; }
 
+    // id of the universe
     private int id;
     public int Id { get => id; set => id = value; }
 
 
+    // bool to know if it had a password
     private bool password;
     public bool Password { get => password; set => password = value; }
 
@@ -33,6 +35,7 @@ public class UniverseButtonScript : MonoBehaviour, IPointerClickHandler
     // Start is called before the first frame update
     void Start()
     {
+        // Get all the wanted game objets
         universeCanvas = GameObject.Find("UniversesMenu");
         universeSearchCanvas = GameObject.Find("UniversesMenuSearch");
         villageCanvas = GameObject.Find("VillageMenu");
@@ -43,12 +46,13 @@ public class UniverseButtonScript : MonoBehaviour, IPointerClickHandler
         villageAnimator = villageCanvas.GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
+    /// <summary>
+    /// When clicked, check if it has a password, 
+    /// if yes, show the password object
+    /// if not, show the village 
+    /// </summary>
+    /// <param name="eventData"></param>
     public void OnPointerClick(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Left)
@@ -66,6 +70,10 @@ public class UniverseButtonScript : MonoBehaviour, IPointerClickHandler
         }
     }
 
+    /// <summary>
+    /// Show the password menu
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator ShowPassword()
     {
         passwordAnimator.SetTrigger("Zoom");
@@ -79,6 +87,10 @@ public class UniverseButtonScript : MonoBehaviour, IPointerClickHandler
         passwordAnimator.SetTrigger("GoBackIdle");
     }
 
+    /// <summary>
+    /// Hide the password menu
+    /// </summary>
+    /// <returns></returns>
     public IEnumerator HidePassword()
     {
         passwordCanvas.GetComponent<CanvasGroup>().interactable = false;
@@ -93,7 +105,9 @@ public class UniverseButtonScript : MonoBehaviour, IPointerClickHandler
         passwordAnimator.SetTrigger("GoBackIdle");
     }
 
-
+    /// <summary>
+    /// Show the village menu 
+    /// </summary>
     private void ShowVillage()
     {
         GameObject.Find("VillageMenu").transform.Find("JoinVillageButton").GetComponent<JoinVillageButtonScript>().CurrentUniverse = id;
@@ -101,6 +115,10 @@ public class UniverseButtonScript : MonoBehaviour, IPointerClickHandler
         StartCoroutine(ChangeMenu());
     }
 
+    /// <summary>
+    /// Chnage the menu to the universe menu
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator ChangeMenu()
     {
         universeCanvas.GetComponent<CanvasGroup>().interactable = false;
@@ -125,12 +143,17 @@ public class UniverseButtonScript : MonoBehaviour, IPointerClickHandler
 
     }
 
-    public bool VerifyPassword(string p)
+    /// <summary>
+    /// Verify if the password given is the good one
+    /// </summary>
+    /// <param name="password">the password entered</param>
+    /// <returns>the result of the verification</returns>
+    public bool VerifyPassword(string password)
     {
         bool b = false;
 
        
-        if (Server.VerifyAcessUniverse(Id, p))
+        if (Server.VerifyAcessUniverse(Id, password))
         {
             ShowVillage();
             b = true;
