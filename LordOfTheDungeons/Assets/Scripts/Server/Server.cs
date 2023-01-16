@@ -40,7 +40,7 @@ public static class Server
 
 
     /// <summary>
-    /// Vérifie si les identifiants et mot de passe sont correctes pour se connecter
+    /// Vï¿½rifie si les identifiants et mot de passe sont correctes pour se connecter
     /// </summary>
     /// <param name="id"></param>
     /// <param name="password"></param>
@@ -370,6 +370,43 @@ public static class Server
         return res;
     }
 
+    public static bool DeleteAllCharacterFromTaverne(int idVillage)
+    {
+        var response = sharedClient.GetStringAsync(String.Format("{0}/taverne/delete_all", GetCurrentVillage()));
+
+        bool json = JsonConvert.DeserializeObject<bool>(response.Result.ToString());
+
+        return json;
+    }
+
+    public static bool SetStartTimeTaverneNow(int idVillage)
+    {
+        var response = sharedClient.GetStringAsync(String.Format("{0}/taverne/set/time_batiment", GetCurrentVillage()));
+
+        bool json = JsonConvert.DeserializeObject<bool>(response.Result.ToString());
+
+        return json;
+    }
+
+    public static bool GetStartTimeTaverne(int idVillage)
+    {
+        var response = sharedClient.GetStringAsync(String.Format("{0}/taverne/get/time_batiment", GetCurrentVillage()));
+
+        int json = JsonConvert.DeserializeObject<bool>(response.Result.ToString());
+
+        return json;
+    }
+
+    public static Equipement getEquipement(int idPersonnage)
+    {
+        var reponse = sharedClient.GetStringAsync(String.Format("character/equipement/get/{0}", idPersonnage));
+
+        Equipement json = JsonConvert.DeserializeObject<Equipement>(response.Result.ToString());
+
+        return json;
+    }
+
+
     public static void SaveIdUniverse(int value)
     {
         saveIdUniverse = value;
@@ -379,7 +416,6 @@ public static class Server
     {
         return saveIdUniverse;
     }
-
 
     public static int GetCurrentVillage()
     {
