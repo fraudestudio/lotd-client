@@ -349,6 +349,13 @@ public class CharacterManager : MonoBehaviour
         Destroy(character);
     }
 
+    /// <summary>
+    /// the given enemy attack a playable 
+    /// </summary>
+    /// <param name="linePlayable">line of the playable</param>
+    /// <param name="columnPlayable">column of the playable</param>
+    /// <param name="lineEnemy">line of the enemy</param>
+    /// <param name="columnEnemy">column of the enemy</param>
     public void EnemyAttackPlayable(int linePlayable, int columnPlayable, int lineEnemy, int columnEnemy)
     {
 

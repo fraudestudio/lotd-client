@@ -12,20 +12,26 @@ using UnityEngine;
 public class RoomGenerator : MonoBehaviour, IGeneratorAlgo
 {
     [SerializeField]
+    // the gameobject of the normale tile
     private GameObject tileNormale;
     [SerializeField]
+    // the gameobject of a full tile
     private GameObject tileFull;
     [SerializeField]
+    // the mapskin loader that store all the map skins
     private GameObject mapSkinLoader;
     [SerializeField]
+    // the gameobject of the border
     private GameObject border;
     [SerializeField]
+    // the torch prefab
     private GameObject torchPreFab;
     [SerializeField]
     // The size of the room
     private int roomSize = 18;
 
     [SerializeField]
+    // the camera manager
     private GameObject cameraManager;
 
     // the room bounds for the camera
@@ -47,6 +53,7 @@ public class RoomGenerator : MonoBehaviour, IGeneratorAlgo
 
     private void Awake()
     {
+        // save the room size
         AlgorithmeRoomGeneration.RoomSize = roomSize;
     }
 
@@ -56,14 +63,20 @@ public class RoomGenerator : MonoBehaviour, IGeneratorAlgo
     /// <param name="carte">the map you want to generate</param>
     public void GenerateRoom(Carte carte)
     {
+        // save the map
         this.carte = carte; 
 
+        // Create the borders
         CreateBorders();
 
+        // Clear all the old tiles
         ClearTiles();
 
+        // Destroyes all the old torches 
         DestroyTorches();
 
+
+        // Create the tile 
         for (int ligne = 0; ligne < Carte.Taille; ligne++)
         {
             for (int colonne = 0; colonne < Carte.Taille; colonne++)
@@ -84,7 +97,7 @@ public class RoomGenerator : MonoBehaviour, IGeneratorAlgo
             }
         }
 
-
+        // Create the camera bounds
         roomCameraBounds = new Bounds(tiles[0].transform.position, Vector3.zero);
 
         foreach (GameObject tile in tiles)
@@ -95,10 +108,11 @@ public class RoomGenerator : MonoBehaviour, IGeneratorAlgo
             }
         }
 
-
+        // Set the skin of all the tiles
         SetSkin();
 
 
+        // Set the camera room bounds and center it
         cameraManager.GetComponent<CameraManager>().RoomBounds = roomCameraBounds;
         cameraManager.GetComponent<CameraManager>().CenterOnRoom(1000);
 

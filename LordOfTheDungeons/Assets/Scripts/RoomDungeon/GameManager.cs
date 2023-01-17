@@ -217,6 +217,13 @@ public class GameManager : MonoBehaviour
 
 
 
+    /// <summary>
+    /// Enemy attack a player
+    /// </summary>
+    /// <param name="linePlayable">line position of the playable</param>
+    /// <param name="columnPlayable">column position of the playable</param>
+    /// <param name="lineEnemy">line position of the enemy</param>
+    /// <param name="columnEnemy">column position of the enemy</param>
     public void EnemyAttackPlayer(int linePlayable, int columnPlayable, int lineEnemy, int columnEnemy)
     {
         characterManager.GetComponent<CharacterManager>().EnemyAttackPlayable(linePlayable,columnPlayable,lineEnemy,columnEnemy);
