@@ -392,14 +392,14 @@ public static class Server
     {
         var response = sharedClient.GetStringAsync(String.Format("{0}/taverne/get/time_batiment", GetCurrentVillage()));
 
-        int json = JsonConvert.DeserializeObject<bool>(response.Result.ToString());
+        bool json = JsonConvert.DeserializeObject<bool>(response.Result.ToString());
 
         return json;
     }
 
     public static Equipement getEquipement(int idPersonnage)
     {
-        var reponse = sharedClient.GetStringAsync(String.Format("character/equipement/get/{0}", idPersonnage));
+        var response = sharedClient.GetStringAsync(String.Format("character/equipement/get/{0}", idPersonnage));
 
         Equipement json = JsonConvert.DeserializeObject<Equipement>(response.Result.ToString());
 
