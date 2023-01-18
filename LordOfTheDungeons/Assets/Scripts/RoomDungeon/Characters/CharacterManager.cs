@@ -6,6 +6,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
+using System.Data;
 using System.IO;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
@@ -57,6 +58,7 @@ public class CharacterManager : MonoBehaviour
     
     [SerializeField]
     private GameObject playerActionManager;
+
 
     // List of thep playable in the room
     private List<GameObject> playables = new List<GameObject>();
@@ -349,6 +351,33 @@ public class CharacterManager : MonoBehaviour
         Destroy(character);
     }
 
+
+
+    /// <summary>
+    /// Move the given enemy with the path given
+    /// </summary>
+    /// <param name="lineEnemy">line position of the enemy</param>
+    /// <param name="columnEnemy">column position of the enmy</param>
+    /// <param name="path">path to take </param>
+    public void MoveEnemy(int lineEnemy, int columnEnemy, int lineObjective, int columnObjective)
+    {
+
+        GameObject enemy = GetEnemy(lineEnemy, columnEnemy);
+       
+        if (enemy == null)
+        {
+            throw new Exception("Enemy does not exists");
+        }
+        else
+        {
+            selectionTileManager.GetComponent<SelectionTileManager>().CreateSelectionTiles(enemy.GetComponent<EnemyScript>().Movement, TypeSelection.Deplacement, enemy);
+            selectionTileManager.GetComponent<SelectionTileManager>().CreateSelectionTrail(selectionTileManager.GetComponent<SelectionTileManager>().GetSelectionTile(lineObjective,columnObjective));
+            selectionTileManager.GetComponent<SelectionTileManager>().MovePlayable();
+        }
+
+
+    }
+
     /// <summary>
     /// the given enemy attack a playable 
     /// </summary>
@@ -358,7 +387,7 @@ public class CharacterManager : MonoBehaviour
     /// <param name="columnEnemy">column of the enemy</param>
     public void EnemyAttackPlayable(int linePlayable, int columnPlayable, int lineEnemy, int columnEnemy)
     {
-
+        
     }
 
 }

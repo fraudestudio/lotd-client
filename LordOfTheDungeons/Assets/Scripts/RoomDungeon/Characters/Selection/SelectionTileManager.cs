@@ -4,7 +4,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
+using System.Data;
 using System.Runtime.CompilerServices;
+using TMPro.EditorUtilities;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.UIElements;
@@ -85,7 +87,7 @@ public class SelectionTileManager : MonoBehaviour
     /// <summary>
     /// Turn all the selection tiles to white
     /// </summary>
-    private void HideAllSelectionTile()
+    public void HideAllSelectionTile()
     {
         foreach (GameObject tile in selectionTiles)
         {
@@ -463,5 +465,26 @@ public class SelectionTileManager : MonoBehaviour
         {
             selectionTile.GetComponent<SelectionTileScript>().SetType(type);
         }
+    }
+
+    /// <summary>
+    /// Send the selection tile in the given 
+    /// </summary>
+    /// <param name="line">line of </param>
+    /// <param name="column"></param>
+    /// <returns></returns>
+    public GameObject GetSelectionTile(int line, int column) 
+    {
+        GameObject result = null;
+         
+        foreach (GameObject tile in selectionTiles)
+        {
+            if (tile.GetComponent<SelectionTileScript>().Ligne - GameManager.roomPosition == line && tile.GetComponent<SelectionTileScript>().Colonne - GameManager.roomPosition == column)
+            {
+                result = tile;
+            }
+        }
+
+        return result;
     }
 }
