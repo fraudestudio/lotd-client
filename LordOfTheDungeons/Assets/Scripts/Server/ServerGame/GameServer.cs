@@ -1,4 +1,4 @@
-﻿using System;
+﻿     using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -18,6 +18,10 @@ public class GameServer
 
     private int port;
 
+    private string token;
+
+    public string Token { get => token; set => token = value; }
+
     public static GameServer Instance
     {
         get
@@ -30,6 +34,8 @@ public class GameServer
         }
     }
 
+
+
     /// <summary>
     /// Connect to the tcp client
     /// </summary>
@@ -41,6 +47,7 @@ public class GameServer
         streamWriter = new StreamWriter(tcpClient.GetStream());
         Debug.Log(streamReader.ReadLine());
         Debug.Log(port);
-        //streamWriter.WriteLine("AUTH " + token);
+        streamWriter.WriteLine("AUTH " + token);
+        Debug.Log(streamReader.ReadLine());
     }
 }

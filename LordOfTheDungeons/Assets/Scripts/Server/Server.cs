@@ -69,6 +69,7 @@ public static class Server
                 name = id;
                 res = "Success";
                 sharedClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", json.SessionToken);
+                GameServer.Instance.Token = json.SessionToken;
             }
             else
             {
