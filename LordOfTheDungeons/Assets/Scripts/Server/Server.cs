@@ -35,7 +35,7 @@ public static class Server
 
     private static HttpClient sharedClient = new()
     {
-        BaseAddress = new Uri("https://info-dij-sae001.iut21.u-bourgogne.fr"),
+        BaseAddress = new Uri("https://info-dij-sae001.iut21.u-bourgogne.fr:5443"),
     };
 
 
@@ -406,6 +406,16 @@ public static class Server
         return json;
     }
 
+
+    public static int GoExpedition(int idVillage)
+    {
+       
+        var response = sharedClient.PostAsync(String.Format("api/village/{0}/expedition", idVillage), new StringContent(JsonConvert.SerializeObject(new List<int>()), Encoding.UTF8, "application/json"));
+
+        int json = JsonConvert.DeserializeObject<int>(response.Result.Content.ReadAsStringAsync().Result);
+
+        return json;
+    }
 
     public static void SaveIdUniverse(int value)
     {
