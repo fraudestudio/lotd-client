@@ -51,6 +51,7 @@ public class GameServer
         Debug.Log(streamReader.ReadLine());
         Debug.Log(port);
         streamWriter.WriteLine("AUTH " + token);
+        streamWriter.Flush();
         Task<string> response = streamReader.ReadLineAsync();
         response.ContinueWith(IsOk);
     }
