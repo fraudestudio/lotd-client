@@ -34,6 +34,8 @@ public class Expedition : MonoBehaviour, IPointerClickHandler
         {
             StartCoroutine(GoToDungeon());
             GameObject.Find("loadscreen").GetComponent<loaderScript>().Level("RoomDungeon");
+            GameServer.Instance.GameState = GameState.WAITING;
+
         }
     }
 
