@@ -1,5 +1,6 @@
 using Assets.Scripts.ProceduralGeneration.Algorithme;
 using Assets.Scripts.ProceduralGeneration.Salles;
+using Assets.Scripts.RoomDungeon.TurnManagement;
 using JetBrains.Annotations;
 using System;
 using System.Collections;
@@ -16,16 +17,29 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject characterManager;
 
+    [SerializeField]
+    private GameObject turnManager;
+
     private GameObject currentRoom;
 
     public static int roomPosition => 50;
 
     void Start()
     {
-        mapGenerator.GetComponent<MapGenerator>().GenerateMap(new AlgorithmeEliminationSimple().Generer(123));
+        mapGenerator.GetComponent<MapGenerator>().GenerateMap(new AlgorithmeEliminationSimple().Generer(GameServer.Instance.Seed));
         roomGenerator.GetComponent<RoomGenerator>().GenerateRoom(new AlgorithmeRoomGeneration().Generer(mapGenerator.GetComponent<MapGenerator>().FirstRoom.GetComponent<SalleObjectScript>().Seed));
         currentRoom = mapGenerator.GetComponent<MapGenerator>().FirstRoom;
+        SetCurrentPlayer(GameServer.Instance.Order);
         InitPlayers();
+    }
+
+    private void SetCurrentPlayer(int order)
+    {
+        switch (order)
+        {
+            case 0: turnManager.GetComponent<TurnManager>().CurrentPlayer = TypeTurn.Player_1; break;
+            case 1: turnManager.GetComponent<TurnManager>().CurrentPlayer = TypeTurn.Player_2; break;
+        }
     }
 
     /// <summary>

@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Village.unity
     guid: 731b0b3a09aa8c44680cb2371a704a6c
+  - enabled: 1
+    path: Assets/Scenes/RoomDungeon.unity
+    guid: 2af41d97bbe4c884daaaae965448ae97
   m_configObjects: {}

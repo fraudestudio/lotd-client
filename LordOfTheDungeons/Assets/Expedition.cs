@@ -1,4 +1,5 @@
 using Assets.Scripts.Server;
+using Assets.Scripts.Server.ServerGame;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Sockets;
@@ -28,5 +29,16 @@ public class Expedition : MonoBehaviour, IPointerClickHandler
     private void Update()
     {
         waitScreen.transform.Find("waitingtext").GetComponent<TMP_Text>().text = GameServer.Instance.State;
+
+        if (GameServer.Instance.GameState == GameState.STARTING)
+        {
+            StartCoroutine(GoToDungeon());
+        }
+    }
+
+    private IEnumerator GoToDungeon()
+    {
+        yield return new WaitForSeconds(5);
+        GameObject.Find("loadscreen").GetComponent<loaderScript>().Level("RoomDungeon");
     }
 }

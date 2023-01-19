@@ -205,6 +205,7 @@ MonoBehaviour:
   mapGenerator: {fileID: 674263666}
   roomGenerator: {fileID: 619482793}
   characterManager: {fileID: 56909921}
+  turnManager: {fileID: 2145475091}
 --- !u!4 &61591710
 Transform:
   m_ObjectHideFlags: 0
