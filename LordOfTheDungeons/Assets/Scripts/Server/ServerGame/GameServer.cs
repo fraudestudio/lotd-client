@@ -37,7 +37,7 @@ public class GameServer
 
     private int order;
 
-    private string currentRequest;
+    private string currentRequest = "";
 
     /// <summary>
     /// The token of the player
@@ -175,11 +175,17 @@ public class GameServer
         return result;
     }
 
+
+    public void AskForState()
+    {
+        currentRequest = "AskForState";
+    }
+
     public void WaitForServerResponse()
     {
         Task<string> whatToDo = streamReader.ReadLineAsync();
         whatToDo.ContinueWith(ReponseToWhatToDo);
-        currentRequest = "NULL";
+        ResetRequest();
     }
 
     private void ReponseToWhatToDo(Task<string> response)
@@ -194,6 +200,11 @@ public class GameServer
     public string GetCurrentRequest()
     {
         return currentRequest;
+    }
+
+    public void ResetRequest()
+    {
+        currentRequest = "";
     }
 
     /// <summary>

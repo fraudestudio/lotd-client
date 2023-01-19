@@ -271,6 +271,7 @@ public class CharacterManager : MonoBehaviour
             ModifyRoomPlayer(currentSelectedPlayable, true);
             selectionTileManager.GetComponent<SelectionTileManager>().DeleteSelectionTiles();
             StartCoroutine(WaitForCamera(0.8f, 0.2f));
+            GameServer.Instance.AskForState();
         }
 
     }

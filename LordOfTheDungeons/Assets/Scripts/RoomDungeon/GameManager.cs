@@ -35,9 +35,7 @@ public class GameManager : MonoBehaviour
         SetCurrentPlayer(GameServer.Instance.Order);
         InitPlayers();
 
-        
         turnManager.GetComponent<TurnManager>().StartManage(GameServer.Instance.AskTurn());
-
         VerifyState();
     }
 
@@ -59,7 +57,7 @@ public class GameManager : MonoBehaviour
 
     public void Update()
     {
-        if (GameServer.Instance.GetCurrentRequest() != "NULL")
+        if (GameServer.Instance.GetCurrentRequest() != "")
         {
             string[] arrayResponse = GameServer.Instance.GetCurrentRequest().Split(' ');
 
@@ -70,8 +68,16 @@ public class GameManager : MonoBehaviour
                     characterManager.GetComponent<CharacterManager>().MovePlayable(int.Parse(arrayResponse[2]), int.Parse(arrayResponse[3]), int.Parse(arrayResponse[4]));
                 }
             }
+
+            else if (arrayResponse[0] == "AskForState")
+            {
+                turnManager.GetComponent<TurnManager>().StartManage(GameServer.Instance.AskTurn());
+                VerifyState();
+                GameServer.Instance.ResetRequest();
+            }
         }
 
+        turnManager.GetComponent<TurnManager>().StartManage(GameServer.Instance.AskTurn());
         VerifyState();
     }
 
