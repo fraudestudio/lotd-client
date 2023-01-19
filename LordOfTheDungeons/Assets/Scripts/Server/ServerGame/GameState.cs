@@ -9,6 +9,7 @@ namespace Assets.Scripts.Server.ServerGame
     public enum GameState
     {
         WAITING,
+        PLAYING,
         STARTING,
     }
 }

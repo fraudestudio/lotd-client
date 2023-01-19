@@ -28,6 +28,10 @@ public class loaderScript : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Reset the progress value on the scene
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator ResetProgressValue()
     {
         yield return new WaitForSeconds(0.8f);

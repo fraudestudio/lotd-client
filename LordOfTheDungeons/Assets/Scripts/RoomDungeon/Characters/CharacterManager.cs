@@ -12,6 +12,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.UIElements;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class CharacterManager : MonoBehaviour
 {
@@ -100,6 +101,9 @@ public class CharacterManager : MonoBehaviour
             playable.name = "Playable_" + i;
             ModifyRoomPlayer(playable, true);
             playable.GetComponent<PlayableCharacterScript>().ChangeTeam(i % 2);
+
+            playable.GetComponent<PlayableCharacterScript>().Id = i;
+
             playables.Add(playable);
 
 
@@ -188,14 +192,32 @@ public class CharacterManager : MonoBehaviour
     /// <param name="path"></param>
     public void MoveCurrentPlayer(List<GameObject> path)
     {
-        playerActionManager.GetComponent<PlayerActionManager>().ShowAttackATH(false);
-        ModifyRoomPlayer(currentSelectedPlayable, false);
-        currentNodePath = 0;
-        pathToMovePlayable = path;
-        CheckNode();
-        cameraManager.GetComponent<CameraManager>().CenterOnObjects(path, 5f, 0.2f);
-        playerActionManager.GetComponent<PlayerActionManager>().CanDoAnything = false;
-        StartCoroutine(WaitForAmountsSeconds(0.3f));
+        if (GameServer.Instance.MovePlayable(currentSelectedPlayable.GetComponent<PlayableCharacterScript>().Id, Convert.ToInt32(path[path.Count - 1].transform.position.y - GameManager.roomPosition), Convert.ToInt32(path[path.Count - 1].transform.position.x - GameManager.roomPosition)))
+        {
+            playerActionManager.GetComponent<PlayerActionManager>().ShowAttackATH(false);
+            ModifyRoomPlayer(currentSelectedPlayable, false);
+            currentNodePath = 0;
+            pathToMovePlayable = path;
+            CheckNode();
+            cameraManager.GetComponent<CameraManager>().CenterOnObjects(path, 5f, 0.2f);
+            playerActionManager.GetComponent<PlayerActionManager>().CanDoAnything = false;
+            StartCoroutine(WaitForAmountsSeconds(0.3f));
+        }
+    }
+
+
+    /// <summary>
+    /// Move the wanted character to the wanted coordinates
+    /// </summary>
+    /// <param name="id">the id of the playable</param>
+    /// <param name="column">the column coordinates wanted</param>
+    /// <param name="line">the line coordinates wanted</param>
+    public void MovePlayable(int id, int column, int line)
+    {
+        GameObject playable = GetPlayable(id);
+        selectionTileManager.GetComponent<SelectionTileManager>().CreateSelectionTiles(playable.GetComponent<PlayableCharacterScript>().Movement, TypeSelection.Deplacement, playable);
+        selectionTileManager.GetComponent<SelectionTileManager>().CreateSelectionTrail(selectionTileManager.GetComponent<SelectionTileManager>().GetSelectionTile(line, column));
+        selectionTileManager.GetComponent<SelectionTileManager>().MovePlayable();
     }
 
     /// <summary>
@@ -314,6 +336,30 @@ public class CharacterManager : MonoBehaviour
             case TypeSelection.Attack: selectionTileManager.GetComponent<SelectionTileManager>().CreateSelectionTiles(currentSelectedPlayable.GetComponent<PlayableCharacterScript>().Action, type, currentSelectedPlayable); break;
         }
 
+    }
+
+
+
+    /// <summary>
+    /// Return the enemy with the coordinates given
+    /// </summary>
+    /// <param name="line">it line</param>
+    /// <param name="column">it column</param>
+    /// <returns>the enemy wanted if found, null otherwise</returns>
+    public GameObject GetPlayable (int id)
+    {
+
+        GameObject result = null;
+
+        foreach (GameObject playable in playables)
+        {
+            if (playable.GetComponent<PlayableCharacterScript>().Id == id)
+            {
+                result = playable;
+            }
+        }
+
+        return result;
     }
 
     /// <summary>

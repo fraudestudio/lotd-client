@@ -1,11 +1,13 @@
 using Assets.Scripts.ProceduralGeneration.Algorithme;
 using Assets.Scripts.ProceduralGeneration.Salles;
 using Assets.Scripts.RoomDungeon.TurnManagement;
+using Assets.Scripts.Server.ServerGame;
 using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.UI;
 using UnityEngine.UIElements;
 
 public class GameManager : MonoBehaviour
@@ -16,7 +18,8 @@ public class GameManager : MonoBehaviour
     private GameObject roomGenerator;
     [SerializeField]
     private GameObject characterManager;
-
+    [SerializeField]
+    private GameObject playerActionManager;
     [SerializeField]
     private GameObject turnManager;
 
@@ -31,6 +34,45 @@ public class GameManager : MonoBehaviour
         currentRoom = mapGenerator.GetComponent<MapGenerator>().FirstRoom;
         SetCurrentPlayer(GameServer.Instance.Order);
         InitPlayers();
+
+        
+        turnManager.GetComponent<TurnManager>().StartManage(GameServer.Instance.AskTurn());
+
+        VerifyState();
+    }
+
+
+    public void VerifyState()
+    {
+        GameServer.Instance.AskGameState();
+        if (GameServer.Instance.GameState == GameState.WAITING)
+        {
+            GameServer.Instance.WaitForServerResponse();
+            playerActionManager.GetComponent<PlayerActionManager>().CanDoAnything = false;
+        }
+        else
+        {
+            playerActionManager.GetComponent<PlayerActionManager>().CanDoAnything = true;
+        }
+    }
+
+
+    public void Update()
+    {
+        if (GameServer.Instance.GetCurrentRequest() != "NULL")
+        {
+            string[] arrayResponse = GameServer.Instance.GetCurrentRequest().Split(' ');
+
+            if (arrayResponse[0] == "MOVE")
+            {
+                if (arrayResponse[1] == "CHARACTER")
+                {
+                    characterManager.GetComponent<CharacterManager>().MovePlayable(int.Parse(arrayResponse[2]), int.Parse(arrayResponse[3]), int.Parse(arrayResponse[4]));
+                }
+            }
+        }
+
+        VerifyState();
     }
 
     private void SetCurrentPlayer(int order)
@@ -230,8 +272,6 @@ public class GameManager : MonoBehaviour
         GameObject.Find("ChangeRoom").transform.Find("Buttons").GetComponent<CanvasGroup>().interactable = true;
         GameObject.Find("ChangeRoom").transform.Find("Buttons").GetComponent<CanvasGroup>().blocksRaycasts = true;
     }
-
-
 
     /// <summary>
     /// Enemy attack a player

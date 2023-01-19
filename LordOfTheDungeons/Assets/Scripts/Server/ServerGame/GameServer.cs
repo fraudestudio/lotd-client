@@ -10,6 +10,8 @@ using TMPro;
 using UnityEditor.Compilation;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.Animations;
+using UnityEngine.Rendering;
 
 public class GameServer
 {
@@ -34,6 +36,8 @@ public class GameServer
     private int seed;
 
     private int order;
+
+    private string currentRequest;
 
     /// <summary>
     /// The token of the player
@@ -138,6 +142,58 @@ public class GameServer
             GameState = GameState.STARTING;
             ChangeState("Joueur trouver ! Votre partie va bientôt commencer !");
         }
+    }
+
+    public string AskTurn()
+    {
+        return streamReader.ReadLine();
+    }
+
+    public void AskGameState()
+    {
+        if (streamReader.ReadLine() == "PLAY")
+        {
+            GameState = GameState.PLAYING;
+        }
+        else
+        {
+            GameState = GameState.WAITING;
+        }
+    }
+
+
+    public bool MovePlayable(int id, int ligne, int colonne)
+    {
+        bool result = false;
+
+        streamWriter.WriteLine("MOVE " + id + " " + colonne + " " + ligne);
+        if (streamReader.ReadLine() != "NOK")
+        {
+            result = true;
+        }
+
+        return result;
+    }
+
+    public void WaitForServerResponse()
+    {
+        Task<string> whatToDo = streamReader.ReadLineAsync();
+        whatToDo.ContinueWith(ReponseToWhatToDo);
+        currentRequest = "NULL";
+    }
+
+    private void ReponseToWhatToDo(Task<string> response)
+    {
+        currentRequest = response.Result;
+    }
+
+    /// <summary>
+    /// Return the current resquest of the server
+    /// </summary>
+    /// <returns>the current server request</returns>
+    public string GetCurrentRequest()
+    {
+        return currentRequest;
     }
 
     /// <summary>
