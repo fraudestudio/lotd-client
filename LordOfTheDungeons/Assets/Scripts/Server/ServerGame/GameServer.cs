@@ -60,12 +60,33 @@ public class GameServer
         response.ContinueWith(IsOk);
     }
 
-
+    /// <summary>
+    /// Tells if the server is good for searching a player 
+    /// </summary>
+    /// <param name="response"></param>
     private void IsOk(Task<string> response)
     {
         if (response.Result == "OK")
         {
             ChangeState("En recherche d'un joueur...");
+            Task<string> startGame = streamReader.ReadLineAsync();
+            startGame.ContinueWith(StartTheGame);
+        }
+        else
+        {
+            throw new Exception();
+        }
+    }
+
+    /// <summary>
+    /// When the server tells to start the game
+    /// </summary>
+    /// <param name="response"></param>
+    private void StartTheGame(Task<string> response)
+    {
+        if (response.Result == "START")
+        {
+            ChangeState("Joueur trouver ! Votre partie va bientôt commencer !");
         }
     }
 
