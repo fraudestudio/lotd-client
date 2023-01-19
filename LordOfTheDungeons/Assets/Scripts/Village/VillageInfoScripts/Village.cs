@@ -23,8 +23,10 @@ public class Village
 
         Dictionary<string,int> bat = Server.GetLevelVillage();
 
-        // Ici requête BDD pour la taverne
-        Tavern = new Tavern(bat["TAVERN"], 5, 4, 1, 20, 30, 4, Server.GetInConstructionVillage("TAVERN"), 40);
+        Debug.Log(Server.GetCurrentVillage());
+        int starttime = Server.GetStartTimeTaverne(Server.GetCurrentVillage());
+        Debug.Log(starttime);
+        Tavern = new Tavern(bat["TAVERN"], 5, 4, 1, 20, 30, 4, Server.GetInConstructionVillage("TAVERN"),starttime);
         Gunsmith = new Gunsmith(bat["GUNSMITH"], 4, 6, 4,10,10,30, Server.GetInConstructionVillage("GUNSMITH"));
         Warehouse = new Warehouse(bat["WAREHOUSE"], 1,1,5,20,20,20, Server.GetInConstructionVillage("WAREHOUSE"), 300,300,300);
         TrainingCamp = new TrainingCamp(bat["TRAINING_CAMP"], 3, 5, 20, 10, 20, 30, Server.GetInConstructionVillage("TRAINING_CAMP"), false, 0);

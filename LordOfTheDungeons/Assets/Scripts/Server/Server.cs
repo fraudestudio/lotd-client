@@ -35,7 +35,7 @@ public static class Server
 
     private static HttpClient sharedClient = new()
     {
-        BaseAddress = new Uri("https://info-dij-sae001.iut21.u-bourgogne.fr"),
+        BaseAddress = new Uri("https://info-dij-sae001.iut21.u-bourgogne.fr:8443"),
     };
 
 
@@ -372,7 +372,7 @@ public static class Server
 
     public static bool DeleteAllCharacterFromTaverne(int idVillage)
     {
-        var response = sharedClient.GetStringAsync(String.Format("{0}/taverne/delete_all", GetCurrentVillage()));
+        var response = sharedClient.GetStringAsync(String.Format("api/village/{0}/taverne/delete_all", GetCurrentVillage()));
 
         bool json = JsonConvert.DeserializeObject<bool>(response.Result.ToString());
 
@@ -381,31 +381,70 @@ public static class Server
 
     public static bool SetStartTimeTaverneNow(int idVillage)
     {
-        var response = sharedClient.GetStringAsync(String.Format("{0}/taverne/set/time_batiment", GetCurrentVillage()));
+        var response = sharedClient.GetStringAsync(String.Format("api/village/{0}/taverne/set/time_batiment", GetCurrentVillage()));
 
         bool json = JsonConvert.DeserializeObject<bool>(response.Result.ToString());
 
         return json;
     }
 
-    public static bool GetStartTimeTaverne(int idVillage)
+    public static int GetStartTimeTaverne(int idVillage)
     {
-        var response = sharedClient.GetStringAsync(String.Format("{0}/taverne/get/time_batiment", GetCurrentVillage()));
+        var response = sharedClient.GetStringAsync(String.Format("api/village/{0}/taverne/get/time_batiment",idVillage));
 
-        int json = JsonConvert.DeserializeObject<bool>(response.Result.ToString());
+        Debug.Log(response.Result.ToString());
+
+        int json = JsonConvert.DeserializeObject<int>(response.Result.ToString());
 
         return json;
     }
 
     public static Equipement getEquipement(int idPersonnage)
     {
-        var reponse = sharedClient.GetStringAsync(String.Format("character/equipement/get/{0}", idPersonnage));
+        var reponse = sharedClient.GetStringAsync(String.Format("api/village/character/equipement/get/{0}", idPersonnage));
 
-        Equipement json = JsonConvert.DeserializeObject<Equipement>(response.Result.ToString());
+        Equipement json = JsonConvert.DeserializeObject<Equipement>(reponse.Result.ToString());
 
         return json;
     }
 
+    public static int InitCharacter(int idVillage)
+    {
+        var reponse = sharedClient.GetStringAsync(String.Format("api/village/{0}/character/create", idVillage));
+
+        int json = JsonConvert.DeserializeObject<int>(reponse.Result.ToString());
+
+        return json;
+    }
+
+    public static CharacterModel GetCharacterByID(int idCharacter)
+    {
+        var response = sharedClient.GetStringAsync(String.Format("api/village/character/get/{0}",idCharacter));
+
+        CharacterModel json = JsonConvert.DeserializeObject<CharacterModel>(response.Result.ToString());
+
+        return json;
+    }
+
+    public static List<int> GetCharacterInBatiment(int idVillage, string batiment)
+    {
+        var response = sharedClient.GetStringAsync(String.Format("api/village/{0}/{1}/GetCharacterInBatiment", idVillage,batiment));
+
+        Debug.Log(response.Result.ToString());
+
+        List<int> json = JsonConvert.DeserializeObject<List<int>>(response.Result.ToString());
+
+        return json;
+    } 
+
+    public static bool SetCharacterInBatiment(int idVillage, int idPersonnage, string batiment)
+    {
+        var response = sharedClient.GetStringAsync(String.Format("api/village/{0}/{1}/{2}/insertPersoInBatiment", idVillage, idPersonnage, batiment));
+
+        bool json = JsonConvert.DeserializeObject<bool>(response.Result.ToString());
+
+        return json;
+    }
 
     public static void SaveIdUniverse(int value)
     {

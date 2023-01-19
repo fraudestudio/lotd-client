@@ -316,14 +316,17 @@ public class BuildingBehaviourScript : MonoBehaviour
     /// </summary>
     private void InitTavern()
     {
+        Debug.Log("caca");
         GameObject t = GameObject.Find("TavernMenu");
         t.transform.Find("TimeSliderTavern").GetComponent<TimeLeftSliderScript>().Init(Village.Tavern.TimeBeforeNewRecruit, Tavern.TimeMaxBeforeNewRecruit);
         Transform heoresAvaiable = t.transform.Find("HeroesAvaiable");
+        
 
         for (int i = 0; i < Village.Tavern.Level + 1; i++)
         {
             if (i % 2 == 0)
             {
+                //creation case
                 GameObject d = Instantiate(slotPreFab);
                 d.name = "Slot_" + i;
                 d.GetComponent<CharacterSlotScript>().SetType(SlotType.TAVERN);
@@ -332,16 +335,40 @@ public class BuildingBehaviourScript : MonoBehaviour
             }
         }
 
-        
-        Armor a = GameObject.Find("CharacterFactory").GetComponent<ArmorFactory>().CreateArmor(0, "Armure en cuir", 1, 3);
-        //Weapon w = GameObject.Find("CharacterFactory").GetComponent<WeaponFactory>().CreateWeapon(1, "Petite �p�e", 1, 10);
-        Weapon w1 = GameObject.Find("CharacterFactory").GetComponent<WeaponFactory>().CreateWeapon(0, "Fronde", 1, 5);
-        GameObject c = GameObject.Find("CharacterFactory").GetComponent<CharacterFactory>().CreateCharacter(0, "Fat�o Mavard", "Hobbit", 1, 10, 10, 4, 5,"Archer",w1,a);
-        //GameObject c1 = GameObject.Find("CharacterFactory").GetComponent<CharacterFactory>().CreateCharacter(1, "Pucas Lires", "Hobbit", 2, 10, 15, 10, 9,"Guerrier",w,a);
-
-        heoresAvaiable.GetChild(0).GetComponent<CharacterSlotScript>().AddChar(c);
-        //heoresAvaiable.GetChild(1).GetComponent<CharacterSlotScript>().AddChar(c1);
-
+        Debug.Log(Server.GetCurrentVillage());
+        if (Server.GetStartTimeTaverne(Server.GetCurrentVillage()) <= 0)
+        {
+            Server.SetStartTimeTaverneNow(Server.GetCurrentVillage());
+            Server.DeleteAllCharacterFromTaverne(Server.GetCurrentVillage());
+            for (int i = 0; i < Village.Tavern.Level + 1; i++)
+            {
+                if (i % 2 == 0)
+                {
+                    int idNewPerso = 0;
+                    idNewPerso = Server.InitCharacter(Server.GetCurrentVillage());
+                    Server.SetCharacterInBatiment(Server.GetCurrentVillage(), idNewPerso, "TAVERN");
+                }
+            }
+        }
+        Debug.Log(Server.GetCurrentVillage());
+        List<int> characters = Server.GetCharacterInBatiment(Server.GetCurrentVillage(), "TAVERN");
+        CharacterModel characterTemp = new CharacterModel();
+        Equipement equipementTemp = new Equipement();
+        for (int i = 0; i < Village.Tavern.Level + 1; i++)
+        {
+            if (i % 2 == 0)
+            {
+                characterTemp = Server.GetCharacterByID(characters[i]);
+                Debug.Log(characterTemp.Name);
+                equipementTemp = Server.getEquipement(characters[i]);
+                Debug.Log(equipementTemp.NIVEAU_ARMURE);
+                Armor a = GameObject.Find("CharacterFactory").GetComponent<ArmorFactory>().CreateArmor(0, "Armure en cuir", equipementTemp.NIVEAU_ARMURE, equipementTemp.BONUS_ARME);
+                Weapon w = GameObject.Find("CharacterFactory").GetComponent<WeaponFactory>().CreateWeapon(0, "Fronde", equipementTemp.NIVEAU_ARME, equipementTemp.NIVEAU_ARMURE);
+                GameObject c = GameObject.Find("CharacterFactory").GetComponent<CharacterFactory>().CreateCharacter(0, characterTemp.Name, characterTemp.RACE, characterTemp.Level, characterTemp.PV, characterTemp.PV_MAX, characterTemp.PA_MAX, characterTemp.PM_MAX, characterTemp.CLASSE, w, a);
+                heoresAvaiable.GetChild(i).GetComponent<CharacterSlotScript>().AddChar(c);
+            }
+        }
+        Debug.Log("sucess");
     }
 
 
