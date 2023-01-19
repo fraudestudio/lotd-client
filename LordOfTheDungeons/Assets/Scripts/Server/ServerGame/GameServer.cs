@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using TMPro;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
@@ -48,6 +49,8 @@ public class GameServer
         Debug.Log(streamReader.ReadLine());
         Debug.Log(port);
         streamWriter.WriteLine("AUTH " + token);
-        Debug.Log(streamReader.ReadLine());
+        if (streamReader.ReadLine() == "OK")
+            GameObject.Find("WaitingRoom").transform.Find("waitingtext").GetComponent<TMP_Text>().text = "Partie trouvé\n En attente de votre coéquipier...";
+
     }
 }
