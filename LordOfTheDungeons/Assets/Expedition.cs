@@ -2,6 +2,7 @@ using Assets.Scripts.Server;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Sockets;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -22,5 +23,10 @@ public class Expedition : MonoBehaviour, IPointerClickHandler
 
             GameServer.Instance.ConnectTcpClient();
         }
+    }
+
+    private void Update()
+    {
+        waitScreen.transform.Find("waitingtext").GetComponent<TMP_Text>().text = GameServer.Instance.State;
     }
 }

@@ -20,6 +20,8 @@ public class GameServer
 
     private int port;
 
+    private string state = "Connexion...";
+
     private string token;
 
     public string Token { get => token; set => token = value; }
@@ -35,6 +37,8 @@ public class GameServer
             return instance;
         }
     }
+
+    public string State { get => state; set => state = value; }
 
 
 
@@ -57,11 +61,16 @@ public class GameServer
     }
 
 
-    public void IsOk(Task<string> response)
+    private void IsOk(Task<string> response)
     {
         if (response.Result == "OK")
         {
-            GameObject.Find("WaitingRoom").transform.Find("waitingtext").GetComponent<TMP_Text>().text = "Partie trouvé\n En attente de votre coéquipier...";
+            ChangeState("En recherche d'un joueur...");
         }
+    }
+
+    public void ChangeState(string stateText)
+    {
+        State = stateText;
     }
 }

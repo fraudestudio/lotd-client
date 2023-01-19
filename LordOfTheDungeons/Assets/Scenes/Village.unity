@@ -435,7 +435,7 @@ GameObject:
   - component: {fileID: 69493009}
   - component: {fileID: 69493008}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: waitingtext
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -481,7 +481,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: En recherche d'un joueur...
+  m_text: Connexion...
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 256fac9365b23824ba1594270db07973, type: 2}
   m_sharedMaterial: {fileID: -4939284704535987481, guid: 256fac9365b23824ba1594270db07973, type: 2}
