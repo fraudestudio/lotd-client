@@ -6,6 +6,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using TMPro;
+using UnityEditor.Compilation;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
@@ -44,13 +45,22 @@ public class GameServer
     {
         port = Server.GoExpedition(Server.GetCurrentVillage());
         tcpClient = new TcpClient("10.128.120.128", port);
+        tcpClient.NoDelay = true;
         streamReader = new StreamReader(tcpClient.GetStream());
         streamWriter = new StreamWriter(tcpClient.GetStream());
         Debug.Log(streamReader.ReadLine());
         Debug.Log(port);
         streamWriter.WriteLine("AUTH " + token);
-        if (streamReader.ReadLine() == "OK")
-            GameObject.Find("WaitingRoom").transform.Find("waitingtext").GetComponent<TMP_Text>().text = "Partie trouvé\n En attente de votre coéquipier...";
+        Task<string> response = streamReader.ReadLineAsync();
+        response.ContinueWith(IsOk);
+    }
 
+
+    public void IsOk(Task<string> response)
+    {
+        if (response.Result == "OK")
+        {
+            GameObject.Find("WaitingRoom").transform.Find("waitingtext").GetComponent<TMP_Text>().text = "Partie trouvé\n En attente de votre coéquipier...";
+        }
     }
 }
