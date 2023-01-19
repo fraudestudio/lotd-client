@@ -56,7 +56,9 @@ public class GameManager : MonoBehaviour
         InitPlayers();
     }
 
-
+    /// <summary>
+    /// Change the room
+    /// </summary>
     public void ChangeRoom()
     {
         StartCoroutine(FadeStartAnim());
@@ -217,9 +219,28 @@ public class GameManager : MonoBehaviour
 
 
 
+    /// <summary>
+    /// Enemy attack a player
+    /// </summary>
+    /// <param name="linePlayable">line position of the playable</param>
+    /// <param name="columnPlayable">column position of the playable</param>
+    /// <param name="lineEnemy">line position of the enemy</param>
+    /// <param name="columnEnemy">column position of the enemy</param>
     public void EnemyAttackPlayer(int linePlayable, int columnPlayable, int lineEnemy, int columnEnemy)
     {
         characterManager.GetComponent<CharacterManager>().EnemyAttackPlayable(linePlayable,columnPlayable,lineEnemy,columnEnemy);
+    }
+
+    /// <summary>
+    /// Move an enemy to wanted coordinates
+    /// </summary>
+    /// <param name="lineEnemy">the line coordinates of the enemy</param>
+    /// <param name="columnEnemy">the column coordinates of the enemy</param>
+    /// <param name="lineObjective"></param>
+    /// <param name="columnObjective"></param>
+    public void EnemyMoveTo(int lineEnemy, int columnEnemy, int lineObjective, int columnObjective)
+    {
+        characterManager.GetComponent<CharacterManager>().MoveEnemy(lineEnemy, columnEnemy, lineObjective, columnObjective);
     }
 
 }

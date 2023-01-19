@@ -5,6 +5,10 @@ using UnityEngine.EventSystems;
 
 public class AttackButtonScript : MonoBehaviour, IPointerClickHandler
 {
+    /// <summary>
+    /// Change to attack type
+    /// </summary>
+    /// <param name="eventData"></param>
     public void OnPointerClick(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Left)

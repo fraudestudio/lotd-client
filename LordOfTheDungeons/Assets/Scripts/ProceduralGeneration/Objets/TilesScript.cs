@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class TilesScript : MonoBehaviour
 {
+    // the room object of the tile
     private Salle salle;
-
     public Salle Salle { get => salle; set => salle = value; }
 
 }

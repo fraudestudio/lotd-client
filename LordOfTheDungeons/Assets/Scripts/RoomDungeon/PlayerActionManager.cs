@@ -13,16 +13,28 @@ public class PlayerActionManager : MonoBehaviour
     private GameObject buttonAttack;
     [SerializeField]
     private GameObject buttonMove;
+    
+    /// <summary>
+    /// Show the attack button on the ATH
+    /// </summary>
+    /// <param name="show"></param>
     public void ShowAttackATH(bool show)
     {
         buttonAttack.SetActive(show);
     }
 
+    /// <summary>
+    /// Show the move button on the ATH
+    /// </summary>
+    /// <param name="show"></param>
     public void ShowMoveATH(bool show)
     {
         buttonMove.SetActive(show);
     }
 
+    /// <summary>
+    /// Start with the attack butotn
+    /// </summary>
     private void Start()
     {
         ShowAttackATH(false);

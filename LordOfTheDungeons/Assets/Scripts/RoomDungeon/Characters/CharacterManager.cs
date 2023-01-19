@@ -6,6 +6,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
+using System.Data;
 using System.IO;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
@@ -57,6 +58,7 @@ public class CharacterManager : MonoBehaviour
     
     [SerializeField]
     private GameObject playerActionManager;
+
 
     // List of thep playable in the room
     private List<GameObject> playables = new List<GameObject>();
@@ -201,21 +203,21 @@ public class CharacterManager : MonoBehaviour
     /// </summary>
     public void AttackEnemy(int line, int column)
     {
-
-        int playerPower = currentSelectedPlayable.GetComponent<PlayableCharacterScript>().Power;
-
-        playerActionManager.GetComponent<PlayerActionManager>().ShowMoveATH(false);
         GameObject enemy = GetEnemy(line, column);
-        List<GameObject> center = new List<GameObject>();
-        center.Add(enemy);
-        center.Add(currentSelectedPlayable);
-        cameraManager.GetComponent<CameraManager>().CenterOnObjects(center, 5f, 0.2f);
-        playerActionManager.GetComponent<PlayerActionManager>().CanDoAnything = false;
-        enemy.GetComponent<EnemyScript>().Hurt(playerPower);
-        selectionTileManager.GetComponent<SelectionTileManager>().DeleteSelectionTiles();
-        playerActionManager.GetComponent<PlayerActionManager>().CanDoAnything = false;
-        StartCoroutine(WaitForCamera(1f, 0.2f));
-
+        if (enemy != null)
+        {
+            int playerPower = currentSelectedPlayable.GetComponent<PlayableCharacterScript>().Power;
+            playerActionManager.GetComponent<PlayerActionManager>().ShowMoveATH(false);
+            List<GameObject> center = new List<GameObject>();
+            center.Add(enemy);
+            center.Add(currentSelectedPlayable);
+            cameraManager.GetComponent<CameraManager>().CenterOnObjects(center, 5f, 0.2f);
+            playerActionManager.GetComponent<PlayerActionManager>().CanDoAnything = false;
+            enemy.GetComponent<EnemyScript>().Hurt(playerPower);
+            selectionTileManager.GetComponent<SelectionTileManager>().DeleteSelectionTiles();
+            playerActionManager.GetComponent<PlayerActionManager>().CanDoAnything = false;
+            StartCoroutine(WaitForCamera(1f, 0.2f));
+        }
     }
 
     /// <summary>
@@ -349,9 +351,43 @@ public class CharacterManager : MonoBehaviour
         Destroy(character);
     }
 
-    public void EnemyAttackPlayable(int linePlayable, int columnPlayable, int lineEnemy, int columnEnemy)
+
+
+    /// <summary>
+    /// Move the given enemy with the path given
+    /// </summary>
+    /// <param name="lineEnemy">line position of the enemy</param>
+    /// <param name="columnEnemy">column position of the enmy</param>
+    /// <param name="path">path to take </param>
+    public void MoveEnemy(int lineEnemy, int columnEnemy, int lineObjective, int columnObjective)
     {
 
+        GameObject enemy = GetEnemy(lineEnemy, columnEnemy);
+       
+        if (enemy == null)
+        {
+            throw new Exception("Enemy does not exists");
+        }
+        else
+        {
+            selectionTileManager.GetComponent<SelectionTileManager>().CreateSelectionTiles(enemy.GetComponent<EnemyScript>().Movement, TypeSelection.Deplacement, enemy);
+            selectionTileManager.GetComponent<SelectionTileManager>().CreateSelectionTrail(selectionTileManager.GetComponent<SelectionTileManager>().GetSelectionTile(lineObjective,columnObjective));
+            selectionTileManager.GetComponent<SelectionTileManager>().MovePlayable();
+        }
+
+
+    }
+
+    /// <summary>
+    /// the given enemy attack a playable 
+    /// </summary>
+    /// <param name="linePlayable">line of the playable</param>
+    /// <param name="columnPlayable">column of the playable</param>
+    /// <param name="lineEnemy">line of the enemy</param>
+    /// <param name="columnEnemy">column of the enemy</param>
+    public void EnemyAttackPlayable(int linePlayable, int columnPlayable, int lineEnemy, int columnEnemy)
+    {
+        
     }
 
 }

@@ -10,9 +10,11 @@ public class PlayableCharacterScript : MonoBehaviour
     private int movement = 5;
     public int Movement { get => movement; set => movement = value; }
     
+    // Action point of the player
     private int action = 2;
     public int Action { get => action; set => action = value; }
     
+    // Power of the player
     private int power = 15;
     public int Power { get => power; }
 

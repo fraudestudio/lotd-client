@@ -5,6 +5,10 @@ using UnityEngine.EventSystems;
 
 public class MoveButtonScript : MonoBehaviour, IPointerClickHandler
 {
+    /// <summary>
+    /// Change to move type
+    /// </summary>
+    /// <param name="eventData"></param>
     public void OnPointerClick(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Left)

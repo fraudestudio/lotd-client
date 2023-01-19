@@ -16,6 +16,10 @@ public class EnemyScript : MonoBehaviour
     // slider of the health bar
     private Slider slider;
 
+    // Movement of the enemy:
+    private int movement = 5;
+    public int Movement { get => movement; set => movement = value; }
+
     private GameObject characterManager;
 
     private void Start()
