@@ -13,8 +13,12 @@ using UnityEngine;
 
 public class GameServer
 {
+
+    // The TCPclient connexion
     private TcpClient tcpClient;
+    // The streamReader
     private StreamReader streamReader;
+    // the streamWriter
     private StreamWriter streamWriter;
 
     private static GameServer instance;
@@ -31,7 +35,27 @@ public class GameServer
 
     private int order;
 
+    /// <summary>
+    /// The token of the player
+    /// </summary>
     public string Token { get => token; set => token = value; }
+    /// <summary>
+    /// The string state of the gameserver
+    /// </summary>
+    public string State { get => state; set => state = value; }
+    /// <summary>
+    /// The seed sent by the server
+    /// </summary>
+    public int Seed { get => seed; set => seed = value; }
+    /// <summary>
+    /// The enum gamestate of the server
+    /// </summary>
+    public GameState GameState { get => gameState; set => gameState = value; }
+    /// <summary>
+    /// The order of the player sent by the server
+    /// </summary>
+    public int Order { get => order; set => order = value; }
+
 
     public static GameServer Instance
     {
@@ -45,12 +69,6 @@ public class GameServer
         }
     }
 
-    public string State { get => state; set => state = value; }
-    public int Seed { get => seed; set => seed = value; }
-    public GameState GameState { get => gameState; set => gameState = value; }
-    public int Order { get => order; set => order = value; }
-
-
 
     /// <summary>
     /// Connect to the tcp client
@@ -58,12 +76,13 @@ public class GameServer
     public void ConnectTcpClient()
     {
         port = Server.GoExpedition(Server.GetCurrentVillage());
+
         tcpClient = new TcpClient("10.128.120.128", port);
         tcpClient.NoDelay = true;
+
         streamReader = new StreamReader(tcpClient.GetStream());
         streamWriter = new StreamWriter(tcpClient.GetStream());
-        Debug.Log(streamReader.ReadLine());
-        Debug.Log(port);
+
         streamWriter.WriteLine("AUTH " + token);
         streamWriter.Flush();
         Task<string> response = streamReader.ReadLineAsync();
@@ -93,6 +112,13 @@ public class GameServer
         }
     }
 
+    /// <summary>
+    /// When the server send a value with a name and an int
+    /// EX : 'seed 123' 
+    /// </summary>
+    /// <param name="response"></param>
+    /// <param name="position"></param>
+    /// <returns></returns>
     private int GetIntWithValue(string response,int position)
     {
         Debug.Log(response);

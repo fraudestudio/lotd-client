@@ -13,6 +13,10 @@ public class Expedition : MonoBehaviour, IPointerClickHandler
     [SerializeField]
     private GameObject waitScreen;
 
+    /// <summary>
+    /// When the player click it start the connexion the with the game server
+    /// </summary>
+    /// <param name="eventData"></param>
     public void OnPointerClick(PointerEventData eventData)
     {
         // If clicked, go to the expedition waiting
@@ -26,6 +30,9 @@ public class Expedition : MonoBehaviour, IPointerClickHandler
         }
     }
 
+    /// <summary>
+    /// Show the state of the server and when the game start, ask to load the dungeon
+    /// </summary>
     private void Update()
     {
         waitScreen.transform.Find("waitingtext").GetComponent<TMP_Text>().text = GameServer.Instance.State;
@@ -38,6 +45,10 @@ public class Expedition : MonoBehaviour, IPointerClickHandler
         }
     }
 
+    /// <summary>
+    /// Wait 5 seconds and go to the dungeon
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator GoToDungeon()
     {
         yield return new WaitForSeconds(5);
