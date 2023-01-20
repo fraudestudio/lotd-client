@@ -104,6 +104,9 @@ public class GameServer
         {
             ChangeState("En recherche d'un joueur...");
 
+            seed = GetIntWithValue(streamReader.ReadLine(),1);
+            order = GetIntWithValue(streamReader.ReadLine(),1);
+
             Task<string> startGame = streamReader.ReadLineAsync();
             startGame.ContinueWith(StartTheGame);
         }
@@ -136,9 +139,6 @@ public class GameServer
         Debug.Log(response.Result);
         if (response.Result == "STARTED")
         {
-            seed = GetIntWithValue(streamReader.ReadLine(), 1);
-            order = GetIntWithValue(streamReader.ReadLine(), 1);
-
             GameState = GameState.STARTING;
             ChangeState("Joueur trouver ! Votre partie va bientôt commencer !");
         }
