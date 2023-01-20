@@ -480,7 +480,7 @@ public class SelectionTileManager : MonoBehaviour
          
         foreach (GameObject tile in selectionTiles)
         {
-            if (tile.GetComponent<SelectionTileScript>().Ligne - GameManager.roomPosition == line && tile.GetComponent<SelectionTileScript>().Colonne - GameManager.roomPosition == column)
+            if (tile.GetComponent<SelectionTileScript>().Ligne == line && tile.GetComponent<SelectionTileScript>().Colonne == column)
             {
                 result = tile;
             }
