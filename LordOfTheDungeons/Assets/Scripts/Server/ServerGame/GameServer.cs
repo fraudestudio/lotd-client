@@ -189,7 +189,6 @@ public class GameServer
     {
         Task<string> whatToDo = streamReader.ReadLineAsync();
         whatToDo.ContinueWith(ReponseToWhatToDo);
-        ResetRequest();
     }
 
     private void ReponseToWhatToDo(Task<string> response)

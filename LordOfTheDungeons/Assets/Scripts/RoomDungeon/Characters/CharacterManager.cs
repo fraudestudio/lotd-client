@@ -287,7 +287,6 @@ public class CharacterManager : MonoBehaviour
             ModifyRoomPlayer(currentSelectedPlayable, true);
             selectionTileManager.GetComponent<SelectionTileManager>().DeleteSelectionTiles();
             StartCoroutine(WaitForCamera(0.8f, 0.2f));
-            GameServer.Instance.AskForState();
         }
 
     }
@@ -305,6 +304,7 @@ public class CharacterManager : MonoBehaviour
         yield return new WaitForSeconds(time);
         playerActionManager.GetComponent<PlayerActionManager>().CanDoAnything = true;
         cameraManager.GetComponent<CameraManager>().CenterOnRoom(cameraSpeed);
+        GameServer.Instance.AskForState();
     }
 
 
