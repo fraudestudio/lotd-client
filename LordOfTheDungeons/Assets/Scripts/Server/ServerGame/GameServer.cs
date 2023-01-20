@@ -170,6 +170,7 @@ public class GameServer
         bool result = false;
 
         streamWriter.WriteLine("MOVE " + id + " " + colonne + " " + ligne);
+        streamWriter.Flush();
         if (streamReader.ReadLine() != "NOK")
         {
             result = true;
