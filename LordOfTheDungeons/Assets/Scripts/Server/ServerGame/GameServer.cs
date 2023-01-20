@@ -147,7 +147,9 @@ public class GameServer
 
     public string AskTurn()
     {
-        return streamReader.ReadLine();
+        string response = streamReader.ReadLine();
+        Debug.Log(response);
+        return response;
     }
 
     public void AskGameState()

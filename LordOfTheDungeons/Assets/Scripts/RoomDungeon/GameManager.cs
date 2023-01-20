@@ -77,9 +77,6 @@ public class GameManager : MonoBehaviour
                 GameServer.Instance.ResetRequest();
             }
         }
-
-        turnManager.GetComponent<TurnManager>().StartManage(GameServer.Instance.AskTurn());
-        VerifyState();
     }
 
     private void SetCurrentPlayer(int order)
