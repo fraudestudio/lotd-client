@@ -205,6 +205,7 @@ MonoBehaviour:
   mapGenerator: {fileID: 674263666}
   roomGenerator: {fileID: 619482793}
   characterManager: {fileID: 56909921}
+  playerActionManager: {fileID: 940066285}
   turnManager: {fileID: 2145475091}
 --- !u!4 &61591710
 Transform:
@@ -3460,6 +3461,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 9068724894317920115, guid: e3b7b79ed9b4f9d45a6b32e11467892a, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9068724894317920115, guid: e3b7b79ed9b4f9d45a6b32e11467892a, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9068724894401598026, guid: e3b7b79ed9b4f9d45a6b32e11467892a, type: 3}
       propertyPath: m_Name
       value: loadscreen
