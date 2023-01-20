@@ -216,8 +216,6 @@ public class CharacterManager : MonoBehaviour
     {
         GameObject playable = GetPlayable(id);
         selectionTileManager.GetComponent<SelectionTileManager>().CreateSelectionTiles(playable.GetComponent<PlayableCharacterScript>().Movement, TypeSelection.Deplacement, playable);
-        Debug.Log("column : " + column);
-        Debug.Log("line : " + line);
         selectionTileManager.GetComponent<SelectionTileManager>().CreateSelectionTrail(selectionTileManager.GetComponent<SelectionTileManager>().GetSelectionTile(line, column));
         selectionTileManager.GetComponent<SelectionTileManager>().MovePlayable();
     }

@@ -45,6 +45,7 @@ public class SelectionTileManager : MonoBehaviour
     /// <param name="arrivalSelectionTile"></param>
     public void CreateSelectionTrail(GameObject arrivalSelectionTile)
     {
+        Debug.Log(arrivalSelectionTile);
         CalculDistanceSelection(arrivalSelectionTile);
         List<GameObject> result = CalculCheminSelection(selectionTiles[0]);
         currentPath = result;
