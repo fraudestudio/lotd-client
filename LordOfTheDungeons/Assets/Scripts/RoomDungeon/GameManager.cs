@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
         roomGenerator.GetComponent<RoomGenerator>().GenerateRoom(new AlgorithmeRoomGeneration().Generer(mapGenerator.GetComponent<MapGenerator>().FirstRoom.GetComponent<SalleObjectScript>().Seed));
         currentRoom = mapGenerator.GetComponent<MapGenerator>().FirstRoom;
         SetCurrentPlayer(GameServer.Instance.Order);
+
         InitPlayers();
 
         turnManager.GetComponent<TurnManager>().StartManage(GameServer.Instance.AskTurn());

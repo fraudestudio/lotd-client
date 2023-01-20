@@ -100,6 +100,7 @@ public class GameServer
     /// <param name="response"></param>
     private void IsOk(Task<string> response)
     {
+        Debug.Log(response.Result);
         if (response.Result == "OK")
         {
             ChangeState("En recherche d'un joueur...");
@@ -136,11 +137,11 @@ public class GameServer
     /// <param name="response"></param>
     private void StartTheGame(Task<string> response)
     {
-        Debug.Log(response.Result);
         if (response.Result == "STARTED")
         {
             GameState = GameState.STARTING;
             ChangeState("Joueur trouver ! Votre partie va bientôt commencer !");
+            response.Dispose();
         }
     }
 
