@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
 
     public void VerifyState()
     {
+        GameServer.Instance.ResetRequest();
         GameServer.Instance.AskGameState();
         if (GameServer.Instance.GameState == GameState.WAITING)
         {
@@ -74,7 +75,6 @@ public class GameManager : MonoBehaviour
             {
                 turnManager.GetComponent<TurnManager>().StartManage(GameServer.Instance.AskTurn());
                 VerifyState();
-                GameServer.Instance.ResetRequest();
             }
         }
     }
