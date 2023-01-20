@@ -86,7 +86,7 @@ public class GameServer
 
         streamReader = new StreamReader(tcpClient.GetStream());
         streamWriter = new StreamWriter(tcpClient.GetStream());
-
+        Debug.Log(streamReader.ReadLine());
         streamWriter.WriteLine("AUTH " + token);
         streamWriter.Flush();
         Task<string> response = streamReader.ReadLineAsync();
