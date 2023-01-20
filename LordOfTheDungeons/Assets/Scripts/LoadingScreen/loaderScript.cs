@@ -1,7 +1,10 @@
+using Assets.Scripts.LoadingScreen;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEditor.Animations;
+using UnityEditor.VersionControl;
 using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -15,10 +18,25 @@ public class loaderScript : MonoBehaviour
     [SerializeField]
     private TMP_Text progressText;
 
+
+
     // Start is called before the first frame updatesm
     void Start()
     {
-        progressText.text = ProgressBarScript.Progress * 100 + "%";
+        ChangeText();
+        StartCoroutine(ResetProgressValue());
+    }
+
+
+    /// <summary>
+    /// Reset the progress value on the scene
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator ResetProgressValue()
+    {
+        yield return new WaitForSeconds(0.8f);
+        ProgressSingleton.Instance.Progress = 0f;
+        ChangeText();
     }
 
     /// <summary>
@@ -38,6 +56,7 @@ public class loaderScript : MonoBehaviour
     /// <returns></returns>
     private IEnumerator LoadLevel(string name)
     {
+
         // Trigger the animation start
         transition.SetTrigger("Start");
         yield return new WaitForSeconds(1);
@@ -48,11 +67,17 @@ public class loaderScript : MonoBehaviour
         // Show the progression
         while (!operation.isDone)
         {
-            ProgressBarScript.Progress = Mathf.Clamp01(operation.progress / 0.9f);
-            progressText.text = ProgressBarScript.Progress * 100 + "%";
-
+            ProgressSingleton.Instance.Progress = Mathf.Clamp01(operation.progress / 0.9f);
+            ChangeText();
             yield return null;
         }
-        ProgressBarScript.Progress = 0;
+    }
+
+    /// <summary>
+    /// Change the progress bar text
+    /// </summary>
+    private void ChangeText()
+    {
+        progressText.text = Math.Round(ProgressSingleton.Instance.Progress * 100, 2).ToString() + "%";
     }
 }

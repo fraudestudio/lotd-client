@@ -46,9 +46,25 @@ public class TurnManager : MonoBehaviour
     /// <summary>
     /// Start to manage who has the turn
     /// </summary>
-    public void StartManage()
+    /// <parm askedResponse>askedReponse to the server</parm>
+    public void StartManage(string askedResponse)
     {
-
+        string[] result = askedResponse.Split(' ');
+        if (result[1] == "PLAYER")
+        {
+            if (result[2] == "0")
+            {
+                currentTurn = TypeTurn.Player_1;
+            }
+            else if (result[2] == "1")
+            {
+                currentTurn = TypeTurn.Player_2;
+            }
+        }
+        else
+        {
+            currentTurn = TypeTurn.Enemy;
+        }
         DisplayTurn();
     }
 

@@ -69,6 +69,7 @@ public static class Server
                 name = id;
                 res = "Success";
                 sharedClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", json.SessionToken);
+                GameServer.Instance.Token = json.SessionToken;
             }
             else
             {
@@ -442,6 +443,16 @@ public static class Server
         var response = sharedClient.GetStringAsync(String.Format("api/village/{0}/{1}/{2}/insertPersoInBatiment", idVillage, idPersonnage, batiment));
 
         bool json = JsonConvert.DeserializeObject<bool>(response.Result.ToString());
+
+        return json;
+    }
+
+    public static int GoExpedition(int idVillage)
+    {
+       
+        var response = sharedClient.PostAsync(String.Format("api/village/{0}/expedition", idVillage), new StringContent(JsonConvert.SerializeObject(new List<int>()), Encoding.UTF8, "application/json"));
+
+        int json = JsonConvert.DeserializeObject<int>(response.Result.Content.ReadAsStringAsync().Result);
 
         return json;
     }
