@@ -1,14 +1,8 @@
 using Assets.Scripts.Server;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Dynamic;
-using System.Xml;
 using TMPro;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.Assertions.Must;
-using static UnityEngine.EventSystems.EventTrigger;
 
 public class UniverseGetInfoScript : MonoBehaviour
 {

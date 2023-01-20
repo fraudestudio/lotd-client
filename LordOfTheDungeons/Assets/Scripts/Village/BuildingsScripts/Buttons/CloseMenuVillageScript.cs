@@ -5,6 +5,10 @@ using UnityEngine.EventSystems;
 
 public class CloseMenuVillageScript : MonoBehaviour, IPointerClickHandler
 {
+    /// <summary>
+    /// When clicked, close the menu
+    /// </summary>
+    /// <param name="eventData"></param>
     public void OnPointerClick(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Left)
@@ -31,19 +35,5 @@ public class CloseMenuVillageScript : MonoBehaviour, IPointerClickHandler
             // On repermet de cliquer sur les bâtiments
             BuildingBehaviourScript.CanBeClicked = true;
         }
-    }
-
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

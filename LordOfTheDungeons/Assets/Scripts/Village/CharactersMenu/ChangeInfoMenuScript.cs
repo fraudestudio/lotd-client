@@ -7,27 +7,43 @@ using UnityEngine.UI;
 
 public class ChangeInfoMenuScript : MonoBehaviour
 {
-    public Image Image;
-    public TMP_Text Name;
-    public TMP_Text Race;
-    public TMP_Text Niveau;
-    public TMP_Text Class;
-    public TMP_Text PA;
-    public TMP_Text PM;
-    public TMP_Text Life;
+    [SerializeField]
+    private Image Image;
+    [SerializeField]
+    private TMP_Text Name;
+    [SerializeField]
+    private TMP_Text Race;
+    [SerializeField]
+    private TMP_Text Niveau;
+    [SerializeField]
+    private TMP_Text Class;
+    [SerializeField]
+    private TMP_Text PA;
+    [SerializeField]
+    private TMP_Text PM;
+    [SerializeField]
+    private TMP_Text Life;
 
 
+    [SerializeField]
     public Image WeaponImage;
+    [SerializeField]
     public TMP_Text WeaponName;
+    [SerializeField]
     public TMP_Text WeaponLevel;
+    [SerializeField]
     public TMP_Text WeaponPower;
 
 
-    public Image ArmorImage;
-    public TMP_Text ArmorName;
-    public TMP_Text ArmorLevel;
-    public TMP_Text ArmorResistance;
+    private Image ArmorImage;
+    private TMP_Text ArmorName;
+    private TMP_Text ArmorLevel;
+    private TMP_Text ArmorResistance;
 
+    /// <summary>
+    /// Change the info on the character menu
+    /// </summary>
+    /// <param name="c">the given character</param>
     public void ChangeInfoMenu (Character c)
     {
         Image.sprite = c.Image;

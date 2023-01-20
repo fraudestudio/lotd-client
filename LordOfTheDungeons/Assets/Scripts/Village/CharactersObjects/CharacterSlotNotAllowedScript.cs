@@ -5,29 +5,47 @@ using UnityEngine;
 
 public class CharacterSlotNotAllowedScript : MonoBehaviour
 {
-
+    /// <summary>
+    /// List of the slots
+    /// </summary>
     private static List<GameObject> slots = new List<GameObject>();
 
+
+    /// <summary>
+    /// List of the images
+    /// </summary>
     private static List<GameObject> images = new List<GameObject>();
 
     private static Transform thisTransform;
 
-    public GameObject NotAllowedPreFAb;
+    [SerializeField]
+    private GameObject NotAllowedPreFAb;
 
-    public static GameObject preFab;
+    [SerializeField]
+    private static GameObject preFab;
 
 
-
+    /// <summary>
+    /// Add a slot to the not allowed
+    /// </summary>
+    /// <param name="g"></param>
     public static void AddSlot(GameObject g)
     {
         slots.Add(g);
     }
 
+    /// <summary>
+    /// Remove a slot to the not allowed slots
+    /// </summary>
+    /// <param name="g"></param>
     public static void RemoveSlot(GameObject g)
     {
         slots.Remove(g);
     }
 
+    /// <summary>
+    /// Show all the slots that are not allowed
+    /// </summary>
     public static void ShowNotAllowedSlot()
     {
         foreach (GameObject g in slots)
@@ -39,6 +57,10 @@ public class CharacterSlotNotAllowedScript : MonoBehaviour
             images.Add(p);
         }
     }
+    
+    /// <summary>
+    /// Hide the not allowed slots
+    /// </summary>
     public static void HideNotAllowedSlot()
     {
         foreach(GameObject p in images)

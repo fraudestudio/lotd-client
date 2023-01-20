@@ -6,9 +6,17 @@ using UnityEngine.EventSystems;
 
 public class HealButtonBehaviour : MonoBehaviour, IPointerClickHandler
 {
-    public GameObject slot;
+    [SerializeField]
+    // The slot
+    private GameObject slot;
+    [SerializeField]
+    // The slider of the slot
     public GameObject slider;
 
+    /// <summary>
+    /// When clicked, start to heal
+    /// </summary>
+    /// <param name="eventData"></param>
     public void OnPointerClick(PointerEventData eventData)
     {
         if (!slot.GetComponent<CharacterSlotScript>().SlotIsEmpty)

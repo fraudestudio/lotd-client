@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace Assets.Scripts.Village.CharactersInfo
 {
     [Serializable]
+    // force unity to serialize a list
     public class ImageCharList<T>
 
     {

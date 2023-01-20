@@ -17,8 +17,10 @@ public class BuildingBehaviourScript : MonoBehaviour
 
     public static bool CanBeClicked { get => canBeClicked; set => canBeClicked = value; }
 
-    public GameObject slotPreFab;
-    public GameObject testCharacterPreFab;
+    [SerializeField]
+    private GameObject slotPreFab;
+    [SerializeField]
+    private GameObject testCharacterPreFab;
 
 
     private void Start()
@@ -77,6 +79,9 @@ public class BuildingBehaviourScript : MonoBehaviour
 
     #region HealerHut
 
+    /// <summary>
+    /// Initiate the healer hut
+    /// </summary>
     private void InitHealerHut()
     {
         for (int i = 0; i < Village.HealerHut.Level + 1; i++)
@@ -92,6 +97,9 @@ public class BuildingBehaviourScript : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Start the healer hut
+    /// </summary>
     private void StartHealerHut()
     {
         GameObject.Find("BuildingObjects").transform.Find("HealerHut").Find("CanvasHealerHut").GetComponent<CanvasGroup>().alpha = 0;
@@ -110,6 +118,9 @@ public class BuildingBehaviourScript : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Stop the healer hut
+    /// </summary>
     private void StopHealerHut()
     {
         for (int i = 0; i < GameObject.Find("HealerHutMenu").transform.Find("SlotsHealer").childCount; i++)
@@ -122,6 +133,9 @@ public class BuildingBehaviourScript : MonoBehaviour
 
     #region VillageCenter
 
+    /// <summary>
+    /// Start the village center
+    /// </summary>
     private void StartVillageCenter()
     {
         GameObject.Find("BuildingObjects").transform.Find("VillageCenter").Find("CanvasVillageCenter").GetComponent<CanvasGroup>().alpha = 0;
@@ -132,6 +146,9 @@ public class BuildingBehaviourScript : MonoBehaviour
 
     #region TrainingCamp
 
+    /// <summary>
+    /// Initiate the training camp
+    /// </summary>
     private void InitTrainingCamp()
     {
         if (Village.TrainingCamp.InFormation)
@@ -168,6 +185,9 @@ public class BuildingBehaviourScript : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Start the training camp 
+    /// </summary>
     private void StartTrainingCamp()
     {
         GameObject.Find("BuildingObjects").transform.Find("TrainingCamp").Find("CanvasTrainingCamp").GetComponent<CanvasGroup>().alpha = 0;
@@ -192,6 +212,9 @@ public class BuildingBehaviourScript : MonoBehaviour
         }
     }
     
+    /// <summary>
+    /// Stop the training camp
+    /// </summary>
     private void StopTrainingCamp()
     {
         for (int i = 0; i < GameObject.Find("TrainingCampMenu").transform.Find("TraineeTitle").Find("TraineesLayout").childCount; i++)
@@ -241,6 +264,9 @@ public class BuildingBehaviourScript : MonoBehaviour
     #endregion
 
     #region Warehouse
+    /// <summary>
+    /// Initiate the warehouse
+    /// </summary>
     private void InitWarehouse()
     {
         GameObject.Find("WarehouseMenu").transform.Find("Icon&Capacity").Find("GoldIcon").Find("MaxGoldCapacity").GetComponent<TMP_Text>().text = (Village.Warehouse.BaseMaxIron * Village.Warehouse.Level).ToString();
@@ -258,7 +284,9 @@ public class BuildingBehaviourScript : MonoBehaviour
         GameObject.Find("ATHVillage").transform.Find("Background").Find("StoneSlider").GetComponent<MaterialSliderScript>().SetValue(r.Pierre);
 
     }
-
+    /// <summary>
+    /// Start the warehouse
+    /// </summary>
     private void StartWarehouse()
     {
         GameObject.Find("BuildingObjects").transform.Find("Warehouse").Find("CanvasWarehouse").GetComponent<CanvasGroup>().alpha = 0;
@@ -268,7 +296,9 @@ public class BuildingBehaviourScript : MonoBehaviour
         Init(w);
         m.GetComponent<ModifyMenuScript>().InitMenu("Warehouse", "Endroit o� les ressources sont stock�s");
     }
-
+    /// <summary>
+    /// Stop the warehouse
+    /// </summary>
     private void StopWarehouse()
     {
 
@@ -470,6 +500,10 @@ public class BuildingBehaviourScript : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Refresh the building when needed
+    /// </summary>
+    /// <param name="building">the wanted building</param>
     public void RefreshBuilding(string building)
     {
         switch (building)

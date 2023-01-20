@@ -6,6 +6,10 @@ using UnityEngine.UI;
 
 public class UpgradeEquipementScript : MonoBehaviour, IPointerClickHandler
 {
+    /// <summary>
+    /// Upgrade the equipement
+    /// </summary>
+    /// <param name="eventData"></param>
     public void OnPointerClick(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Left)

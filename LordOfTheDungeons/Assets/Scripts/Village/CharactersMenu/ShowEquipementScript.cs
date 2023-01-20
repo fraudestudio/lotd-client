@@ -5,6 +5,10 @@ using UnityEngine.EventSystems;
 
 public class ShowEquipementScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
+    /// <summary>
+    /// Show the equipement stats
+    /// </summary>
+    /// <param name="eventData"></param>
     public void OnPointerEnter(PointerEventData eventData)
     {
         switch (name)
@@ -14,6 +18,10 @@ public class ShowEquipementScript : MonoBehaviour, IPointerEnterHandler, IPointe
         }
     }
 
+    /// <summary>
+    /// Hide the equipement stats
+    /// </summary>
+    /// <param name="eventData"></param>
     public void OnPointerExit(PointerEventData eventData)
     {
         switch (name)

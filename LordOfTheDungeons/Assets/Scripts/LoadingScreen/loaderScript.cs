@@ -1,13 +1,8 @@
 using Assets.Scripts.LoadingScreen;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using UnityEditor.Animations;
-using UnityEditor.VersionControl;
-using UnityEditorInternal;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class loaderScript : MonoBehaviour

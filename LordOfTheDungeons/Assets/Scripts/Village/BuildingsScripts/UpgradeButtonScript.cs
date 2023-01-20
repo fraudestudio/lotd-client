@@ -5,6 +5,10 @@ using UnityEngine.EventSystems;
 
 public class UpgradeButtonScript : MonoBehaviour, IPointerClickHandler
 {
+    /// <summary>
+    /// If clicked, start to upgrade a building
+    /// </summary>
+    /// <param name="eventData"></param>
     public void OnPointerClick(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Left)

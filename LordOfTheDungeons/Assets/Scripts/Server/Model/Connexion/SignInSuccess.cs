@@ -8,7 +8,18 @@ namespace Assets.Scripts.Server.Model.Connexion
 {
     public class SignInSuccess
     {
-        public bool Validated { get; set; }
-        public string SessionToken { get; set; }
+
+        private bool validated;
+
+        /// <summary>
+        /// Tells if the signin is validated
+        /// </summary>
+        public bool Validated { get => validated; set => validated = value; }
+
+        private string sessionToken;
+        /// <summary>
+        /// The session token sent by the server
+        /// </summary>
+        public string SessionToken { get => sessionToken; set => sessionToken = value; }
     }
 }

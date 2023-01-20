@@ -1,12 +1,8 @@
 using Assets.Scripts.ProceduralGeneration;
 using Assets.Scripts.ProceduralGeneration.Algorithme;
 using Assets.Scripts.ProceduralGeneration.Objets;
-using Assets.Scripts.ProceduralGeneration.Salles;
 using Assets.Scripts.RoomDungeon;
-using System.Collections;
 using System.Collections.Generic;
-using System.Xml;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class RoomGenerator : MonoBehaviour, IGeneratorAlgo

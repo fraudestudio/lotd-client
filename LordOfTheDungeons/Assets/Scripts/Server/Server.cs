@@ -1,25 +1,13 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Threading.Tasks;
-using UnityEditor.PackageManager;
 using UnityEngine;
 using System.Text;
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
-using System.Net.Security;
-using UnityEngine.Networking;
-using System.Runtime.InteropServices;
-using UnityEngine.Rendering;
-using System.Linq;
 using Assets.Scripts.Server;
-using static UnityEngine.Networking.UnityWebRequest;
-using Mono.Cecil.Mdb;
-using System.Security.Cryptography;
 using Assets.Scripts.Server.Menu;
 using Assets.Scripts.Server.Model;
-using Assets.Scripts.Village;
 using Assets.Scripts.Server.Model.Connexion;
 using System.Net;
 
@@ -35,7 +23,7 @@ public static class Server
 
     private static HttpClient sharedClient = new()
     {
-        BaseAddress = new Uri("https://info-dij-sae001.iut21.u-bourgogne.fr:8443"),
+        BaseAddress = new Uri("https://info-dij-sae001.iut21.u-bourgogne.fr"),
     };
 
 

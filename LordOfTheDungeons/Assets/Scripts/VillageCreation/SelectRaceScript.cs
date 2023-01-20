@@ -7,27 +7,16 @@ using UnityEngine.Rendering.Universal;
 
 public class SelectRaceScript : MonoBehaviour
 {
-    // Start is called before the first frame update
+    
+    [SerializeField]
+    private Light2D usedLight;
+    [SerializeField]
+    private Animator transition;
+    [SerializeField]
+    private TMP_Text text;
 
-    public Light2D usedLight;
-    public Animator transition;
-    public TMP_Text text;
-
-    public TMP_InputField inputField;
-
-    private bool isEnter;
-    private bool isExit;
-
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    [SerializeField]
+    private TMP_InputField inputField;
 
     private void OnMouseEnter()
     {

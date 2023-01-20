@@ -6,6 +6,10 @@ using UnityEngine.EventSystems;
 
 public class StartTrainingButtonScript : MonoBehaviour, IPointerClickHandler
 {
+    /// <summary>
+    /// When clicked, start to train and desactivate all the slots
+    /// </summary>
+    /// <param name="eventData"></param>
     public void OnPointerClick(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Left)

@@ -1,10 +1,4 @@
-﻿using Microsoft.Unity.VisualStudio.Editor;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Assets.Scripts.Village
 {
@@ -47,7 +41,23 @@ namespace Assets.Scripts.Village
         public int PA_MAX { get => pA_MAX; set => pA_MAX = value; }
         public int PM_MAX { get => pM_MAX; set => pM_MAX = value; }
         public string Classe { get => classe; set => classe = value; }
+        public string IdEquipement { get => idEquipement; set => idEquipement = value; }
 
+        /// <summary>
+        /// Create a character
+        /// </summary>
+        /// <param name="image">the image of the character</param>
+        /// <param name="icon">the icon of the character</param>
+        /// <param name="name">the name of the character</param>
+        /// <param name="race">the race of the character</param>
+        /// <param name="level">the level of the character</param>
+        /// <param name="life">the life of the character</param>
+        /// <param name="maxLife">the max life of the character</param>
+        /// <param name="PA_MAX">the point of action max of the character</param>
+        /// <param name="PM_MAX">the point of movement max of the character</param>
+        /// <param name="classe">the class of the character</param>
+        /// <param name="weapon">the weapon of the character</param>
+        /// <param name="armor">the armor of the character</param>
         public Character(Sprite image, Sprite icon, string name, string race, int level, int life, int maxLife, int PA_MAX, int PM_MAX, string classe, Weapon weapon, Armor armor)
         {
             this.image = image;
@@ -64,12 +74,18 @@ namespace Assets.Scripts.Village
             this.armor = armor;
         }
 
-
+        /// <summary>
+        /// Add a given value to the player level
+        /// </summary>
+        /// <param name="value">the wanted value</param>
         public void AddLevel(int value)
         {
             level += value;
         }
 
+        /// <summary>
+        /// Set the max health of the player
+        /// </summary>
         public void SetMaxHealt()
         {
             life = maxLife;

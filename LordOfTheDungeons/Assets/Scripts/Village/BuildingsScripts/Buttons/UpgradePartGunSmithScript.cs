@@ -7,16 +7,24 @@ using UnityEngine.UI;
 
 public class UpgradePartGunSmithScript : MonoBehaviour
 {
-    public Image WeaponIcon;
-    public Image ArmorIcon;
+    [SerializeField]
+    private Image WeaponIcon;
+    [SerializeField]
+    private Image ArmorIcon;
 
-    public TMP_Text WeaponGold;
-    public TMP_Text WeaponStone;
-    public TMP_Text WeaponWood;
+    [SerializeField]
+    private TMP_Text WeaponGold;
+    [SerializeField]
+    private TMP_Text WeaponStone;
+    [SerializeField]
+    private TMP_Text WeaponWood;
 
-    public TMP_Text ArmorGold;
-    public TMP_Text ArmorStone;
-    public TMP_Text ArmorWood;
+    [SerializeField]
+    private TMP_Text ArmorGold;
+    [SerializeField]
+    private TMP_Text ArmorStone;
+    [SerializeField]
+    private TMP_Text ArmorWood;
 
 
     private int weapongold;
@@ -26,8 +34,13 @@ public class UpgradePartGunSmithScript : MonoBehaviour
     private int armorwood;
     private int armorstone;
 
+    [SerializeField]
+    private GameObject upgradePart;
 
-    public GameObject upgradePart;
+    /// <summary>
+    /// Check if we can upgrade
+    /// </summary>
+    /// <param name="value"></param>
     public void CanUpgradeObserver(bool value)
     {
         upgradePart.SetActive(value);
@@ -65,6 +78,11 @@ public class UpgradePartGunSmithScript : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Verify if can the player can buy the given equipement
+    /// </summary>
+    /// <param name="equipement">the wanted equipement</param>
+    /// <returns>the result of the condition</returns>
     private bool CanBuy(string equipement)
     {
 
@@ -125,6 +143,10 @@ public class UpgradePartGunSmithScript : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Buy an upgrade
+    /// </summary>
+    /// <param name="equipement">the wanted equipement</param>
     private void Buy(string equipement)
     {
         switch (equipement)
@@ -135,7 +157,10 @@ public class UpgradePartGunSmithScript : MonoBehaviour
     }
 
 
-
+    /// <summary>
+    /// Upgrade a weapon or armor
+    /// </summary>
+    /// <param name="buttonName">the button name</param>
     public void HasBought(string buttonName)
     {
         switch (buttonName)

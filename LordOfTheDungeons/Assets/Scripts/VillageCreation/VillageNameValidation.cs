@@ -6,25 +6,19 @@ using UnityEngine.EventSystems;
 
 public class VillageNameValidation : MonoBehaviour, IPointerClickHandler
 {
+    [SerializeField]
+    private Canvas nameCanvas;
+    [SerializeField]
+    private Canvas factionCanvas;
+    [SerializeField]
+    private GameObject factionObjects;
+    [SerializeField]
+    private Animator animator;
+    [SerializeField]
+    private TMP_InputField field;
+    [SerializeField]
+    private TMP_Text error;
 
-    public Canvas nameCanvas;
-    public Canvas factionCanvas;
-    public GameObject factionObjects;
-    public Animator animator;
-    public TMP_InputField field;
-    public TMP_Text error;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void OnPointerClick(PointerEventData eventData)
     {

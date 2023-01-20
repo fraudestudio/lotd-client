@@ -9,8 +9,14 @@ namespace Assets.Scripts.Village
 {
     public class CanHealScript : MonoBehaviour
     {
-        public GameObject button;
+        [SerializeField]
+        // the heal button
+        private GameObject button;
 
+        /// <summary>
+        /// Notify if the healslot is empty
+        /// </summary>
+        /// <param name="value"></param>
         public void NotifySlotIsNotEmpty(bool value)
         {
             button.SetActive(value);

@@ -5,6 +5,10 @@ using UnityEngine.EventSystems;
 
 public class CloseVillageCenterScipt : MonoBehaviour, IPointerClickHandler
 {
+    /// <summary>
+    /// Close the center village menu
+    /// </summary>
+    /// <param name="eventData"></param>
     public void OnPointerClick(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Left)

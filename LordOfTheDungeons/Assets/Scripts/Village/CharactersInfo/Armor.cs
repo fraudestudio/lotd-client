@@ -1,10 +1,4 @@
-﻿using Microsoft.Unity.VisualStudio.Editor;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Assets.Scripts.Village
 {
@@ -18,6 +12,31 @@ namespace Assets.Scripts.Village
 
         private int resistance;
 
+
+        /// <summary>
+        /// Name of the armor
+        /// </summary>
+        public string Name { get => name; set => name = value; }
+        /// <summary>
+        /// Image of the armor
+        /// </summary>
+        public Sprite Image { get => image; set => image = value; }
+        /// <summary>
+        /// Level of the armor
+        /// </summary>
+        public int Level { get => level; set => level = value; }
+        /// <summary>
+        /// Resistance of the armor
+        /// </summary>
+        public int Resistance { get => resistance; set => resistance = value; }
+
+        /// <summary>
+        /// Construct the armor object
+        /// </summary>
+        /// <param name="image">image of the armor</param>
+        /// <param name="name">name of the armor</param>
+        /// <param name="level">level of the armor</param>
+        /// <param name="resistance">resistance of the armor</param>
         public Armor(Sprite image, string name, int level, int resistance)
         {
             this.image = image;
@@ -26,20 +45,22 @@ namespace Assets.Scripts.Village
             this.resistance = resistance;
         }
 
-
+        /// <summary>
+        /// Add a level to the armor
+        /// </summary>
         public void AddLevel()
         {
             level++;
         }
 
+        /// <summary>
+        /// Get the resistance of the armor
+        /// </summary>
+        /// <returns>the value of the resistance</returns>
         public int GetTotalResistance()
         {
             return level * resistance;
         }
 
-        public string Name { get => name; set => name = value; }
-        public Sprite Image { get => image; set => image = value; }
-        public int Level { get => level; set => level = value; }
-        public int Resistance { get => resistance; set => resistance = value; }
     }
 }

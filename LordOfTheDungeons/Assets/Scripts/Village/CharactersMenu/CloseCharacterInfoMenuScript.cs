@@ -5,6 +5,10 @@ using UnityEngine.EventSystems;
 
 public class CloseCharacterInfoMenuScript : MonoBehaviour, IPointerClickHandler
 {
+    /// <summary>
+    /// Close the character menu
+    /// </summary>
+    /// <param name="eventData"></param>
     public void OnPointerClick(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Left)

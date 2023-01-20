@@ -1,7 +1,4 @@
 using Assets.Scripts.ProceduralGeneration;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.UI;
 using UnityEngine;
 
 public class SalleObjectScript : MonoBehaviour

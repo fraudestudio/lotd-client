@@ -1,17 +1,9 @@
 ﻿using Assets.Scripts.Server.ServerGame;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading.Tasks;
-using TMPro;
-using UnityEditor.Compilation;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.Animations;
-using UnityEngine.Rendering;
 
 public class GameServer
 {
@@ -145,6 +137,10 @@ public class GameServer
         }
     }
 
+    /// <summary>
+    /// Ask the turn to the server
+    /// </summary>
+    /// <returns>return the response</returns>
     public string AskTurn()
     {
         string response = streamReader.ReadLine();
@@ -152,6 +148,9 @@ public class GameServer
         return response;
     }
 
+    /// <summary>
+    /// Ask the game state to the server and change the "GameState" in function of it
+    /// </summary>
     public void AskGameState()
     {
         if (streamReader.ReadLine() == "PLAY")
@@ -164,13 +163,21 @@ public class GameServer
         }
     }
 
-
+    /// <summary>
+    /// Ask the server if he can move a playable
+    /// </summary>
+    /// <param name="id">id of the playable</param>
+    /// <param name="ligne">line of the destination</param>
+    /// <param name="colonne">column of the destination</param>
+    /// <returns>the response of the server</returns>
     public bool MovePlayable(int id, int ligne, int colonne)
     {
         bool result = false;
 
         streamWriter.WriteLine("MOVE " + id + " " + colonne + " " + ligne);
         streamWriter.Flush();
+
+        // If not "NOK", the server accepts 
         if (streamReader.ReadLine() != "NOK")
         {
             result = true;
@@ -179,18 +186,27 @@ public class GameServer
         return result;
     }
 
-
+    /// <summary>
+    /// Ask for the state
+    /// </summary>
     public void AskForState()
     {
         currentRequest = "AskForState";
     }
 
+    /// <summary>
+    /// Listen to the server and wait for a response
+    /// </summary>
     public void WaitForServerResponse()
     {
         Task<string> whatToDo = streamReader.ReadLineAsync();
         whatToDo.ContinueWith(ReponseToWhatToDo);
     }
 
+    /// <summary>
+    /// Get the response when the player sent an instruction
+    /// </summary>
+    /// <param name="response">the response of the server</param>
     private void ReponseToWhatToDo(Task<string> response)
     {
         currentRequest = response.Result;
@@ -205,6 +221,9 @@ public class GameServer
         return currentRequest;
     }
 
+    /// <summary>
+    /// Reset the resquest
+    /// </summary>
     public void ResetRequest()
     {
         currentRequest = "";

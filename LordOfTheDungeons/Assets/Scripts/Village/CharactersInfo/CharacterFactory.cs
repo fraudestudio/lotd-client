@@ -11,17 +11,33 @@ using UnityEngine.UI;
 public class CharacterFactory : MonoBehaviour
 {
     [Serializable]
+    // Force unity to serialize a list
     public class Icon : ImageIconList<Sprite> { }
 
     [Serializable]
+    // Force unity to serialize a list
     public class ImageChar : ImageCharList<Sprite> { }
     public Icon Icons;
     public ImageChar ImageCharacter;
 
+    [SerializeField]
+    private GameObject PreFabCharacter;
 
-    public GameObject PreFabCharacter;
-
-
+    /// <summary>
+    /// Fabric of characters
+    /// </summary>
+    /// <param name="image">id of the image of the character</param>
+    /// <param name="name">the name of the character</param>
+    /// <param name="race">the race of the character</param>
+    /// <param name="level">the level of the character</param>
+    /// <param name="life">the life of the character</param>
+    /// <param name="maxLife">the max life of the character</param>
+    /// <param name="PA_MAX">the point action max of the character</param>
+    /// <param name="PM_MAX">the movement point of the character</param>
+    /// <param name="classe">the class of the character</param>
+    /// <param name="weapon">the weapon of the character</param>
+    /// <param name="armor">the armor of the character</param>
+    /// <returns>the created character</returns>
     public GameObject CreateCharacter(int image, string name, string race, int level, int life, int maxLife, int PA_MAX, int PM_MAX, string classe, Weapon weapon, Armor armor)
     {
         GameObject character = Instantiate(PreFabCharacter);

@@ -1,15 +1,8 @@
 using Assets.Scripts.ProceduralGeneration;
 using Assets.Scripts.RoomDungeon.Characters.Selection;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel.Design;
-using System.Data;
-using System.Runtime.CompilerServices;
-using TMPro.EditorUtilities;
 using UnityEngine;
-using UnityEngine.Playables;
-using UnityEngine.UIElements;
 
 public class SelectionTileManager : MonoBehaviour
 {

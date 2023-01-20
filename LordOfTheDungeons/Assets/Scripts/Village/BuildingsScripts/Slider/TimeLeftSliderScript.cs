@@ -1,16 +1,8 @@
-using System.Timers;
 using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
 using TMPro;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEngine.Rendering.DebugUI;
-using static UnityEngine.UI.Slider;
 using System;
-using System.Runtime.CompilerServices;
-using System.Security;
 
 public class TimeLeftSliderScript : MonoBehaviour
 {

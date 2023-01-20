@@ -10,8 +10,8 @@ using static CharacterFactory;
 
 public class VillageManager : MonoBehaviour
 {
-
-    public GameObject villageCenterBlockPreFab;
+    [SerializeField]
+    private GameObject villageCenterBlockPreFab;
 
     private static int countCharacterTrainingCamp = 0;
     private static int countCharacterTavern = 0;

@@ -5,17 +5,24 @@ using UnityEngine;
 public class CanTrainScript : MonoBehaviour
 {
 
-   
+    // The trainees in the building
     private List<GameObject> trainees = new List<GameObject>();
+    // The instructor
     private GameObject instructor;
 
     #region Observateur instructeur
+    /// <summary>
+    /// Register the instructor
+    /// </summary>
+    /// <param name="instructor">the wanted instructor</param>
     public void AddInstructor(GameObject instructor)
     {
         this.instructor = instructor;
         VerifyCond();
     }
-
+    /// <summary>
+    /// Remove the instructor
+    /// </summary>
     public void RemoveInstructor()
     {
         this.instructor = null;
@@ -24,12 +31,19 @@ public class CanTrainScript : MonoBehaviour
     #endregion
 
     #region Observateur Trainee
+    /// <summary>
+    /// Add trainee to the trainee list
+    /// </summary>
+    /// <param name="trainee">the wanted trainee</param>
     public void AddTrainee(GameObject trainee)
     {
         this.trainees.Add(trainee);
         VerifyCond();
     }
-
+    /// <summary>
+    /// Remove trainee of the trainee list
+    /// </summary>
+    /// <param name="trainee">the wanted trainee</param>
     public void RemoveTrainee(GameObject trainee)
     {
         this.trainees.Remove(trainee);
@@ -37,6 +51,9 @@ public class CanTrainScript : MonoBehaviour
     }
     #endregion
 
+    /// <summary>
+    /// Verify if we can train
+    /// </summary>
     public void VerifyCond()
     {
         if (instructor == null && trainees.Count == 0)
@@ -67,6 +84,11 @@ public class CanTrainScript : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Verify the level condition.
+    /// If the level of the trainees is inferior to the instructor, it pass
+    /// </summary>
+    /// <returns>the result of the condition</returns>
     private bool VerifyLevel()
     {
         bool result = true;

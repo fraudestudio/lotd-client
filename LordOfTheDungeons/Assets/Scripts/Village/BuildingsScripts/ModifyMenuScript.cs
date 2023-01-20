@@ -1,31 +1,19 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ModifyMenuScript : MonoBehaviour
 {
-
-    public TMP_Text TitleText;
-    public TMP_Text DescriptionText;
-    public Button UpgradeButton;
-    public GameObject constructionTimer;
+    [SerializeField]
+    private TMP_Text TitleText;
+    [SerializeField]
+    private TMP_Text DescriptionText;
+    [SerializeField]
+    private Button UpgradeButton;
+    [SerializeField]
+    private GameObject constructionTimer;
 
     private string currentUsedBuilding = "";
-
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
 
     /// <summary>
     /// Permet de savoir quel est le bâtiment qui est utilisé par l'utilisateur
@@ -370,7 +358,10 @@ public class ModifyMenuScript : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// Verify if the player can buy in the gunsmith
+    /// </summary>
+    /// <returns></returns>
     public bool CanBuy()
     {
         bool result = false;
@@ -392,22 +383,38 @@ public class ModifyMenuScript : MonoBehaviour
         return result;
     }
 
+    /// <summary>
+    /// Get the wood cost of the building
+    /// </summary>
+    /// <returns>the cost of the wood</returns>
     public int GetWoodBuyValue()
     {
         return int.Parse(UpgradeButton.transform.Find("WoodCountLogo").transform.Find("WoodCount").GetComponent<TMP_Text>().text);
     }
 
+    /// <summary>
+    /// Get the gold cost of the building
+    /// </summary>
+    /// <returns>the cost of the gold</returns>
     public int GetGoldBuyValue()
     {
         return int.Parse(UpgradeButton.transform.Find("GoldCountLogo").transform.Find("GoldCount").GetComponent<TMP_Text>().text);
     }
 
+    /// <summary>
+    /// Get the stone cost of the building
+    /// </summary>
+    /// <returns>the cost of the stone</returns>
     public int GetStoneBuyValue()
     {
         return int.Parse(UpgradeButton.transform.Find("StoneCountLogo").transform.Find("StoneCount").GetComponent<TMP_Text>().text);
     }
 
 
+    /// <summary>
+    /// Active the upgrade button
+    /// </summary>
+    /// <param name="active"></param>
     private void SetActiveUpgrade(bool active)
     {
         UpgradeButton.gameObject.SetActive(active);
@@ -420,6 +427,9 @@ public class ModifyMenuScript : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Test if the player can click on the upgrade button
+    /// </summary>
     private void InteractableTest()
     {
         if (CanBuy())
@@ -432,6 +442,10 @@ public class ModifyMenuScript : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Set the interactibility of the upgrade button
+    /// </summary>
+    /// <param name="interactable">the bool of the interaction</param>
     private void SetInteractableUpgrade(bool interactable)
     {
         UpgradeButton.GetComponent<Button>().interactable = interactable;

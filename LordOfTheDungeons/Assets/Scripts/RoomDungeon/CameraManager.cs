@@ -1,8 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
-using UnityEditor.Experimental.GraphView;
-using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 
 public class CameraManager : MonoBehaviour

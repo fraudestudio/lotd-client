@@ -11,6 +11,7 @@ using static UnityEngine.Rendering.DebugUI.Table;
 public class CharacterSlotScript : MonoBehaviour, IDropHandler
 {
 
+    // The type of slots
     public SlotType Type = SlotType.RECRUIT;
 
 
@@ -20,15 +21,29 @@ public class CharacterSlotScript : MonoBehaviour, IDropHandler
 
     public bool slotIsEmpty = true;
 
+    /// <summary>
+    /// Tells if the slot is empty 
+    /// </summary>
     public bool SlotIsEmpty { get => slotIsEmpty; set => slotIsEmpty = value; }
+
+    /// <summary>
+    /// Check if the player can drop a image on it 
+    /// </summary>
     public bool CanDrop { get => canDrop; set => canDrop = value; }
 
 
     private GameObject currentCharacter;
 
+    /// <summary>
+    /// The current character drag
+    /// </summary>
     public GameObject CurrentCharacter { get => currentCharacter; }
 
 
+    /// <summary>
+    /// When drop in
+    /// </summary>
+    /// <param name="eventData"></param>
     public void OnDrop(PointerEventData eventData)
     {
         GameObject drop = eventData.pointerDrag;
@@ -185,9 +200,11 @@ public class CharacterSlotScript : MonoBehaviour, IDropHandler
                 }
             }
         }
-
+       
     }
-
+    /// <summary>
+    /// set the parameter of the created slots 
+    /// </summary>
     public void Awake()
     {
         if (transform.childCount > 2)
@@ -206,6 +223,10 @@ public class CharacterSlotScript : MonoBehaviour, IDropHandler
         }
     }
 
+    /// <summary>
+    /// Set the type of the slots
+    /// </summary>
+    /// <param name="type">the wanted type</param>
     public void SetType(SlotType type)
     {
         Type = type;
