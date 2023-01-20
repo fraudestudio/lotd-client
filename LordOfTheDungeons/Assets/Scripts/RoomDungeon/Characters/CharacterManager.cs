@@ -2,6 +2,7 @@ using Assets.Scripts.ProceduralGeneration;
 using Assets.Scripts.ProceduralGeneration.Salles;
 using Assets.Scripts.RoomDungeon.Characters.Selection;
 using Assets.Scripts.RoomDungeon.TurnManagement;
+using Assets.Scripts.Server.ServerGame;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -192,7 +193,21 @@ public class CharacterManager : MonoBehaviour
     /// <param name="path"></param>
     public void MoveCurrentPlayer(List<GameObject> path)
     {
-        if (GameServer.Instance.MovePlayable(currentSelectedPlayable.GetComponent<PlayableCharacterScript>().Id, Convert.ToInt32(path[path.Count - 1].transform.position.y - GameManager.roomPosition), Convert.ToInt32(path[path.Count - 1].transform.position.x - GameManager.roomPosition)))
+        if (GameServer.Instance.GameState == GameState.PLAYING)
+        {
+            if (GameServer.Instance.MovePlayable(currentSelectedPlayable.GetComponent<PlayableCharacterScript>().Id, Convert.ToInt32(path[path.Count - 1].transform.position.y - GameManager.roomPosition), Convert.ToInt32(path[path.Count - 1].transform.position.x - GameManager.roomPosition)))
+            {
+                playerActionManager.GetComponent<PlayerActionManager>().ShowAttackATH(false);
+                ModifyRoomPlayer(currentSelectedPlayable, false);
+                currentNodePath = 0;
+                pathToMovePlayable = path;
+                CheckNode();
+                cameraManager.GetComponent<CameraManager>().CenterOnObjects(path, 5f, 0.2f);
+                playerActionManager.GetComponent<PlayerActionManager>().CanDoAnything = false;
+                StartCoroutine(WaitForAmountsSeconds(0.3f));
+            }
+        }
+        else
         {
             playerActionManager.GetComponent<PlayerActionManager>().ShowAttackATH(false);
             ModifyRoomPlayer(currentSelectedPlayable, false);
@@ -203,6 +218,7 @@ public class CharacterManager : MonoBehaviour
             playerActionManager.GetComponent<PlayerActionManager>().CanDoAnything = false;
             StartCoroutine(WaitForAmountsSeconds(0.3f));
         }
+
     }
 
 
